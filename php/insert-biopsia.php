@@ -80,4 +80,53 @@
             alert('Los datos se han insertado correctamente.');
             window.location.href = '../registro-biopsia.php'; 
             </script>";      
+
+
+
+
+
+
+            /*
+// Cambiando la zona horaria
+date_default_timezone_set('America/Caracas');
+
+// Declarando las variables a utilizar, conectandolas con los datos recibidos de registro-informes (biopsia)
+$f_entrada   = date("Y-m-d H:i:s");
+$ci_paciente   = $_POST['paciente'];
+$id_medico   = $_POST['medico'];
+$descripcion = $_POST['descripcion'];
+$resumen     = $_POST['resumen'];
+$diagnostico = $_POST['diagnostico'];
+
+// TABLA: m_biopsia
+$sitio_lesion = $_POST['sitio_lesion'];
+$ID_Examen    = 0;
+
+// ENVIANDO DATOS
+
+// Enviando M_BIOPSIA
+$sql_m_biopsia = "INSERT INTO m_biopsia (Sitio_lesion) VALUES ('$sitio_lesion')";
+$ejecutado_m_biopsia = mysqli_query($conex, $sql_m_biopsia);
+if (!$ejecutado_m_biopsia) {
+    throw new Exception("Error al insertar en la tabla 'm_biopsia'" . mysqli_error($conex));
+}
+
+// Buscando ID_M_BIOPSIA
+$id_m_biopsia = $conex->insert_id; // obtiene el ID autoincrementable del último registro insertado
+
+// Enviando M_REMITIDO
+$sql_m_remitido = "INSERT INTO m_remitido (ID_Medico, CI_Paciente, Descripcion_material, Diagnostico, Resumen, F_Entrada, ID_M_Biopsia) VALUES ('$id_medico', '$ci_paciente', '$descripcion','$diagnostico', '$resumen', '$f_entrada', '$id_m_biopsia')";
+$ejecutado_m_remitido = mysqli_query($conex,$sql_m_remitido);
+if (!$ejecutado_m_remitido) {
+    throw new Exception("Error al insertar en la tabla 'm_remitido'" . mysqli_error($conex));
+}
+
+// Mostramos un mensaje de éxito utilizando una ventana emergente de alerta de JavaScript.
+// Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
+echo "<script>
+alert('Los datos se han insertado correctamente.');
+window.location.href = '../registro-biopsia.php'; 
+</script>";      
+?>
+*/
 ?>
