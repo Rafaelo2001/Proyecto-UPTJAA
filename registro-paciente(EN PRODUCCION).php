@@ -8,7 +8,7 @@
 
 <html lang="es">
     <head>
-        <title>Registro paciente en blanco</title>
+        <title>Registro Paciente</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +21,7 @@
         
         <h1>Registro Paciente</h1>
 
-        <form  action="php/insert-patient.php" method="post" autocomplete="off">
+        <form action="php/insert-patient.php" method="post" autocomplete="off">
 
             <label for="ci">Cédula:</label>
             <input id="ci" name="cedula" type="text" maxlength="11" required>
