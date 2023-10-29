@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registro de Citología</title>
+    </head>
+<body class="login-register">
+
+    <!--esto del sidebar no quise modificarlo, por que aja tendriamos que ver como sera que queda eso x2-->
+    
+    <div class="sidebar close">
+        <div class="logo-details">
+            <img class="logo" src="images/Logo con contorno.png" alt="Logo de Higea" width="60" height="60">
+            <img class="logo_name" src="images/Letras.png" alt="HIGEA" width="135" height="40">
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="home.php">
+                    <i class="fi fi-rr-apps"></i>
+                    <span class="link_name">Panel Principal</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="home.php">Panel Principal</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="patient_register.html">
+                    <i class="fi fi-rr-procedures"></i>
+                    <span class="link_name">Pacientes</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="patient_register.html">Pacientes</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class="fi fi-rr-microscope"></i>
+                        <span class="link_name">Muestras</span>
+                    </a>
+                    <i class="fi fi-rr-angle-small-down arrow"></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Muestras</a></li>
+                    <li><a href="citology_register.html">Citología</a></li>
+                    <li><a href="biopsia_register.html">Biopsia</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="supplies_register.html">
+                    <i class="fi fi-rr-box-open-full"></i>
+                    <span class="link_name">Insumos</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="supplies_register.html">Insumos</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class="fi fi-rr-file-circle-info"></i>
+                        <span class="link_name">Detalles</span>
+                    </a>
+                    <i class="fi fi-rr-angle-small-down arrow"></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Detalles</a></li>
+                    <li><a href="#">Pacientes</a></li>
+                    <li><a href="display-samples.html">Muestras</a></li>
+                    <li><a href="display-inventory.html">Insumos</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="profile-details">
+                    <a href="php/exit.php">
+                        <i class="fi fi-rr-exit"></i>
+                        <span class="link_name">Salir</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="php/exit.php">Salir</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <section class="home-section">
+        <div class="home-content">
+            <i class="fi fi-rr-menu-burger bx-menu"></i>
+        </div>
+
+        <div class="register-box-citology">
+            <h1>REGISTRO DE CITOLOGÍA</h1>
+            <form action="#" method="post" class="form" id="form">
+    
+                <div class="grid">
+    
+                    <!--group: entry_date-->
+                    <div class="form-group" id="group_entry_date">
+                        <div class="form-group-input">
+                            <label for="entry_date">Fecha de entrada</label>
+                            <input type="date" class="entry_date" name="entry_date" id="entry_date" placeholder="(dd/mm/aaaa)">
+                            <i class="formulario_validacion_estado fi fi-rr-cross"></i>
+                        </div>
+                        <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
+                    </div>
+    
+                    <!--group: resume-->
+                    <div class="form-group" id="group_resume">
+                        <div class="form-group-input">
+                            <label for="resume">Resumen de historia clínica</label>
+                            <input   type="text" name="resume" id="resume" placeholder="Escriba el resumen">
+                            <i class="formulario_validacion_estado fi fi-rr-cross"></i>
+                        </div>
+                        <p class="form-input-error">Rellene este campo correctamente</p>
+                    </div>
+                    
+                    <!--group: diagnosis-->
+                    <div class="form-group" id="group_diagnosis">
+                        <div class="form-group-input">
+                            <label for="diagnosis">Diagnóstico clínico</label>
+                            <input   type="text" name="diagnosis" id="diagnosis" placeholder="Escriba el diagnóstico">
+                            <i class="formulario_validacion_estado fi fi-rr-cross"></i>
+                        </div>
+                        <p class="form-input-error">Rellene este campo correctamente</p>
+                    </div>
+                    
+                    <!--group: fur_date-->
+                    <div class="form-group" id="group_fur_date">
+                        <div class="form-group-input">
+                            <label for="fur_date">Fecha de la última regla (FUR)</label>
+                            <input type="date" class="fur_date" name="fur_date" id="fur_date" placeholder="(dd/mm/aaaa)">
+                            <i class="formulario_validacion_estado fi fi-rr-cross"></i>
+                        </div>
+                        <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
+                    </div>
+                </div>
+    
+                <div class="checkbox" id="frotis">
+                    <h2>Frotis de:</h2>
+                    <input type="checkbox" name="frotis" id="endocervix" value="endocervix">
+                    <label for="endocervix">Endocervix</label>
+    
+                    <input type="checkbox" name="frotis" id="exocervix" value="exocervix">
+                    <label for="exocervix">Exocervix</label>
+    
+                    <input type="checkbox" name="frotis" id="vagina" value="vagina">
+                    <label for="vagina">Vagina</label>
+                </div>
+    
+                <!--group: other-->
+                <div class="form-group" id="group_other">
+                    <div class="form-group-input">
+                        <label for="other">Otros</label>
+                        <input   type="text" name="other" id="other" placeholder="Especifique">
+                        <i class="formulario_validacion_estado fi fi-rr-cross"></i>
+                    </div>
+                    <p class="form-input-error">Rellene este campo correctamente</p>
+                </div>
+                
+                <!--group: obsevations-->
+                <div class="form-group" id="group_observations">
+                    <div class="form-group-input">
+                        <label for="diagnosis">Observaciones</label>
+                        <input   type="text" name="obsevations" id="observations" placeholder="Indique la observacion">
+                        <i class="formulario_validacion_estado fi fi-rr-cross"></i>
+                    </div>
+                    <p class="form-input-error">Rellene este campo correctamente</p>
+                </div>
+    
+                    <div class="form-mess" id="form-mess">
+                        <p><i class="fi fi-rr-triangle-warning"></i><b>Error:</b> ¡Revise los campos!</p>
+                    </div>
+    
+                    <div class="button-container">
+                        <div class="form__group form__group-btn-submit">
+                            <input class="button-submit" type="submit" name="registrar" id="registrar" value="Registrar">
+                        </div>
+                        <p class="form-mess-good" id="form-mess-good">¡Formulario enviado!</p>
+                    </div>
+            </form>
+        </div>
+    </section>
+
+</body>
+</html>
