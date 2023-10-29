@@ -22,7 +22,7 @@
         <form action="#" method="post">
 
             <label for="entry_date">Fecha de Entrada:</label>
-            <input type="date" class="entry_date" name="entry_date" id="entry_date" placeholder="(dd/mm/aaaa)">
+            <input type="date" name="entry_date" id="entry_date" placeholder="(dd/mm/aaaa)">
 
                 <br><br>
 

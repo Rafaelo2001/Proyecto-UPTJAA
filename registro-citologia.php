@@ -1,11 +1,18 @@
+<?php
+        // agregar Mencion de seccion
+    include "php/conexion.php";
+    $user = new CodeaDB();
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="es">
     <head>
         <title>Registro Citología</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
     <body>
@@ -14,23 +21,36 @@
 
         <form action="#" method="post" class="form" id="form">
 
-            <label for="entry_date">Fecha de entrada</label>
+            <label for="entry_date">Fecha de Entrada:</label>
             <input type="date" class="entry_date" name="entry_date" id="entry_date" placeholder="(dd/mm/aaaa)">
 
                 <br><br>
 
-            <label for="resume">Resumen de historia clínica</label>
+            <label for="medicos-bdd">Médico:</label>
+            <select id="medicos-bdd" name="medico-bdd" required>
+                <option value="" selected disabled>-- Selecciona Medico--</option>
+
+                <?php $listaMedicos = $user->buscar("medico","1"); ?>
+
+                <?php foreach($listaMedicos as $medico): ?>
+                        <option value="<?php echo $medico['ID_Medico'] ?>"> <?php echo $medico['Nombre_Medico'] ?></option>
+                <?php endforeach; ?>
+            </select>     
+
+                <br><br>
+
+            <label for="resume">Resumen de Historia Clínica:</label>
             <input type="text" name="resume" id="resume" placeholder="Escriba el resumen">
 
                 <br><br>
             
-            <label for="diagnosis">Diagnóstico clínico</label>
+            <label for="diagnosis">Diagnóstico Clínico:</label>
             <input type="text" name="diagnosis" id="diagnosis" placeholder="Escriba el diagnóstico">
 
                 <br><br>
 
-            <label for="fur_date">Fecha de la última regla (FUR)</label>
-            <input type="date" class="fur_date" name="fur_date" id="fur_date" placeholder="(dd/mm/aaaa)">
+            <label for="fur_date">Fecha de la Última Regla (FUR):</label>
+            <input type="date" name="fur_date" id="fur_date" placeholder="(dd/mm/aaaa)">
 
                 <br><br>
 
@@ -59,7 +79,7 @@
 
                 <br><br>
 
-            <label for="diagnosis">Observaciones</label>
+            <label for="diagnosis">Observaciones:</label>
             <input type="text" name="obsevations" id="observations" placeholder="Indique la observacion">
 
                 <br><br>
