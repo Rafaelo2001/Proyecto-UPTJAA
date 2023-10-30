@@ -23,13 +23,15 @@
 
         <form action="#" method="post" class="form" id="form">
 
+            <!--
+                No seria necesario xq se puede guardar la fecha del sistema automaticamente
             <label for="f_entrada">Fecha de Entrada:</label>
             <input type="date" name="f_entrada" id="f_entrada">
-
                 <br><br>
+            -->
 
-            <label for="medicos-bdd">Médico:</label>
-            <select id="medicos-bdd" name="medico-bdd" required>
+            <label for="medico">Médico:</label>
+            <select id="medico" name="medico" required>
                 <option value="" selected disabled>-- Selecciona Medico--</option>
 
                 <?php $listaMedicos = $user->buscar("medico","1"); ?>
@@ -59,24 +61,18 @@
 
             Frotis:            
                 
-                <input type="checkbox" name="frotis" id="endocervix" value="endocervix">
+                <input type="checkbox" name="endocervix" id="endocervix">
                 <label for="endocervix">Endocervix</label>
                         
-                <input type="checkbox" name="frotis" id="exocervix" value="exocervix">
+                <input type="checkbox" name="exocervix" id="exocervix">
                 <label for="exocervix">Exocervix</label>
                      
-                <input type="checkbox" name="frotis" id="vagina" value="vagina">
+                <input type="checkbox" name="vagina" id="vagina">
                 <label for="vagina">Vagina</label>
-                
-                <!--
-                    Aqui se puede hacer, 
-                    o bien mandar la casilla de otros activada junto con el valor en el input text,
-                    o que al seleccionar "otro" se habilite el input text
-                -->
             
-                <input type="checkbox" name="frotis" id="otro" value="otro">
+                <input type="checkbox" name="otro_check" id="otro_check">
                 <label for="otro">Otro:</label>
-                <input type="text" name="otro" id="otro_input" placeholder="Especifique" disabled>
+                <input type="text" name="otro" id="otro" placeholder="Especifique" disabled>
 
 
                 <br><br>

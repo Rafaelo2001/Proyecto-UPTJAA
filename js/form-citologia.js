@@ -1,13 +1,13 @@
 // Funcion para activar 'otros' en Frotis
 
-    let checkOtro = $("#otro");
+    let checkOtro = $("#otro_check");
 
     checkOtro.change(function(){
                 
         if (checkOtro.prop("checked") == true){
-            $("#otro_input").prop("disabled", false);
+            $("#otro").prop("disabled", false);
         }
         else {
-            $("#otro_input").prop("disabled", true);
+            $("#otro").prop("disabled", true);
         }
     });

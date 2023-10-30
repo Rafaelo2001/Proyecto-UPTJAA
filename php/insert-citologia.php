@@ -20,20 +20,37 @@
     // Declarando las variables a utilizar, conectandolas con los datos recibidos de registro-citologia
     /* 
         Orden de llenado
-            0. Registo Medico (si es necesario)
+            1. F_entrada
+            2. ID-medico
+            3. Diagnostico
+            4. Resumen            
 
-            1. direccion
-            2. persona
-            3. telefono / correo
-            4. peciente
-            5. medico
-            6. medico-registra-paciente (fecha-obs)
+            5. ID_M_Citologia (Pasar valor del ID de la tabla m_remitido???)
+
+            6.FUR
+            7. Endocervix, Exocervix, Vagina, Otro
     */
 
+        // TABLA: m_remitido
+            $f_entrada   = date("Y-m-d H:i:s");
+            $id_medico   = $_POST['medico'];
+            $resumen     = $_POST['resumen'];
+            $diagnostico = $_POST['diagnostico'];
+            
+        // TABLA: m_citologia
+            $FUR        = $_POST['FUR'];
+            $endocervix = $_POST['endocervix'];
+            $exocervix  = $_POST['exocervix'];
+            $vagina     = $_POST['vagina'];
+            $otro       = $_POST['otro'];
+
+
+
+    // QUITARRRRRRRRRRRRRRRRRRRRRRRRR
         // Medico OK
             $registro_medico_nuevo = $_POST['registro_medico_nuevo'];
             
-            $id_medico = $_POST['medico-bdd'];
+            $id_medico = $_POST['medico'];
 
             $nombre_medico = $_POST['nombre-medico-registro'];
             $telefono_medico = $_POST['telefono-medico-registro'];
