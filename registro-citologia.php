@@ -13,6 +13,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="js/jquery-3.7.1.js"></script>
     </head>
 
     <body>
@@ -21,8 +23,8 @@
 
         <form action="#" method="post" class="form" id="form">
 
-            <label for="entry_date">Fecha de Entrada:</label>
-            <input type="date" class="entry_date" name="entry_date" id="entry_date" placeholder="(dd/mm/aaaa)">
+            <label for="f_entrada">Fecha de Entrada:</label>
+            <input type="date" name="f_entrada" id="f_entrada">
 
                 <br><br>
 
@@ -39,18 +41,18 @@
 
                 <br><br>
 
-            <label for="resume">Resumen de Historia Clínica:</label>
-            <input type="text" name="resume" id="resume" placeholder="Escriba el resumen">
+            <label for="resumen">Resumen de Historia Clínica:</label>
+            <input type="text" name="resumen" id="resumen" placeholder="Escriba el resumen">
 
                 <br><br>
             
-            <label for="diagnosis">Diagnóstico Clínico:</label>
-            <input type="text" name="diagnosis" id="diagnosis" placeholder="Escriba el diagnóstico">
+            <label for="diagnostico">Diagnóstico Clínico:</label>
+            <input type="text" name="diagnostico" id="diagnostico" placeholder="Escriba el diagnóstico">
 
                 <br><br>
 
-            <label for="fur_date">Fecha de la Última Regla (FUR):</label>
-            <input type="date" name="fur_date" id="fur_date" placeholder="(dd/mm/aaaa)">
+            <label for="FUR">Fecha de la Última Regla (FUR):</label>
+            <input type="date" name="FUR" id="FUR">
 
                 <br><br>
 
@@ -72,9 +74,9 @@
                     o que al seleccionar "otro" se habilite el input text
                 -->
             
-                <input type="checkbox" name="frotis" id="other" value="other">
-                <label for="other">Otro:</label>
-                <input type="text" name="other" id="other_input" placeholder="Especifique">
+                <input type="checkbox" name="frotis" id="otro" value="otro">
+                <label for="otro">Otro:</label>
+                <input type="text" name="otro" id="otro_input" placeholder="Especifique" disabled>
 
 
                 <br><br>
@@ -88,5 +90,6 @@
 
         </form>
 
+        <script src="js/form-citologia.js"></script>
     </body>
 </html>

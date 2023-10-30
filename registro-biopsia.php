@@ -21,8 +21,8 @@
 
         <form action="#" method="post">
 
-            <label for="entry_date">Fecha de Entrada:</label>
-            <input type="date" name="entry_date" id="entry_date" placeholder="(dd/mm/aaaa)">
+            <label for="f_entrada">Fecha de Entrada:</label>
+            <input type="date" name="f_entrada" id="f_entrada" required>
 
                 <br><br>
 
@@ -40,25 +40,28 @@
 
                 <br><br>
 
-            <label for="resume">Resumen de Historia Clínica:</label>
-            <input type="text" name="resume" id="resume" placeholder="Escriba el resumen">
+            <label for="resumen">Resumen de Historia Clínica:</label>
+            <input type="text" name="resumen" id="resumen" placeholder="Escriba el resumen" required>
 
                 <br><br>
 
-            <label for="diagnosis">Diagnóstico Clínico:</label>
-            <input type="text" name="diagnosis" id="diagnosis" placeholder="Escriba el diagnóstico">
+            <label for="diagnostico">Diagnóstico Clínico:</label>
+            <input type="text" name="diagnostico" id="diagnostico" placeholder="Escriba el diagnóstico" required>
 
                 <br><br>
 
-            <label for="lession_site">Sitio de la Lesión:</label>
-            <input type="text" name="lession_site" id="lession_site" placeholder="Indique">
+            <label for="sitio_lesion">Sitio de la Lesión:</label>
+            <input type="text" name="sitio_lesion" id="sitio_lesion" placeholder="Indique" required>
 
                 <br><br>
 
+            <!-- Observaciones no se encuentra en la BDD, asi que lo dejare comentado por ahora -->
+            <!--
             <label for="obsevations">Observaciones:</label>
             <input type="text" name="obsevations" id="observations" placeholder="Indique la observacion">
 
                 <br><br>
+            -->
 
             <button type="submit">Registrar</button>
               
