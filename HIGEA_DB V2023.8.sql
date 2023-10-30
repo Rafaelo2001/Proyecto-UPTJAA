@@ -2392,7 +2392,7 @@ CREATE TABLE `recup_password` (
 -- Disparadores `recup_password`
 --
 DELIMITER $$
-CREATE TRIGGER `call_actualizar_columna_edad` AFTER INSERT ON `recup_password` FOR EACH ROW BEGIN
+CREATE TRIGGER `call_actualizar_columna_edad` AFTER INSERT ON `telefono` FOR EACH ROW BEGIN
 	CALL actualizar_columna_edad();
 END
 $$
