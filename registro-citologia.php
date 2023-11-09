@@ -21,7 +21,7 @@
         
         <h1>Registro de Citología</h1>
 
-        <form action="#" method="post" class="form" id="form">
+        <form action="php/insert-citologia.php" method="post" autocomplete="off">
 
             <!--
                 No seria necesario xq se puede guardar la fecha del sistema automaticamente

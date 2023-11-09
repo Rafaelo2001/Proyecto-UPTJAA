@@ -28,7 +28,32 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `calcular_edad` (`F_nac` DATE) RETURN
     RETURN anos;
 END$$
 
+
+--
+-- Disparadores `telefono`
+--
+
+CREATE TRIGGER `call_actualizar_columna_edad` AFTER INSERT ON `telefono` FOR EACH ROW BEGIN
+	CALL actualizar_columna_edad();
+END
+$$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `m_remitido`
+-- 
+
+CREATE TABLE `m_remitido` (
+  `ID_M_Remitido` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_Medico` int(11) DEFAULT NULL,
+  `Diagnostico` varchar(250) DEFAULT NULL,
+  `Resumen` varchar(100) DEFAULT NULL,
+  `F_Entrada` datetime DEFAULT NULL,
+
+  PRIMARY KEY (`ID_M_Remitido`)
+);
 
 -- --------------------------------------------------------
 
@@ -51,9 +76,9 @@ CREATE TABLE `m_biopsia` (
 CREATE TABLE `m_citologia` (
   `ID_M_Citologia` int(11) NOT NULL,
   `FUR` varchar(45) DEFAULT NULL,
-  `Endocervix` varchar(45) DEFAULT NULL,
-  `Exocervix` varchar(45) DEFAULT NULL,
-  `Vagina` varchar(45) DEFAULT NULL,
+  `Endocervix` tinyint(1) DEFAULT NULL,
+  `Exocervix` tinyint(1) DEFAULT NULL,
+  `Vagina` tinyint(1) DEFAULT NULL,
   `Otros` varchar(45) DEFAULT NULL,
   `ID_Examen` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -1130,21 +1155,7 @@ INSERT INTO `municipio` (`id_municipio`, `id_estado`, `nombre`) VALUES
 (461, 23, 'Valmore Rodríguez'),
 (462, 24, 'Libertador');
 
--- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `m_remitido`
--- 
-
-CREATE TABLE `m_remitido` (
-  `ID_M_Remitido` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_Medico` int(11) DEFAULT NULL,
-  `Diagnostico` varchar(250) DEFAULT NULL,
-  `Resumen` varchar(100) DEFAULT NULL,
-  `F_Entrada` datetime DEFAULT NULL,
-
-  PRIMARY KEY (`ID_M_Remitido`)
-);
 
 -- --------------------------------------------------------
 
@@ -2388,15 +2399,7 @@ CREATE TABLE `recup_password` (
   `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Disparadores `recup_password`
---
-DELIMITER $$
-CREATE TRIGGER `call_actualizar_columna_edad` AFTER INSERT ON `telefono` FOR EACH ROW BEGIN
-	CALL actualizar_columna_edad();
-END
-$$
-DELIMITER ;
+
 
 -- --------------------------------------------------------
 
