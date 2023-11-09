@@ -168,7 +168,7 @@
                 // Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
                 echo "<script>
                 alert('Los datos se han insertado correctamente.');
-                window.location.href = '../index.php';
+                window.location.href = '../registro-paciente.php';
                 </script>";
 
            

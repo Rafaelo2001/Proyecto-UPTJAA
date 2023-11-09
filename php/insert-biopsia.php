@@ -31,8 +31,7 @@
 
             5. ID_M_Citologia (Pasar valor del ID de la tabla m_remitido???)
 
-            6.FUR
-            7. Endocervix, Exocervix, Vagina, Otro
+            6. Sitio Lesion
     */
     
         // TABLA: m_remitido
@@ -42,12 +41,8 @@
             $diagnostico = $_POST['diagnostico'];
             
         // TABLA: m_citologia
-            $FUR        = $_POST['FUR'];
-            $endocervix = ($_POST['endocervix'] == 'on')  ? 1 : 0;
-            $exocervix  = ($_POST['exocervix']  == 'on')  ? 1 : 0;
-            $vagina     = ($_POST['vagina']     == 'on')  ? 1 : 0;
-            $otro       = (empty($_POST['otro'])) ? 0 : $_POST['otro'];
-            $ID_Examen = 0;
+            $sitio_lesion = $_POST['sitio_lesion'];
+            $ID_Examen    = 0;
 
         
         // ENVIANDO DATOS
@@ -68,17 +63,17 @@
                     $id_m_remitido = $fila_id['ID_M_Remitido'];
                 }
 
-            // Enviando M_CITOLOGIA
-            $sql_m_citologia = "INSERT INTO m_citologia (ID_M_Citologia, FUR, Endocervix, Exocervix, Vagina, Otros, ID_Examen) VALUES ('$id_m_remitido', '$FUR', '$endocervix', '$exocervix', '$vagina', '$otro', '$ID_Examen')";
-            $ejecutado_m_citologia = mysqli_query($conex,$sql_m_citologia);
-            if (!$ejecutado_m_citologia) {
-                throw new Exception("Error al insertar en la tabla 'm_citologia'" . mysqli_error($conex));
+            // Enviando M_BIOPSIA
+            $sql_m_biopsia = "INSERT INTO m_biopsia (ID_M_Biopsia, Sitio_lesion, ID_Examen) VALUES ('$id_m_remitido', '$sitio_lesion', '$ID_Examen')";
+            $ejecutado_m_biopsia = mysqli_query($conex, $sql_m_biopsia);
+            if (!$ejecutado_m_biopsia) {
+                throw new Exception("Error al insertar en la tabla 'm_biopsia'" . mysqli_error($conex));
             }            
 
             // Mostramos un mensaje de éxito utilizando una ventana emergente de alerta de JavaScript.
             // Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
             echo "<script>
             alert('Los datos se han insertado correctamente.');
-            window.location.href = '../registro-citologia.php'; 
+            window.location.href = '../registro-biopsia.php'; 
             </script>";      
 ?>

@@ -77,10 +77,13 @@
 
                 <br><br>
 
-            <label for="diagnosis">Observaciones:</label>
-            <input type="text" name="obsevations" id="observations" placeholder="Indique la observacion">
+            <!-- Observaciones no se encuentra en la BDD, asi que lo dejare comentado por ahora -->
+            <!--
+                <label for="diagnosis">Observaciones:</label>
+                <input type="text" name="obsevations" id="observations" placeholder="Indique la observacion">
 
                 <br><br>
+                -->
 
             <button type="submit">Registrar</button>
 

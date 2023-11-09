@@ -19,15 +19,10 @@
         
         <h1>Registro de Biopsia</h1>
 
-        <form action="#" method="post">
+        <form action="php/insert-biopsia.php" method="post" autocomplete="off">
 
-            <label for="f_entrada">Fecha de Entrada:</label>
-            <input type="date" name="f_entrada" id="f_entrada" required>
-
-                <br><br>
-
-            <label for="medicos-bdd">Médico:</label>
-            <select id="medicos-bdd" name="medico-bdd" required>
+            <label for="medico">Médico:</label>
+            <select id="medico" name="medico" required>
                 <option value="" selected disabled>-- Selecciona Medico--</option>
 
                 <?php $listaMedicos = $user->buscar("medico","1"); ?>
@@ -35,8 +30,7 @@
                 <?php foreach($listaMedicos as $medico): ?>
                         <option value="<?php echo $medico['ID_Medico'] ?>"> <?php echo $medico['Nombre_Medico'] ?></option>
                 <?php endforeach; ?>
-            </select>
-                            
+            </select>        
 
                 <br><br>
 
