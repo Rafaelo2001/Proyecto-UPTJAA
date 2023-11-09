@@ -1,5 +1,14 @@
 <?php
-        // agregar Mencion de seccion
+    session_start();
+    header('Cache-Control: no-cache, no-store, must-revalidate');
+    header('Pragma: no-cache');
+    header('Expires: 0');
+
+    if(!isset($_SESSION['username'])) {
+        header('Location: index.php');
+        exit;
+    }
+
     include "php/conexion.php";
     $user = new CodeaDB();
 ?>
