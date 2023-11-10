@@ -12,32 +12,7 @@ SET time_zone = "-04:00";
 CREATE DATABASE `higea_db`;
 USE `higea_db`;
 
-DELIMITER $$
---
--- Procedimientos
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_columna_edad` ()  NO SQL UPDATE persona
-SET edad = calcular_edad(F_nac)$$
 
---
--- Funciones
---
-CREATE DEFINER=`root`@`localhost` FUNCTION `calcular_edad` (`F_nac` DATE) RETURNS INT(11) NO SQL BEGIN
-    DECLARE anos INT;
-    SET anos = TIMESTAMPDIFF(YEAR, F_nac, CURDATE());
-    RETURN anos;
-END$$
-
-
---
--- Disparadores `telefono`
---
-
-CREATE TRIGGER `call_actualizar_columna_edad` AFTER INSERT ON `telefono` FOR EACH ROW BEGIN
-	CALL actualizar_columna_edad();
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -2413,6 +2388,33 @@ CREATE TABLE `telefono` (
   `Nro_Telf` varchar(45) DEFAULT NULL,
   `CI` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_columna_edad` ()  NO SQL UPDATE persona
+SET edad = calcular_edad(F_nac)$$
+
+--
+-- Funciones
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `calcular_edad` (`F_nac` DATE) RETURNS INT(11) NO SQL BEGIN
+    DECLARE anos INT;
+    SET anos = TIMESTAMPDIFF(YEAR, F_nac, CURDATE());
+    RETURN anos;
+END$$
+
+
+--
+-- Disparadores `telefono`
+--
+
+CREATE TRIGGER `call_actualizar_columna_edad` AFTER INSERT ON `telefono` FOR EACH ROW BEGIN
+	CALL actualizar_columna_edad();
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
