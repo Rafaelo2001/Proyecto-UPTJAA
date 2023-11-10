@@ -3005,4 +3005,27 @@ ALTER TABLE `usuario_registra_insumo`
 ALTER TABLE `usuario_registra_paciente`
   ADD CONSTRAINT `fk_Usuario_Paciente1` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`),
   ADD CONSTRAINT `usuario_registra_paciente_ibfk_1` FOREIGN KEY (`CIP`) REFERENCES `paciente` (`CIP`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Datos de Administrador Maestro
+  -- Direccion
+    INSERT INTO `direccion` (`ID_Direccion`, `Localizacion`, `Calle`, `Sector`, `Nro_Casa`, `ID_Parroquia`) VALUES (NULL, 'a', 'a', 'a', '123', '322')
+
+  -- Persona 
+    INSERT INTO `persona` (`CI`, `PN`, `SN`, `TN`, `PA`, `SA`, `F_nac`, `Edad`, `Sexo`, `ID_Direccion`) VALUES ('123456', 'ADMIN', '', '', 'ADMIN', '', '2000-01-01', '23', 'M', '1')
+
+  -- Telefono
+    INSERT INTO `telefono` (`ID_Telefono`, `Cod_Area`, `Nro_Telf`, `CI`) VALUES (NULL, '1234', '1234567', '123456')
+
+  -- Correo 
+    INSERT INTO `correo` (`ID_Correo`, `Correo`, `CI`) VALUES (NULL, 'admin@admin.com', '123456')
+
+  -- Empleado
+    INSERT INTO `empleado` (`CIE`, `Tipo`) VALUES ('123456', 'admin')
+
+  -- Usuario
+    INSERT INTO `usuario` (`ID_Usuario`, `Nombre`, `Password`, `CIE`) VALUES (NULL, 'ADMIN', '1234567', '123456')
+
+  -- Pregunta Seguridad
+    INSERT INTO `recup_password` (`ID_Recup_Password`, `P1`, `P2`, `P3`, `R1`, `R2`, `R3`, `ID_Usuario`) VALUES (NULL, 'Ciudad de nacimiento', 'Nombre de mi mascota', 'Nombre de mi mascota', 'admin', 'admin', 'admin', '1')
+
 COMMIT;
