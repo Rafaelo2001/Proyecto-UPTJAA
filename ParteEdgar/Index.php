@@ -9,20 +9,7 @@
             <h1>Informes</h1>
 
             <form>
-                Pacientes
-                <select>
-                    <option></option>
-                    <option>Ramon</option>
-                    <option>Fernando</option>
-                    <option>Carlos</option>
-
-                </select>
-                Medico
-                <select>
-                    <option></option>
-                    <option>Miguel Blanco</option>
-                </select>
-            </form>
+                            </form>
         </center>
 
         <br>
@@ -62,6 +49,8 @@
 
             Obsevaciones/Comentarios <br> <br>
                 <textarea name="Observaciones" id="Observaciones" cols="30" rows="10"></textarea>
+
+                
         </center> 
     </body>
 </html>

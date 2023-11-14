@@ -27,10 +27,12 @@
     <center>
 <label for="Citologia">Citologia</label>
         <input type="checkbox" id="Citologia"> <br>
-<label for="Otros">Otros</label>        
+<label for="Biopsia">Biopsia</label>        
         <input type="checkbox" Otros> <br>
+        <h2>Informacion material remitido</h2> <br>
+       <br> <textarea name="Informacion" id="Información" cols="100" rows="5"></textarea>
 
-        <br><textarea name="Observaciones" id="Observaciones" cols="80" rows="30"></textarea>
+        
 </center> 
 </body>
 </html>

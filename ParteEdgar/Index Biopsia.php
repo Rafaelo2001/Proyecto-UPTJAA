@@ -38,6 +38,17 @@
     <textarea name="Categoría" id="Categoría" cols="30" rows="10"></textarea>
     <br> <br>
 
+    
+    Diagnosticos
+            <button>+</button>
+                <br> <br> 
+            <textarea name="Diagnosticos" id="Diagnosticos" cols="30" rows="10"></textarea>     
+                <br><br>
+                
+    Obsevaciones/Comentarios <br> <br>
+                <textarea name="Observaciones" id="Observaciones" cols="30" rows="10"></textarea>
+                <br>
+
     <button>Enviar</button>
 </center> 
 </body>
