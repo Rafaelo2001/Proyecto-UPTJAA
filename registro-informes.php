@@ -14,7 +14,16 @@
         
             <h1>Informes</h1>
 
-            <form>
+            
+            <input class="tipo_informe" id="citologia" name="tipo_informe" value="citologia" type="radio"> 
+                    <label for="citologia">Citologia</label>
+                        
+                    -----
+                    
+                <label for="biopsia">Biopsia</label>        
+                    <input class="tipo_informe" id="biopsia" name="tipo_informe" value="biopsia" type="radio">
+
+            <form action="" method="post" autocomplete="off">
                 Pacientes
                 <select>
                     <option></option>
@@ -33,13 +42,6 @@
                     <br><br><br>           
 
                 
-                <input class="tipo_informe" id="citologia" name="tipo_informe" value="citologia" type="radio"> 
-                    <label for="citologia">Citologia</label>
-                        
-                    -----
-                    
-                <label for="biopsia">Biopsia</label>        
-                    <input class="tipo_informe" id="biopsia" name="tipo_informe" value="biopsia" type="radio">
 
                    
                     <br><br>
@@ -50,13 +52,10 @@
 
                     <br><br>
                     <hr>
-                    <br><br>
 
                 <!--Recordar colocar en el php, determinar cual info enviar de acuerdo al Radio-->
                 
                 <section id="informe_biopsia" style="display:none">
-                    Biopsia!
-
                     <h1>Informe Biopsia</h1>
 
                     <h2>Descripción Micro</h2>
@@ -73,7 +72,7 @@
                         <br><br>
 
                     
-                    Diagnosticos
+                    Diagnosticos <br><br>
                             <textarea name="Diagnosticos" id="Diagnosticos" cols="30" rows="10"></textarea>     
                                 <br><br>
                                 
@@ -83,8 +82,6 @@
                 </section>
 
                 <section id="informe_citologia" style="display:none">
-                    Citology!
-
                     <h1> Informe Citologia</h1>
 
                     <h2>Cantidad de muestras</h2> <br> 
@@ -98,11 +95,13 @@
                     Hallazgos
                         <button>+</button> 
                             <br> <br>
+                            <!--
                         <form> <input type="text"> <br>
                             <input type="text"> <br>
                             <input type="text"> <br>
                             <input type="text"> <br>
                         </form>
+-->
 
 
                         <br> <br>
@@ -129,7 +128,7 @@
                     <textarea name="Observaciones" id="Observaciones" cols="30" rows="10"></textarea>
                 </section>
 
-                <button>Enviar</button>
+                <button type="submit">Enviar</button>
             </form>
         <script src="js/form-informe.js"></script>
     </body>

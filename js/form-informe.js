@@ -8,18 +8,14 @@ seleccion_informe.change(function(){
 
     if (informe == "citologia") {
         $("#informe_biopsia").css("display","none");
-        //$("#medicos-bdd").prop("required", false);
-
+       
+        $("form").attr("action", "php/insert-informe-citologia.php");        
         $("#informe_citologia").css("display","block");
-        //$("#nombre-medico-registro").prop("required", true);
-        //$("#telefono-medico-registro").prop("required", true);
     }
     else if (informe == "biopsia") {
         $("#informe_citologia").css("display","none");
-        //$("#nombre-medico-registro").prop("required", false);
-        //$("#telefono-medico-registro").prop("required", false);
 
+        $("form").prop("action", "php/insert-informe-biopsia.php");
         $("#informe_biopsia").css("display","block");
-        //$("#medicos-bdd").prop("required", true);
     }
 });
