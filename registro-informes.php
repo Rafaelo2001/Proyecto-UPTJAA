@@ -76,7 +76,7 @@
                     <br><br>
 
                 <label for="medico">Medico:</label>
-                <select id="medico" name="medico_id" required>
+                <select id="medico" name="medico_id" style="width: 506px;" required>
                     <option></option>
                     <option>Miguel Blanco</option>
 
@@ -89,19 +89,13 @@
                 </select>
             
 
+
                     <br><br><br>           
+                    <hr>
+
+
 
                 
-
-                   
-                    <br><br>
-
-
-                <h2>Informacion material remitido</h2>
-                <textarea name="Informacion" id="Información" cols="100" rows="5"></textarea>
-
-                    <br><br>
-                    <hr>
 
                 <!--Recordar colocar en el php, determinar cual info enviar de acuerdo al Radio-->
                 <!--AGREGAR UNA SELECCION DE EXAMENES DE ACUERDO AL ID DEL PACIENTE, esto puede ser ya dentro del area de biopsia/citologia-->
@@ -113,6 +107,11 @@
                     <select id="examen" name="examen_id" required>
                         <option value="" selected disabled>Agregar php</option>
                     </select>
+
+                    <h2>Informacion material remitido</h2>
+                    <textarea name="Informacion" id="Información" cols="100" rows="5"></textarea>
+
+                    <br><br>
 
                     <h2>Descripción Micro</h2>
                     <textarea name="Categoría" id="Categoría" cols="30" rows="10"></textarea>
@@ -144,6 +143,11 @@
                     <select id="examen" name="examen_id" required>
                         <option value="" selected disabled>Agregar php</option>
                     </select>
+
+                    <h2>Informacion material remitido</h2>
+                    <textarea name="Informacion" id="Información" cols="100" rows="5"></textarea>
+
+                    <br><br>
 
                     <h2>Cantidad de muestras</h2> <br> 
                         <textarea name="muestras" id="muestras" cols="30" rows="10"></textarea>

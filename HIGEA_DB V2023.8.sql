@@ -23,6 +23,7 @@ USE `higea_db`;
 CREATE TABLE `m_remitido` (
   `ID_M_Remitido` int(11) NOT NULL AUTO_INCREMENT,
   `ID_Medico` int(11) DEFAULT NULL,
+  `CI_Paciente` int(11) DEFAULT NULL,
   `Diagnostico` varchar(250) DEFAULT NULL,
   `Resumen` varchar(100) DEFAULT NULL,
   `F_Entrada` datetime DEFAULT NULL,
@@ -38,8 +39,7 @@ CREATE TABLE `m_remitido` (
 
 CREATE TABLE `m_biopsia` (
   `ID_M_Biopsia` int(11) NOT NULL,
-  `Sitio_lesion` varchar(45) DEFAULT NULL,
-  `ID_Examen` int(11) NOT NULL
+  `Sitio_lesion` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -54,8 +54,7 @@ CREATE TABLE `m_citologia` (
   `Endocervix` tinyint(1) DEFAULT NULL,
   `Exocervix` tinyint(1) DEFAULT NULL,
   `Vagina` tinyint(1) DEFAULT NULL,
-  `Otros` varchar(45) DEFAULT NULL,
-  `ID_Examen` int(11) NOT NULL
+  `Otros` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -662,7 +661,10 @@ INSERT INTO `estado` (`id_estado`, `nombre`) VALUES
 
 CREATE TABLE `examen` (
   `ID_Examen` int(11) NOT NULL,
-  `Tipo` varchar(45) DEFAULT NULL
+  `ID_M_remitido` int(11) NOT NULL,
+  `Tipo` varchar(45) DEFAULT NULL,
+
+  CONSTRAINT `FK_id_m_remitido` FOREIGN KEY (`ID_M_Remitido`) REFERENCES `m_remitido` (`ID_M_Remitido`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -1142,19 +1144,6 @@ INSERT INTO `municipio` (`id_municipio`, `id_estado`, `nombre`) VALUES
 CREATE TABLE `paciente` (
   `CIP` int(11) NOT NULL,
   PRIMARY KEY (`CIP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `paciente_entrega_m_remitido`
---
-
-CREATE TABLE `paciente_entrega_m_remitido` (
-  `CIP` int(11) NOT NULL,
-  `ID_M_Remitido` int(11) NOT NULL,
-  `F_Entrada` datetime DEFAULT NULL,
-  `Obs` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -2530,17 +2519,15 @@ CREATE TABLE `medico_remite_paciente` (
 -- Indices de la tabla `m_biopsia`
 --
 ALTER TABLE `m_biopsia`
-  ADD PRIMARY KEY (`ID_M_Biopsia`,`ID_Examen`),
-  ADD UNIQUE KEY `ID_M_Biopsia` (`ID_M_Biopsia`),
-  ADD KEY `ID_Examen` (`ID_Examen`);
+  ADD PRIMARY KEY (`ID_M_Biopsia`),
+  ADD UNIQUE KEY `ID_M_Biopsia` (`ID_M_Biopsia`);
 
 --
 -- Indices de la tabla `m_citologia`
 --
 ALTER TABLE `m_citologia`
-  ADD PRIMARY KEY (`ID_M_Citologia`,`ID_Examen`),
-  ADD UNIQUE KEY `ID_M_Citologia` (`ID_M_Citologia`),
-  ADD KEY `ID_Examen` (`ID_Examen`);
+  ADD PRIMARY KEY (`ID_M_Citologia`),
+  ADD UNIQUE KEY `ID_M_Citologia` (`ID_M_Citologia`);
 
 --
 -- Indices de la tabla `ciudad`
@@ -2652,16 +2639,6 @@ ALTER TABLE `lote`
 ALTER TABLE `municipio`
   ADD PRIMARY KEY (`id_municipio`),
   ADD KEY `id_estado` (`id_estado`);
-
-
-
-
---
--- Indices de la tabla `paciente_entrega_m_remitido`
---
-ALTER TABLE `paciente_entrega_m_remitido`
-  ADD PRIMARY KEY (`CIP`,`ID_M_Remitido`),
-  ADD KEY `ID_M_Remitido` (`ID_M_Remitido`);
 
 --
 -- Indices de la tabla `paciente_paga_factura`
@@ -2843,25 +2820,30 @@ ALTER TABLE `usuario`
 -- Restricciones para tablas volcadas
 --
 
+--
+-- Filtros para la tabla `paciente`
+--
+ALTER TABLE `paciente`
+  ADD CONSTRAINT `fk_CIP_CI` FOREIGN KEY (`CIP`) REFERENCES `persona` (`CI`);
+
 -- 
 -- Filtros para tabla `m_remitido`
 --
 
 ALTER TABLE `m_remitido`
-  ADD FOREIGN KEY (`ID_Medico`) REFERENCES `medico` (`ID_Medico`);
+  ADD FOREIGN KEY (`ID_Medico`) REFERENCES `medico` (`ID_Medico`),
+  ADD FOREIGN KEY (`CI_Paciente`) REFERENCES `paciente` (`CIP`);
 
 --
 -- Filtros para la tabla `m_biopsia`
 --
 ALTER TABLE `m_biopsia`
-  ADD CONSTRAINT `m_biopsia_ibfk_1` FOREIGN KEY (`ID_Examen`) REFERENCES `examen` (`ID_Examen`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_M_Biopsia_M_Remitido_Examen1` FOREIGN KEY (`ID_M_Biopsia`) REFERENCES `m_remitido` (`ID_M_Remitido`);
 
 --
 -- Filtros para la tabla `m_citologia`
 --
 ALTER TABLE `m_citologia`
-  ADD CONSTRAINT `m_citologia_ibfk_1` FOREIGN KEY (`ID_Examen`) REFERENCES `examen` (`ID_Examen`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_M_Citologia_M_Remitido_Examen1` FOREIGN KEY (`ID_M_Citologia`) REFERENCES `m_remitido` (`ID_M_Remitido`);
 
 --
@@ -2934,13 +2916,6 @@ ALTER TABLE `insumo_tiene_lote`
 --
 ALTER TABLE `municipio`
   ADD CONSTRAINT `municipio_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estado` (`id_estado`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `paciente_entrega_m_remitido`
---
-ALTER TABLE `paciente_entrega_m_remitido`
-  ADD CONSTRAINT `fk_Paciente_M_Remitido1` FOREIGN KEY (`CIP`) REFERENCES `paciente` (`CIP`),
-  ADD CONSTRAINT `paciente_entrega_m_remitido_ibfk_1` FOREIGN KEY (`ID_M_Remitido`) REFERENCES `m_remitido` (`ID_M_Remitido`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `paciente_paga_factura`
