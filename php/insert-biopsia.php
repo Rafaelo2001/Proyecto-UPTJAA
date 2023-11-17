@@ -1,5 +1,7 @@
 <?php
 
+    // REGISTRO DE INFORME DE BIOPSIA
+
     class BySearch
     {
         // BUSCAR x BY
@@ -21,7 +23,7 @@
     date_default_timezone_set('America/Caracas');
 
 
-    // Declarando las variables a utilizar, conectandolas con los datos recibidos de registro-citologia
+    // Declarando las variables a utilizar, conectandolas con los datos recibidos de registro-informes (biopsia)
     /* 
         Orden de llenado
             1. F_entrada

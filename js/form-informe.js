@@ -1,3 +1,27 @@
+// Funcion Select2 - Convierte a un Select normal a un Select con busqueda integrada y todo
+
+$(document).ready(
+  function() {
+    $('#paciente_id').select2(
+      {
+        placeholder: "Busque paciente por nombre o cédula de identidad",
+        allowClear: true
+      }
+    );
+  }
+);
+
+$(document).ready(
+  function() {
+    $('#medico').select2(
+      {
+        placeholder: "Busque medico por nombre",
+        allowClear: true
+      }
+    );
+  }
+);
+
 // Funcion para el registro de Medico
 
 let seleccion_informe = $("input[name='tipo_informe']");

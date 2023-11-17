@@ -116,7 +116,7 @@
                 $resultadoDireccion = $buscarIdDirecion->buscarBY('direccion','ID_Direccion');
                 foreach ($resultadoDireccion as $filaIdDireccion) {
                     $idDireccion = $filaIdDireccion['ID_Direccion'];
-                    $sqlPersona = "INSERT INTO persona (CI, PN, SN, TN, PA, SA, F_nac, Edad, Sexo, ID_Direccion) VALUES ('$ci_paciente', '$nombre1_paciente', '$nombre2_paciente', '$name_empl3', '$apellido1_paciente', '$surname_empl2', '$date_birth', '$edad', '$sexo', '$idDireccion')";
+                    $sqlPersona = "INSERT INTO persona (CI, PN, SN, TN, PA, SA, F_nac, Edad, Sexo, ID_Direccion) VALUES ('$ci_paciente', '$nombre1_paciente', '$nombre2_paciente', '$nombre3_paciente', '$apellido1_paciente', '$apellido2_paciente', '$date_birth', '$edad', '$sexo', '$idDireccion')";
                     $ejecutadoPersona = mysqli_query($conex,$sqlPersona);
                     if (!$ejecutadoPersona) {
                         throw new Exception("Error al insertar en la tabla Persona: " . mysqli_error($conex));

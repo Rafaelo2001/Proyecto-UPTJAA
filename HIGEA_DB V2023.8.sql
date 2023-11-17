@@ -702,6 +702,7 @@ CREATE TABLE `factura` (
 CREATE TABLE `informe` (
   `ID_Informe` int(11) NOT NULL,
   `Fecha` date DEFAULT NULL,
+  `Material_Remitido` varchar(250) DEFAULT NULL,
   `Diagnostico` varchar(250) DEFAULT NULL,
   `Observacion` varchar(100) DEFAULT NULL,
   `CIP` int(11) NOT NULL,
