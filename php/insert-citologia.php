@@ -37,6 +37,7 @@
     
         // TABLA: m_remitido
             $f_entrada   = date("Y-m-d H:i:s");
+            $ci_paciente = $_POST['paciente'];
             $id_medico   = $_POST['medico'];
             $resumen     = $_POST['resumen'];
             $diagnostico = $_POST['diagnostico'];
@@ -47,13 +48,12 @@
             $exocervix  = ($_POST['exocervix']  == 'on')  ? 1 : 0;
             $vagina     = ($_POST['vagina']     == 'on')  ? 1 : 0;
             $otro       = (empty($_POST['otro'])) ? 0 : $_POST['otro'];
-            $ID_Examen = 0;
 
         
         // ENVIANDO DATOS
 
             // Enviando M_REMITIDO
-            $sql_m_remitido = "INSERT INTO m_remitido (ID_Medico, Diagnostico, Resumen, F_Entrada) VALUES ('$id_medico', '$diagnostico', '$resumen', '$f_entrada')";
+            $sql_m_remitido = "INSERT INTO m_remitido (ID_Medico, CI_Paciente, Diagnostico, Resumen, F_Entrada) VALUES ('$id_medico', '$ci_paciente', '$diagnostico', '$resumen', '$f_entrada')";
             $ejecutado_m_remitido = mysqli_query($conex,$sql_m_remitido);
             if (!$ejecutado_m_remitido) {
                 throw new Exception("Error al insertar en la tabla 'm_remitido'" . mysqli_error($conex));
@@ -69,7 +69,7 @@
                 }
 
             // Enviando M_CITOLOGIA
-            $sql_m_citologia = "INSERT INTO m_citologia (ID_M_Citologia, FUR, Endocervix, Exocervix, Vagina, Otros, ID_Examen) VALUES ('$id_m_remitido', '$FUR', '$endocervix', '$exocervix', '$vagina', '$otro', '$ID_Examen')";
+            $sql_m_citologia = "INSERT INTO m_citologia (ID_M_Citologia, FUR, Endocervix, Exocervix, Vagina, Otros) VALUES ('$id_m_remitido', '$FUR', '$endocervix', '$exocervix', '$vagina', '$otro')";
             $ejecutado_m_citologia = mysqli_query($conex,$sql_m_citologia);
             if (!$ejecutado_m_citologia) {
                 throw new Exception("Error al insertar en la tabla 'm_citologia'" . mysqli_error($conex));

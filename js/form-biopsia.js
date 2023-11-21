@@ -1,6 +1,17 @@
 const form = document.getElementById('form');
 const inputs = document.querySelectorAll('#form input');
 
+$(document).ready(
+    function() {
+      $('#paciente').select2(
+        {
+          placeholder: "Busque paciente por nombre o cédula de identidad",
+          allowClear: true
+        }
+      );
+    }
+  );
+
 const expressions = {
     ci: /^\d{6,8}$/, // 6 a 8 numeros.
 	user: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo

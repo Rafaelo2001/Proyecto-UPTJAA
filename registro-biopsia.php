@@ -22,6 +22,10 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="css/select2.min.css" rel="stylesheet" />
+        <script src="js/jquery-3.7.1.js"></script>
+        <script src="js/select2.min.js"></script>
     </head>
 
     <body>
@@ -29,6 +33,38 @@
         <h1>Registro de Biopsia</h1>
 
         <form action="php/insert-biopsia.php" method="post" autocomplete="off">
+
+        <label for="paciente">Paciente:</label>
+                <select id="paciente" name="paciente" required>
+                    <option></option>
+
+                    <?php $listaPacientes = $user->buscar("paciente","1"); ?>
+
+                    <?php foreach($listaPacientes as $cedula_paciente): ?>
+
+                        <option value="<?php echo $cedula_paciente['CIP'] ?>">
+                            <?php
+                                $cedula = $cedula_paciente['CIP'];
+                                $ci_sql = "CI = '$cedula';";
+                                
+                                $pacientes = $user->buscar("persona", $ci_sql); 
+                                foreach($pacientes as $paciente): 
+                                    
+                                    $nombre_completo = $paciente['PN'] ." ". $paciente['SN'] ." ". $paciente['TN'] ." ". $paciente['PA'] ." ". $paciente['SA']; 
+                                    
+                                    $cedula_formateada = number_format($cedula, 0, ',', '.');
+                                    $cedula_a_mostrar = " - C.I.: $cedula_formateada";
+                                    
+                                    echo $nombre_completo, $cedula_a_mostrar;
+
+                                endforeach; 
+                            ?>
+                        </option>
+
+                    <?php endforeach; ?>
+                </select>
+
+                    <br><br>
 
             <label for="medico">Médico:</label>
             <select id="medico" name="medico" required>
@@ -70,6 +106,6 @@
               
         </form>
 
-
+        <script src="js/form-biopsia.js"></script>
     </body>
 </html>

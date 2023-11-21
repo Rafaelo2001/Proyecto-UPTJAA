@@ -38,11 +38,12 @@
     
         // TABLA: m_remitido
             $f_entrada   = date("Y-m-d H:i:s");
+            $ci_paciente   = $_POST['paciente'];
             $id_medico   = $_POST['medico'];
             $resumen     = $_POST['resumen'];
             $diagnostico = $_POST['diagnostico'];
             
-        // TABLA: m_citologia
+        // TABLA: m_biopsia
             $sitio_lesion = $_POST['sitio_lesion'];
             $ID_Examen    = 0;
 
@@ -50,13 +51,13 @@
         // ENVIANDO DATOS
 
             // Enviando M_REMITIDO
-            $sql_m_remitido = "INSERT INTO m_remitido (ID_Medico, Diagnostico, Resumen, F_Entrada) VALUES ('$id_medico', '$diagnostico', '$resumen', '$f_entrada')";
+            $sql_m_remitido = "INSERT INTO m_remitido (ID_Medico, CI_Paciente, Diagnostico, Resumen, F_Entrada) VALUES ('$id_medico', '$ci_paciente', '$diagnostico', '$resumen', '$f_entrada')";
             $ejecutado_m_remitido = mysqli_query($conex,$sql_m_remitido);
             if (!$ejecutado_m_remitido) {
                 throw new Exception("Error al insertar en la tabla 'm_remitido'" . mysqli_error($conex));
             }
 
-                // Buscando ID_M_Citologia
+                // Buscando ID_M_BIOPSIA
                 $buscar_id_m_remitido = new BySearch();
                 $buscar_id_m_remitido->conexion = new mysqli("localhost","root","","higea_db");
                 $resultado_id_m_remitido = $buscar_id_m_remitido->buscarBY('m_remitido','ID_M_Remitido');
@@ -66,7 +67,7 @@
                 }
 
             // Enviando M_BIOPSIA
-            $sql_m_biopsia = "INSERT INTO m_biopsia (ID_M_Biopsia, Sitio_lesion, ID_Examen) VALUES ('$id_m_remitido', '$sitio_lesion', '$ID_Examen')";
+            $sql_m_biopsia = "INSERT INTO m_biopsia (ID_M_Biopsia, Sitio_lesion) VALUES ('$id_m_remitido', '$sitio_lesion')";
             $ejecutado_m_biopsia = mysqli_query($conex, $sql_m_biopsia);
             if (!$ejecutado_m_biopsia) {
                 throw new Exception("Error al insertar en la tabla 'm_biopsia'" . mysqli_error($conex));

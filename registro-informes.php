@@ -103,57 +103,78 @@
                 <section id="informe_biopsia" style="display:none">
                     <h1>Informe Biopsia</h1>
 
-                    <label for="examen"></label>
-                    <select id="examen" name="examen_id" required>
-                        <option value="" selected disabled>Agregar php</option>
+                    <label for="examen_id_b">Examenes del Paciente:</label>
+                    <select id="examen_id_b" name="examen_id_b" required>
                     </select>
 
                     <h2>Informacion material remitido</h2>
-                    <textarea name="Informacion" id="Información" cols="100" rows="5"></textarea>
+                    <textarea name="info_b" id="info_b" cols="100" rows="5"></textarea>
 
                     <br><br>
 
                     <h2>Descripción Micro</h2>
-                    <textarea name="Categoría" id="Categoría" cols="30" rows="10"></textarea>
+                    <textarea name="des_micro_b" id="des_micro_b" cols="30" rows="10"></textarea>
                     
                     
                         <br><br>
                     
                 
                     <h2>Descripción Macro</h2>
-                    <textarea name="Categoría" id="Categoría" cols="30" rows="10"></textarea>
+                    <textarea name="des_macro_b" id="des_macro_b" cols="30" rows="10"></textarea>
                     
                     
                         <br><br>
 
                     
                     Diagnosticos <br><br>
-                            <textarea name="Diagnosticos" id="Diagnosticos" cols="30" rows="10"></textarea>     
+                            <textarea name="diag_b" id="diag_b" cols="30" rows="10"></textarea>     
                                 <br><br>
                                 
                     Obsevaciones/Comentarios <br> <br>
-                                <textarea name="Observaciones" id="Observaciones" cols="30" rows="10"></textarea>
+                                <textarea name="obs_b" id="obs_b" cols="30" rows="10"></textarea>
                                 <br>
+
+                <script>
+                    $("#paciente_id").change(function(){    	
+                    $.ajax({
+                        data:  "CI_Paciente="+$("#paciente_id").val(),
+                        url:   'php/ajax_biopsia.php',
+                        type:  'post',
+                        dataType: 'json',
+                        beforeSend: function () {  },
+                        success:  function (response) {
+                            var html = "";
+                            $.each(response, function( index, value ) {
+                                html+= '<option value="'+value.id+'">'+value.diagnostico+"</option>";
+                            });  
+                            $("#examen_id_b").html(html);
+                        },
+                        error:function(){
+                            alert("error" + $("#paciente_id").val())
+                        }
+                    });
+                })
+                </script>
                 </section>
 
                 <section id="informe_citologia" style="display:none">
                     <h1> Informe Citologia</h1>
 
-                    <label for="examen"></label>
-                    <select id="examen" name="examen_id" required>
+                    <label for="examen_id_c">Examenes del Paciente:</label>
+                    <select id="examen_id_c" name="examen_id_c" required>
                         <option value="" selected disabled>Agregar php</option>
                     </select>
 
                     <h2>Informacion material remitido</h2>
-                    <textarea name="Informacion" id="Información" cols="100" rows="5"></textarea>
+                    <textarea name="info_c" id="info_c" cols="100" rows="5"></textarea>
 
                     <br><br>
 
-                    <h2>Cantidad de muestras</h2> <br> 
-                        <textarea name="muestras" id="muestras" cols="30" rows="10"></textarea>
+                    <h2>Calidad de muestras</h2> <br> 
+                        <textarea name="calidad_c" id="calidad_c" cols="30" rows="10"></textarea>
 
                     <h2>Categoría general</h2>
-                        <textarea name="Categoría" id="Categoría" cols="30" rows="10"></textarea>
+                        <textarea name="categ_c" id="categ_c" cols="30" rows="10"></textarea>
                     
                         <br> <br>
                     
@@ -174,7 +195,7 @@
                     Diagnosticos
                         <button>+</button>
                             <br> <br> 
-                        <textarea name="Diagnosticos" id="Diagnosticos" cols="30" rows="10"></textarea>     
+                        <textarea name="diag_c" id="diag_c" cols="30" rows="10"></textarea>     
                             
                         
                         <br><br>
@@ -182,7 +203,7 @@
                         
                     Conducta
                         <br><br>
-                    <textarea name="conducta" id="conducta" cols="30" rows="10"></textarea>
+                    <textarea name="conducta_c" id="conducta_c" cols="30" rows="10"></textarea>
                     
 
                         <br><br>
@@ -190,7 +211,29 @@
 
                     Obsevaciones/Comentarios
                         <br><br>
-                    <textarea name="Observaciones" id="Observaciones" cols="30" rows="10"></textarea>
+                    <textarea name="obs_c" id="obs_c" cols="30" rows="10"></textarea>
+
+                    <script>
+                    $("#paciente_id").change(function(){    	
+                    $.ajax({
+                        data:  "CI_Paciente="+$("#paciente_id").val(),
+                        url:   'php/ajax_citologia.php',
+                        type:  'post',
+                        dataType: 'json',
+                        beforeSend: function () {  },
+                        success:  function (response) {
+                            var html = "";
+                            $.each(response, function( index, value ) {
+                                html+= '<option value="'+value.id+'">'+value.diagnostico+"</option>";
+                            });  
+                            $("#examen_id_c").html(html);
+                        },
+                        error:function(){
+                            alert("error" + $("#paciente_id").val())
+                        }
+                    });
+                })
+                </script>
                 </section>
 
                 <button type="submit">Enviar</button>

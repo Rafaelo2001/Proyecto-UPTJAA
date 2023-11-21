@@ -26,6 +26,7 @@ CREATE TABLE `m_remitido` (
   `CI_Paciente` int(11) DEFAULT NULL,
   `Diagnostico` varchar(250) DEFAULT NULL,
   `Resumen` varchar(100) DEFAULT NULL,
+  `examinado` BOOLEAN NULL DEFAULT FALSE,
   `F_Entrada` datetime DEFAULT NULL,
 
   PRIMARY KEY (`ID_M_Remitido`)
@@ -662,7 +663,7 @@ INSERT INTO `estado` (`id_estado`, `nombre`) VALUES
 CREATE TABLE `examen` (
   `ID_Examen` int(11) NOT NULL,
   `ID_M_remitido` int(11) NOT NULL,
-  `Tipo` varchar(45) DEFAULT NULL,
+  `Tipo` SET('biopsia','citologia') NOT NULL,
 
   CONSTRAINT `FK_id_m_remitido` FOREIGN KEY (`ID_M_Remitido`) REFERENCES `m_remitido` (`ID_M_Remitido`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
