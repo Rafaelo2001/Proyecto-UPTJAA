@@ -101,60 +101,71 @@
                 <!--AGREGAR UNA SELECCION DE EXAMENES DE ACUERDO AL ID DEL PACIENTE, esto puede ser ya dentro del area de biopsia/citologia-->
                 
                 <section id="informe_biopsia" style="display:none">
-                    <h1>Informe Biopsia</h1>
+                    <h1>INFORME BIOPSIA</h1>
 
                     <label for="examen_id_b">Examenes del Paciente:</label>
                     <select id="examen_id_b" name="examen_id_b" required>
+                        <option value="" selected disabled>Seleccione paciente</option>
                     </select>
 
-                    <h2>Informacion material remitido</h2>
-                    <textarea name="info_b" id="info_b" cols="100" rows="5"></textarea>
 
-                    <br><br>
+                        <br>
 
-                    <h2>Descripción Micro</h2>
-                    <textarea name="des_micro_b" id="des_micro_b" cols="30" rows="10"></textarea>
+
+                    <label for="info_b"><h2>Informacion material remitido</h2></label>
+                    <textarea id="info_b" name="info_b" cols="100" rows="7" style="resize: none;"></textarea>
+
+
+                        <br><br>
+
+
+                    <label for="des_micro_b"><h2>Descripción Micro</h2></label>
+                    <textarea id="des_micro_b" name="des_micro_b" cols="80" rows="12" style="resize: none;"></textarea>
                     
                     
                         <br><br>
                     
                 
-                    <h2>Descripción Macro</h2>
-                    <textarea name="des_macro_b" id="des_macro_b" cols="30" rows="10"></textarea>
+                    <label for="des_macro_b"><h2>Descripción Macro</h2></label>
+                    <textarea id="des_macro_b" name="des_macro_b" cols="80" rows="12" style="resize: none;"></textarea>
                     
                     
                         <br><br>
 
                     
-                    Diagnosticos <br><br>
-                            <textarea name="diag_b" id="diag_b" cols="30" rows="10"></textarea>     
-                                <br><br>
-                                
-                    Obsevaciones/Comentarios <br> <br>
-                                <textarea name="obs_b" id="obs_b" cols="30" rows="10"></textarea>
-                                <br>
+                    <label for="diag_b"><h2>Diagnostico</h2></label>
+                    <textarea id="diag_b" name="diag_b" cols="65" rows="15" style="resize: none;"></textarea>     
+                        
 
-                <script>
-                    $("#paciente_id").change(function(){    	
-                    $.ajax({
-                        data:  "CI_Paciente="+$("#paciente_id").val(),
-                        url:   'php/ajax_biopsia.php',
-                        type:  'post',
-                        dataType: 'json',
-                        beforeSend: function () {  },
-                        success:  function (response) {
-                            var html = "";
-                            $.each(response, function( index, value ) {
-                                html+= '<option value="'+value.id+'">'+value.diagnostico+"</option>";
-                            });  
-                            $("#examen_id_b").html(html);
-                        },
-                        error:function(){
-                            alert("error" + $("#paciente_id").val())
-                        }
-                    });
-                })
-                </script>
+                        <br><br>
+                                
+                    
+                    <label for="obs_b"><h3>Obsevaciones/Comentarios</h3></label>
+                    <textarea id="obs_b" name="obs_b" cols="65" rows="8" style="resize: none;"></textarea>
+                    
+                        <br><br>
+
+                    <script>
+                        $("#paciente_id").change(function(){    	
+                        $.ajax({
+                            data:  "CI_Paciente="+$("#paciente_id").val(),
+                            url:   'php/ajax_biopsia.php',
+                            type:  'post',
+                            dataType: 'json',
+                            beforeSend: function () {  },
+                            success:  function (response) {
+                                var html = "";
+                                $.each(response, function( index, value ) {
+                                    html+= '<option value="'+value.id+'">'+value.diagnostico+"</option>";
+                                });  
+                                $("#examen_id_b").html(html);
+                            },
+                            error:function(){
+                                alert("error" + $("#paciente_id").val())
+                            }
+                        });
+                        })
+                    </script>
                 </section>
 
                 <section id="informe_citologia" style="display:none">
@@ -162,56 +173,63 @@
 
                     <label for="examen_id_c">Examenes del Paciente:</label>
                     <select id="examen_id_c" name="examen_id_c" required>
-                        <option value="" selected disabled>Agregar php</option>
+                        <option value="" selected disabled>Seleccione paciente</option>
                     </select>
 
-                    <h2>Informacion material remitido</h2>
-                    <textarea name="info_c" id="info_c" cols="100" rows="5"></textarea>
+                    <label for="info_c"><h2>Informacion material remitido</h2></label>
+                    <textarea id="info_c" name="info_c" cols="100" rows="7" style="resize: none;"></textarea>
 
-                    <br><br>
 
-                    <h2>Calidad de muestras</h2> <br> 
-                        <textarea name="calidad_c" id="calidad_c" cols="30" rows="10"></textarea>
+                        <br><br>
 
-                    <h2>Categoría general</h2>
-                        <textarea name="categ_c" id="categ_c" cols="30" rows="10"></textarea>
+
+                    <label for="calidad_c"><h2>Calidad de muestras</h2></label>
+                    <textarea id="calidad_c" name="calidad_c" cols="80" rows="12" style="resize: none;"></textarea>
+
+
+                        <br><br>
+
+
+                    <label for="categ_c"><h2>Categoría general</h2></label>
+                    <textarea id="categ_c" name="categ_c" cols="80" rows="12" style="resize: none;"></textarea>
                     
-                        <br> <br>
+
+                        <br><br>
                     
-                    Hallazgos
+
+                        <label for="">Hallazgos (TERMINAR DE ACOMODAR)</label>
                         <button>+</button> 
                             <br> <br>
                             <!--
-                        <form> <input type="text"> <br>
-                            <input type="text"> <br>
-                            <input type="text"> <br>
-                            <input type="text"> <br>
-                        </form>
--->
+                                <form> <input type="text"> <br>
+                                    <input type="text"> <br>
+                                    <input type="text"> <br>
+                                    <input type="text"> <br>
+                                </form>
+                            -->
 
 
-                        <br> <br>
+                        <br><br>
 
-                    Diagnosticos
-                        <button>+</button>
-                            <br> <br> 
-                        <textarea name="diag_c" id="diag_c" cols="30" rows="10"></textarea>     
-                            
+                    <label for="diag_c"><h2>Diagnostico</h2></label>
+                    <button>+</button>
+                    <textarea id="diag_c" name="diag_c" cols="30" rows="10" style="resize: none;"></textarea>     
                         
+                    
                         <br><br>
 
                         
-                    Conducta
-                        <br><br>
-                    <textarea name="conducta_c" id="conducta_c" cols="30" rows="10"></textarea>
+                    <label for="conducta_c"><h2>Conducta</h2></label>
+                    <textarea id="conducta_c" name="conducta_c" cols="30" rows="10" style="resize: none;"></textarea>
                     
 
                         <br><br>
 
 
-                    Obsevaciones/Comentarios
+                    <label for="obs_c"><h2>Obsevaciones/Comentarios</h2></label>
+                    <textarea name="obs_c" id="obs_c" cols="30" rows="10" style="resize: none;"></textarea>
+
                         <br><br>
-                    <textarea name="obs_c" id="obs_c" cols="30" rows="10"></textarea>
 
                     <script>
                     $("#paciente_id").change(function(){    	
@@ -232,8 +250,8 @@
                             alert("error" + $("#paciente_id").val())
                         }
                     });
-                })
-                </script>
+                    })
+                    </script>
                 </section>
 
                 <button type="submit">Enviar</button>

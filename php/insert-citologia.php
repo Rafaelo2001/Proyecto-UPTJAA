@@ -39,6 +39,7 @@
             $f_entrada   = date("Y-m-d H:i:s");
             $ci_paciente = $_POST['paciente'];
             $id_medico   = $_POST['medico'];
+            $descripcion = $_POST['descripcion'];
             $resumen     = $_POST['resumen'];
             $diagnostico = $_POST['diagnostico'];
             
@@ -53,7 +54,7 @@
         // ENVIANDO DATOS
 
             // Enviando M_REMITIDO
-            $sql_m_remitido = "INSERT INTO m_remitido (ID_Medico, CI_Paciente, Diagnostico, Resumen, F_Entrada) VALUES ('$id_medico', '$ci_paciente', '$diagnostico', '$resumen', '$f_entrada')";
+            $sql_m_remitido = "INSERT INTO m_remitido (ID_Medico, CI_Paciente, Descripcion_material, Diagnostico, Resumen, F_Entrada) VALUES ('$id_medico', '$ci_paciente', '$descripcion', '$diagnostico', '$resumen', '$f_entrada')";
             $ejecutado_m_remitido = mysqli_query($conex,$sql_m_remitido);
             if (!$ejecutado_m_remitido) {
                 throw new Exception("Error al insertar en la tabla 'm_remitido'" . mysqli_error($conex));

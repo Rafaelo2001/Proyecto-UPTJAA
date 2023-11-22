@@ -79,6 +79,12 @@
 
                 <br><br>
 
+            <label for="descripcion">Descripcion Material Remitido:</label>
+                <br>
+            <textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material"></textarea>
+            
+                <br><br>
+
             <label for="resumen">Resumen de Historia Clínica:</label>
             <input type="text" name="resumen" id="resumen" placeholder="Escriba el resumen">
 

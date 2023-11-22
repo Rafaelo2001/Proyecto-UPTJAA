@@ -24,9 +24,10 @@ CREATE TABLE `m_remitido` (
   `ID_M_Remitido` int(11) NOT NULL AUTO_INCREMENT,
   `ID_Medico` int(11) DEFAULT NULL,
   `CI_Paciente` int(11) DEFAULT NULL,
-  `Diagnostico` varchar(250) DEFAULT NULL,
-  `Resumen` varchar(100) DEFAULT NULL,
-  `examinado` BOOLEAN NULL DEFAULT FALSE,
+  `Descripcion_material` TEXT DEFAULT NULL;
+  `Diagnostico` TEXT DEFAULT NULL,
+  `Resumen` TEXT DEFAULT NULL,
+  `Examinado` BOOLEAN NULL DEFAULT FALSE,
   `F_Entrada` datetime DEFAULT NULL,
 
   PRIMARY KEY (`ID_M_Remitido`)
@@ -40,7 +41,7 @@ CREATE TABLE `m_remitido` (
 
 CREATE TABLE `m_biopsia` (
   `ID_M_Biopsia` int(11) NOT NULL,
-  `Sitio_lesion` varchar(45) DEFAULT NULL
+  `Sitio_lesion` TEXT DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
