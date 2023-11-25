@@ -17,159 +17,74 @@
     // Conectando con la base de datos Higea
     $conex = mysqli_connect("localhost","root","","higea_db");
 
-    // Declarando las variables a utilizar, conectandolas con los datos recibidos de patient-register
+    // Declarando las variables a utilizar, conectandolas con los datos recibidos de registro-informe
     /* 
         Orden de llenado
-            0. Registo Medico (si es necesario)
+            
+            Tabla 'informe'
+                ID_Informe 	- Esto es auto
+                2. Fecha *	
+                3. Descripcion_M_Remitido *
+                4. Diagnostico	*	
+                5. Observacion	*
+                0. CIP	*
+                1. ID_Medic*
 
-            1. direccion
-            2. persona
-            3. telefono / correo
-            4. peciente
-            5. medico
-            6. medico-registra-paciente (fecha-obs)
+            Tabla 'inf_biopsia'
+                7. ID_Inf_Biopsia	- Buscar cual fue el ID del informe
+                8. Desc_Macro	*
+                9. Desc_Micro	*
+                10. ID_Examen   *
     */
 
-        // Medico OK
-            $registro_medico_nuevo = $_POST['registro_medico_nuevo'];
-            
-            $id_medico = $_POST['medico-bdd'];
+        // informe OK
+            $CIP             =  $_POST['paciente_id'];
+            $id_medico       =  $_POST['medico_id'];
+            $fecha           =  date("Y-m-d");
+            $des_m_remitido  =  $_POST['info_b'];
+            $diagnostico     =  $_POST['diag_b'];
+            $obs             =  $_POST['obs_b'];
 
-            $nombre_medico = $_POST['nombre-medico-registro'];
-            $telefono_medico = $_POST['telefono-medico-registro'];
+        // inf_biopsia
+            $des_macro = $_POST['des_macro_b'];
+            $des_micro = $_POST['des_micro_b'];
+            $id_examen = $_POST['examen_id_b'];
+
     
-        // Direccion OK
-            $parroquia = $_POST['parroquia'];
-            $localizacion = $_POST['localizacion'];
-            $sector = $_POST['sector'];
-            $calle = $_POST['calle'];
-            $nro_casa = $_POST['nro_casa'];
+    // ENVIANDO DATOS
 
-        // Persona
-            $ci_paciente = $_POST['cedula'];
-            $nombre1_paciente = $_POST['pn'];
-            $nombre2_paciente = $_POST['sn'];
-            $nombre3_paciente = $_POST['tn'];
-            $apellido1_paciente = $_POST['pa'];
-            $apellido2_paciente = $_POST['sa'];
-            $date_birth = $_POST['f_nac'];
-            $edad = '0';
-            $sexo = $_POST['sexo'];
+        // Enviando 'informe'
+        $sql_informe = "INSERT INTO informe (Descripcion_M_Remitido, Diagnostico, Observacion, CIP, ID_Medico, Fecha) VALUES ('$des_m_remitido', '$diagnostico', '$obs', '$CIP', '$id_medico', '$fecha')";
 
-        // Telefono / Correo
-            // $cod_area = $_POST['cod_area'];
-            $telf_paciente = $_POST['tlfn'];
-            $email_paciente = $_POST['correo'];
+        $ejecutando_sql_informe = mysqli_query($conex,$sql_informe);
+        if (!$ejecutando_sql_informe) {
+            throw new Exception("Error al insertar en la tabla Informe" . mysqli_error($conex));
+        }
 
-        // Medico-Remite-Paciente
-            $f_registro = date("Y-m-d H:i:s");
-            $obs = $_POST['obs'];
-        
-        
+            // Busqueda del ID del Informe recien creado en $id_informe
+
+            $buscar_id_informe = new BySearch();
+            $buscar_id_informe->conexion = new mysqli("localhost","root","","higea_db");
+            $resultado_id_informe = $buscar_id_informe->buscarBY('informe','ID_Informe');
+
+            foreach ($resultado_id_informe as $fila_id_informe) {
+                $id_informe = $fila_id_informe['ID_Informe'];
+            }
+
+        // Enviando 'inf_biopsia'
+        $sql_inf_b = "INSERT INTO inf_biopsia (ID_Inf_Biopsia, Desc_Macro, Desc_Micro, ID_Examen) VALUES ('$id_informe', '$des_macro', '$des_micro', '$id_examen')";
+
+        $ejecutando_sql_inf_b = mysqli_query($conex,$sql_inf_b);
+        if (!$ejecutando_sql_inf_b) {
+            throw new Exception("Error al insertar en la tabla inf_biopsia" . mysqli_error($conex));
+        }        
     
-        
-           
-            /*
-            Por ahora el rollback se descartara xq la unica forma que funcione es rediseñando el DER
-            */
-
-                // Enviando MEDICO
-
-                if ($registro_medico_nuevo) {
-
-                    $sql_Medico_Nuevo = "INSERT INTO medico (Nombre_Medico, Telefono_Medico) VALUES ('$nombre_medico', '$telefono_medico')";
-
-                    $ejecutado_Medico_Nuevo = mysqli_query($conex,$sql_Medico_Nuevo);
-                    if (!$ejecutado_Medico_Nuevo) {
-                        throw new Exception("Error al insertar en la tabla Medico" . mysqli_error($conex));
-                    }
-
-                    // Registro del ID del Medico recien creado en $id_medico
-
-                    $buscar_id_medico = new BySearch();
-                    $buscar_id_medico->conexion = new mysqli("localhost","root","","higea_db");
-                    $resultado_id_medico = $buscar_id_medico->buscarBY('medico','ID_Medico');
-
-                    foreach ($resultado_id_medico as $fila_id_medico) {
-                        $id_medico = $fila_id_medico['ID_Medico'];
-                    }
-
-                }
-
-                
+        // Mostramos un mensaje de éxito utilizando una ventana emergente de alerta de JavaScript.
+        // Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
+        echo "<script>
+        alert('Los datos se han insertado correctamente.');
+        window.location.href = '../registro-informes.php';
+        </script>";
 
 
-                        
-                // Enviando DIRECCION
-                $sqlDireccion = "INSERT INTO Direccion (ID_Parroquia, Localizacion, Calle, Sector, Nro_Casa) VALUES ('$parroquia', '$localizacion', '$calle', '$sector', '$nro_casa')";
-                $ejecutadoDireccion = mysqli_query($conex,$sqlDireccion);
-                if (!$ejecutadoDireccion) {
-                    throw new Exception("Error al insertar en la tabla Direccion" . mysqli_error($conex));
-                }
-
-
-
-                        
-                // Enviando PERSONA
-                $buscarIdDirecion = new BySearch();
-                $buscarIdDirecion->conexion = new mysqli("localhost","root","","higea_db");
-                $resultadoDireccion = $buscarIdDirecion->buscarBY('direccion','ID_Direccion');
-                foreach ($resultadoDireccion as $filaIdDireccion) {
-                    $idDireccion = $filaIdDireccion['ID_Direccion'];
-                    $sqlPersona = "INSERT INTO persona (CI, PN, SN, TN, PA, SA, F_nac, Edad, Sexo, ID_Direccion) VALUES ('$ci_paciente', '$nombre1_paciente', '$nombre2_paciente', '$name_empl3', '$apellido1_paciente', '$surname_empl2', '$date_birth', '$edad', '$sexo', '$idDireccion')";
-                    $ejecutadoPersona = mysqli_query($conex,$sqlPersona);
-                    if (!$ejecutadoPersona) {
-                        throw new Exception("Error al insertar en la tabla Persona: " . mysqli_error($conex));
-                    }
-                }
-        
-                // Enviando TELEFONO
-                $sqlTelefono = "INSERT INTO telefono (Nro_Telf, CI) VALUES ('$telf_paciente', '$ci_paciente')";
-                $ejecutadoTelefono = mysqli_query($conex,$sqlTelefono);
-                if (!$ejecutadoTelefono) {
-                    throw new Exception("Error al insertar en la tabla Telefono" . mysqli_error($conex));
-                }
-            
-        
-                // Enviando CORREO
-                $sqlCorreo = "INSERT INTO correo (Correo, CI) VALUES ('$email_paciente', '$ci_paciente')";
-                $ejecutadoCorreo = mysqli_query($conex,$sqlCorreo);
-                if (!$ejecutadoCorreo) {
-                    throw new Exception("Error al insertar en la tabla Correo" . mysqli_error($conex));
-                }
-            
-
-                
-                // Enviando PACIENTE
-                $sql_Paciente = "INSERT INTO paciente (CIP) VALUES ('$ci_paciente')";
-                $ejecutado_Paciente = mysqli_query($conex,$sql_Paciente);
-                if (!$ejecutado_Paciente) {
-                    throw new Exception("Error al insertar en la tabla Empleado" . mysqli_error($conex));
-                }
-
-
-
-                // Enviando MEDICO_REMITE_PACIENTE
-                $sql_Medico_Remite_Paciente = "INSERT INTO medico_remite_paciente (ID_Medico, CIP, F_Registro, Obs) VALUES ('$id_medico', '$ci_paciente', '$f_registro', '$obs')";
-                $ejecutado_Medico_Remite_Paciente = mysqli_query($conex,$sql_Medico_Remite_Paciente);
-                if (!$ejecutado_Medico_Remite_Paciente) {
-                    throw new Exception("Error al insertar en la tabla Empleado" . mysqli_error($conex));
-                }
-
-
-            
-               
-        
-        
-          
-                
-
-                // Mostramos un mensaje de éxito utilizando una ventana emergente de alerta de JavaScript.
-                // Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
-                echo "<script>
-                alert('Los datos se han insertado correctamente.');
-                window.location.href = '../registro-paciente.php';
-                </script>";
-
-           
 ?>

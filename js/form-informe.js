@@ -49,11 +49,3 @@ seleccion_informe.change(function(){
         $("#informe_biopsia *").prop("required", true);
     }
 });
-
-/*
-            $("#medico_en_bdd").css("display","none");
-            $("#medicos-bdd").prop("required", false);
-
-            $("#medico_nuevo").css("display","block");
-            $("#nombre-medico-registro").prop("required", true);
-            $("#telefono-medico-registro").prop("required", true);*/

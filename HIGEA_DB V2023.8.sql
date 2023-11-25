@@ -708,9 +708,9 @@ CREATE TABLE `factura` (
 CREATE TABLE `informe` (
   `ID_Informe` int(11) NOT NULL,
   `Fecha` date DEFAULT NULL,
-  `Material_Remitido` varchar(250) DEFAULT NULL,
-  `Diagnostico` varchar(250) DEFAULT NULL,
-  `Observacion` varchar(100) DEFAULT NULL,
+  `Descripcion_M_Remitido` TEXT DEFAULT NULL,
+  `Diagnostico` TEXT DEFAULT NULL,
+  `Observacion` TEXT DEFAULT NULL,
   `CIP` int(11) NOT NULL,
   `ID_Medico` int(11) NOT NULL
 
@@ -724,8 +724,8 @@ CREATE TABLE `informe` (
 
 CREATE TABLE `inf_biopsia` (
   `ID_Inf_Biopsia` int(11) NOT NULL,
-  `Desc_Macro` varchar(200) DEFAULT NULL,
-  `Desc_Micro` varchar(200) DEFAULT NULL,
+  `Desc_Macro` TEXT DEFAULT NULL,
+  `Desc_Micro` TEXT DEFAULT NULL,
   `ID_Examen` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -737,10 +737,10 @@ CREATE TABLE `inf_biopsia` (
 
 CREATE TABLE `inf_citologia` (
   `ID_Inf_Citologia` int(11) NOT NULL,
-  `Calidad` varchar(100) DEFAULT NULL,
-  `Categ_Gral` varchar(45) DEFAULT NULL,
-  `Hallazgos` varchar(45) DEFAULT NULL,
-  `Conducta` varchar(45) DEFAULT NULL,
+  `Calidad` TEXT DEFAULT NULL,
+  `Categ_Gral` TEXT DEFAULT NULL,
+  `Hallazgos` TEXT DEFAULT NULL,
+  `Conducta` TEXT DEFAULT NULL,
   `ID_Examen` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

@@ -18,7 +18,7 @@
 						$fecha_formateada = date("d-m-Y", strtotime($examen['F_Examen']));
 						$diagnostico = $value['Diagnostico']." - ";
 
-						$html[] = ["id"=>$value['ID_M_Remitido'] ,"diagnostico"=>$diagnostico, "fecha"=>$fecha_formateada ];
+						$html[] = ["id"=>$examen['ID_Examen'] ,"diagnostico"=>$diagnostico, "fecha"=>$fecha_formateada ];
 					}
 					else {
 						$cuenta_cito++;
