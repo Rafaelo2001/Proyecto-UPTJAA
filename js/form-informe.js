@@ -4,8 +4,9 @@ $(document).ready(
   function() {
     $('#paciente_id').select2(
       {
+        tags: false,
         placeholder: "Busque paciente por nombre o cédula de identidad",
-        allowClear: true
+        allowClear: false
       }
     );
   }
@@ -15,6 +16,7 @@ $(document).ready(
   function() {
     $('#medico').select2(
       {
+        tags: false,
         placeholder: "Busque medico por nombre",
         allowClear: true
       }
@@ -32,14 +34,26 @@ seleccion_informe.change(function(){
 
     if (informe == "citologia") {
         $("#informe_biopsia").css("display","none");
+        $("#informe_biopsia *").prop("required", false);
        
         $("form").attr("action", "php/insert-informe-citologia.php");        
         $("#informe_citologia").css("display","block");
+        $("#informe_citologia *").prop("required", true);
     }
     else if (informe == "biopsia") {
         $("#informe_citologia").css("display","none");
+        $("#informe_citologia *").prop("required", false);  
 
         $("form").prop("action", "php/insert-informe-biopsia.php");
         $("#informe_biopsia").css("display","block");
+        $("#informe_biopsia *").prop("required", true);
     }
 });
+
+/*
+            $("#medico_en_bdd").css("display","none");
+            $("#medicos-bdd").prop("required", false);
+
+            $("#medico_nuevo").css("display","block");
+            $("#nombre-medico-registro").prop("required", true);
+            $("#telefono-medico-registro").prop("required", true);*/

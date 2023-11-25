@@ -17,7 +17,7 @@
 
 <html lang="es">
     <head>
-        <title>Modulo de generacion de Informes</title>
+        <title>Modulo de Registro de Informes</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -113,35 +113,35 @@
 
 
                     <label for="info_b"><h2>Informacion material remitido</h2></label>
-                    <textarea id="info_b" name="info_b" cols="100" rows="7" style="resize: none;"></textarea>
+                    <textarea id="info_b" name="info_b" cols="100" rows="7" style="resize: none;" required></textarea>
 
 
-                        <br><br>
-
-
-                    <label for="des_micro_b"><h2>Descripción Micro</h2></label>
-                    <textarea id="des_micro_b" name="des_micro_b" cols="80" rows="12" style="resize: none;"></textarea>
-                    
-                    
                         <br><br>
                     
                 
                     <label for="des_macro_b"><h2>Descripción Macro</h2></label>
-                    <textarea id="des_macro_b" name="des_macro_b" cols="80" rows="12" style="resize: none;"></textarea>
+                    <textarea id="des_macro_b" name="des_macro_b" cols="80" rows="12" style="resize: none;" required></textarea>
+                    
+                    
+                        <br><br>
+
+
+                    <label for="des_micro_b"><h2>Descripción Micro</h2></label>
+                    <textarea id="des_micro_b" name="des_micro_b" cols="80" rows="12" style="resize: none;" required></textarea>
                     
                     
                         <br><br>
 
                     
                     <label for="diag_b"><h2>Diagnostico</h2></label>
-                    <textarea id="diag_b" name="diag_b" cols="65" rows="15" style="resize: none;"></textarea>     
+                    <textarea id="diag_b" name="diag_b" cols="65" rows="15" style="resize: none;" required></textarea>     
                         
 
                         <br><br>
                                 
                     
-                    <label for="obs_b"><h3>Obsevaciones/Comentarios</h3></label>
-                    <textarea id="obs_b" name="obs_b" cols="65" rows="8" style="resize: none;"></textarea>
+                    <label for="obs_b"><h2>Obsevaciones/Comentarios</h2></label>
+                    <textarea id="obs_b" name="obs_b" cols="65" rows="8" style="resize: none;" required></textarea>
                     
                         <br><br>
 
@@ -156,7 +156,7 @@
                             success:  function (response) {
                                 var html = "";
                                 $.each(response, function( index, value ) {
-                                    html+= '<option value="'+value.id+'">'+value.diagnostico+"</option>";
+                                    html+= '<option value="'+value.id+'">'+value.diagnostico + value.fecha + "</option>";
                                 });  
                                 $("#examen_id_b").html(html);
                             },
@@ -169,7 +169,7 @@
                 </section>
 
                 <section id="informe_citologia" style="display:none">
-                    <h1> Informe Citologia</h1>
+                    <h1>INFORME CITOLOGÍA</h1>
 
                     <label for="examen_id_c">Examenes del Paciente:</label>
                     <select id="examen_id_c" name="examen_id_c" required>
@@ -177,57 +177,49 @@
                     </select>
 
                     <label for="info_c"><h2>Informacion material remitido</h2></label>
-                    <textarea id="info_c" name="info_c" cols="100" rows="7" style="resize: none;"></textarea>
+                    <textarea id="info_c" name="info_c" cols="100" rows="7" style="resize: none;" required></textarea>
 
 
                         <br><br>
 
 
                     <label for="calidad_c"><h2>Calidad de muestras</h2></label>
-                    <textarea id="calidad_c" name="calidad_c" cols="80" rows="12" style="resize: none;"></textarea>
+                    <textarea id="calidad_c" name="calidad_c" cols="80" rows="12" style="resize: none;" required></textarea>
 
 
                         <br><br>
 
 
-                    <label for="categ_c"><h2>Categoría general</h2></label>
-                    <textarea id="categ_c" name="categ_c" cols="80" rows="12" style="resize: none;"></textarea>
+                    <label for="categ_c"><h2>Categoría General</h2></label>
+                    <textarea id="categ_c" name="categ_c" cols="80" rows="12" style="resize: none;" required></textarea>
                     
 
                         <br><br>
                     
 
-                        <label for="">Hallazgos (TERMINAR DE ACOMODAR)</label>
-                        <button>+</button> 
-                            <br> <br>
-                            <!--
-                                <form> <input type="text"> <br>
-                                    <input type="text"> <br>
-                                    <input type="text"> <br>
-                                    <input type="text"> <br>
-                                </form>
-                            -->
-
-
+                    <label for="hallazgos_c"><h2>Hallazgos</h2></label>
+                    <textarea id="hallazgos_c" name="hallazgos_c" cols="80" rows="12" style="resize: none;" required></textarea>
+                    
+                    
                         <br><br>
+
 
                     <label for="diag_c"><h2>Diagnostico</h2></label>
-                    <button>+</button>
-                    <textarea id="diag_c" name="diag_c" cols="30" rows="10" style="resize: none;"></textarea>     
+                    <textarea id="diag_c" name="diag_c" cols="65" rows="15" style="resize: none;" required></textarea>     
                         
                     
                         <br><br>
 
                         
                     <label for="conducta_c"><h2>Conducta</h2></label>
-                    <textarea id="conducta_c" name="conducta_c" cols="30" rows="10" style="resize: none;"></textarea>
+                    <textarea id="conducta_c" name="conducta_c" cols="65" rows="8" style="resize: none;" required></textarea>
                     
 
                         <br><br>
 
 
                     <label for="obs_c"><h2>Obsevaciones/Comentarios</h2></label>
-                    <textarea name="obs_c" id="obs_c" cols="30" rows="10" style="resize: none;"></textarea>
+                    <textarea name="obs_c" id="obs_c" cols="65" rows="8" style="resize: none;" required></textarea>
 
                         <br><br>
 
@@ -242,7 +234,7 @@
                         success:  function (response) {
                             var html = "";
                             $.each(response, function( index, value ) {
-                                html+= '<option value="'+value.id+'">'+value.diagnostico+"</option>";
+                                html+= '<option value="'+value.id+'">'+value.diagnostico + value.fecha + "</option>";
                             });  
                             $("#examen_id_c").html(html);
                         },

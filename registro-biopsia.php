@@ -79,7 +79,7 @@
 
                 <br><br>
 
-            <label for="descripcion">Descripcion Material Remitido:</label>
+            <label for="descripcion">Descripcion Material Remitido: <small><i>obligatorio</i></small></label>
                 <br>
             <textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material"></textarea>
 
