@@ -487,11 +487,13 @@ form .form-group-input {
     font-size: 16px;
 }
 .form-register input[type="radio"],
+.form-register input[type="checkbox"],
 .register-box-biopsia input[type="checkbox"],
 .register-box-citology input[type="checkbox"] {
     display: none;
 }
 .form-register .radio label,
+.form-register .checkbox label,
 .register-box-biopsia .checkbox label,
 .register-box-citology .checkbox label {
     color: #035E73;
@@ -506,11 +508,13 @@ form .form-group-input {
     transition: all 0.5s ease;
 }
 .form-register .radio label:hover,
+.form-register .checkbox label:hover,
 .register-box-biopsia .checkbox label:hover,
 .register-box-citology .checkbox label:hover {
     background: rgb(3, 94, 115, .3);
 }
 .form-register .radio label:before,
+.form-register .checkbox label:before,
 .register-box-biopsia .checkbox label:before,
 .register-box-citology .checkbox label:before {
     content: "";
@@ -524,11 +528,13 @@ form .form-group-input {
     left: 17px;
     bottom: 2.5px;
 }
+.form-register .checkbox label:before,
 .register-box-biopsia .checkbox label:before,
 .register-box-citology .checkbox label:before{
     border-radius: 3px;
 }
 .form-register input[type="radio"]:checked + label,
+.form-register input[type="checkbox"]:checked + label,
 .register-box-biopsia input[type="checkbox"]:checked + label,
 .register-box-citology input[type="checkbox"]:checked + label {
     padding: 5px 15px;
@@ -538,6 +544,7 @@ form .form-group-input {
 }
 
 .form-register input[type="radio"]:checked + label:before,
+.form-register input[type="checkbox"]:checked + label:before,
 .register-box-biopsia input[type="checkbox"]:checked + label:before,
 .register-box-citology input[type="checkbox"]:checked + label:before {
     display: none;
