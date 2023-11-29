@@ -17,7 +17,7 @@
 
 <html lang="es">
     <head>
-        <title>Registro Paciente</title>
+        <title>Registro de Paciente</title>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +28,6 @@
     </head>
 
     <body class="login-register">
-
         <div class="sidebar close">
                 <div class="logo-details">
                 <img class="logo" src="images/Logo con contorno.png" alt="Logo de Higea" width="60" height="60">
@@ -45,12 +44,12 @@
                         </ul>
                 </li>
                 <li>
-                        <a href="patient_register.html">
+                        <a href="registro-paciente.php">
                         <i class="fi fi-rr-procedures"></i>
                         <span class="link_name">Pacientes</span>
                         </a>
                         <ul class="sub-menu blank">
-                        <li><a class="link_name" href="patient_register.html">Pacientes</a></li>
+                        <li><a class="link_name" href="registro-paciente.php">Pacientes</a></li>
                         </ul>
                 </li>
                 <li>
@@ -63,8 +62,8 @@
                         </div>
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Muestras</a></li>
-                        <li><a href="citology_register.html">Citología</a></li>
-                        <li><a href="biopsia_register.html">Biopsia</a></li>
+                        <li><a href="registro-citologia.php">Citología</a></li>
+                        <li><a href="registro-biopsia.php">Biopsia</a></li>
                         </ul>
                 </li>
                 <li>
@@ -77,9 +76,27 @@
                         </ul>
                 </li>
                 <li>
+                        <a href="registro-informes.php">
+                        <i class="fi fi-rr-document-signed"></i>
+                        <span class="link_name">Informes médicos</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="registro-informes.php">Informes médicos</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="#">
+                        <i class="fi fi-rr-file-invoice-dollar"></i>
+                        <span class="link_name">Facturación</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="#">Facturación</a></li>
+                        </ul>
+                </li>
+                <li>
                         <div class="iocn-link">
                         <a href="#">
-                                <i class="fi fi-rr-file-circle-info"></i>
+                                <i class="fi fi-rr-eye"></i>
                                 <span class="link_name">Detalles</span>
                         </a>
                         <i class="fi fi-rr-angle-small-down arrow"></i>
@@ -87,8 +104,8 @@
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Detalles</a></li>
                         <li><a href="#">Pacientes</a></li>
-                        <li><a href="display-samples.html">Muestras</a></li>
-                        <li><a href="display-inventory.html">Insumos</a></li>
+                        <li><a href="#">Muestras</a></li>
+                        <li><a href="#">Insumos</a></li>
                         </ul>
                 </li>
                 <li>

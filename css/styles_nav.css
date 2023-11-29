@@ -332,10 +332,20 @@
     grid-template-columns: 1fr 1fr;
     gap: 5px;
 }
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+}
 .form-register .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5px;
+}
+.form-register .grid2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
 }
 form .form-input-error {
     font-size: 12px;

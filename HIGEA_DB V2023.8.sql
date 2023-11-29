@@ -24,7 +24,7 @@ CREATE TABLE `m_remitido` (
   `ID_M_Remitido` int(11) NOT NULL AUTO_INCREMENT,
   `ID_Medico` int(11) DEFAULT NULL,
   `CI_Paciente` int(11) DEFAULT NULL,
-  `Descripcion_material` TEXT DEFAULT NULL;
+  `Descripcion_material` TEXT DEFAULT NULL,
   `Diagnostico` TEXT DEFAULT NULL,
   `Resumen` TEXT DEFAULT NULL,
   `Examinado` BOOLEAN NULL DEFAULT FALSE,

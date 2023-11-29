@@ -49,12 +49,12 @@
                         </ul>
                 </li>
                 <li>
-                        <a href="patient_register.html">
+                        <a href="registro-paciente.php">
                         <i class="fi fi-rr-procedures"></i>
                         <span class="link_name">Pacientes</span>
                         </a>
                         <ul class="sub-menu blank">
-                        <li><a class="link_name" href="patient_register.html">Pacientes</a></li>
+                        <li><a class="link_name" href="registro-paciente.php">Pacientes</a></li>
                         </ul>
                 </li>
                 <li>
@@ -67,8 +67,8 @@
                         </div>
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Muestras</a></li>
-                        <li><a href="citology_register.html">Citología</a></li>
-                        <li><a href="biopsia_register.html">Biopsia</a></li>
+                        <li><a href="registro-citologia.php">Citología</a></li>
+                        <li><a href="registro-biopsia.php">Biopsia</a></li>
                         </ul>
                 </li>
                 <li>
@@ -81,9 +81,27 @@
                         </ul>
                 </li>
                 <li>
+                        <a href="registro-informes.php">
+                        <i class="fi fi-rr-document-signed"></i>
+                        <span class="link_name">Informes médicos</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="registro-informes.php">Informes médicos</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="#">
+                        <i class="fi fi-rr-file-invoice-dollar"></i>
+                        <span class="link_name">Facturación</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="#">Facturación</a></li>
+                        </ul>
+                </li>
+                <li>
                         <div class="iocn-link">
                         <a href="#">
-                                <i class="fi fi-rr-file-circle-info"></i>
+                                <i class="fi fi-rr-eye"></i>
                                 <span class="link_name">Detalles</span>
                         </a>
                         <i class="fi fi-rr-angle-small-down arrow"></i>
@@ -91,8 +109,8 @@
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Detalles</a></li>
                         <li><a href="#">Pacientes</a></li>
-                        <li><a href="display-samples.html">Muestras</a></li>
-                        <li><a href="display-inventory.html">Insumos</a></li>
+                        <li><a href="#">Muestras</a></li>
+                        <li><a href="#">Insumos</a></li>
                         </ul>
                 </li>
                 <li>
@@ -119,9 +137,9 @@
                         <form action="php/insert-citologia.php" method="post" class="form" id="form" autocomplete="off">
 
 
-                                                <label for="paciente">Paciente:</label>
+                                                <label for="paciente">Paciente</label>
                                                         <select id="paciente" name="paciente" required>
-                                                                <option></option>
+                                                                <option value="" selected disabled>-- Selecciona un paciente registrado--</option>
 
                                                                 <?php $listaPacientes = $user->buscar("paciente","1"); ?>
 
@@ -149,37 +167,37 @@
                                                                 <?php endforeach; ?>
                                                         </select>
 
+                                        
+                                        <label for="descripcion">Descripcion Material Remitido: <small><i>obligatorio</i></small></label>
+                                        <br>
+                                        <textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material"></textarea>
+                                        
+
                 <br><br>
 
 
                                 <div class="grid">
-                                    <!--group: state-->
-                                    <div class="form-group" id="group_state">
+                                        <!--group: state-->
+                                        <div class="form-group" id="group_state">
                                                 <div id="medico_en_bdd">
-                                                <label for="medico">Médico</label>
-                                                <select id="medico" name="medico" required>
-                                                    <option value="" selected disabled>-- Selecciona Medico--</option>
+                                                        <label for="medico">Médico</label>
+                                                        <select id="medico" name="medico" required>
+                                                                <option value="" selected disabled>-- Selecciona Medico--</option>
 
-                                                    <?php $listaMedicos = $user->buscar("medico","1"); ?>
+                                                                <?php $listaMedicos = $user->buscar("medico","1"); ?>
 
-                                                    <?php foreach($listaMedicos as $medico): ?>
-                                                            <option value="<?php echo $medico['ID_Medico'] ?>"> <?php echo $medico['Nombre_Medico'] ?></option>
-                                                    <?php endforeach; ?>
-                                                </select> 
+                                                                <?php foreach($listaMedicos as $medico): ?>
+                                                                        <option value="<?php echo $medico['ID_Medico'] ?>"> <?php echo $medico['Nombre_Medico'] ?></option>
+                                                                <?php endforeach; ?>
+                                                        </select> 
 
             
-                                                            </div>
+                                                </div>
                                                 <span class="form-input-error">
                                                         <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                                                         <p>Rellene este campo correctamente</p>
                                                 </span>
                                         </div>
-
-                                        <br><br>
-
-                                                <label for="descripcion">Descripcion Material Remitido: <small><i>obligatorio</i></small></label>
-                                                <br>
-                                                <textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material"></textarea>
 
                                         <!--group: name1-->
                                         <div class="form-group" id="group_name_patient1">
@@ -221,21 +239,23 @@
                                 </div>
 
 
-                                        <div class="checkbox" id="frotis">
-                                            <h2>Frotis de:</h2>
-                                            <input type="checkbox" name="frotis" id="endocervix" value="endocervix">
-                                            <label for="endocervix">Endocervix</label>
+                                <div class="checkbox" id="frotis">
+                                        <h2>Frotis de:</h2>
+                                        <input type="checkbox" name="frotis" id="endocervix" value="endocervix">
+                                        <label for="endocervix">Endocervix</label>
                             
-                                            <input type="checkbox" name="frotis" id="exocervix" value="exocervix">
-                                            <label for="exocervix">Exocervix</label>
+                                        <input type="checkbox" name="frotis" id="exocervix" value="exocervix">
+                                        <label for="exocervix">Exocervix</label>
                             
-                                            <input type="checkbox" name="frotis" id="vagina" value="vagina">
-                                            <label for="vagina">Vagina</label>
+                                        <input type="checkbox" name="frotis" id="vagina" value="vagina">
+                                        <label for="vagina">Vagina</label>
 
-                                            <input type="checkbox" name="otro_check" id="otro_check">
-                                            <label for="otro">Otro:</label>
-                                            <input type="text" name="otro" id="otro" placeholder="Especifique" disabled>
-                                        </div>
+                                        <br>
+
+                                        <input type="checkbox" name="otro_check" id="otro_check">
+                                        <label for="otro_check">Otro:</label>
+                                        <input type="text" name="otro" id="otro" placeholder="Especifique" disabled>
+                                </div>
                                         
                                 <div class="form-mess" id="form-mess">
                                 <p><i class="fi fi-rr-triangle-warning"></i><b>Error:</b> ¡Revise los campos!</p>

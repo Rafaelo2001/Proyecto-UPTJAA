@@ -32,7 +32,6 @@
     </head>
 
     <body class="login-register">
-
         <div class="sidebar close">
                 <div class="logo-details">
                 <img class="logo" src="images/Logo con contorno.png" alt="Logo de Higea" width="60" height="60">
@@ -49,12 +48,12 @@
                         </ul>
                 </li>
                 <li>
-                        <a href="patient_register.html">
+                        <a href="registro-paciente.php">
                         <i class="fi fi-rr-procedures"></i>
                         <span class="link_name">Pacientes</span>
                         </a>
                         <ul class="sub-menu blank">
-                        <li><a class="link_name" href="patient_register.html">Pacientes</a></li>
+                        <li><a class="link_name" href="registro-paciente.php">Pacientes</a></li>
                         </ul>
                 </li>
                 <li>
@@ -67,8 +66,8 @@
                         </div>
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Muestras</a></li>
-                        <li><a href="citology_register.html">Citología</a></li>
-                        <li><a href="biopsia_register.html">Biopsia</a></li>
+                        <li><a href="registro-citologia.php">Citología</a></li>
+                        <li><a href="registro-biopsia.php">Biopsia</a></li>
                         </ul>
                 </li>
                 <li>
@@ -81,9 +80,27 @@
                         </ul>
                 </li>
                 <li>
+                        <a href="registro-informes.php">
+                        <i class="fi fi-rr-document-signed"></i>
+                        <span class="link_name">Informes médicos</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="registro-informes.php">Informes médicos</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="#">
+                        <i class="fi fi-rr-file-invoice-dollar"></i>
+                        <span class="link_name">Facturación</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="#">Facturación</a></li>
+                        </ul>
+                </li>
+                <li>
                         <div class="iocn-link">
                         <a href="#">
-                                <i class="fi fi-rr-file-circle-info"></i>
+                                <i class="fi fi-rr-eye"></i>
                                 <span class="link_name">Detalles</span>
                         </a>
                         <i class="fi fi-rr-angle-small-down arrow"></i>
@@ -91,8 +108,8 @@
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Detalles</a></li>
                         <li><a href="#">Pacientes</a></li>
-                        <li><a href="display-samples.html">Muestras</a></li>
-                        <li><a href="display-inventory.html">Insumos</a></li>
+                        <li><a href="#">Muestras</a></li>
+                        <li><a href="#">Insumos</a></li>
                         </ul>
                 </li>
                 <li>
@@ -148,6 +165,11 @@
                                 <?php endforeach; ?>
                                 </select>
 
+                                        <label for="descripcion">Descripcion Material Remitido: <small><i>obligatorio</i></small></label>
+                                        <br>
+                                        <textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material"></textarea>
+
+
                                 <br><br>
 
 
@@ -173,12 +195,6 @@
                                                 </span>
                                         </div>
 
-                                        <br><br>
-
-                                                <label for="descripcion">Descripcion Material Remitido: <small><i>obligatorio</i></small></label>
-                                                <br>
-                                                <textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material"></textarea>
-
                                         <!--group: name1-->
                                         <div class="form-group" id="group_name_patient1">
                                         <div class="form-group-input">
@@ -194,7 +210,7 @@
                                         <!--group: name2-->
                                         <div class="form-group" id="group_name_patient2">
                                         <div class="form-group-input">
-                                        <label for="diagnostico">Diagnóstico Clínico:</label>
+                                        <label for="diagnostico">Diagnóstico Clínico</label>
                                         <input type="text" name="diagnostico" id="diagnostico" placeholder="Escriba el diagnóstico" required>
                                         </div>
                                         <span class="form-input-error">
@@ -206,7 +222,7 @@
                                         <!--group: name3-->
                                         <div class="form-group" id="group_name_patient3">
                                         <div class="form-group-input">
-                                        <label for="sitio_lesion">Sitio de la Lesión:</label>
+                                        <label for="sitio_lesion">Sitio de la Lesión</label>
                                         <input type="text" name="sitio_lesion" id="sitio_lesion" placeholder="Indique" required>
                                         </div>
                                         <span class="form-input-error">
