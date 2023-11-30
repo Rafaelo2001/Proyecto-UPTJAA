@@ -664,7 +664,7 @@ INSERT INTO `estado` (`id_estado`, `nombre`) VALUES
 CREATE TABLE `examen` (
   `ID_Examen` int(11) NOT NULL,
   `ID_M_remitido` int(11) NOT NULL,
-  `Tipo` SET('biopsia','citologia') NOT NULL,
+  `Tipo` enum('biopsia','citologia') NOT NULL,
   `F_Examen` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Obs` TEXT NULL,
 
