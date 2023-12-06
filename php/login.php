@@ -17,19 +17,32 @@
     $username = $conex->real_escape_string($username);
     $password = $conex->real_escape_string($password);
 
-    // Ejecuta la consulta SQL para verificar si los datos ingresados coinciden con alguno de los datos almacenados en la tabla usuario
-    $resultado = $conex->query("SELECT nombre FROM usuario WHERE nombre = '$username' AND password = '$password'");
+    // Ejecuta la consulta SQL para obtener el hash de la contraseña del usuario
+    $resultado = $conex->query("SELECT password FROM usuario WHERE nombre = '$username'");
 
     if (mysqli_num_rows($resultado) > 0)
     {
-        // Si hay una coincidencia, guarda el nombre del usuario en una variable y redirige a una página
-        $_SESSION['username'] = $_POST['username'];
-        header('Location: ../home.php');
+        // Si hay una coincidencia, verifica la contraseña
+        $row = mysqli_fetch_assoc($resultado);
+        $password_hash = $row['password'];
+
+        if (password_verify($password, $password_hash)) {
+            // Si la contraseña es correcta, guarda el nombre del usuario en una variable y redirige a una página
+            $_SESSION['username'] = $_POST['username'];
+            header('Location: ../home.php');
+        } else {
+            // Si la contraseña es incorrecta, muestra un mensaje emergente de error
+            echo '<script type="text/javascript">';
+            echo 'alert("Error: Nombre de usuario o contraseña incorrectos");';
+            echo '</script>';
+        }
     }
     else
     {
-        // Si no hay una coincidencia, muestra un mensaje de error
-        echo "Error: Nombre de usuario o contraseña incorrectos";
+        // Si no hay una coincidencia, muestra un mensaje emergente de error
+        echo '<script type="text/javascript">';
+        echo 'alert("Error: Nombre de usuario o contraseña incorrectos");';
+        echo '</script>';
     }
 
     $conex->close();

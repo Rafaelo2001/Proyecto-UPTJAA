@@ -5,7 +5,7 @@ const expressions = {
     ci: /^\d{6,8}$/, // 6 a 8 numeros.
 	user: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
 	sur_name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-	password: /^.{7,12}$/, // 7 a 12 dígitos.
+	password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/, // al menos una M, una m, un digito, un caracter @$!%*?& y una longitud de 8 a 16 caracteres.
 	email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 	cod_area: /^\d{4}$/, // 4 numeros.
 	tel: /^\d{7}$/, // 7 numeros.
@@ -173,7 +173,7 @@ form.addEventListener('submit', (e) => {
             alert('Error, selecciona una opción de "Tipo de usuario"');
             hasError = true;
             } else if (campos.ci_empl && campos.name_empl1 /*&& campos.name_empl2 && campos.name_empl3*/ && campos.surname_empl1 /*&& campos.surname_empl2*/ && campos.date_birth && campos.cod_area && campos.telf_empl && campos.email_empl && campos.state && campos.city && campos.municipality && campos.parish && campos.location && campos.sector && campos.street && campos.house && campos.username && campos.password && campos.respuesta1 && campos.respuesta2 && campos.respuesta3){
-                form.reset();
+                //form.reset();
         
                 document.getElementById('form-mess-good').classList.add('form-mess-good-active');
                 setTimeout(() => {

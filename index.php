@@ -19,7 +19,7 @@ $user = new CodeaDB();
     <body class="login-register">
         <header>
             <nav>
-                <a href="index.html" class="title">
+                <a href="index.php" class="title">
                     <img src="images/Logo con contorno.png" alt="Logo de Higea" width="90" height="90">
                     <img src="images/Letras.png" alt="Higea" width="180px" height="45px">
                 </a>
@@ -39,7 +39,7 @@ $user = new CodeaDB();
                 <div class="form-group" id="group_username">
                     <div class="form-group-input">
                         <label for="username">Nombre de usuario</label>
-                        <input type="text" name="username" id="username" placeholder="Ingresa nombre de usuario">
+                        <input type="text" name="username" id="username" placeholder="Ingresa nombre de usuario" autocomplete="off">
                         <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                     </div>
                     <p class="form-input-error">Rellene este campo correctamente</p>
@@ -49,7 +49,7 @@ $user = new CodeaDB();
                 <div class="form-group" id="group_password">
                     <div class="form-group-input">
                         <label for="password">Contraseña</label>
-                        <input type="password" name="password" id="password" placeholder="Ingresa contraseña">
+                        <input type="password" name="password" id="password" placeholder="Ingresa contraseña" autocomplete="off">
                         <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                     </div>
                     <p class="form-input-error">Rellene este campo correctamente</p>
@@ -65,8 +65,8 @@ $user = new CodeaDB();
                     </div>
                     <p class="form-mess-good" id="form-mess-good">¡Formulario enviado!</p>
                 </div>
-                <a href="rcvr_pass.html">¿Olvidó su contraseña?</a><br>
-                <a href="user_register.html">¿No tiene una cuenta?</a>
+                <a href="rcvr_pass.php">¿Olvidó su contraseña?</a><br>
+                <a href="user_register.php">¿No tiene una cuenta?</a>
             </form>
         </div>
 

@@ -5,7 +5,7 @@ const expressions = {
     ci: /^\d{6,8}$/, // 6 a 8 numeros.
 	user: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
 	sur_name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-	password: /^.{7,12}$/, // 7 a 12 dígitos.
+	password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/, // al menos una M, una m, un digito, un caracter @$!%*?& y una longitud de 8 a 16 caracteres.
 	email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 	tel: /^\d{11}$/, // 11 numeros.
     text: /^[a-zA-ZÀ-ÿ\s]{1,60}$/, // Letras y espacios, no pueden llevar acentos.
@@ -15,13 +15,18 @@ const expressions = {
 }
 
 const campos = {
-    username: false
+    password: false,
+    confirmation_pass: false
 }
 
 const validForm = (e) => {
     switch (e.target.name) {
-        case "username":  // cédula
-            validarCampo(expressions.user, e.target, 'username');
+        case "password": // contraseña
+            validarCampo(expressions.password, e.target, 'password');
+            validarPassword();
+        break;
+        case "confirmation_pass": // confirmación contraseña
+            validarPassword();
         break;
     }
 }
@@ -72,8 +77,8 @@ inputs.forEach((input) => {
 
 form.addEventListener('submit', (e) => {
 
-    if (campos.username){
-        form.reset();
+    if (campos.password){
+        //form.reset();
 
         document.getElementById('form-mess-good').classList.add('form-mess-good-active');
         setTimeout(() => {

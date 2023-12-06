@@ -122,7 +122,8 @@
         
         
                 // Enviando USUARIO
-                $sqlUsuario = "INSERT INTO usuario (Nombre, Password, CIE) VALUES ('$username', '$password', '$ci_empl')";
+                $password_hashed = password_hash($password, PASSWORD_BCRYPT);
+                $sqlUsuario = "INSERT INTO usuario (Nombre, Password, CIE) VALUES ('$username', '$password_hashed', '$ci_empl')";
                 $ejecutadoUsuario = mysqli_query($conex,$sqlUsuario);
                 if (!$ejecutadoUsuario) {
                     throw new Exception("Error al insertar en la tabla Usuario" . mysqli_error($conex));

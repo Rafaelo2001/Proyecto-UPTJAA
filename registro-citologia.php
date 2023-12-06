@@ -241,13 +241,13 @@
 
                                 <div class="checkbox" id="frotis">
                                         <h2>Frotis de:</h2>
-                                        <input type="checkbox" name="frotis" id="endocervix" value="endocervix">
+                                        <input type="checkbox" name="endocervix" id="endocervix" value="endocervix">
                                         <label for="endocervix">Endocervix</label>
                             
-                                        <input type="checkbox" name="frotis" id="exocervix" value="exocervix">
+                                        <input type="checkbox" name="exocervix" id="exocervix" value="exocervix">
                                         <label for="exocervix">Exocervix</label>
                             
-                                        <input type="checkbox" name="frotis" id="vagina" value="vagina">
+                                        <input type="checkbox" name="vagina" id="vagina" value="vagina">
                                         <label for="vagina">Vagina</label>
 
                                         <br>

@@ -1,3 +1,8 @@
+<?php
+include "php/conexion.php";
+$user = new CodeaDB();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -27,7 +32,7 @@
     <div class="login-box">
         <img class="avatar" src="images/Logo con contorno.png" alt="Logo de Higea">
         <h1>RECUPERACIÓN DE CONTRASEÑA</h1>
-        <form action="#" method="post" class="form" id="form">
+        <form action="php/val-user-recup.php" method="post" class="form" id="form">
 
             <!--username-->
             <div class="form-group" id="group_username">

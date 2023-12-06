@@ -237,10 +237,11 @@ label {
     color:#026b88;
 }
 
-form .form-input-error {
+p .form-input-error {
     font-size: 12px;
     margin-bottom: 10px;
     color: #E1161F;
+    line-height: 0.3;
 }
 
 .button-container {
@@ -338,6 +339,7 @@ form .form-group-input {
     font-size: 15px;
     margin: 0;
     color: #F2F2F2;
+    line-height: 1.0;
 }
 
 .form-mess-good {
