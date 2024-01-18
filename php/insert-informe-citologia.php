@@ -76,7 +76,7 @@
             }
 
         // Enviando 'inf_citologia'
-        $sql_inf_c = "INSERT INTO inf_citologia (ID_Inf_Citologia, Calidad, Categ_Gral, Hallazgos, Conducta, ID_Examen) VALUES ('$id_informe', '$calidad', '$cat_gnral', '$hallazgos', '$conducta', '$id_examen')";
+        $sql_inf_c = "INSERT INTO inf_citologia (ID_Informe, Calidad, Categ_Gral, Hallazgos, Conducta, ID_Examen) VALUES ('$id_informe', '$calidad', '$cat_gnral', '$hallazgos', '$conducta', '$id_examen')";
 
         $ejecutando_sql_inf_c = mysqli_query($conex,$sql_inf_c);
         if (!$ejecutando_sql_inf_c) {

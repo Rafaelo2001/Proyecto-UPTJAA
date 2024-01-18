@@ -714,6 +714,7 @@ CREATE TABLE `informe` (
 
 CREATE TABLE `inf_biopsia` (
   `ID_Inf_Biopsia` int(11) NOT NULL,
+  `ID_Informe` int(11) NOT NULL,
   `Desc_Macro` text DEFAULT NULL,
   `Desc_Micro` text DEFAULT NULL,
   `ID_Examen` int(11) NOT NULL
@@ -727,6 +728,7 @@ CREATE TABLE `inf_biopsia` (
 
 CREATE TABLE `inf_citologia` (
   `ID_Inf_Citologia` int(11) NOT NULL,
+  `ID_Informe` int(11) NOT NULL,
   `Calidad` text DEFAULT NULL,
   `Categ_Gral` text DEFAULT NULL,
   `Hallazgos` text DEFAULT NULL,
@@ -2618,16 +2620,18 @@ ALTER TABLE `informe`
 -- Indices de la tabla `inf_biopsia`
 --
 ALTER TABLE `inf_biopsia`
-  ADD PRIMARY KEY (`ID_Inf_Biopsia`,`ID_Examen`),
+  ADD PRIMARY KEY (`ID_Inf_Biopsia`),
   ADD UNIQUE KEY `ID_Inf_Biopsia` (`ID_Inf_Biopsia`),
+  ADD KEY `ID_Informe` (`ID_Informe`),
   ADD KEY `ID_Examen` (`ID_Examen`);
 
 --
 -- Indices de la tabla `inf_citologia`
 --
 ALTER TABLE `inf_citologia`
-  ADD PRIMARY KEY (`ID_Inf_Citologia`,`ID_Examen`),
+  ADD PRIMARY KEY (`ID_Inf_Citologia`),
   ADD UNIQUE KEY `ID_Inf_Citologia` (`ID_Inf_Citologia`),
+  ADD KEY `ID_Informe` (`ID_Informe`),
   ADD KEY `ID_Examen` (`ID_Examen`);
 
 --
@@ -2887,6 +2891,18 @@ ALTER TABLE `usuario`
   MODIFY `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `inf_biopsia`
+--
+ALTER TABLE `inf_biopsia`
+  MODIFY `ID_Inf_Biopsia` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `inf_citologia`
+--
+ALTER TABLE `inf_citologia`
+  MODIFY `ID_Inf_Citologia` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -2944,14 +2960,14 @@ ALTER TABLE `informe`
 -- Filtros para la tabla `inf_biopsia`
 --
 ALTER TABLE `inf_biopsia`
-  ADD CONSTRAINT `fk_Inf_Biopsia_Informe_Examen1` FOREIGN KEY (`ID_Inf_Biopsia`) REFERENCES `informe` (`ID_Informe`),
+  ADD CONSTRAINT `fk_Inf_Biopsia_Informe_Examen1` FOREIGN KEY (`ID_Informe`) REFERENCES `informe` (`ID_Informe`),
   ADD CONSTRAINT `inf_biopsia_ibfk_1` FOREIGN KEY (`ID_Examen`) REFERENCES `examen` (`ID_Examen`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `inf_citologia`
 --
 ALTER TABLE `inf_citologia`
-  ADD CONSTRAINT `fk_Inf_Citologia_Informe_Examen1` FOREIGN KEY (`ID_Inf_Citologia`) REFERENCES `informe` (`ID_Informe`),
+  ADD CONSTRAINT `fk_Inf_Citologia_Informe_Examen1` FOREIGN KEY (`ID_Informe`) REFERENCES `informe` (`ID_Informe`),
   ADD CONSTRAINT `inf_citologia_ibfk_1` FOREIGN KEY (`ID_Examen`) REFERENCES `examen` (`ID_Examen`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --

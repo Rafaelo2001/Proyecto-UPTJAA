@@ -24,7 +24,10 @@
         <link rel="stylesheet" href="css/styles_nav.css">
         <link rel="icon" type="image/png" href="images/favicon.png">
         <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+
+        <link href="css/select2.min.css" rel="stylesheet" />
         <script src="js/jquery-3.7.1.js"></script>
+        <script src="js/select2.min.js"></script>
     </head>
 
     <body class="login-register" style="text-align: center;">
@@ -146,7 +149,7 @@
                                         <div class="form-group" id="group_ci_patient">
                                         <div class="form-group-input">
                                         <label for="paciente_id">Paciente:</label>
-                                            <select id="paciente_id" name="paciente_id" required>
+                                            <select style="min-width: 100px;" id="paciente_id" name="paciente_id" required>
                                                 <option></option>
 
                                                 <?php $listaPacientes = $user->buscar("paciente","1"); ?>
@@ -187,7 +190,6 @@
                                         <label for="medico">Medico:</label>
                                             <select id="medico" name="medico_id" style="width: 506px;" required>
                                                 <option></option>
-                                                <option>Miguel Blanco</option>
 
                                                 <?php $listaMedicos = $user->buscar("medico","1"); ?>
                                                 <?php foreach($listaMedicos as $medico): ?>

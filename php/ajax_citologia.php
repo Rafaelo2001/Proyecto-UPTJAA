@@ -16,7 +16,7 @@
 					if ($examen['Tipo'] == "citologia")
 					{
 						$fecha_formateada = date("d-m-Y", strtotime($examen['F_Examen']));
-						$diagnostico = $value['Diagnostico']." - ";
+						$diagnostico = $value['Descripcion_material']." - ";
 
 						$html[] = ["id"=>$examen['ID_Examen'] ,"diagnostico"=> $diagnostico, "fecha"=>$fecha_formateada ];
 					}
