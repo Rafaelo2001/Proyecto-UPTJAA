@@ -8,6 +8,8 @@
 
         if ($u) {
             foreach($u as $informe){
+                $medico = $user->buscar("medico","ID_Medico =".$informe["ID_Medico"]);
+                $nombreMedico = $medico[0]["Nombre_Medico"];
 
                 if($inf_biop = $user->buscar("inf_biopsia","ID_Informe=".$_POST["ID_Informe"]))
                 {
@@ -19,7 +21,7 @@
                             "diag"      => $informe["Diagnostico"],
                             "obs"       => $informe["Observacion"],
                             "cip"       => $informe["CIP"],
-                            "id_medico" => $informe["ID_Medico"],
+                            "medico"    => $nombreMedico,
                             
                             "tipo"      => "biopsia",
                             "id_b"      => $b["ID_Inf_Biopsia"],
@@ -34,20 +36,20 @@
                 {
                     foreach($inf_cito as $c){
                         $datosInforme[] = [
-                            "id"    => $informe["ID_Informe"],
-                            "fecha" => $informe["Fecha"],
-                            "des_mr" => $informe["Descripcion_M_Remitido"],
-                            "diag" => $informe["Diagnostico"],
-                            "obs" => $informe["Observacion"],
-                            "cip" => $informe["CIP"],
-                            "id_medico" => $informe["ID_Medico"],
+                            "id_inf"    => $informe["ID_Informe"],
+                            "fecha"     => $informe["Fecha"],
+                            "des_mr"    => $informe["Descripcion_M_Remitido"],
+                            "diag"      => $informe["Diagnostico"],
+                            "obs"       => $informe["Observacion"],
+                            "cip"       => $informe["CIP"],
+                            "medico"    => $nombreMedico,
                             
-                            "tipo" => "citologia",
-                            "id_c" => $c["ID_Inf_Citologia"],
-                            "calidad" => $c["Calidad"],
-                            "ctg_gnrl" => $c["Categ_Gral"],
+                            "tipo"      => "citologia",
+                            "id_c"      => $c["ID_Inf_Citologia"],
+                            "calidad"   => $c["Calidad"],
+                            "ctg_gnrl"  => $c["Categ_Gral"],
                             "hallazgos" => $c["Hallazgos"],
-                            "conducta" => $c["Conducta"],
+                            "conducta"  => $c["Conducta"],
         
                             "error" => 0
                         ];
