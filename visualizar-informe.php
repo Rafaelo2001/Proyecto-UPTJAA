@@ -62,6 +62,8 @@
                 ?>
             </select>
 
+            <input type="submit" value="Imprimir">
+
             <br><br>
 
             <section id="seccion_biopsia">
@@ -162,15 +164,7 @@
                 
                 <label for="fecha">Fecha de Redacción:</label> <br>
                 <input type="date" readonly disabled id="fecha" name="fecha">
-            </section>
-            <br><br>
-
-            
-
-            <br><br>
-
-            <input type="submit" value="Imprimir">
-            
+            </section>            
         </form>
         
     </body>
