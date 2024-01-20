@@ -85,12 +85,12 @@
                         </ul>
                 </li>
                 <li>
-                        <a href="#">
+                        <a href="registro-pagos.php">
                         <i class="fi fi-rr-file-invoice-dollar"></i>
                         <span class="link_name">Facturación</span>
                         </a>
                         <ul class="sub-menu blank">
-                        <li><a class="link_name" href="#">Facturación</a></li>
+                        <li><a class="link_name" href="registro-pagos.php">Facturación</a></li>
                         </ul>
                 </li>
                 <li>

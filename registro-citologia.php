@@ -90,12 +90,12 @@
                         </ul>
                 </li>
                 <li>
-                        <a href="#">
+                        <a href="registro-pagos.php">
                         <i class="fi fi-rr-file-invoice-dollar"></i>
                         <span class="link_name">Facturación</span>
                         </a>
                         <ul class="sub-menu blank">
-                        <li><a class="link_name" href="#">Facturación</a></li>
+                        <li><a class="link_name" href="registro-pagos.php">Facturación</a></li>
                         </ul>
                 </li>
                 <li>
@@ -270,6 +270,22 @@
                         </form>
                 </section>
         </main>
+
+        <script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+          arrow[i].addEventListener("click", (e)=>{
+         let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+         arrowParent.classList.toggle("showMenu");
+          });
+        }
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".bx-menu");
+        console.log(sidebarBtn);
+        sidebarBtn.addEventListener("click", ()=>{
+          sidebar.classList.toggle("close");
+        });
+        </script>
 
 
             <!-- Observaciones no se encuentra en la BDD, asi que lo dejare comentado por ahora -->
