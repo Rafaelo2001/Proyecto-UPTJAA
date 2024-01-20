@@ -138,8 +138,8 @@
 
 
                                                 <label for="paciente">Paciente</label>
-                                                        <select id="paciente" name="paciente" required>
-                                                                <option value="" selected disabled>-- Selecciona un paciente registrado--</option>
+                                                        <select id="paciente" name="paciente" style="min-width: 100px;" required>
+                                                                <option></option>
 
                                                                 <?php $listaPacientes = $user->buscar("paciente","1"); ?>
 

@@ -6,7 +6,7 @@ $(document).ready(
       {
         tags: false,
         placeholder: "Busque paciente por nombre o cédula de identidad",
-        allowClear: false
+        allowClear: false,
       }
     );
   }

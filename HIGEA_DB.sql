@@ -13,51 +13,23 @@ CREATE DATABASE `higea_db`;
 USE `higea_db`;
 
 
-
--- --------------------------------------------------------
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_columna_edad` ()  NO SQL UPDATE persona
+SET edad = calcular_edad(F_nac)$$
 
 --
--- Estructura de tabla para la tabla `m_remitido`
--- 
-
-CREATE TABLE `m_remitido` (
-  `ID_M_Remitido` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_Medico` int(11) DEFAULT NULL,
-  `CI_Paciente` int(11) DEFAULT NULL,
-  `Descripcion_material` TEXT DEFAULT NULL,
-  `Diagnostico` TEXT DEFAULT NULL,
-  `Resumen` TEXT DEFAULT NULL,
-  `Examinado` BOOLEAN NULL DEFAULT FALSE,
-  `F_Entrada` datetime DEFAULT NULL,
-
-  PRIMARY KEY (`ID_M_Remitido`)
-);
-
--- --------------------------------------------------------
-
+-- Funciones
 --
--- Estructura de tabla para la tabla `m_biopsia`
---
+CREATE DEFINER=`root`@`localhost` FUNCTION `calcular_edad` (`F_nac` DATE) RETURNS INT(11) NO SQL BEGIN
+    DECLARE anos INT;
+    SET anos = TIMESTAMPDIFF(YEAR, F_nac, CURDATE());
+    RETURN anos;
+END$$
 
-CREATE TABLE `m_biopsia` (
-  `ID_M_Biopsia` int(11) NOT NULL,
-  `Sitio_lesion` TEXT DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `m_citologia`
---
-
-CREATE TABLE `m_citologia` (
-  `ID_M_Citologia` int(11) NOT NULL,
-  `FUR` varchar(45) DEFAULT NULL,
-  `Endocervix` tinyint(1) DEFAULT NULL,
-  `Exocervix` tinyint(1) DEFAULT NULL,
-  `Vagina` tinyint(1) DEFAULT NULL,
-  `Otros` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -587,6 +559,13 @@ CREATE TABLE `correo` (
   `CI` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `correo`
+--
+
+INSERT INTO `correo` (`ID_Correo`, `Correo`, `CI`) VALUES
+(1, 'admin@admin.com', 123456);
+
 -- --------------------------------------------------------
 
 --
@@ -602,6 +581,13 @@ CREATE TABLE `direccion` (
   `ID_Parroquia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `direccion`
+--
+
+INSERT INTO `direccion` (`ID_Direccion`, `Localizacion`, `Calle`, `Sector`, `Nro_Casa`, `ID_Parroquia`) VALUES
+(1, 'Comercial Flamingo', '1ra Carrera', 'El Luchador', '2', 79);
+
 -- --------------------------------------------------------
 
 --
@@ -612,6 +598,13 @@ CREATE TABLE `empleado` (
   `CIE` int(11) NOT NULL,
   `Tipo` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `empleado`
+--
+
+INSERT INTO `empleado` (`CIE`, `Tipo`) VALUES
+(123456, 'admin');
 
 -- --------------------------------------------------------
 
@@ -664,11 +657,9 @@ INSERT INTO `estado` (`id_estado`, `nombre`) VALUES
 CREATE TABLE `examen` (
   `ID_Examen` int(11) NOT NULL,
   `ID_M_remitido` int(11) NOT NULL,
-  `Tipo` enum('biopsia','citologia') NOT NULL,
-  `F_Examen` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Obs` TEXT NULL,
-
-  CONSTRAINT `FK_id_m_remitido` FOREIGN KEY (`ID_M_Remitido`) REFERENCES `m_remitido` (`ID_M_Remitido`)
+  `Tipo` set('biopsia','citologia') NOT NULL,
+  `F_Examen` date NOT NULL DEFAULT current_timestamp(),
+  `Obs` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -693,10 +684,10 @@ CREATE TABLE `examen_usa_insumo` (
 
 CREATE TABLE `factura` (
   `ID_Factura` int(11) NOT NULL,
-  `Nro_Control` varchar(45) DEFAULT NULL,
+  `Nro_Control` int(11) DEFAULT NULL,
   `Monto` varchar(45) DEFAULT NULL,
   `F_Pago` datetime DEFAULT NULL,
-  `ID_Pago` int(11) NOT NULL
+  `CIP` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -708,12 +699,11 @@ CREATE TABLE `factura` (
 CREATE TABLE `informe` (
   `ID_Informe` int(11) NOT NULL,
   `Fecha` date DEFAULT NULL,
-  `Descripcion_M_Remitido` TEXT DEFAULT NULL,
-  `Diagnostico` TEXT DEFAULT NULL,
-  `Observacion` TEXT DEFAULT NULL,
+  `Descripcion_M_Remitido` text DEFAULT NULL,
+  `Diagnostico` text DEFAULT NULL,
+  `Observacion` text DEFAULT NULL,
   `CIP` int(11) NOT NULL,
   `ID_Medico` int(11) NOT NULL
-
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -724,8 +714,9 @@ CREATE TABLE `informe` (
 
 CREATE TABLE `inf_biopsia` (
   `ID_Inf_Biopsia` int(11) NOT NULL,
-  `Desc_Macro` TEXT DEFAULT NULL,
-  `Desc_Micro` TEXT DEFAULT NULL,
+  `ID_Informe` int(11) NOT NULL,
+  `Desc_Macro` text DEFAULT NULL,
+  `Desc_Micro` text DEFAULT NULL,
   `ID_Examen` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -737,10 +728,11 @@ CREATE TABLE `inf_biopsia` (
 
 CREATE TABLE `inf_citologia` (
   `ID_Inf_Citologia` int(11) NOT NULL,
-  `Calidad` TEXT DEFAULT NULL,
-  `Categ_Gral` TEXT DEFAULT NULL,
-  `Hallazgos` TEXT DEFAULT NULL,
-  `Conducta` TEXT DEFAULT NULL,
+  `ID_Informe` int(11) NOT NULL,
+  `Calidad` text DEFAULT NULL,
+  `Categ_Gral` text DEFAULT NULL,
+  `Hallazgos` text DEFAULT NULL,
+  `Conducta` text DEFAULT NULL,
   `ID_Examen` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -782,6 +774,31 @@ CREATE TABLE `lote` (
   `F_Elab` date DEFAULT NULL,
   `F_Entrada` date DEFAULT NULL,
   `Proveedor` varchar(250) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `medico`
+--
+
+CREATE TABLE `medico` (
+  `ID_Medico` int(11) NOT NULL,
+  `Nombre_Medico` varchar(45) DEFAULT NULL,
+  `Telefono_Medico` varchar(16) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `medico_remite_paciente`
+--
+
+CREATE TABLE `medico_remite_paciente` (
+  `ID_Medico` int(11) NOT NULL,
+  `CIP` int(11) NOT NULL,
+  `F_Registro` datetime DEFAULT NULL,
+  `Obs` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -1137,7 +1154,50 @@ INSERT INTO `municipio` (`id_municipio`, `id_estado`, `nombre`) VALUES
 (461, 23, 'Valmore Rodríguez'),
 (462, 24, 'Libertador');
 
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `m_biopsia`
+--
+
+CREATE TABLE `m_biopsia` (
+  `ID_M_Biopsia` int(11) NOT NULL,
+  `ID_M_Remitido` int(11) NOT NULL,
+  `Sitio_lesion` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `m_citologia`
+--
+
+CREATE TABLE `m_citologia` (
+  `ID_M_Citologia` int(11) NOT NULL,
+  `ID_M_Remitido` int(11) NOT NULL,
+  `FUR` varchar(45) DEFAULT NULL,
+  `Endocervix` tinyint(1) DEFAULT NULL,
+  `Exocervix` tinyint(1) DEFAULT NULL,
+  `Vagina` tinyint(1) DEFAULT NULL,
+  `Otros` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `m_remitido`
+--
+
+CREATE TABLE `m_remitido` (
+  `ID_M_Remitido` int(11) NOT NULL,
+  `ID_Medico` int(11) DEFAULT NULL,
+  `CI_Paciente` int(11) DEFAULT NULL,
+  `Descripcion_material` text DEFAULT NULL,
+  `Diagnostico` text DEFAULT NULL,
+  `Resumen` text DEFAULT NULL,
+  `Examinado` tinyint(1) DEFAULT 0,
+  `F_Entrada` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1146,21 +1206,7 @@ INSERT INTO `municipio` (`id_municipio`, `id_estado`, `nombre`) VALUES
 --
 
 CREATE TABLE `paciente` (
-  `CIP` int(11) NOT NULL,
-  PRIMARY KEY (`CIP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `paciente_paga_factura`
---
-
-CREATE TABLE `paciente_paga_factura` (
-  `CIP` int(11) NOT NULL,
-  `ID_Factura` int(11) NOT NULL,
-  `F_Pago` datetime DEFAULT NULL,
-  `Obs` varchar(200) DEFAULT NULL
+  `CIP` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -2351,6 +2397,13 @@ CREATE TABLE `persona` (
   `ID_Direccion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `persona`
+--
+
+INSERT INTO `persona` (`CI`, `PN`, `SN`, `TN`, `PA`, `SA`, `F_nac`, `Edad`, `Sexo`, `ID_Direccion`) VALUES
+(123456, 'ADMIN', NULL, NULL, 'ADMIN', NULL, '2000-01-01', 23, 'M', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -2368,7 +2421,12 @@ CREATE TABLE `recup_password` (
   `ID_Usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `recup_password`
+--
 
+INSERT INTO `recup_password` (`ID_Recup_Password`, `P1`, `P2`, `P3`, `R1`, `R2`, `R3`, `ID_Usuario`) VALUES
+(1, 'Ciudad de nacimiento', 'Nombre de mi mascota', 'Nombre de mi mascota', 'admin', 'admin', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -2383,27 +2441,17 @@ CREATE TABLE `telefono` (
   `CI` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-DELIMITER $$
 --
--- Procedimientos
+-- Volcado de datos para la tabla `telefono`
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_columna_edad` ()  NO SQL UPDATE persona
-SET edad = calcular_edad(F_nac)$$
 
---
--- Funciones
---
-CREATE DEFINER=`root`@`localhost` FUNCTION `calcular_edad` (`F_nac` DATE) RETURNS INT(11) NO SQL BEGIN
-    DECLARE anos INT;
-    SET anos = TIMESTAMPDIFF(YEAR, F_nac, CURDATE());
-    RETURN anos;
-END$$
-
+INSERT INTO `telefono` (`ID_Telefono`, `Cod_Area`, `Nro_Telf`, `CI`) VALUES
+(1, '1234', '1234567', 123456);
 
 --
 -- Disparadores `telefono`
 --
-
+DELIMITER $$
 CREATE TRIGGER `call_actualizar_columna_edad` AFTER INSERT ON `telefono` FOR EACH ROW BEGIN
 	CALL actualizar_columna_edad();
 END
@@ -2419,9 +2467,16 @@ DELIMITER ;
 CREATE TABLE `usuario` (
   `ID_Usuario` int(11) NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
-  `Password` varchar(45) DEFAULT NULL,
+  `Password` varchar(250) DEFAULT NULL,
   `CIE` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`ID_Usuario`, `Nombre`, `Password`, `CIE`) VALUES
+(1, 'ADMIN', '$2y$10$Dx8gHR45bvQJFbR1ri3pleB5D1eX5/DTUhbgkyFk2Utks9s2St.46', 123456);
 
 -- --------------------------------------------------------
 
@@ -2477,61 +2532,9 @@ CREATE TABLE `usuario_registra_paciente` (
   `Obs` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-
--- --------------------------------------------------------
-
---
--- Estructura tabla `medico` y `medico_emite_paciente`
---
-
-CREATE TABLE `medico` (
-  `ID_Medico` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre_Medico` varchar(45) DEFAULT NULL,
-  `Telefono_Medico` varchar(16) DEFAULT NULL,
-  PRIMARY KEY (`ID_Medico`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-
-CREATE TABLE `medico_remite_paciente` (
-  `ID_Medico` int(11) NOT NULL,
-  `CIP` int(11) NOT NULL,
-  `F_Registro` datetime DEFAULT NULL,
-  `Obs` varchar(200) DEFAULT NULL,
-
-  CONSTRAINT `FK_medico` FOREIGN KEY (`ID_Medico`) REFERENCES `medico` (`ID_Medico`),
-  CONSTRAINT `FK_paciente` FOREIGN KEY (`CIP`) REFERENCES `paciente` (`CIP`),
-  PRIMARY KEY (`ID_Medico`,`CIP`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-
-
-
--- --------------------------------------------------------
-
-
 --
 -- Índices para tablas volcadas
 --
-
---
--- Indices de la tabla `m_remitido`
---
--- ALTER TABLE `m_remitido`
---  ADD PRIMARY KEY (`ID_M_Remitido`);
-
---
--- Indices de la tabla `m_biopsia`
---
-ALTER TABLE `m_biopsia`
-  ADD PRIMARY KEY (`ID_M_Biopsia`),
-  ADD UNIQUE KEY `ID_M_Biopsia` (`ID_M_Biopsia`);
-
---
--- Indices de la tabla `m_citologia`
---
-ALTER TABLE `m_citologia`
-  ADD PRIMARY KEY (`ID_M_Citologia`),
-  ADD UNIQUE KEY `ID_M_Citologia` (`ID_M_Citologia`);
 
 --
 -- Indices de la tabla `ciudad`
@@ -2575,7 +2578,8 @@ ALTER TABLE `estado`
 --
 ALTER TABLE `examen`
   ADD PRIMARY KEY (`ID_Examen`),
-  ADD UNIQUE KEY `ID_Examen` (`ID_Examen`);
+  ADD UNIQUE KEY `ID_Examen` (`ID_Examen`),
+  ADD KEY `FK_id_m_remitido` (`ID_M_remitido`);
 
 --
 -- Indices de la tabla `examen_usa_insumo`
@@ -2588,9 +2592,10 @@ ALTER TABLE `examen_usa_insumo`
 -- Indices de la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD PRIMARY KEY (`ID_Factura`,`ID_Pago`),
+  ADD PRIMARY KEY (`ID_Factura`),
   ADD UNIQUE KEY `ID_Factura` (`ID_Factura`),
-  ADD KEY `fk_Factura_Pago1` (`ID_Pago`);
+  ADD KEY `fk_Factura_NControl1` (`Nro_Control`),
+  ADD KEY `fk_Factura_CIP1` (`CIP`);
 
 --
 -- Indices de la tabla `informe`
@@ -2598,22 +2603,25 @@ ALTER TABLE `factura`
 ALTER TABLE `informe`
   ADD PRIMARY KEY (`ID_Informe`,`CIP`),
   ADD UNIQUE KEY `ID_Informe` (`ID_Informe`),
-  ADD KEY `fk_Informe_Paciente1` (`CIP`);
+  ADD KEY `fk_Informe_Paciente1` (`CIP`),
+  ADD KEY `FK_Informe_Medico` (`ID_Medico`);
 
 --
 -- Indices de la tabla `inf_biopsia`
 --
 ALTER TABLE `inf_biopsia`
-  ADD PRIMARY KEY (`ID_Inf_Biopsia`,`ID_Examen`),
+  ADD PRIMARY KEY (`ID_Inf_Biopsia`),
   ADD UNIQUE KEY `ID_Inf_Biopsia` (`ID_Inf_Biopsia`),
+  ADD KEY `ID_Informe` (`ID_Informe`),
   ADD KEY `ID_Examen` (`ID_Examen`);
 
 --
 -- Indices de la tabla `inf_citologia`
 --
 ALTER TABLE `inf_citologia`
-  ADD PRIMARY KEY (`ID_Inf_Citologia`,`ID_Examen`),
+  ADD PRIMARY KEY (`ID_Inf_Citologia`),
   ADD UNIQUE KEY `ID_Inf_Citologia` (`ID_Inf_Citologia`),
+  ADD KEY `ID_Informe` (`ID_Informe`),
   ADD KEY `ID_Examen` (`ID_Examen`);
 
 --
@@ -2638,6 +2646,19 @@ ALTER TABLE `lote`
   ADD UNIQUE KEY `ID_Lote` (`ID_Lote`);
 
 --
+-- Indices de la tabla `medico`
+--
+ALTER TABLE `medico`
+  ADD PRIMARY KEY (`ID_Medico`);
+
+--
+-- Indices de la tabla `medico_remite_paciente`
+--
+ALTER TABLE `medico_remite_paciente`
+  ADD PRIMARY KEY (`ID_Medico`,`CIP`),
+  ADD KEY `FK_paciente` (`CIP`);
+
+--
 -- Indices de la tabla `municipio`
 --
 ALTER TABLE `municipio`
@@ -2645,11 +2666,34 @@ ALTER TABLE `municipio`
   ADD KEY `id_estado` (`id_estado`);
 
 --
--- Indices de la tabla `paciente_paga_factura`
+-- Indices de la tabla `m_biopsia`
 --
-ALTER TABLE `paciente_paga_factura`
-  ADD PRIMARY KEY (`CIP`,`ID_Factura`),
-  ADD KEY `ID_Factura` (`ID_Factura`);
+ALTER TABLE `m_biopsia`
+  ADD PRIMARY KEY (`ID_M_Biopsia`),
+  ADD UNIQUE KEY `ID_M_Biopsia` (`ID_M_Biopsia`),
+  ADD KEY `fk_ID_M_Remitido1` (`ID_M_Remitido`);
+
+--
+-- Indices de la tabla `m_citologia`
+--
+ALTER TABLE `m_citologia`
+  ADD PRIMARY KEY (`ID_M_Citologia`),
+  ADD UNIQUE KEY `ID_M_Citologia` (`ID_M_Citologia`),
+  ADD KEY `fk_ID_M_Remitido2` (`ID_M_Remitido`);
+
+--
+-- Indices de la tabla `m_remitido`
+--
+ALTER TABLE `m_remitido`
+  ADD PRIMARY KEY (`ID_M_Remitido`),
+  ADD KEY `ID_Medico` (`ID_Medico`),
+  ADD KEY `CI_Paciente` (`CI_Paciente`);
+
+--
+-- Indices de la tabla `paciente`
+--
+ALTER TABLE `paciente`
+  ADD PRIMARY KEY (`CIP`);
 
 --
 -- Indices de la tabla `pago`
@@ -2739,13 +2783,13 @@ ALTER TABLE `ciudad`
 -- AUTO_INCREMENT de la tabla `correo`
 --
 ALTER TABLE `correo`
-  MODIFY `ID_Correo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Correo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `ID_Direccion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Direccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -2784,12 +2828,35 @@ ALTER TABLE `lote`
   MODIFY `ID_Lote` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `medico`
+--
+ALTER TABLE `medico`
+  MODIFY `ID_Medico` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `municipio`
 --
 ALTER TABLE `municipio`
   MODIFY `id_municipio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=463;
 
+--
+-- AUTO_INCREMENT de la tabla `m_biopsia`
+--
+ALTER TABLE `m_biopsia`
+  MODIFY `ID_M_Biopsia` int(11) NOT NULL AUTO_INCREMENT;
 
+--
+-- AUTO_INCREMENT de la tabla `m_citologia`
+--
+ALTER TABLE `m_citologia`
+  MODIFY `ID_M_Citologia` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `m_remitido`
+--
+ALTER TABLE `m_remitido`
+  MODIFY `ID_M_Remitido` int(11) NOT NULL AUTO_INCREMENT;
+ 
 --
 -- AUTO_INCREMENT de la tabla `pago`
 --
@@ -2806,49 +2873,35 @@ ALTER TABLE `parroquia`
 -- AUTO_INCREMENT de la tabla `recup_password`
 --
 ALTER TABLE `recup_password`
-  MODIFY `ID_Recup_Password` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Recup_Password` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `telefono`
 --
 ALTER TABLE `telefono`
-  MODIFY `ID_Telefono` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Telefono` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `inf_biopsia`
+--
+ALTER TABLE `inf_biopsia`
+  MODIFY `ID_Inf_Biopsia` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `inf_citologia`
+--
+ALTER TABLE `inf_citologia`
+  MODIFY `ID_Inf_Citologia` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `paciente`
---
-ALTER TABLE `paciente`
-  ADD CONSTRAINT `fk_CIP_CI` FOREIGN KEY (`CIP`) REFERENCES `persona` (`CI`);
-
--- 
--- Filtros para tabla `m_remitido`
---
-
-ALTER TABLE `m_remitido`
-  ADD FOREIGN KEY (`ID_Medico`) REFERENCES `medico` (`ID_Medico`),
-  ADD FOREIGN KEY (`CI_Paciente`) REFERENCES `paciente` (`CIP`);
-
---
--- Filtros para la tabla `m_biopsia`
---
-ALTER TABLE `m_biopsia`
-  ADD CONSTRAINT `fk_M_Biopsia_M_Remitido_Examen1` FOREIGN KEY (`ID_M_Biopsia`) REFERENCES `m_remitido` (`ID_M_Remitido`);
-
---
--- Filtros para la tabla `m_citologia`
---
-ALTER TABLE `m_citologia`
-  ADD CONSTRAINT `fk_M_Citologia_M_Remitido_Examen1` FOREIGN KEY (`ID_M_Citologia`) REFERENCES `m_remitido` (`ID_M_Remitido`);
 
 --
 -- Filtros para la tabla `ciudad`
@@ -2875,6 +2928,12 @@ ALTER TABLE `empleado`
   ADD CONSTRAINT `fk_Empleado_Persona1` FOREIGN KEY (`CIE`) REFERENCES `persona` (`CI`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Filtros para la tabla `examen`
+--
+ALTER TABLE `examen`
+  ADD CONSTRAINT `FK_id_m_remitido` FOREIGN KEY (`ID_M_remitido`) REFERENCES `m_remitido` (`ID_M_remitido`);
+
+--
 -- Filtros para la tabla `examen_usa_insumo`
 --
 ALTER TABLE `examen_usa_insumo`
@@ -2885,27 +2944,28 @@ ALTER TABLE `examen_usa_insumo`
 -- Filtros para la tabla `factura`
 --
 ALTER TABLE `factura`
-  ADD CONSTRAINT `fk_Factura_Pago1` FOREIGN KEY (`ID_Pago`) REFERENCES `pago` (`ID_Pago`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Factura_NControl1` FOREIGN KEY (`Nro_Control`) REFERENCES `pago` (`ID_Pago`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Factura_CIP1` FOREIGN KEY (`CIP`) REFERENCES `paciente` (`CIP`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `informe`
 --
 ALTER TABLE `informe`
-  ADD CONSTRAINT `fk_Informe_Paciente1` FOREIGN KEY (`CIP`) REFERENCES `paciente` (`CIP`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_Informe_Medico` FOREIGN KEY (`ID_Medico`) REFERENCES `medico` (`ID_Medico`)  ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `FK_Informe_Medico` FOREIGN KEY (`ID_Medico`) REFERENCES `medico` (`ID_Medico`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Informe_Paciente1` FOREIGN KEY (`CIP`) REFERENCES `paciente` (`CIP`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `inf_biopsia`
 --
 ALTER TABLE `inf_biopsia`
-  ADD CONSTRAINT `fk_Inf_Biopsia_Informe_Examen1` FOREIGN KEY (`ID_Inf_Biopsia`) REFERENCES `informe` (`ID_Informe`),
+  ADD CONSTRAINT `fk_Inf_Biopsia_Informe_Examen1` FOREIGN KEY (`ID_Informe`) REFERENCES `informe` (`ID_Informe`),
   ADD CONSTRAINT `inf_biopsia_ibfk_1` FOREIGN KEY (`ID_Examen`) REFERENCES `examen` (`ID_Examen`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `inf_citologia`
 --
 ALTER TABLE `inf_citologia`
-  ADD CONSTRAINT `fk_Inf_Citologia_Informe_Examen1` FOREIGN KEY (`ID_Inf_Citologia`) REFERENCES `informe` (`ID_Informe`),
+  ADD CONSTRAINT `fk_Inf_Citologia_Informe_Examen1` FOREIGN KEY (`ID_Informe`) REFERENCES `informe` (`ID_Informe`),
   ADD CONSTRAINT `inf_citologia_ibfk_1` FOREIGN KEY (`ID_Examen`) REFERENCES `examen` (`ID_Examen`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -2916,17 +2976,42 @@ ALTER TABLE `insumo_tiene_lote`
   ADD CONSTRAINT `insumo_tiene_lote_ibfk_1` FOREIGN KEY (`ID_Lote`) REFERENCES `lote` (`ID_Lote`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Filtros para la tabla `medico_remite_paciente`
+--
+ALTER TABLE `medico_remite_paciente`
+  ADD CONSTRAINT `FK_medico` FOREIGN KEY (`ID_Medico`) REFERENCES `medico` (`ID_Medico`),
+  ADD CONSTRAINT `FK_paciente` FOREIGN KEY (`CIP`) REFERENCES `paciente` (`CIP`);
+
+--
 -- Filtros para la tabla `municipio`
 --
 ALTER TABLE `municipio`
   ADD CONSTRAINT `municipio_ibfk_1` FOREIGN KEY (`id_estado`) REFERENCES `estado` (`id_estado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `paciente_paga_factura`
+-- Filtros para la tabla `m_biopsia`
 --
-ALTER TABLE `paciente_paga_factura`
-  ADD CONSTRAINT `fk_Paciente_Factura1` FOREIGN KEY (`CIP`) REFERENCES `paciente` (`CIP`),
-  ADD CONSTRAINT `paciente_paga_factura_ibfk_1` FOREIGN KEY (`ID_Factura`) REFERENCES `factura` (`ID_Factura`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `m_biopsia`
+  ADD CONSTRAINT `fk_M_Biopsia_M_Remitido_Examen1` FOREIGN KEY (`ID_M_Remitido`) REFERENCES `m_remitido` (`ID_M_Remitido`);
+
+--
+-- Filtros para la tabla `m_citologia`
+--
+ALTER TABLE `m_citologia`
+  ADD CONSTRAINT `fk_M_Citologia_M_Remitido_Examen1` FOREIGN KEY (`ID_M_Remitido`) REFERENCES `m_remitido` (`ID_M_Remitido`);
+
+--
+-- Filtros para la tabla `m_remitido`
+--
+ALTER TABLE `m_remitido`
+  ADD CONSTRAINT `m_remitido_ibfk_1` FOREIGN KEY (`ID_Medico`) REFERENCES `medico` (`ID_Medico`),
+  ADD CONSTRAINT `m_remitido_ibfk_2` FOREIGN KEY (`CI_Paciente`) REFERENCES `paciente` (`CIP`);
+
+--
+-- Filtros para la tabla `paciente`
+--
+ALTER TABLE `paciente`
+  ADD CONSTRAINT `fk_CIP_CI` FOREIGN KEY (`CIP`) REFERENCES `persona` (`CI`);
 
 --
 -- Filtros para la tabla `parroquia`
@@ -2986,26 +3071,3 @@ ALTER TABLE `usuario_registra_paciente`
   ADD CONSTRAINT `fk_Usuario_Paciente1` FOREIGN KEY (`ID_Usuario`) REFERENCES `usuario` (`ID_Usuario`),
   ADD CONSTRAINT `usuario_registra_paciente_ibfk_1` FOREIGN KEY (`CIP`) REFERENCES `paciente` (`CIP`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
-
--- --------------------------------------------------------
--- Datos de Administrador Maestro
-  -- Direccion
-  INSERT INTO `direccion` (`Localizacion`, `Calle`, `Sector`, `Nro_Casa`, `ID_Parroquia`) VALUES ('Comercial Flamingo', '1ra Carrera', 'El Luchador', '2', '79');
-
--- Persona 
-  INSERT INTO `persona` (`CI`, `PN`, `PA`, `F_nac`, `Edad`, `Sexo`, `ID_Direccion`) VALUES ('123456', 'ADMIN', 'ADMIN', '2000-01-01', '23', 'M', '1');
-
--- Telefono
-  INSERT INTO `telefono` (`Cod_Area`, `Nro_Telf`, `CI`) VALUES ('1234', '1234567', '123456');
-
--- Correo 
-  INSERT INTO `correo` (`Correo`, `CI`) VALUES ('admin@admin.com', '123456');
-
--- Empleado
-  INSERT INTO `empleado` (`CIE`, `Tipo`) VALUES ('123456', 'admin');
-
--- Usuario
-  INSERT INTO `usuario` (`Nombre`, `Password`, `CIE`) VALUES ('ADMIN', '1234567', '123456');
-
--- Pregunta Seguridad
-  INSERT INTO `recup_password` (`P1`, `P2`, `P3`, `R1`, `R2`, `R3`, `ID_Usuario`) VALUES ('Ciudad de nacimiento', 'Nombre de mi mascota', 'Nombre de mi mascota', 'admin', 'admin', 'admin', '1');

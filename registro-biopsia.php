@@ -136,7 +136,7 @@
                         <form action="php/insert-biopsia.php" method="post" class="form" id="form" autocomplete="off">
 
                         <label for="paciente">Paciente:</label>
-                                <select id="paciente" name="paciente" required>
+                                <select id="paciente" name="paciente" style="min-width: 100px;" required>
                                 <option></option>
 
                                 <?php $listaPacientes = $user->buscar("paciente","1"); ?>

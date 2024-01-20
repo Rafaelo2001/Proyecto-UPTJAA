@@ -218,7 +218,7 @@
                                         <div>
                                                 <label>Sexo</label>
                                                 <div class="radio" id="sexo">
-                                                        <input type="radio" name="sexo" id="masculino" value="M">
+                                                        <input type="radio" name="sexo" id="masculino" value="M" required>
                                                         <label for="masculino">Masculino</label>
                                                         <br>
                                                         <input type="radio" name="sexo" id="femenino" value="F">
@@ -403,7 +403,7 @@
                                                 <input id="nombre-medico-registro" name="nombre-medico-registro" type="text">
                                                         
                                                 <label for="telefono-medico-registro">Teléfono Médico</label>
-                                                <input id="telefono-medico-registro" name="telefono-medico-registro" type="tel">
+                                                <input id="telefono-medico-registro" maxlength="12" name="telefono-medico-registro" type="tel">
                                         </div>
 
                                         <div id="observaciones">

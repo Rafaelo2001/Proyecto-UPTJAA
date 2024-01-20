@@ -72,7 +72,7 @@
             }
 
         // Enviando 'inf_biopsia'
-        $sql_inf_b = "INSERT INTO inf_biopsia (ID_Inf_Biopsia, Desc_Macro, Desc_Micro, ID_Examen) VALUES ('$id_informe', '$des_macro', '$des_micro', '$id_examen')";
+        $sql_inf_b = "INSERT INTO inf_biopsia (ID_Informe, Desc_Macro, Desc_Micro, ID_Examen) VALUES ('$id_informe', '$des_macro', '$des_micro', '$id_examen')";
 
         $ejecutando_sql_inf_b = mysqli_query($conex,$sql_inf_b);
         if (!$ejecutando_sql_inf_b) {

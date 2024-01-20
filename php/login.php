@@ -32,17 +32,19 @@
             header('Location: ../home.php');
         } else {
             // Si la contraseña es incorrecta, muestra un mensaje emergente de error
-            echo '<script type="text/javascript">';
-            echo 'alert("Error: Nombre de usuario o contraseña incorrectos");';
-            echo '</script>';
+            echo '<script type="text/javascript">
+            alert("Error: Nombre de usuario o contraseña incorrectos");
+            window.location.href = "../"; 
+            </script>';
         }
     }
     else
     {
         // Si no hay una coincidencia, muestra un mensaje emergente de error
-        echo '<script type="text/javascript">';
-        echo 'alert("Error: Nombre de usuario o contraseña incorrectos");';
-        echo '</script>';
+        echo '<script type="text/javascript">
+        alert("Error: Nombre de usuario o contraseña incorrectos");
+        window.location.href = "../"; 
+        </script>';
     }
 
     $conex->close();
