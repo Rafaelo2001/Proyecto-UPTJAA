@@ -38,7 +38,7 @@
     
         // TABLA: m_remitido
             $f_entrada   = date("Y-m-d H:i:s");
-            $ci_paciente   = $_POST['paciente'];
+            $ci_paciente = $_POST['paciente'];
             $id_medico   = $_POST['medico'];
             $descripcion = $_POST['descripcion'];
             $resumen     = $_POST['resumen'];
@@ -46,7 +46,6 @@
             
         // TABLA: m_biopsia
             $sitio_lesion = $_POST['sitio_lesion'];
-            $ID_Examen    = 0;
 
         
         // ENVIANDO DATOS
@@ -68,7 +67,7 @@
                 }
 
             // Enviando M_BIOPSIA
-            $sql_m_biopsia = "INSERT INTO m_biopsia (ID_M_Biopsia, Sitio_lesion) VALUES ('$id_m_remitido', '$sitio_lesion')";
+            $sql_m_biopsia = "INSERT INTO m_biopsia (ID_M_Remitido, Sitio_lesion) VALUES ('$id_m_remitido', '$sitio_lesion')";
             $ejecutado_m_biopsia = mysqli_query($conex, $sql_m_biopsia);
             if (!$ejecutado_m_biopsia) {
                 throw new Exception("Error al insertar en la tabla 'm_biopsia'" . mysqli_error($conex));

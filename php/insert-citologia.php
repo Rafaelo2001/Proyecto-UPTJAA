@@ -45,9 +45,9 @@
             
         // TABLA: m_citologia
             $FUR        = $_POST['FUR'];
-            $endocervix = ($_POST['endocervix'] == 'on')  ? 1 : 0;
-            $exocervix  = ($_POST['exocervix']  == 'on')  ? 1 : 0;
-            $vagina     = ($_POST['vagina']     == 'on')  ? 1 : 0;
+            $endocervix = (isset($_POST['endocervix']))  ? 1 : 0;
+            $exocervix  = (isset($_POST['exocervix']))  ? 1 : 0;
+            $vagina     = (isset($_POST['vagina']))  ? 1 : 0;
             $otro       = (empty($_POST['otro'])) ? 0 : $_POST['otro'];
 
         
@@ -70,7 +70,7 @@
                 }
 
             // Enviando M_CITOLOGIA
-            $sql_m_citologia = "INSERT INTO m_citologia (ID_M_Citologia, FUR, Endocervix, Exocervix, Vagina, Otros) VALUES ('$id_m_remitido', '$FUR', '$endocervix', '$exocervix', '$vagina', '$otro')";
+            $sql_m_citologia = "INSERT INTO m_citologia (ID_M_Remitido, FUR, Endocervix, Exocervix, Vagina, Otros) VALUES ('$id_m_remitido', '$FUR', '$endocervix', '$exocervix', '$vagina', '$otro')";
             $ejecutado_m_citologia = mysqli_query($conex,$sql_m_citologia);
             if (!$ejecutado_m_citologia) {
                 throw new Exception("Error al insertar en la tabla 'm_citologia'" . mysqli_error($conex));
