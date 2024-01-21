@@ -27,8 +27,9 @@
         $password_hash = $row['password'];
 
         if (password_verify($password, $password_hash)) {
-            // Si la contraseña es correcta, guarda el nombre del usuario en una variable y redirige a una página
+            // Si la contraseña es correcta, guarda el nombre del usuario y la ID en una variable y redirige a una página
             $_SESSION['username'] = $_POST['username'];
+            $_SESSION['userID'] = $row['id_usuario'];
             header('Location: ../home.php');
         } else {
             // Si la contraseña es incorrecta, muestra un mensaje emergente de error

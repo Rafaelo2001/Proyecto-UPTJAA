@@ -4,9 +4,9 @@ SET time_zone = "-04:00";
 
 --
 -- Base de datos: `higea_db`
--- Versión de BD: higea_db V2023.8
+-- Versión de BD: higea_db V2024.2
 -- Inclusion de la tabla `medico` y sus respectivas relaciones.
--- Fecha de última modificación: 2023-10-10
+-- Fecha de última modificación: 20-01-2024
 --
 
 CREATE DATABASE `higea_db`;
@@ -685,8 +685,9 @@ CREATE TABLE `examen_usa_insumo` (
 CREATE TABLE `factura` (
   `ID_Factura` int(11) NOT NULL,
   `Nro_Control` int(11) DEFAULT NULL,
-  `Monto` varchar(45) DEFAULT NULL,
+  `Monto` decimal(10,2) DEFAULT NULL,
   `F_Pago` datetime DEFAULT NULL,
+  `Descripcion` varchar(400) DEFAULT NULL,
   `CIP` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -1217,7 +1218,7 @@ CREATE TABLE `paciente` (
 
 CREATE TABLE `pago` (
   `ID_Pago` int(11) NOT NULL,
-  `Nro_Pago` varchar(45) DEFAULT NULL,
+  `Referencia` varchar(45) DEFAULT NULL,
   `Tipo_Pago` varchar(45) DEFAULT NULL,
   `Obs` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -2487,8 +2488,7 @@ INSERT INTO `usuario` (`ID_Usuario`, `Nombre`, `Password`, `CIE`) VALUES
 CREATE TABLE `usuario_emite_factura` (
   `ID_Usuario` int(11) NOT NULL,
   `ID_Factura` int(11) NOT NULL,
-  `F_Emision` datetime DEFAULT NULL,
-  `Obs` varchar(200) DEFAULT NULL
+  `F_Emision` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------

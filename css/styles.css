@@ -240,7 +240,7 @@ label {
 p .form-input-error {
     font-size: 12px;
     margin-bottom: 10px;
-    color: rgb(225, 22, 31);
+    color: #e1161f;
     line-height: 0.3;
 }
 

@@ -63,7 +63,7 @@ $user = new CodeaDB();
             <img src="images/Logo Blanco Sin Linea.png" alt="Logo de Higea" width="70" height="70">
             <img src="images/higea_bw.png" alt="Logo de Higea" width="70" height="70">
             <img src="images/Letras.png" alt="Logo de Higea" width="70" height="20">
-            <span class="copyright">&copy; 2023 HIGEA - Laboratorio Dr. Miguel Blanco. Todos los derechos reservados.</span>
+            <span class="copyright">&copy; 2024 HIGEA - Laboratorio Dr. Miguel Blanco. Todos los derechos reservados.</span>
         </div>
     </footer>
     

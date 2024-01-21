@@ -474,6 +474,8 @@ form .form-group-input {
     margin-bottom: 10px;
 }
 .form-register input[type="text"],
+.form-register input[type="number"],
+.form-register input[type="datetime-local"],
 .register-box-biopsia input[type="text"],
 .register-box-citology input[type="text"],
 .register-box-supplies input[type="text"],

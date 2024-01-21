@@ -21,7 +21,7 @@
     $password_hashed = password_hash($password, PASSWORD_BCRYPT);
 
     // Ejecuta la consulta SQL para actualizar la contraseña del usuario
-    $resultado = $conex->query("UPDATE usuario SET password = '$password_hashed' WHERE id_usuario = '$id_usuario'");
+    $resultado = $conex->query("UPDATE usuario SET password = '$password_hashed' WHERE id_usuario = '$id_usuario'");   
 
     if ($resultado === TRUE) {
         echo '<script type="text/javascript">';

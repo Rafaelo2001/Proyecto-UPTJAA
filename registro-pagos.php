@@ -128,7 +128,7 @@
 
                 <section class="form-register">
                         <h1>REGISTRO DE PAGOS</h1>
-                        <form action="php/insert-pago.php" method="post" class="form" id="form" autocomplete="off">
+                        <form action="php/generador-factura.php" method="post" class="form" id="form" autocomplete="off">
 
                         <label for="paciente">Paciente</label>
                             <select id="paciente" name="paciente" style="min-width: 100px;" required>
@@ -176,7 +176,17 @@
                                         <div class="form-group" id="group_date_birth">
                                         <div class="form-group-input">
                                         <label for="monto">Ingrese monto</label>
-                                        <input type="number" placeholder="Monto a pagar" name="monto" id="monto" class="monto" required> 
+                                        <input type="number" step="0.01" placeholder="Monto a pagar" name="monto" id="monto" class="monto" required> 
+                                                <i class="formulario_validacion_estado fi fi-rr-cross"></i>
+                                        </div>
+                                        <p class="form-input-error">Rellene este campo correctamente. Ej: 2000</p>
+                                        </div>
+
+                                        <!--group: datebirth-->
+                                        <div class="form-group" id="group_date_birth">
+                                        <div class="form-group-input">
+                                        <label for="monto">Descripción de la factura</label>
+                                        <input type="text" placeholder="Indique la descripción" name="desc" id="desc" class="desc" required> 
                                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                                         </div>
                                         <p class="form-input-error">Rellene este campo correctamente. Ej: 2000</p>
@@ -205,8 +215,8 @@
                                        <!--group: datebirth-->
                                        <div class="form-group" id="group_date_birth">
                                        <div class="form-group-input">
-                                       <label for="nro_pago">Referencia</label>
-                                       <input type="text" id="nro_pago" name="nro_pago" class="nro_pago" placeholder="Indique la referencia" required>
+                                       <label for="referencia">Referencia (si aplica)</label>
+                                       <input type="text" id="referencia" name="referencia" class="referencia" placeholder="Indique la referencia">
                                                <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                                        </div>
                                        <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
@@ -215,8 +225,8 @@
                                        <!--group: datebirth-->
                                        <div class="form-group" id="group_date_birth">
                                        <div class="form-group-input">
-                                       <label for="obs">Observaciones</label>
-                                       <input type="text" id="obs" name="obs" class="obs" placeholder="Observación" required>
+                                       <label for="obs">Observaciones del pago</label>
+                                       <input type="text" id="obs" name="obs" class="obs" placeholder="Observación">
                                                <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                                        </div>
                                        <p class="form-input-error">Rellene este campo correctamente. Ej: 2000</p>
@@ -230,7 +240,7 @@
 
                                 <div class="button-container">
                                 <div class="form__group form__group-btn-submit">
-                                        <input class="button-submit" type="submit" name="registrar" id="registrar" value="Registrar">
+                                        <input class="button-submit" type="submit" name="registrar" id="registrar" value="Generar factura">
                                 </div>
                                 <p class="form-mess-good" id="form-mess-good">¡Formulario enviado!</p>
                                 </div>
