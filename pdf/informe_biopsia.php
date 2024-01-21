@@ -39,83 +39,169 @@
 
             $this->Ln(25);
         }
+
+        function Footer()
+        {
+            $this->SetFont('Arial', 'BI', 10);
+
+            $this->SetY(-25);
+            $this->MultiCell(0,5,"DR. MIGUEL BLANCO     \nMEDICO ANATOMOPATOLOGO     ",0,"R");
+
+            $this->SetFont('Arial','I',8);
+
+            $this->Cell(0,10,mb_convert_encoding("Av. Francisco de Miranda, C.C. Mansión Flamingo, Piso 1, Local N°5, Telf.: (0283) 2356539, El Tigre - Edo. Anzoátegui", "ISO-8859-1"),0,0,'C');
+        }
     }
 
-    $biopPDF = new PDF();
+    // Declaracion del Documento PDF
+        $b = new PDF();
 
-    $biopPDF->AddFont('Montserrat-Regular','','Montserrat-Regular.php');
-    $biopPDF->AddFont('Montserrat-Bold','','Montserrat-Bold.php');
+            $b->AddFont('Montserrat-Regular','','Montserrat-Regular.php');
+            $b->AddFont('Montserrat-Bold','','Montserrat-Bold.php');
 
-    $biopPDF-> AddPage('P','Legal');
+            $b-> AddPage('P','Letter');
 
-    $biopPDF-> SetFont('Arial', '', 10);
-
-    // Datos para cabecera
-        $fecha = date("d/m/Y", strtotime($_POST["fecha"]));
-            
-        $datosPaciente = $user->buscar("persona","CI=".$_POST["cip"]);
-            $nombrePaciente = strtoupper($datosPaciente[0]["PN"].' '.$datosPaciente[0]["PA"]);
-            $edadPaciente = $datosPaciente[0]["Edad"].mb_convert_encoding(" años","ISO-8859-1");
-            $sexoPaciente = $datosPaciente[0]["Sexo"];
-
-        $nombreMedico = mb_convert_encoding(strtoupper($_POST["medico"]), "ISO-8859-1");
+            $b-> SetFont('Arial', '', 10);
 
 
-    // Primera Fila de Datos del Paciente
-        $biopPDF->SetTextColor(3, 94, 115);
-            $fechaLargo = $biopPDF->GetStringWidth("Fecha: ");
-            $biopPDF->Cell($fechaLargo,10,"Fecha: ",0,0);
-        $biopPDF->SetTextColor(13, 13, 13);
-            $biopPDF->Cell(35-$fechaLargo,10,$fecha,0,0);
+    // Cabecera Datos Paciente
+        // Datos para cabecera
+            $fecha = date("d/m/Y", strtotime($_POST["fecha"]));
+                
+            $datosPaciente = $user->buscar("persona","CI=".$_POST["cip"]);
+                $nombrePaciente = strtoupper($datosPaciente[0]["PN"].' '.$datosPaciente[0]["PA"]);
+                $edadPaciente = $datosPaciente[0]["Edad"].mb_convert_encoding(" años","ISO-8859-1");
+                $sexoPaciente = $datosPaciente[0]["Sexo"];
 
-        $biopPDF->setX(50);
+            $nombreMedico = mb_convert_encoding(strtoupper($_POST["medico"]), "ISO-8859-1");
 
-        $biopPDF->SetTextColor(3, 94, 115);
-            $nombreLargo = $biopPDF->GetStringWidth("Nombre:   ");
-            $biopPDF->Cell($nombreLargo,10,"Nombre:   ",0,0);
-        $biopPDF->SetTextColor(13, 13, 13);
-            $biopPDF->Cell(80-$nombreLargo,10,$nombrePaciente,0,0);
 
-        $biopPDF->setX(140);
+        // Primera Fila de Datos del Paciente
+            $b->SetTextColor(3, 94, 115);
+                $fechaLargo = $b->GetStringWidth("Fecha: ");
+                $b->Cell($fechaLargo,10,"Fecha: ",0,0);
+            $b->SetTextColor(13, 13, 13);
+                $b->Cell(35-$fechaLargo,10,$fecha,0,0);
 
-        $biopPDF->SetTextColor(3, 94, 115);
-            $edadLargo = $biopPDF->GetStringWidth("Edad: ");
-            $biopPDF->Cell($edadLargo,10,"Edad: ",0,0);
-        $biopPDF->SetTextColor(13, 13, 13);
-            $biopPDF->Cell(40-$edadLargo,10,$edadPaciente,0,0);
+            $b->setX(50);
 
-        $biopPDF->setX(185);
+            $b->SetTextColor(3, 94, 115);
+                $nombreLargo = $b->GetStringWidth("Nombre:   ");
+                $b->Cell($nombreLargo,10,"Nombre:   ",0,0);
+            $b->SetTextColor(13, 13, 13);
+                $b->Cell(80-$nombreLargo,10,$nombrePaciente,0,0);
 
-        $biopPDF->SetTextColor(3, 94, 115);
-            $sexoLargo = $biopPDF->GetStringWidth("Sexo: ");
-            $biopPDF->Cell($sexoLargo,10,"Sexo: ",0,0);
-        $biopPDF->SetTextColor(13, 13, 13);
-            $biopPDF->Cell(35-$sexoLargo,10,$sexoPaciente,0,1);
+            $b->setX(140);
+
+            $b->SetTextColor(3, 94, 115);
+                $edadLargo = $b->GetStringWidth("Edad: ");
+                $b->Cell($edadLargo,10,"Edad: ",0,0);
+            $b->SetTextColor(13, 13, 13);
+                $b->Cell(40-$edadLargo,10,$edadPaciente,0,0);
+
+            $b->setX(185);
+
+            $b->SetTextColor(3, 94, 115);
+                $sexoLargo = $b->GetStringWidth("Sexo: ");
+                $b->Cell($sexoLargo,10,"Sexo: ",0,0);
+            $b->SetTextColor(13, 13, 13);
+                $b->Cell(35-$sexoLargo,10,$sexoPaciente,0,1);
 
         // Linea Horinzontal
-        $biopPDF->Cell(35,2,'',0,2);
-        $biopPDF->Cell(0,0,'',1,2);
-        $biopPDF->Cell(35,4,'',0,2);
+            $b->Cell(35,2,'',0,2);
+            $b->Cell(0,0,'',1,2);
+            $b->Cell(35,4,'',0,2);
 
 
-    // Primera Fila de Datos del Paciente
-        $biopPDF->SetTextColor(3, 94, 115);
-            $ciLargo = $biopPDF->GetStringWidth("C.I.:   ");
-            $biopPDF->Cell($ciLargo,10,"C.I.:   ",0,0);
-        $biopPDF->SetTextColor(13, 13, 13);
-            $biopPDF->Cell(35-$ciLargo,10,number_format($_POST["cip"], 0, ",","."),0,0);
+        // Segunda Fila de Datos del Paciente
+            $b->SetTextColor(3, 94, 115);
+                $ciLargo = $b->GetStringWidth("C.I.:   ");
+                $b->Cell($ciLargo,10,"C.I.:   ",0,0);
+            $b->SetTextColor(13, 13, 13);
+                $b->Cell(35-$ciLargo,10,number_format($_POST["cip"], 0, ",","."),0,0);
 
-        $biopPDF->setX(50);
+            $b->setX(50);
 
-        $biopPDF->SetTextColor(3, 94, 115);
-            $medicoLargo = $biopPDF->GetStringWidth("Médico:   DR(A).");
-            $biopPDF->Cell($medicoLargo,10,mb_convert_encoding('Médico:   DR(A).', 'ISO-8859-1'),0,0);
-        $biopPDF->SetTextColor(13, 13, 13);
-            $biopPDF->Cell(80-$medicoLargo,10,$nombreMedico,0,1);
+            $b->SetTextColor(3, 94, 115);
+                $medicoLargo = $b->GetStringWidth("Médico:   DR(A).");
+                $b->Cell($medicoLargo,10,mb_convert_encoding('Médico:   DR(A).', 'ISO-8859-1'),0,0);
+            $b->SetTextColor(13, 13, 13);
+                $b->Cell(80-$medicoLargo,10,$nombreMedico,0,1);
 
-        $biopPDF->Cell(35,2,'',0,2);
-        $biopPDF->Cell(0,0,'',1,0);
+            // Linea Horinzontal
+                $b->Cell(35,2,'',0,2);
+                $b->Cell(0,0,'',1,2);
+                $b->Cell(35,8,'',0,2);
 
-    $biopPDF-> Output();
+
+    // Informacion de Planilla
+        // Linea Titulo
+            $b->SetFont('Arial','U',14);
+            $b->SetFillColor(186,236,247);
+            $b->SetTextColor(3,94,115);
+            $b->Cell(5,8,"", 0,0, "", true);
+        $b->Cell(0,8,"MATERIAL REMITIDO", 0,1, "L", true);
+        
+        // Standar Font
+            $b->SetFont('Arial', '', 12);
+            $b->SetTextColor(13,13,13);
+        $b->cell(0,3,"",0,1);
+        $b->MultiCell(0,10,mb_convert_encoding($_POST["des_mr"], 'ISO-8859-1'),0,1);
+        $b->cell(0,3,"",0,1);
+
+        // Linea Titulo
+            $b->SetFont('Arial','U',14);
+            $b->SetFillColor(186,236,247);
+            $b->SetTextColor(3,94,115);
+            $b->Cell(5,8,"", 0,0, "", true);
+        $b->Cell(0,8,mb_convert_encoding("DESCRIPCIÓN MACROSCÓPICA", 'ISO-8859-1'), 0,1, "L", true);
+
+        // Descripcion Macro
+            $b->SetFont('Arial', '', 10);
+            $b->SetTextColor(13,13,13);
+        $b->cell(0,3,"",0,1);
+        $b->MultiCell(0,6,mb_convert_encoding($_POST["des_macro"], 'ISO-8859-1'),0,1);
+        $b->cell(0,3,"",0,1);
+
+        // Linea Titulo
+            $b->SetFont('Arial','U',14);
+            $b->SetFillColor(186,236,247);
+            $b->SetTextColor(3,94,115);
+            $b->Cell(5,8,"", 0,0, "", true);
+        $b->Cell(0,8,mb_convert_encoding("DESCRIPCIÓN MICROSCÓPICA", 'ISO-8859-1'), 0,1, "L", true);
+
+        // Descripcion Micro
+            $b->SetFont('Arial', '', 10);
+            $b->SetTextColor(13,13,13);
+        $b->cell(0,3,"",0,1);
+        $b->MultiCell(0,6,mb_convert_encoding($_POST["des_micro"], 'ISO-8859-1'),0,1);
+        $b->cell(0,3,"",0,1);
+
+        // Linea Titulo
+            $b->SetFont('Arial','U',14);
+            $b->SetFillColor(186,236,247);
+            $b->SetTextColor(3,94,115);
+            $b->Cell(5,8,"", 0,0, "", true);
+        $b->Cell(0,8,mb_convert_encoding($_POST["des_mr"]."; BIOPSIA", 'ISO-8859-1'), 0,1, "C", true);
+
+        // Diagnostico
+            $b->SetFont('Arial', 'U', 10);
+            $b->SetTextColor(13,13,13);
+        $b->cell($b->GetStringWidth("DIAGNOSTICO"),10,"DIAGNOSTICO",0,0);
+            $b->SetFont('Arial', '', 10);
+        $b->cell(3,10,": ",0,1);
+        $b->MultiCell(0,6,mb_convert_encoding($_POST["diag"], 'ISO-8859-1'),0,1);
+        $b->cell(0,8,"",0,1);
+
+        // Comentario/Observacion
+            $b->SetFont('Arial', 'U', 8);
+            $b->SetTextColor(13,13,13);
+        $b->cell($b->GetStringWidth("NOTA"),5,"NOTA",0,0);
+            $b->SetFont('Arial', '', 8);
+        $b->cell(3,5,": ",0,0);
+        $b->MultiCell(0,5,mb_convert_encoding($_POST["obs"], 'ISO-8859-1'),0,1);
+        $b->cell(0,5,"",0,1);
+
+    $b-> Output();
 
 ?>
