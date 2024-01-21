@@ -50,12 +50,12 @@
         {
             $this->SetFont('Arial', 'BI', 10);
 
-            $this->SetY(-30);
+            $this->SetY(-25);
             $this->MultiCell(0,5,"DR. MIGUEL BLANCO     \nMEDICO ANATOMOPATOLOGO     ",0,"R");
 
             $this->SetFont('Arial','I',8);
 
-            $this->Cell(0,10,"Av. Francisco de Miranda, C.C. Mansión Flamingo, Piso 1, Local N°5, Telf.: (0283) 2356539, El Tigre - Edo. Anzoátegui",0,0,'C');
+            $this->Cell(0,10,mb_convert_encoding("Av. Francisco de Miranda, C.C. Mansión Flamingo, Piso 1, Local N°5, Telf.: (0283) 2356539, El Tigre - Edo. Anzoátegui", "ISO-8859-1"),0,0,'C');
         }
     }
 
@@ -159,7 +159,6 @@
             $c->SetFont('Arial','U',14);
             $c->SetFillColor(186,236,247);
             $c->SetTextColor(3,94,115);
-            // $c->setY(120);
             $c->Cell(5,8,"", 0,0, "", true);
         $c->Cell(0,8,mb_convert_encoding("INFORME CITOLÓGICO", 'ISO-8859-1'), 0,1, "C", true);
 
