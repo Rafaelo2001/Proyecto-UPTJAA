@@ -116,6 +116,37 @@
         $biopPDF->Cell(35,2,'',0,2);
         $biopPDF->Cell(0,0,'',1,0);
 
+
+        // Informacion de Planilla
+            // Linea Titulo
+                $c->SetFont('Arial','U',14);
+                $c->SetFillColor(186,236,247);
+                $c->SetTextColor(3,94,115);
+                $c->Cell(5,10,"", 0,0, "", true);
+            $c->Cell(0,10,"MATERIAL REMITIDO", 0,1, "L", true);
+            
+            // Standar Font
+                $c->SetFont('Arial', '', 12);
+                $c->SetTextColor(13,13,13);
+            $c->cell(0,5,"",0,1);
+            $c->MultiCell(0,10,mb_convert_encoding($_POST["des_mr"], 'ISO-8859-1'),0,1);
+            $c->cell(0,5,"",0,1);
+
+            // Linea Titulo
+                $c->SetFont('Arial','U',14);
+                $c->SetFillColor(186,236,247);
+                $c->SetTextColor(3,94,115);
+                // $c->setY(120);
+                $c->Cell(5,10,"", 0,0, "", true);
+            $c->Cell(0,10,mb_convert_encoding("DESCRIPCIÓN MACROSCÓPICA", 'ISO-8859-1'), 0,1, "L", true);
+
+            // Standar Font
+                $c->SetFont('Arial', '', 12);
+                $c->SetTextColor(13,13,13);
+            $c->cell(0,5,"",0,1);
+            $c->MultiCell(0,10,mb_convert_encoding($_POST["des_mr"], 'ISO-8859-1'),0,1);
+            $c->cell(0,5,"",0,1);
+
     $biopPDF-> Output();
 
 ?>
