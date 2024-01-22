@@ -21,14 +21,14 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
         <link rel="stylesheet" href="css/styles_nav.css">
         <link rel="icon" type="image/png" href="images/favicon.png">
         <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-
-        <link href="css/select2.min.css" rel="stylesheet" />
+        <link href="css/select2.min.css" rel="stylesheet"/>
         <script src="js/jquery-3.7.1.js"></script>
         <script src="js/select2.min.js"></script>
+        <script src="js/sweetalert2.all.min.js"></script>
+        <link href="css/sweetalert2.min.css" rel="stylesheet"/>
     </head>
 
     <body class="login-register">
@@ -153,7 +153,10 @@
                                                 
                                                 $nombre_completo = $paciente['PN'] ." ". $paciente['SN'] ." ". $paciente['TN'] ." ". $paciente['PA'] ." ". $paciente['SA']; 
                                                 
-                                                $cedula_formateada = number_format($cedula, 0, ',', '.');
+                                                list($tipo_identidad, $ci_numerica) = explode('-', $cedula);
+                                                $ci_numerica_formateada = number_format($ci_numerica, 0, ',', '.');
+                                                $cedula_formateada = $tipo_identidad . '-' . $ci_numerica_formateada;
+
                                                 $cedula_a_mostrar = " - C.I.: $cedula_formateada";
                                                 
                                                 echo $nombre_completo, $cedula_a_mostrar;
@@ -231,10 +234,12 @@
                                         </span>
                                         </div>
                                 </div>
-                                        
+                                 
+                                <!--
                                 <div class="form-mess" id="form-mess">
                                 <p><i class="fi fi-rr-triangle-warning"></i><b>Error:</b> ¡Revise los campos!</p>
                                 </div>
+                                -->
 
                                 <div class="button-container">
                                 <div class="form__group form__group-btn-submit">

@@ -171,7 +171,7 @@ $pdf->Multicell(0,4,$rif,0,1);
 $pdf->Ln(5); // Agrega una línea en blanco
 
 // Configura el tamaño de letra para el título
-$pdf->SetFont('Montserrat-Bold','',16);
+$pdf->SetFont('Montserrat-Bold','',14);
 
 // Configura el color del texto para el título
 $pdf->SetTextColor(3,94,115);
@@ -268,7 +268,7 @@ $pdf->SetFont('Montserrat-Bold','',12);
 $pdf->SetTextColor(3,94,115);
 
 // Agrega la celda con el texto "C.I./RIF/Pasaporte:"
-$pdf->Cell(45,10,utf8_decode('C.I./RIF/Pasaporte:'),0);
+$pdf->Cell(47,10,utf8_decode('C.I./E/Pasaporte/RIF:'),0);
 
 // Configura el tamaño de letra para los datos de "C.I./RIF/Pasaporte:" almacenados en la BD
 $pdf->SetFont('Montserrat-Regular','',12);
@@ -277,12 +277,12 @@ $pdf->SetFont('Montserrat-Regular','',12);
 $pdf->SetTextColor(13,13,13);
 
 // Agrega la segunda celda con el número de C.I./RIF/Pasaporte recuperado de la base de datos
-$pdf->Cell(60,10,utf8_decode('V-'.$cip),0);
+$pdf->Cell(60,10,utf8_decode($cip),0);
 
 $pdf->Ln(10); // Agrega una línea en blanco
 
 // Configura el tamaño de letra para CANTIDAD, CONCEPTO O DESCRIPCIÓN y TOTAL
-$pdf->SetFont('Montserrat-Bold','',12);
+$pdf->SetFont('Montserrat-Bold','',14);
 
 // Configura el color del texto para CANTIDAD, CONCEPTO O DESCRIPCIÓN y TOTAL
 $pdf->SetTextColor(3,94,115);
@@ -332,7 +332,7 @@ $pdf->Cell(25,10,utf8_decode('Bs.D '.$monto),0,0,'C',true);
 $pdf->Ln(30); // Agrega una línea en blanco
 
 // Configura el tamaño de letra para TOTAL
-$pdf->SetFont('Montserrat-Bold','',16);
+$pdf->SetFont('Montserrat-Bold','',14);
 
 // Configura el color del texto para TOTAL
 $pdf->SetTextColor(3,94,115);
@@ -367,6 +367,6 @@ $pdf->Cell(85,10,utf8_decode($tipo_pago),0,0,'R',true);
 $pdf->Ln();
 
 // Genera el PDF, se utiliza el parámetro I para visualizar el PDF en el navegador sin descargar, el segundo parámetro es el nombre del archivo al descargarlo
-$pdf->Output('D', 'FACTURA NRO.'.$id_factura.'.pdf');
+$pdf->Output('I', 'FACTURA NRO.'.$id_factura.'.pdf');
 
 ?>

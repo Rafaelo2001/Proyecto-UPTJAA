@@ -46,7 +46,9 @@
             $nro_casa = $_POST['nro_casa'];
 
         // Persona
+            $tipo_identidad = $_POST['tipo_identidad'];
             $ci_paciente = $_POST['cedula'];
+            $documento_id = $tipo_identidad."-".$ci_paciente;
             $nombre1_paciente = $_POST['pn'];
             $nombre2_paciente = $_POST['sn'];
             $nombre3_paciente = $_POST['tn'];
@@ -116,7 +118,7 @@
                 $resultadoDireccion = $buscarIdDirecion->buscarBY('direccion','ID_Direccion');
                 foreach ($resultadoDireccion as $filaIdDireccion) {
                     $idDireccion = $filaIdDireccion['ID_Direccion'];
-                    $sqlPersona = "INSERT INTO persona (CI, PN, SN, TN, PA, SA, F_nac, Edad, Sexo, ID_Direccion) VALUES ('$ci_paciente', '$nombre1_paciente', '$nombre2_paciente', '$nombre3_paciente', '$apellido1_paciente', '$apellido2_paciente', '$date_birth', '$edad', '$sexo', '$idDireccion')";
+                    $sqlPersona = "INSERT INTO persona (CI, PN, SN, TN, PA, SA, F_nac, Edad, Sexo, ID_Direccion) VALUES ('$documento_id', '$nombre1_paciente', '$nombre2_paciente', '$nombre3_paciente', '$apellido1_paciente', '$apellido2_paciente', '$date_birth', '$edad', '$sexo', '$idDireccion')";
                     $ejecutadoPersona = mysqli_query($conex,$sqlPersona);
                     if (!$ejecutadoPersona) {
                         throw new Exception("Error al insertar en la tabla Persona: " . mysqli_error($conex));
@@ -124,7 +126,7 @@
                 }
         
                 // Enviando TELEFONO
-                $sqlTelefono = "INSERT INTO telefono (Nro_Telf, CI) VALUES ('$telf_paciente', '$ci_paciente')";
+                $sqlTelefono = "INSERT INTO telefono (Nro_Telf, CI) VALUES ('$telf_paciente', '$documento_id')";
                 $ejecutadoTelefono = mysqli_query($conex,$sqlTelefono);
                 if (!$ejecutadoTelefono) {
                     throw new Exception("Error al insertar en la tabla Telefono" . mysqli_error($conex));
@@ -132,7 +134,7 @@
             
         
                 // Enviando CORREO
-                $sqlCorreo = "INSERT INTO correo (Correo, CI) VALUES ('$email_paciente', '$ci_paciente')";
+                $sqlCorreo = "INSERT INTO correo (Correo, CI) VALUES ('$email_paciente', '$documento_id')";
                 $ejecutadoCorreo = mysqli_query($conex,$sqlCorreo);
                 if (!$ejecutadoCorreo) {
                     throw new Exception("Error al insertar en la tabla Correo" . mysqli_error($conex));
@@ -141,7 +143,7 @@
 
                 
                 // Enviando PACIENTE
-                $sql_Paciente = "INSERT INTO paciente (CIP) VALUES ('$ci_paciente')";
+                $sql_Paciente = "INSERT INTO paciente (CIP) VALUES ('$documento_id')";
                 $ejecutado_Paciente = mysqli_query($conex,$sql_Paciente);
                 if (!$ejecutado_Paciente) {
                     throw new Exception("Error al insertar en la tabla Empleado" . mysqli_error($conex));
@@ -150,7 +152,7 @@
 
 
                 // Enviando MEDICO_REMITE_PACIENTE
-                $sql_Medico_Remite_Paciente = "INSERT INTO medico_remite_paciente (ID_Medico, CIP, F_Registro, Obs) VALUES ('$id_medico', '$ci_paciente', '$f_registro', '$obs')";
+                $sql_Medico_Remite_Paciente = "INSERT INTO medico_remite_paciente (ID_Medico, CIP, F_Registro, Obs) VALUES ('$id_medico', '$documento_id', '$f_registro', '$obs')";
                 $ejecutado_Medico_Remite_Paciente = mysqli_query($conex,$sql_Medico_Remite_Paciente);
                 if (!$ejecutado_Medico_Remite_Paciente) {
                     throw new Exception("Error al insertar en la tabla Empleado" . mysqli_error($conex));

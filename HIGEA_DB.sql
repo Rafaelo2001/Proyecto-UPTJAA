@@ -556,7 +556,7 @@ INSERT INTO `ciudad` (`id_ciudad`, `id_estado`, `nombre`) VALUES
 CREATE TABLE `correo` (
   `ID_Correo` int(11) NOT NULL,
   `Correo` varchar(200) DEFAULT NULL,
-  `CI` int(11) NOT NULL
+  `CI` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -564,7 +564,7 @@ CREATE TABLE `correo` (
 --
 
 INSERT INTO `correo` (`ID_Correo`, `Correo`, `CI`) VALUES
-(1, 'admin@admin.com', 123456);
+(1, 'admin@admin.com', 'V-123456');
 
 -- --------------------------------------------------------
 
@@ -595,7 +595,7 @@ INSERT INTO `direccion` (`ID_Direccion`, `Localizacion`, `Calle`, `Sector`, `Nro
 --
 
 CREATE TABLE `empleado` (
-  `CIE` int(11) NOT NULL,
+  `CIE` varchar(15) NOT NULL,
   `Tipo` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -604,7 +604,7 @@ CREATE TABLE `empleado` (
 --
 
 INSERT INTO `empleado` (`CIE`, `Tipo`) VALUES
-(123456, 'admin');
+('V-123456', 'admin');
 
 -- --------------------------------------------------------
 
@@ -688,7 +688,7 @@ CREATE TABLE `factura` (
   `Monto` decimal(10,2) DEFAULT NULL,
   `F_Pago` datetime DEFAULT NULL,
   `Descripcion` varchar(400) DEFAULT NULL,
-  `CIP` int(11) NOT NULL
+  `CIP` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -703,7 +703,7 @@ CREATE TABLE `informe` (
   `Descripcion_M_Remitido` text DEFAULT NULL,
   `Diagnostico` text DEFAULT NULL,
   `Observacion` text DEFAULT NULL,
-  `CIP` int(11) NOT NULL,
+  `CIP` varchar(15) NOT NULL,
   `ID_Medico` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -797,7 +797,7 @@ CREATE TABLE `medico` (
 
 CREATE TABLE `medico_remite_paciente` (
   `ID_Medico` int(11) NOT NULL,
-  `CIP` int(11) NOT NULL,
+  `CIP` varchar(15) NOT NULL,
   `F_Registro` datetime DEFAULT NULL,
   `Obs` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -1192,7 +1192,7 @@ CREATE TABLE `m_citologia` (
 CREATE TABLE `m_remitido` (
   `ID_M_Remitido` int(11) NOT NULL,
   `ID_Medico` int(11) DEFAULT NULL,
-  `CI_Paciente` int(11) DEFAULT NULL,
+  `CI_Paciente` varchar(15) DEFAULT NULL,
   `Descripcion_material` text DEFAULT NULL,
   `Diagnostico` text DEFAULT NULL,
   `Resumen` text DEFAULT NULL,
@@ -1207,7 +1207,7 @@ CREATE TABLE `m_remitido` (
 --
 
 CREATE TABLE `paciente` (
-  `CIP` int(11) NOT NULL
+  `CIP` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -2386,7 +2386,7 @@ INSERT INTO `parroquia` (`id_parroquia`, `id_municipio`, `nombre`) VALUES
 --
 
 CREATE TABLE `persona` (
-  `CI` int(11) NOT NULL,
+  `CI` varchar(15) NOT NULL,
   `PN` varchar(45) NOT NULL,
   `SN` varchar(45) DEFAULT NULL,
   `TN` varchar(45) DEFAULT NULL,
@@ -2403,7 +2403,7 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`CI`, `PN`, `SN`, `TN`, `PA`, `SA`, `F_nac`, `Edad`, `Sexo`, `ID_Direccion`) VALUES
-(123456, 'ADMIN', NULL, NULL, 'ADMIN', NULL, '2000-01-01', 23, 'M', 1);
+('V-123456', 'ADMIN', NULL, NULL, 'ADMIN', NULL, '2000-01-01', 23, 'M', 1);
 
 -- --------------------------------------------------------
 
@@ -2439,7 +2439,7 @@ CREATE TABLE `telefono` (
   `ID_Telefono` int(11) NOT NULL,
   `Cod_Area` varchar(10) DEFAULT NULL,
   `Nro_Telf` varchar(45) DEFAULT NULL,
-  `CI` int(11) NOT NULL
+  `CI` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -2447,7 +2447,7 @@ CREATE TABLE `telefono` (
 --
 
 INSERT INTO `telefono` (`ID_Telefono`, `Cod_Area`, `Nro_Telf`, `CI`) VALUES
-(1, '1234', '1234567', 123456);
+(1, '1234', '1234567', 'V-123456');
 
 --
 -- Disparadores `telefono`
@@ -2469,7 +2469,7 @@ CREATE TABLE `usuario` (
   `ID_Usuario` int(11) NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
   `Password` varchar(250) DEFAULT NULL,
-  `CIE` int(11) NOT NULL
+  `CIE` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -2477,7 +2477,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`ID_Usuario`, `Nombre`, `Password`, `CIE`) VALUES
-(1, 'ADMIN', '$2y$10$Dx8gHR45bvQJFbR1ri3pleB5D1eX5/DTUhbgkyFk2Utks9s2St.46', 123456);
+(1, 'ADMIN', '$2y$10$Dx8gHR45bvQJFbR1ri3pleB5D1eX5/DTUhbgkyFk2Utks9s2St.46', 'V-123456');
 
 -- --------------------------------------------------------
 
@@ -2527,7 +2527,7 @@ CREATE TABLE `usuario_registra_insumo` (
 
 CREATE TABLE `usuario_registra_paciente` (
   `ID_Usuario` int(11) NOT NULL,
-  `CIP` int(11) NOT NULL,
+  `CIP` varchar(15) NOT NULL,
   `F_Registro` datetime DEFAULT NULL,
   `Obs` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

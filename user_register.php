@@ -19,7 +19,7 @@ $user = new CodeaDB();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 </head>
 
 <body class="login-register">
@@ -41,11 +41,23 @@ $user = new CodeaDB();
                 <form action="php/insert-user.php" method="post" class="form" id="form">
                     <h2>INFORMACIÓN PRINCIPAL:</h2>
                     <div class="grid">
+                        <!--group: V/E/P/J-->
+                        <div class="questions" id="tipo_identidad" name="tipo_identidad">
+                            <label for="tipo_identidad">Tipo de identificación</label>
+                            <select class="tipo_identidad" name="tipo_identidad" id="tipo_identidad" required>
+                                <option value="" selected="selected" disabled selected>Seleccione</option>
+                                <option value="V">Venezolano (V)</option>
+                                <option value="E">Extranjero (E)</option>
+                                <option value="P">Pasaporte (P)</option>
+                                <option value="J">RIF (J)</option>
+                            </select>
+                        </div>
+
                         <!--group: ci-->
                         <div class="form-group" id="group_ci_empl">
                             <div class="form-group-input">
-                                <label for="ci_empl">Cédula de identidad</label>
-                                <input type="text" name="ci_empl" id="ci_empl" placeholder="Ingrese su cédula" autocomplete="off">
+                                <label for="ci_empl">Documento de identidad</label>
+                                <input type="text" name="ci_empl" id="ci_empl" placeholder="Ingrese nro. de documento" autocomplete="off">
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">La cédula debe contener entre 6-8 caracteres, solo puede contener números</p>
@@ -180,7 +192,9 @@ $user = new CodeaDB();
 
                         <div class="questions" id="parroquias">
                             <label for="quest-security">Parroquia</label>
-                            <select id="lista_parroquias" name="parroquia" class="quest-security"></select>
+                            <select id="lista_parroquias" name="parroquia" class="quest-security">
+                                <option value="" selected disabled>-- Seleccione Parroquia--</option>
+                            </select>
                         </div>
                         
                         <!--group: location-->

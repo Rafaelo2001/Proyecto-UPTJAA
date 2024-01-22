@@ -71,7 +71,34 @@
             $ejecutado_m_biopsia = mysqli_query($conex, $sql_m_biopsia);
             if (!$ejecutado_m_biopsia) {
                 throw new Exception("Error al insertar en la tabla 'm_biopsia'" . mysqli_error($conex));
-            }            
+            }       
+            
+            /*
+            // Si ambas consultas se ejecutan correctamente, muestra la alerta de éxito de sweetalert2
+            if ($ejecutado_m_remitido && $ejecutado_m_biopsia) {
+                echo "
+                <script>
+                Swal.fire({
+                  title: '¡Éxito!',
+                  text: 'Los datos del formulario se han enviado correctamente.',
+                  icon: 'success',
+                  confirmButtonText: '¡Entendido!'
+                });
+                </script>
+                ";
+              } else {
+                echo "
+                <script>
+                Swal.fire({
+                  title: '¡Error!',
+                  text: 'Los datos del formulario no se han enviado correctamente.',
+                  icon: 'error',
+                  confirmButtonText: 'Volver a intentar'
+                });
+                </script>
+                ";
+              }
+              */
 
             // Mostramos un mensaje de éxito utilizando una ventana emergente de alerta de JavaScript.
             // Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
@@ -79,7 +106,6 @@
             alert('Los datos se han insertado correctamente.');
             window.location.href = '../registro-biopsia.php'; 
             </script>";      
-
 
 
 
