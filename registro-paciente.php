@@ -133,11 +133,23 @@
 
                                 <h2>INFORMACIÓN PRINCIPAL:</h2>
                                 <div class="grid">
+                                        <!--group: V/E/P/J-->
+                                        <div class="questions" id="tipo_identidad" name="tipo_identidad">
+                                                <label for="tipo_identidad">Tipo de identificación</label>
+                                                <select class="tipo_identidad" name="tipo_identidad" id="tipo_identidad" required>
+                                                        <option value="" selected="selected" disabled selected>Seleccione</option>
+                                                        <option value="V">Venezolano (V)</option>
+                                                        <option value="E">Extranjero (E)</option>
+                                                        <option value="P">Pasaporte (P)</option>
+                                                        <option value="J">RIF (J)</option>
+                                                </select>
+                                        </div>
+                                        
                                         <!--group: ci-->
                                         <div class="form-group" id="group_ci_patient">
                                         <div class="form-group-input">
-                                                <label for="ci">Cédula de identidad</label>
-                                                <input id="ci" name="cedula" class="cedula" type="text" maxlength="11" required placeholder="Ingrese su cédula">
+                                                <label for="ci">Documento de identidad</label>
+                                                <input id="ci" name="cedula" class="cedula" type="text" maxlength="11" required placeholder="Ingrese nro. de documento" require>
                                         </div>
                                         <span class="form-input-error">
                                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
@@ -214,16 +226,16 @@
                                         </div>
                                         <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
                                         </div>
-                                        
-                                        <div>
-                                                <label>Sexo</label>
-                                                <div class="radio" id="sexo">
-                                                        <input type="radio" name="sexo" id="masculino" value="M" required>
-                                                        <label for="masculino">Masculino</label>
-                                                        <br>
-                                                        <input type="radio" name="sexo" id="femenino" value="F">
-                                                        <label for="femenino">Femenino</label>
-                                                </div>
+                                </div>
+
+                                <div>
+                                        <label>Sexo</label>
+                                        <div class="radio" id="sexo">
+                                                <input type="radio" name="sexo" id="masculino" value="M" required>
+                                                <label for="masculino">Masculino</label>
+                                                
+                                                <input type="radio" name="sexo" id="femenino" value="F">
+                                                <label for="femenino">Femenino</label>
                                         </div>
                                 </div>
 
