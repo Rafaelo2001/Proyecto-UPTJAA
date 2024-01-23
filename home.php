@@ -32,15 +32,6 @@
                 </div>
                 <ul class="nav-links">
                 <li>
-                        <a href="home.php">
-                        <i class="fi fi-rr-apps"></i>
-                        <span class="link_name">Panel Principal</span>
-                        </a>
-                        <ul class="sub-menu blank">
-                        <li><a class="link_name" href="home.php">Panel Principal</a></li>
-                        </ul>
-                </li>
-                <li>
                         <a href="registro-paciente.php">
                         <i class="fi fi-rr-procedures"></i>
                         <span class="link_name">Pacientes</span>
@@ -103,6 +94,44 @@
                         <li><a href="#">Pacientes</a></li>
                         <li><a href="#">Muestras</a></li>
                         <li><a href="#">Insumos</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-rr-eye"></i>
+                                <span class="link_name">Mantenimiento</span>
+                        </a>
+                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Mantenimiento</a></li>
+                        <li><a href="#">Backup</a></li>
+                        <li><a href="#">Restore</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-rr-eye"></i>
+                                <span class="link_name">Acerca de</span>
+                        </a>
+                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Acerca de</a></li>
+                        <li><a href="#">Sobre HIGEA</a></li>
+                        <li><a href="#">Developers</a></li>
+                        <li><a href="#">Ayuda</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="registro-pagos.php">
+                        <i class="fi fi-rr-file-invoice-dollar"></i>
+                        <span class="link_name">Gestión de usuarios</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="registro-pagos.php">Gestión de usuarios</a></li>
                         </ul>
                 </li>
                 <li>
