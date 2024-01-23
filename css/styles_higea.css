@@ -209,15 +209,20 @@
 .sidebar .profile-details .job{
   font-size: 12px;
 }
+
 .home-section{
   position: relative;
-  background: #ffffff;
-  height: 100vh;
+  background: rgb(248,255,254);
+  background: linear-gradient(132deg, rgb(248, 255, 254) 0%, rgba(171,255,255,1) 100%);
+  min-height: 100vh;
   left: 260px;
   width: calc(100% - 260px);
   transition: all 0.5s ease;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
+
 .login-register {
   padding: 0;
   margin: 0;
@@ -274,9 +279,10 @@
 
 .register-box {
     width: 580px;
-    height: 690px;
-    border-radius: 5px;
-    background: #f2f2f2;
+    height: 550px;
+    border-radius: 10px;
+    background: rgb(0,127,164);
+    background: linear-gradient(135deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
     color: #035E73;
     top: 50%;
     left: 50%;
@@ -284,13 +290,14 @@
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 20px 30px;
-    box-shadow: 5px 5px 10px 2px rgba(0, 50, 119, 0.2);
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
 }
 .register-box-biopsia {
     width: 580px;
-    height: 450px;
-    border-radius: 5px;
-    background: #F2F2F2;
+    height: 550px;
+    border-radius: 10px;
+    background: rgb(0,127,164);
+    background: linear-gradient(135deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
     color: #035E73;
     top: 50%;
     left: 50%;
@@ -298,13 +305,14 @@
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 20px 30px;
-    box-shadow: 5px 5px 10px 2px rgba(0, 50, 119, 0.2);
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
 }
 .register-box-citology {
     width: 580px;
-    height: 600px;
-    border-radius: 5px;
-    background: #F2F2F2;
+    height: 550px;
+    border-radius: 10px;
+    background: rgb(0,127,164);
+    background: linear-gradient(135deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
     color: #035E73;
     top: 50%;
     left: 50%;
@@ -312,14 +320,14 @@
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 20px 30px;
-    box-shadow: 5px 5px 10px 2px rgba(0, 50, 119, 0.2);
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
 }
 .register-box-supplies {
     width: 580px;
     height: 550px;
     border-radius: 10px;
-    background: rgb(0,255,255);
-    background: linear-gradient(135deg, rgba(0,255,255,1) 0%, rgba(38,163,191,1) 100%);
+    background: rgb(0,127,164);
+    background: linear-gradient(135deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
     color: #035E73;
     top: 50%;
     left: 50%;
@@ -327,7 +335,7 @@
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 20px 30px;
-    box-shadow: 5px 5px 10px 2px rgba(0, 50, 119, 0.2);
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
 }
 .grid {
     display: grid;
@@ -440,7 +448,7 @@ form .form-group-input {
     padding: 0 0 20px;
     text-align: center;
     font-size: 22px;
-    color: #052832;
+    color: #F2F2F2;
     font-weight: 700;
 }
 .form-register h2,
@@ -449,7 +457,7 @@ form .form-group-input {
     padding: 20px 0 10px 0;
     text-align: center;
     font-size: 16px;
-    color: #0F7CBF;
+    color: rgba(254,153,0,1);
     font-weight: 600;
 }
 .register-box-citology h3{
@@ -466,7 +474,7 @@ form .form-group-input {
     margin: 0;
     padding: 0;
     font-weight: 600;
-    color:#052832;
+    color:#b3ffff;
     display: block;
     margin-top: 10px;
 }
@@ -493,16 +501,32 @@ form .form-group-input {
 .register-box-biopsia input[type="date"],
 .register-box-citology input[type="date"],
 .register-box-supplies input[type="date"],
-.form-register select {
-    border: 1px solid #009dc9;
+.form-register select,
+.register-box-citology select {
+    border: none;
+    border-bottom: 3px solid rgba(254,101,0,1);
     background-color: #F2F2F2;
     outline: none;
     height: 40px;
     color: #0D0D0D;
     font-size: 16px;
     border-radius: 10px;
-    box-shadow: 5px 5px 10px 2px rgba(0, 50, 119, 0.2);
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
 }
+
+.form-register textarea {
+  border: none;
+  border-bottom: 3px solid rgba(254,101,0,1);
+  background-color: #F2F2F2;
+  outline: none;
+  height: 120px;
+  width: 500px;
+  color: #0D0D0D;
+  font-size: 16px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
+}
+
 .form-register input[type="radio"],
 .form-register input[type="checkbox"],
 .register-box-biopsia input[type="checkbox"],
@@ -513,8 +537,8 @@ form .form-group-input {
 .form-register .checkbox label,
 .register-box-biopsia .checkbox label,
 .register-box-citology .checkbox label {
-    color: #035E73;
-    background: rgba(0,0,0,.0);
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0);
     padding: 5px 15px 5px 51px;
     display: inline-block;
     position: relative;
@@ -528,7 +552,7 @@ form .form-group-input {
 .form-register .checkbox label:hover,
 .register-box-biopsia .checkbox label:hover,
 .register-box-citology .checkbox label:hover {
-    background: rgb(3, 94, 115, .3);
+    background: rgba(216, 248, 255, 0.2);
 }
 .form-register .radio label:before,
 .form-register .checkbox label:before,
@@ -539,7 +563,7 @@ form .form-group-input {
     height: 17px;
     display: inline-block;
     background: none;
-    border: 3px solid #035E73;
+    border: 3px solid #ffffff;
     border-radius: 50%;
     position: absolute;
     left: 17px;
@@ -555,9 +579,9 @@ form .form-group-input {
 .register-box-biopsia input[type="checkbox"]:checked + label,
 .register-box-citology input[type="checkbox"]:checked + label {
     padding: 5px 15px;
-    background: #035E73;
+    background: #fe6500;
     border-radius: 5px;
-    color: #F2F2F2;
+    color: #ffffff;
 }
 
 .form-register input[type="radio"]:checked + label:before,
@@ -579,7 +603,7 @@ form .form-group-input {
     border-radius: 20px;
     cursor: pointer;
     transition: background .2s;
-    box-shadow: 5px 5px 10px 2px rgba(0, 50, 119, 0.2);
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
     font-weight: 600;
 }
 
@@ -589,16 +613,21 @@ form .form-group-input {
 }
 .form-register {
     width: 520px;
-    background-color: #F2F2F2;;
-    padding: 30px;
+    background: rgb(0,127,164);
+    background: linear-gradient(135deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
+    padding: 20px 30px;
     margin: auto;
     margin-top: 0;
     margin-bottom: 200px;
-    border-radius: 5px;
+    border-radius: 10px;
     color: #035E73;
-    box-shadow: 5px 5px 10px 2px rgba(0, 50, 119, 0.2);
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
 }
 
 input::placeholder { /* Standard (Chrome, Firefox, Safari, Edge) */
   color:#9c9c9c;
+}
+
+.texto{
+  color: #F2F2F2;
 }

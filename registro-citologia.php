@@ -23,7 +23,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <link rel="stylesheet" href="css/styles_nav.css">
+        <link rel="stylesheet" href="css/styles_higea.css">
+        <link rel="stylesheet" type="text/css" href="css/styles_higea.css?v=1.2">
         <link rel="icon" type="image/png" href="images/favicon.png">
         <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
         
@@ -170,9 +171,8 @@
                                                                 <?php endforeach; ?>
                                                         </select>
 
-                                        
+                                        <br><br>
                                         <label for="descripcion">Descripcion Material Remitido: <small><i>obligatorio</i></small></label>
-                                        <br>
                                         <textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material"></textarea>
                                         
 

@@ -15,6 +15,7 @@ $user = new CodeaDB();
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css?v=1.2">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
@@ -363,11 +364,10 @@ $user = new CodeaDB();
                 </form>
             </section>
     </div>
-	<footer>
+    <footer>
         <div class="div-footer">
-            <img src="images/Logo Blanco Sin Linea.png" alt="Logo de Higea" width="70" height="70">
-            <img src="images/higea_bw.png" alt="Logo de Higea" width="70" height="70">
-            <img src="images/Letras.png" alt="Logo de Higea" width="70" height="20">
+            <img src="images/Logo.png" alt="Logo de Higea" width="70" height="70">
+            <img src="images/higea_color.png" alt="Logo de Higea" width="70" height="70">
             <span class="copyright">&copy; 2024 HIGEA - Laboratorio Dr. Miguel Blanco. Todos los derechos reservados.</span>
         </div>
     </footer>

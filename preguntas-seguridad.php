@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Recuperación de Contraseña</title>
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="css/styles.css?v=1.2">
         <link rel="icon" type="image/png" href="images/favicon.png">
         <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     </head>
@@ -24,9 +25,8 @@
         </nav>
     </header>
 
-    <div class="login-box">
-        <img class="avatar" src="images/Logo con contorno.png" alt="Logo de Higea">
-        <h1>VALIDACIÓN DE PREGUNTAS DE SEGURIDAD</h1>
+    <div class="login-box-quest">
+        <h1>PREGUNTAS DE SEGURIDAD</h1>
         <form action="php/val-preguntas.php" method="post" class="form" id="form">
 
         <?php
@@ -61,7 +61,6 @@
                     echo '<div class="form-group-input">';
                         echo '<label for="r1">' . $_SESSION['p1'] . '</label>';
                         echo '<input type="text" name="r1" id="r1" placeholder="Ingresa la respuesta" autocomplete="off">';
-                        echo '<i class="formulario_validacion_estado fi fi-rr-cross"></i>';
                     echo '</div>';
                     echo '<p class="form-input-error">Rellene este campo correctamente</p>';
                 echo '</div>';
@@ -70,7 +69,6 @@
                     echo '<div class="form-group-input">';
                         echo '<label for="r2">' . $_SESSION['p2'] . '</label>';
                         echo '<input type="text" name="r2" id="r2" placeholder="Ingresa la respuesta" autocomplete="off">';
-                        echo '<i class="formulario_validacion_estado fi fi-rr-cross"></i>';
                     echo '</div>';
                     echo '<p class="form-input-error">Rellene este campo correctamente</p>';
                 echo '</div>';
@@ -79,7 +77,6 @@
                     echo '<div class="form-group-input">';
                         echo '<label for="r3">' . $_SESSION['p3'] . '</label>';
                         echo '<input type="text" name="r3" id="r3" placeholder="Ingresa la respuesta" autocomplete="off">';
-                        echo '<i class="formulario_validacion_estado fi fi-rr-cross"></i>';
                     echo '</div>';
                     echo '<p class="form-input-error">Rellene este campo correctamente</p>';
                 echo '</div>';
@@ -110,9 +107,8 @@
 
     <footer>
         <div class="div-footer">
-            <img src="images/Logo Blanco Sin Linea.png" alt="Logo de Higea" width="70" height="70">
-            <img src="images/higea_bw.png" alt="Logo de Higea" width="70" height="70">
-            <img src="images/Letras.png" alt="Logo de Higea" width="70" height="20">
+            <img src="images/Logo.png" alt="Logo de Higea" width="70" height="70">
+            <img src="images/higea_color.png" alt="Logo de Higea" width="70" height="70">
             <span class="copyright">&copy; 2024 HIGEA - Laboratorio Dr. Miguel Blanco. Todos los derechos reservados.</span>
         </div>
     </footer>

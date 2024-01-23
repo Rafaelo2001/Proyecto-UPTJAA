@@ -11,6 +11,7 @@ $user = new CodeaDB();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Recuperación de Contraseña</title>
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="css/styles.css?v=1.2">
         <link rel="icon" type="image/png" href="images/favicon.png">
         <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -30,11 +31,11 @@ $user = new CodeaDB();
         </nav>
     </header>
 
-    <div class="login-box">
-        <img class="avatar" src="images/Logo con contorno.png" alt="Logo de Higea">
+    <div class="login-box-pass">
         <h1>NUEVA CONTRASEÑA</h1>
         <form action="php/guardar-nueva-contra.php" method="post" class="form" id="form">
 
+                    <div class="grid">
                         <!--group: password-->
                         <div class="form-group" id="group_password">
                             <div class="form-group-input">
@@ -61,6 +62,7 @@ $user = new CodeaDB();
                             </div>
                             <p class="form-input-error">Las contraseñas no coinciden</p>
                         </div>
+                    </div>
             
 
             <!--<div class="form-mess" id="form-mess">
@@ -78,9 +80,8 @@ $user = new CodeaDB();
 
     <footer>
         <div class="div-footer">
-            <img src="images/Logo Blanco Sin Linea.png" alt="Logo de Higea" width="70" height="70">
-            <img src="images/higea_bw.png" alt="Logo de Higea" width="70" height="70">
-            <img src="images/Letras.png" alt="Logo de Higea" width="70" height="20">
+            <img src="images/Logo.png" alt="Logo de Higea" width="70" height="70">
+            <img src="images/higea_color.png" alt="Logo de Higea" width="70" height="70">
             <span class="copyright">&copy; 2024 HIGEA - Laboratorio Dr. Miguel Blanco. Todos los derechos reservados.</span>
         </div>
     </footer>
