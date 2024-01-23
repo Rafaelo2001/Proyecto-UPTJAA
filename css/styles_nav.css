@@ -8,8 +8,8 @@
   left: 0;
   height: 100%;
   width: 260px;
-  background: rgb(9,175,203);
-  background: linear-gradient(180deg, rgba(9,175,203,1) 0%, rgba(0,144,178,1) 100%);
+  background: #10141d;
+  z-index: 100;
   transition: all 0.5s ease;
   margin: 0;
   padding: 0;
@@ -64,7 +64,7 @@
   transition: all 0.4s ease;
 }
 .sidebar .nav-links li:hover{
-  background: #035E73;
+  background: #1b2331;
 }
 .sidebar .nav-links li .iocn-link{
   display: flex;
@@ -108,7 +108,7 @@
 .sidebar .nav-links li .sub-menu{
   padding: 6px 6px 14px 80px;
   margin-top: -10px;
-  background: #035E73;
+  background: #1b2331;
   display: none;
 }
 .sidebar .nav-links li.showMenu .sub-menu{
@@ -169,7 +169,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #035E73;
+  background: #1b2331;
   padding: 12px 0;
   transition: all 0.5s ease;
 }
@@ -189,7 +189,7 @@
   object-fit: cover;
   border-radius: 16px;
   margin: 0 14px 0 12px;
-  background: #035E73;
+  background: #1b2331;
   transition: all 0.5s ease;
 }
 .sidebar.close .profile-details img{
@@ -211,7 +211,7 @@
 }
 .home-section{
   position: relative;
-  background: #ffffff;
+  background: url(../images/bg_higea.jpg) no-repeat center top fixed;
   height: 100vh;
   left: 260px;
   width: calc(100% - 260px);
@@ -222,8 +222,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background: rgb(248,255,254);
-  background: linear-gradient(132deg, rgba(248,255,254,1) 0%, rgba(171,255,255,1) 100%);
+  background: url(../images/bg_higea.jpg) no-repeat center top fixed;
   background-size: cover;
   font-family: 'Ubuntu', sans-serif;
   position: relative;
@@ -240,7 +239,7 @@
 }
 .home-section .home-content .bx-menu,
 .home-section .home-content .text{
-  color: #035E73;
+  color: #10141d;
   font-size: 35px;
 }
 .home-section .home-content .bx-menu{
@@ -317,9 +316,8 @@
 .register-box-supplies {
     width: 580px;
     height: 550px;
-    border-radius: 10px;
-    background: rgb(0,255,255);
-    background: linear-gradient(135deg, rgba(0,255,255,1) 0%, rgba(38,163,191,1) 100%);
+    border-radius: 5px;
+    background: #F2F2F2;
     color: #035E73;
     top: 50%;
     left: 50%;
@@ -352,7 +350,7 @@
 form .form-input-error {
     font-size: 12px;
     margin-bottom: 10px;
-    color: #ffffff;
+    color: #E1161F;
 }
 .button-container {
     margin-top: 10px;
@@ -383,7 +381,7 @@ form .form-group-input {
 .form-mess {
     height: 30px;
     line-height: 30px;
-    background: #ffffff;
+    background: #E1161F;
     padding: 0 15px;
     border-radius: 5px;
     display: none;
@@ -421,7 +419,7 @@ form .form-group-input {
 }
 
 .form-group-error .formulario_validacion_estado {
-    color: #ffffff;
+    color: #E1161F;
     opacity: 1;
 }
 .login-register {
@@ -440,7 +438,6 @@ form .form-group-input {
     padding: 0 0 20px;
     text-align: center;
     font-size: 22px;
-    color: #052832;
     font-weight: 700;
 }
 .form-register h2,
@@ -465,8 +462,7 @@ form .form-group-input {
 .register-box-supplies label {
     margin: 0;
     padding: 0;
-    font-weight: 600;
-    color:#052832;
+    font-weight: 400;
     display: block;
     margin-top: 10px;
 }
@@ -494,14 +490,13 @@ form .form-group-input {
 .register-box-citology input[type="date"],
 .register-box-supplies input[type="date"],
 .form-register select {
-    border: 1px solid #009dc9;
-    background-color: #F2F2F2;
+    border: none;
+    border-bottom: 1px solid #26A3BF;
+    background-color: transparent;
     outline: none;
     height: 40px;
     color: #0D0D0D;
     font-size: 16px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px 2px rgba(0, 50, 119, 0.2);
 }
 .form-register input[type="radio"],
 .form-register input[type="checkbox"],
@@ -567,25 +562,26 @@ form .form-group-input {
     display: none;
 }
 .button-submit,
+.button-submit,
+.button-delete,
 .button-delete {
     border: none;
     outline: none;
     height: 40px;
     margin-top: 10px;
-    background: rgb(254,153,0);
-    background: linear-gradient(135deg, rgba(254,153,0,1) 0%, rgba(254,101,0,1) 100%);
-    color: #ffffff;
+    background: #26A3BF;
+    color: #F2F2F2;
     font-size: 18px;
-    border-radius: 20px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background .2s;
-    box-shadow: 5px 5px 10px 2px rgba(0, 50, 119, 0.2);
-    font-weight: 600;
+    transition: background .5s;
 }
 
 .button-submit:hover,
+.button-submit:hover,
+.button-delete:hover,
 .button-delete:hover {
-    background: #fe6500;
+    background: #035E73;
 }
 .form-register {
     width: 520px;
@@ -597,8 +593,4 @@ form .form-group-input {
     border-radius: 5px;
     color: #035E73;
     box-shadow: 5px 5px 10px 2px rgba(0, 50, 119, 0.2);
-}
-
-input::placeholder { /* Standard (Chrome, Firefox, Safari, Edge) */
-  color:#9c9c9c;
 }

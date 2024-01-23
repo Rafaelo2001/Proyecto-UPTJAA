@@ -11,6 +11,7 @@
   background: rgb(9,175,203);
   background: linear-gradient(180deg, rgba(9,175,203,1) 0%, rgba(0,144,178,1) 100%);
   transition: all 0.5s ease;
+  z-index: 100;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
