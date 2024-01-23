@@ -10,7 +10,8 @@ body {
 }
 
 header {
-    background-color: #035E73;
+    background: rgb(70,251,255);
+    background: linear-gradient(260deg, rgba(70,251,255,1) 0%, rgba(0,144,178,1) 100%);
 }
 
 nav {
@@ -20,7 +21,7 @@ nav {
     right: 0;
     justify-content: space-between;
     align-items: center;
-    color: #26A3BF;
+    color: #ffffff;
 }
 
 .title {
@@ -63,18 +64,20 @@ li {
 }
 
 .buttom {
-    background-color: #F2F2F2;
+    background: rgb(254,153,0);
+    background: linear-gradient(135deg, rgba(254,153,0,1) 0%, rgba(254,101,0,1) 100%);
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     padding: 10px 25px;
-    font-weight: 500;
+    font-weight: 600;
     margin-left: 19px;
-    transition: background-color .5s;
+    transition: background-color .2s;
     cursor: pointer;
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
 }
 
 button:hover {
-    background-color: #cecece;
+    background: #fe6500;
 }
 
 .buttom-active {
@@ -89,7 +92,7 @@ button:hover {
 
 .buttom-item {
     text-decoration: none;
-    color: #26A3BF;
+    color: #ffffff;
 }
 
 button i {
@@ -105,7 +108,8 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0D0D0D;
+    background: rgb(70,251,255);
+    background: linear-gradient(90deg, rgba(70,251,255,1) 41%, rgba(0,144,178,1) 100%);
     position: fixed;
     bottom: 0;
     margin-top: 100px;
@@ -114,7 +118,7 @@ footer {
 .div-footer {
     padding-left: 40px;
     text-decoration: none;
-    color: #F2F2F2;
+    color: #015167;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -136,13 +140,14 @@ footer {
 
 .form-register {
     width: 800px;
-    background-color: #F2F2F2;;
+    background: rgb(0,127,164);
+    background: linear-gradient(135deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
     padding: 30px;
     margin: auto;
     margin-top: 20px;
     margin-bottom: 100px;
-    border-radius: 5px;
-    box-shadow: 5px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
     color: #035E73;
 }
 
@@ -192,19 +197,22 @@ footer {
     outline: none;
     height: 40px;
     margin-top: 10px;
-    background: #26A3BF;
-    color: #F2F2F2;
+    background: rgb(254,153,0);
+    background: linear-gradient(135deg, rgba(254,153,0,1) 0%, rgba(254,101,0,1) 100%);
+    color: #ffffff;
     font-size: 18px;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
-    transition: background .5s;
+    transition: background .2s;
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
+    font-weight: 600;
 }
 
 .button-submit:hover,
 .button-submit:hover,
 .button-delete:hover,
 .button-delete:hover {
-    background: #035E73;
+    background: #fe6500;
 }
 
 .quest-security {
@@ -240,8 +248,8 @@ label {
 p .form-input-error {
     font-size: 12px;
     margin-bottom: 10px;
-    color: #e1161f;
-    line-height: 0.3;
+    color: #ffa6ab;
+    line-height: 0.1;
 }
 
 .button-container {
@@ -312,6 +320,7 @@ form .form-group-input {
     margin-top: 0;
     display: none;
     font-weight: 300;
+    color: #ffffff;
 }
 
 .form-input-error-active {
@@ -325,7 +334,7 @@ form .form-group-input {
 .form-mess {
     height: 30px;
     line-height: 30px;
-    background: #E1161F;
+    background: #ffa6ab;
     padding: 0 15px;
     border-radius: 5px;
     display: none;
@@ -364,7 +373,7 @@ form .form-group-input {
 }
 
 .form-group-error .formulario_validacion_estado {
-    color: #E1161F;
+    color: #ffa6ab;
     opacity: 1;
 }
 
@@ -372,7 +381,7 @@ form .form-group-input {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    background: url(../images/bg.jpg) no-repeat center top fixed;
+    background: url(../images/new_bg.jpg) no-repeat center top fixed;
     background-size: cover;
     position: relative;
     min-height: 100vh;
@@ -393,17 +402,67 @@ form .form-group-input {
 }
 
 .login-box {
-    width: 320px;
-    height: 500px;
-    border-radius: 5px;
-    background: #F2F2F2;
+    width: 300px;
+    height: 415px;
+    border-radius: 10px;
+    background: rgb(0,127,164);
+    background: linear-gradient(135deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
     color: #035E73;
     top: 50%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
-    padding: 70px 30px;
+    padding: 30px 30px;
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
+}
+
+.login-box-rcvr {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    background: rgb(0,127,164);
+    background: linear-gradient(135deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
+    color: #035E73;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 30px 30px;
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
+}
+
+.login-box-quest {
+    width: 300px;
+    height: 470px;
+    border-radius: 10px;
+    background: rgb(0,127,164);
+    background: linear-gradient(135deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
+    color: #035E73;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 30px 30px;
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
+}
+
+.login-box-pass {
+    width: 600px;
+    height: 350px;
+    border-radius: 10px;
+    background: rgb(0,127,164);
+    background: linear-gradient(135deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
+    color: #035E73;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 30px 30px;
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
 }
 
 .login-box .avatar,
@@ -417,32 +476,43 @@ form .form-group-input {
 }
 
 .login-box h1,
+.login-box-rcvr h1,
+.login-box-quest h1,
+.login-box-pass h1,
 .form-register h1{
     margin: 0;
-    padding: 0 0 20px;
+    padding: 0 0 10px;
     text-align: center;
     font-size: 22px;
     font-weight: 700;
+    color: #F2F2F2;
 }
 .form-register h2 {
     margin: 0;
     padding: 20px 0 10px 0;
     text-align: center;
     font-size: 16px;
-    color: #0F7CBF;
+    color: rgba(254,153,0,1);
     font-weight: 600;
 }
 
 .login-box label,
+.login-box-rcvr label,
+.login-box-quest label,
+.login-box-pass label,
 .form-register label {
     margin: 0;
     padding: 0;
-    font-weight: 400;
+    font-weight: 600;
     display: block;
     margin-top: 10px;
+    color:#b3ffff;
 }
 
 .login-box input,
+.login-box-rcvr input,
+.login-box-quest input,
+.login-box-pass input,
 .form-register input {
     width: 230px;
     margin-bottom: 10px;
@@ -450,6 +520,9 @@ form .form-group-input {
 
 .login-box input[type="text"],
 .login-box input[type="password"],
+.login-box-rcvr input[type="text"],
+.login-box-quest input[type="text"],
+.login-box-pass input[type="password"],
 .form-register input[type="text"],
 .form-register input[type="password"],
 .form-register input[type="email"],
@@ -457,24 +530,26 @@ form .form-group-input {
 .form-register input[type="date"],
 .form-register select {
     border: none;
-    border-bottom: 1px solid #26A3BF;
-    background-color: transparent;
+    border-bottom: 3px solid rgba(254,101,0,1);
+    background-color: #F2F2F2;
     outline: none;
     height: 40px;
     color: #0D0D0D;
     font-size: 16px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
 }
 
 .login-box a {
     text-decoration: none;
     font-size: 12px;
     line-height: 20px;
-    color: #0D0D0D;
+    color:#b3ffff;
     transition: color .5s; 
 }
 
 .login-box a:hover {
-    color: #26A3BF;
+    color: #ffffff;
 }
 
 .form-register input[type="radio"] {
@@ -482,8 +557,8 @@ form .form-group-input {
 }
 
 .form-register .radio label {
-    color: #035E73;
-    background: rgba(0,0,0,.0);
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0);
     padding: 5px 15px 5px 51px;
     display: inline-block;
     position: relative;
@@ -495,7 +570,7 @@ form .form-group-input {
 }
 
 .form-register .radio label:hover {
-    background: rgb(3, 94, 115, .3);
+    background: rgba(216, 248, 255, 0.2);
 }
 
 .form-register .radio label:before {
@@ -504,18 +579,22 @@ form .form-group-input {
     height: 17px;
     display: inline-block;
     background: none;
-    border: 3px solid #035E73;
+    border: 3px solid #ffffff;
     border-radius: 50%;
     position: absolute;
     left: 17px;
     bottom: 2.5px;
 }
 
+.form-register .checkbox label:before{
+    border-radius: 3px;
+}
+
 .form-register input[type="radio"]:checked + label {
     padding: 5px 15px;
-    background: #035E73;
+    background: #fe6500;
     border-radius: 5px;
-    color: #F2F2F2;
+    color: #ffffff;
 }
 
 .form-register input[type="radio"]:checked + label:before {

@@ -13,6 +13,7 @@ $user = new CodeaDB();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="css/styles.css?v=1.2">
         <link rel="icon" type="image/png" href="images/favicon.png">
         <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     </head>
@@ -31,7 +32,6 @@ $user = new CodeaDB();
         </header>
 
         <div class="login-box">
-            <img class="avatar" src="images/Logo con contorno.png" alt="Logo de Higea">
             <h1>INICIO DE SESIÓN</h1>
             <form action="php/login.php" method="post" class="form" id="form">
 
@@ -40,7 +40,6 @@ $user = new CodeaDB();
                     <div class="form-group-input">
                         <label for="username">Nombre de usuario</label>
                         <input type="text" name="username" id="username" placeholder="Ingresa nombre de usuario" autocomplete="off">
-                        <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                     </div>
                     <p class="form-input-error">Rellene este campo correctamente</p>
                 </div>
@@ -50,7 +49,6 @@ $user = new CodeaDB();
                     <div class="form-group-input">
                         <label for="password">Contraseña</label>
                         <input type="password" name="password" id="password" placeholder="Ingresa contraseña" autocomplete="off">
-                        <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                     </div>
                     <p class="form-input-error">Rellene este campo correctamente</p>
                 </div>
@@ -72,9 +70,8 @@ $user = new CodeaDB();
 
         <footer>
             <div class="div-footer">
-                <img src="images/Logo Blanco Sin Linea.png" alt="Logo de Higea" width="70" height="70">
-                <img src="images/higea_bw.png" alt="Logo de Higea" width="70" height="70">
-                <img src="images/Letras.png" alt="Logo de Higea" width="70" height="20">
+                <img src="images/Logo.png" alt="Logo de Higea" width="70" height="70">
+                <img src="images/higea_color.png" alt="Logo de Higea" width="70" height="70">
                 <span class="copyright">&copy; 2024 HIGEA - Laboratorio Dr. Miguel Blanco. Todos los derechos reservados.</span>
             </div>
         </footer>
