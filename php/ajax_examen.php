@@ -2,7 +2,7 @@
 	if(isset($_POST['CI_Paciente'])):
 		require "conexion.php";
 		$user=new CodeaDB();
-		$m=$user->buscar("m_remitido","examinado = 0 AND CI_Paciente=".$_POST['CI_Paciente']);    
+		$m=$user->buscar("m_remitido","examinado = 0 AND CI_Paciente='".$_POST['CI_Paciente']."'");    
         
 		$material_remitido=[];
         

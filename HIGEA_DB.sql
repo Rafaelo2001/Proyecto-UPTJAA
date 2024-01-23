@@ -686,7 +686,7 @@ CREATE TABLE `factura` (
   `ID_Factura` int(11) NOT NULL,
   `Nro_Control` int(11) DEFAULT NULL,
   `Monto` decimal(10,2) DEFAULT NULL,
-  `F_Pago` datetime DEFAULT NULL,
+  `F_Emision` datetime DEFAULT NULL,
   `Descripcion` varchar(400) DEFAULT NULL,
   `CIP` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -744,12 +744,12 @@ CREATE TABLE `inf_citologia` (
 --
 
 CREATE TABLE `insumo` (
-  `ID_Insumo` int(11) NOT NULL,
-  `F_Exp` date DEFAULT NULL,
-  `Existencia` varchar(45) DEFAULT NULL,
-  `Duracion` varchar(45) DEFAULT NULL,
-  `Material` varchar(45) DEFAULT NULL,
-  `Tope` varchar(45) DEFAULT NULL
+  `ID_Insumo`   int(11) NOT NULL,
+  `Material`    varchar(45) DEFAULT NULL,
+  `Unidades`    varchar(45) DEFAULT NULL,
+  `Existencia`  int(11) DEFAULT NULL,
+  `Cant_minima` int(11) DEFAULT NULL,
+  `Duracion`    varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -772,8 +772,10 @@ CREATE TABLE `insumo_tiene_lote` (
 
 CREATE TABLE `lote` (
   `ID_Lote` int(11) NOT NULL,
+  `Codigo_Lote` varchar(250) NOT NULL,
   `F_Elab` date DEFAULT NULL,
   `F_Entrada` date DEFAULT NULL,
+  `F_Exp` date DEFAULT NULL,
   `Proveedor` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -1220,6 +1222,7 @@ CREATE TABLE `pago` (
   `ID_Pago` int(11) NOT NULL,
   `Referencia` varchar(45) DEFAULT NULL,
   `Tipo_Pago` varchar(45) DEFAULT NULL,
+  `F_Pago` datetime DEFAULT NULL,
   `Obs` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

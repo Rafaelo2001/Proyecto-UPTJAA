@@ -42,7 +42,7 @@
                     foreach($listaInformes as $informe):
                         $fechaInforme = date("d/m/Y", strtotime($informe["Fecha"]));
                         
-                        $datosPaciente = $user->buscar("persona","CI = ".$informe["CIP"]);
+                        $datosPaciente = $user->buscar("persona","CI = '".$informe["CIP"]."'");
                         $nombrePaciente = '';
                         foreach($datosPaciente as $p):
                             $nombrePaciente = $p["PN"]." ".$p["PA"];

@@ -1,5 +1,20 @@
+<?php
+    session_start();
+    header('Cache-Control: no-cache, no-store, must-revalidate');
+    header('Pragma: no-cache');
+    header('Expires: 0');
+
+    if(!isset($_SESSION['username'])) {
+        header('Location: index.php');
+        exit;
+    }
+
+    include "php/conexion.php";
+    $user = new CodeaDB();
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -111,25 +126,40 @@
 
         <div class="register-box-supplies">
             <h1>REGISTRO DE INSUMOS</h1>
-            <form action="#" method="post" class="form" id="form">
+            <form action="php/insert-insumo.php" method="post" class="form" id="form">
+
+            <!-- Se usan para el procesamiento 6 envases de alcohol cada uno con 400cc, 
+            Tres envases con xilol cada uno de 400 cc
+            Y dos envases con parafina líquida cada uno con 400 cc. 
+            Estas cantidades se reponen una vez al mes. -->
     
                 <div class="grid">
-    
-                    <!--group: top-->
-                    <div class="form-group" id="group_top">
-                        <div class="form-group-input">
-                            <label for="top">Tope</label>
-                            <input   type="text" name="top" id="top" placeholder="Escriba el tope">
-                            <i class="formulario_validacion_estado fi fi-rr-cross"></i>
-                        </div>
-                        <p class="form-input-error">Rellene este campo correctamente</p>
-                    </div>
     
                     <!--group: material-->
                     <div class="form-group" id="group_material">
                         <div class="form-group-input">
                             <label for="material">Material</label>
-                            <input   type="text" name="material" id="material" placeholder="Nombre del material">
+                            <input   type="text" name="material" id="material" required placeholder="Nombre del material">
+                            <i class="formulario_validacion_estado fi fi-rr-cross"></i>
+                        </div>
+                        <p class="form-input-error">Rellene este campo correctamente</p>
+                    </div>
+
+                    <!--group: unidades-->
+                    <div class="form-group" id="group_duration">
+                        <div class="form-group-input">
+                            <label for="unidades">Unidades</label>
+                            <input   type="text" name="unidades" id="unidades" required placeholder="Unidad de medida del material">
+                            <i class="formulario_validacion_estado fi fi-rr-cross"></i>
+                        </div>
+                        <p class="form-input-error">Rellene este campo correctamente</p>
+                    </div>
+
+                    <!--group: cant minima-->
+                    <div class="form-group" id="group_top">
+                        <div class="form-group-input">
+                            <label for="cant_minima">Cantidad Minima</label>
+                            <input   type="number" min="0" name="cant_minima" required id="cant_minima" placeholder="Establesca una cantidad minima">
                             <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                         </div>
                         <p class="form-input-error">Rellene este campo correctamente</p>
@@ -138,58 +168,19 @@
                     <!--group: stock-->
                     <div class="form-group" id="group_stock">
                         <div class="form-group-input">
-                            <label for="stock">Existencia</label>
-                            <input   type="text" name="stock" id="stock" placeholder="Indique la existencia">
+                            <label for="existencia">Existencia (opcional)</label>
+                            <input   type="number" name="existencia" id="existencia" placeholder="Indique la existencia">
                             <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                         </div>
                         <p class="form-input-error">Rellene este campo correctamente</p>
                     </div>
+
     
-                    <!--group: duration-->
-                    <div class="form-group" id="group_duration">
-                        <div class="form-group-input">
-                            <label for="duration">Duración</label>
-                            <input   type="text" name="duration" id="duration" placeholder="Duración del material">
-                            <i class="formulario_validacion_estado fi fi-rr-cross"></i>
-                        </div>
-                        <p class="form-input-error">Rellene este campo correctamente</p>
-                    </div>
-    
-                    <!--group: exp_date-->
-                    <div class="form-group" id="group_exp_date">
-                        <div class="form-group-input">
-                            <label for="exp_date">Fecha de expiración</label>
-                            <input type="date" class="exp_date" name="exp_date" id="exp_date" placeholder="(dd/mm/aaaa)">
-                            <i class="formulario_validacion_estado fi fi-rr-cross"></i>
-                        </div>
-                        <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
-                    </div>
-    
-                    <!--group: entry_date-->
-                    <div class="form-group" id="group_entry_date">
-                        <div class="form-group-input">
-                            <label for="entry_date">Fecha de entrada del lote</label>
-                            <input type="date" class="entry_date" name="entry_date" id="entry_date" placeholder="(dd/mm/aaaa)">
-                            <i class="formulario_validacion_estado fi fi-rr-cross"></i>
-                        </div>
-                        <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
-                    </div>
-    
-                    <!--group: elab_date-->
-                    <div class="form-group" id="group_elab_date">
-                        <div class="form-group-input">
-                            <label for="elab_date">Fecha de elaboración</label>
-                            <input type="date" class="elab_date" name="elab_date" id="elab_date" placeholder="(dd/mm/aaaa)">
-                            <i class="formulario_validacion_estado fi fi-rr-cross"></i>
-                        </div>
-                        <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
-                    </div>
-    
-                    <!--group: supplier-->
+                    <!--group: duracion-->
                     <div class="form-group" id="group_supplier">
                         <div class="form-group-input">
-                            <label for="supplier">Proveedor</label>
-                            <input   type="text" name="supplier" id="supplier" placeholder="Nombre del proveedor">
+                            <label for="duracion">Duracion</label>
+                            <input   type="text" name="duracion" id="duracion" placeholder="Indique la duracion">
                             <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                         </div>
                         <p class="form-input-error">Rellene este campo correctamente</p>
@@ -202,7 +193,7 @@
     
                     <div class="button-container">
                         <div class="form__group form__group-btn-submit">
-                            <input class="button-submit" type="submit" name="registrar" id="registrar" value="Registrar">
+                            <input class="button-submit" type="submit" id="registrar" value="Registrar">
                         </div>
                         <p class="form-mess-good" id="form-mess-good">¡Formulario enviado!</p>
                     </div>

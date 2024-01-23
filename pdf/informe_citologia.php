@@ -74,7 +74,7 @@
         // Datos para cabecera
             $fecha = date("d/m/Y", strtotime($_POST["fecha"]));
             
-            $datosPaciente = $user->buscar("persona","CI=".$_POST["cip"]);
+            $datosPaciente = $user->buscar("persona","CI='".$_POST["cip"]."'");
                 $nombrePaciente = strtoupper($datosPaciente[0]["PN"].' '.$datosPaciente[0]["PA"]);
                 $edadPaciente = $datosPaciente[0]["Edad"].mb_convert_encoding(" años","ISO-8859-1");
                 $sexoPaciente = $datosPaciente[0]["Sexo"];
@@ -124,7 +124,10 @@
                 $ciLargo = $c->GetStringWidth("C.I.:   ");
                 $c->Cell($ciLargo,10,"C.I.:   ",0,0);
             $c->SetTextColor(13, 13, 13);
-                $c->Cell(35-$ciLargo,10,number_format($_POST["cip"], 0, ",","."),0,0);
+                    list($tipo_identidad, $ci_numerica) = explode('-', $_POST["cip"]);
+                    $ci_numerica_formateada = number_format($ci_numerica, 0, ',', '.');
+                    $cedula_formateada = $tipo_identidad . '-' . $ci_numerica_formateada;
+                $c->Cell(35-$ciLargo,10,$cedula_formateada,0,0);
 
             $c->setX(50);
 

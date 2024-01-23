@@ -35,15 +35,17 @@ $conex = mysqli_connect("localhost","root","","higea_db");
     // TABLA: pago
         $referencia   = $_POST["referencia"];
         $tipo_pago = $_POST["tipo_pago"];
+        $fecha_pago = $_POST["fecha"];
         $obs   = $_POST["obs"];
         
+        date_default_timezone_set('America/Caracas'); // Establece la zona horaria a la de Caracas, Venezuela.
+
     // TABLA: factura
         $monto = $_POST["monto"];
+        $fecha_emision = date('Y-m-d H:i:s');
         $fecha_pago = $_POST["fecha"];
         $descripcion = $_POST["desc"];
         $cip = $_POST["paciente"];
-
-        date_default_timezone_set('America/Caracas'); // Establece la zona horaria a la de Caracas, Venezuela.
 
     /*// TABLA: usuario-emite-factura
         if(isset($_SESSION['userID'])) { // Verifica si la variable de sesión 'userID' existe
@@ -58,7 +60,7 @@ $conex = mysqli_connect("localhost","root","","higea_db");
     // ENVIANDO DATOS
 
         // Enviando Pago
-        $sql_pago = "INSERT INTO pago (Referencia, Tipo_Pago, Obs) VALUES ('$referencia', '$tipo_pago', '$obs')";
+        $sql_pago = "INSERT INTO pago (Referencia, Tipo_Pago, F_Pago, Obs) VALUES ('$referencia', '$tipo_pago', '$fecha_pago', '$obs')";
         $ejecutado_pago = mysqli_query($conex,$sql_pago);
         if (!$ejecutado_pago) {
             throw new Exception("Error al insertar en la tabla 'pago'" . mysqli_error($conex));
@@ -72,7 +74,7 @@ $conex = mysqli_connect("localhost","root","","higea_db");
             
 
         // Enviando Factura
-        $sql_factura = "INSERT INTO factura (Nro_Control, Monto, F_Pago, Descripcion, CIP) VALUES ('$id_pago', '$monto', '$fecha_pago', '$descripcion', '$cip')";
+        $sql_factura = "INSERT INTO factura (Nro_Control, Monto, F_Emision, Descripcion, CIP) VALUES ('$id_pago', '$monto', '$fecha_emision', '$descripcion', '$cip')";
         $ejecutado_factura = mysqli_query($conex, $sql_factura);
         if (!$ejecutado_factura) {
             throw new Exception("Error al insertar en la tabla 'factura'" . mysqli_error($conex));
