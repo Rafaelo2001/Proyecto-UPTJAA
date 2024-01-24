@@ -137,15 +137,6 @@ $user = new CodeaDB();
                     </div>
                     <h2>INFORMACIÓN DE CONTACTO:</h2>
                     <div class="grid">
-                        <!--group: cod_area-->
-                        <div class="form-group" id="group_cod_area">
-                            <div class="form-group-input">
-                                <label for="cod_area">Código Telefónico</label>
-                                <input   type="tel" name="cod_area" id="cod_area" placeholder="Ingrese el código telefónico" autocomplete="off">
-                                <i class="formulario_validacion_estado fi fi-rr-cross"></i>
-                            </div>
-                            <p class="form-input-error">El código telefónico debe tener 4 dígitos: 0123</p>
-                        </div>
 
                         <!--group: tel-->
                         <div class="form-group" id="group_telf_empl">
@@ -154,7 +145,7 @@ $user = new CodeaDB();
                                 <input   type="tel" name="telf_empl" id="telf_empl" placeholder="Ingrese su nro. de teléfono" autocomplete="off">
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
-                            <p class="form-input-error">El número telefónico debe tener 7 dígitos: 1234567</p>
+                            <p class="form-input-error">El número telefónico debe tener 12 dígitos: 1234-1234567</p>
                         </div>
 
                         <!--group: e-mail-->

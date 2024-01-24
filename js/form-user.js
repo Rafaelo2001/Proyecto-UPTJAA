@@ -8,7 +8,7 @@ const expressions = {
 	password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/, // al menos una M, una m, un digito, un caracter @$!%*?& y una longitud de 8 a 16 caracteres.
 	email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 	cod_area: /^\d{4}$/, // 4 numeros.
-	tel: /^\d{7}$/, // 7 numeros.
+	// tel: /^\d{7}$/, // 7 numeros.
     text: /^[a-zA-ZÀ-ÿ0-9\s]{1,400}$/, // Letras y espacios, no pueden llevar acentos.
     number: /^\d{1,10}$/, // 1 a 10 numeros.
     decimal: /^[0-9]+(\.[0-9]+)?$/,

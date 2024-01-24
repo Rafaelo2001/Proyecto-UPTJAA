@@ -2440,7 +2440,6 @@ INSERT INTO `recup_password` (`ID_Recup_Password`, `P1`, `P2`, `P3`, `R1`, `R2`,
 
 CREATE TABLE `telefono` (
   `ID_Telefono` int(11) NOT NULL,
-  `Cod_Area` varchar(10) DEFAULT NULL,
   `Nro_Telf` varchar(45) DEFAULT NULL,
   `CI` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -2449,8 +2448,8 @@ CREATE TABLE `telefono` (
 -- Volcado de datos para la tabla `telefono`
 --
 
-INSERT INTO `telefono` (`ID_Telefono`, `Cod_Area`, `Nro_Telf`, `CI`) VALUES
-(1, '1234', '1234567', 'V-123456');
+INSERT INTO `telefono` (`ID_Telefono`, `Nro_Telf`, `CI`) VALUES
+(1, '1234-1234567', 'V-123456');
 
 --
 -- Disparadores `telefono`
