@@ -1,3 +1,15 @@
+<?php
+    session_start();
+    header('Cache-Control: no-cache, no-store, must-revalidate');
+    header('Pragma: no-cache');
+    header('Expires: 0');
+
+    if(!isset($_SESSION['username'])) {
+        header('Location: index.php');
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -5,12 +17,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Developers HIGEA</title>
+
         <link rel="stylesheet" href="css/styles_higea.css">
         <link rel="stylesheet" type="text/css" href="css/styles_higea.css?v=1.1">
-        <!-- Link Swiper's CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+        <link rel="stylesheet" href="css/swiper-bundle.min.css">
+        <link rel="stylesheet" type="text/css" href="css/swiper-bundle.min.css?v=1.1">
+
         <link rel="stylesheet" href="css/developers.css">
-        <link rel="stylesheet" type="text/css" href="css/developers.css?v=1.2">
+        <link rel="stylesheet" type="text/css" href="css/developers.css?v=1.1">
+
         <link rel="icon" type="image/png" href="images/favicon.png">
         <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     </head>
@@ -207,7 +223,7 @@
 
                     <div class="card_image">
 
-                        <img src="images/ramon.png" alt="card image">
+                        <img src="images/jose.png" alt="card image">
 
                     </div>
 
@@ -250,7 +266,7 @@
         </section>
 
         <!-- Swiper JS -->
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="js/swiper-bundle.min.js"></script>
 
         <!-- Initialize Swiper -->
         <script>
