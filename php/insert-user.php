@@ -49,7 +49,6 @@
             $sexo = $_POST['sexo'];
 
         // Telefono / Correo
-            $cod_area = $_POST['cod_area'];
             $telf_empl = $_POST['telf_empl'];
             $email_empl = $_POST['email_empl'];
 
@@ -99,7 +98,7 @@
                 }
         
                 // Enviando TELEFONO
-                $sqlTelefono = "INSERT INTO telefono (Cod_Area, Nro_Telf, CI) VALUES ('$cod_area', '$telf_empl', '$documento_id')";
+                $sqlTelefono = "INSERT INTO telefono (Nro_Telf, CI) VALUES ('$telf_empl', '$documento_id')";
                 $ejecutadoTelefono = mysqli_query($conex,$sqlTelefono);
                 if (!$ejecutadoTelefono) {
                     throw new Exception("Error al insertar en la tabla Telefono" . mysqli_error($conex));
