@@ -44,7 +44,7 @@
                         <div class="iocn-link">
                         <a href="#">
                                 <i class="fi fi-rr-microscope"></i>
-                                <span class="link_name">Muestras</span>
+                                <span class="link_name">Muestrass</span>
                         </a>
                         <i class="fi fi-rr-angle-small-down arrow"></i>
                         </div>
