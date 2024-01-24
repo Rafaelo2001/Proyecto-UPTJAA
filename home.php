@@ -49,9 +49,10 @@
                         <i class="fi fi-rr-angle-small-down arrow"></i>
                         </div>
                         <ul class="sub-menu">
-                        <li><a class="link_name" href="#">Muestras</a></li>
+                        <li><a class="link_name" href="#">Muestras y Exámenes</a></li>
                         <li><a href="registro-citologia.php">Citología</a></li>
                         <li><a href="registro-biopsia.php">Biopsia</a></li>
+                        <li><a href="registro-examen.php">Examen</a></li>
                         </ul>
                 </li>
                 <li>
@@ -136,7 +137,7 @@
                         </ul>
                 </li>
                 <li>
-                        <a href="registro-pagos.php">
+                        <a href="#">
                         <i class="fi fi-rr-users-alt"></i>
                         <span class="link_name">Gestión de usuarios</span>
                         </a>

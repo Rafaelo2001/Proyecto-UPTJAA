@@ -31,21 +31,12 @@
     </head>
 
     <body class="login-register" style="text-align: center;">
-        <div class="sidebar close">
+    <div class="sidebar close">
                 <div class="logo-details">
                 <img class="logo" src="images/Logo con contorno.png" alt="Logo de Higea" width="60" height="60">
                 <img class="logo_name" src="images/Letras.png" alt="HIGEA" width="135" height="40">
                 </div>
                 <ul class="nav-links">
-                <li>
-                        <a href="home.php">
-                        <i class="fi fi-rr-apps"></i>
-                        <span class="link_name">Panel Principal</span>
-                        </a>
-                        <ul class="sub-menu blank">
-                        <li><a class="link_name" href="home.php">Panel Principal</a></li>
-                        </ul>
-                </li>
                 <li>
                         <a href="registro-paciente.php">
                         <i class="fi fi-rr-procedures"></i>
@@ -64,27 +55,38 @@
                         <i class="fi fi-rr-angle-small-down arrow"></i>
                         </div>
                         <ul class="sub-menu">
-                        <li><a class="link_name" href="#">Muestras</a></li>
+                        <li><a class="link_name" href="#">Muestras y Exámenes</a></li>
                         <li><a href="registro-citologia.php">Citología</a></li>
                         <li><a href="registro-biopsia.php">Biopsia</a></li>
+                        <li><a href="registro-examen.php">Examen</a></li>
                         </ul>
                 </li>
                 <li>
-                        <a href="supplies_register.html">
-                        <i class="fi fi-rr-box-open-full"></i>
-                        <span class="link_name">Insumos</span>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-rr-box-open-full"></i>
+                                <span class="link_name">Insumos</span>
                         </a>
-                        <ul class="sub-menu blank">
-                        <li><a class="link_name" href="supplies_register.html">Insumos</a></li>
+                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Insumos</a></li>
+                        <li><a href="registro-insumo.php">Registrar</a></li>
+                        <li><a href="visualizar-insumo.php">Visualizar</a></li>
                         </ul>
                 </li>
                 <li>
-                        <a href="registro-informes.php">
-                        <i class="fi fi-rr-document-signed"></i>
-                        <span class="link_name">Informes médicos</span>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-rr-document-signed"></i>
+                                <span class="link_name">Informes médicos</span>
                         </a>
-                        <ul class="sub-menu blank">
-                        <li><a class="link_name" href="registro-informes.php">Informes médicos</a></li>
+                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Informes médicos</a></li>
+                        <li><a href="registro-informes.php">Registrar</a></li>
+                        <li><a href="visualizar-informe.php">Visualizar</a></li>
                         </ul>
                 </li>
                 <li>
@@ -109,6 +111,44 @@
                         <li><a href="#">Pacientes</a></li>
                         <li><a href="#">Muestras</a></li>
                         <li><a href="#">Insumos</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-rr-database"></i>
+                                <span class="link_name">Mantenimiento</span>
+                        </a>
+                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Mantenimiento</a></li>
+                        <li><a href="#">Backup</a></li>
+                        <li><a href="#">Restore</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-rr-info"></i>
+                                <span class="link_name">Acerca de</span>
+                        </a>
+                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Acerca de</a></li>
+                        <li><a href="#">Sobre HIGEA</a></li>
+                        <li><a href="developers.php">Developers</a></li>
+                        <li><a href="#">Ayuda</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="#">
+                        <i class="fi fi-rr-users-alt"></i>
+                        <span class="link_name">Gestión de usuarios</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="#">Gestión de usuarios</a></li>
                         </ul>
                 </li>
                 <li>

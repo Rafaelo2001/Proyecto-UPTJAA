@@ -20,7 +20,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/styles_nav.css">
+        <link rel="stylesheet" href="css/styles_higea.css">
+        <link rel="stylesheet" type="text/css" href="css/styles_higea.css?v=1.1">
         <link rel="icon" type="image/png" href="images/favicon.png">
         <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 
@@ -28,85 +29,251 @@
         <script src="js/jquery-3.7.1.js"></script>
         <script src="js/select2.min.js"></script>
     </head>
-    <body>
-        <h1>Visualizador de Insumos</h1>
-        <!-- Alcohol, xilol, formol, parafina,coloración, hematoxilina, Pap-mart, citofix, laminas, laminillas, hojillas de microtomo, eosina, hojas blancas. -->
-        <form action="php/actu_insumo.php" method="post">
-            <select id="insumo" name="id_insumo" required>
-                <option disabled selected></option>
-                <?php
-                    $listaInsumo = $user->buscar("insumo","1");
 
-                    foreach($listaInsumo as $insumo):
-                ?>
-                <option value="<?php echo($insumo["ID_Insumo"]); ?>">
-                    <?php echo($insumo["Material"]); ?>
-                </option>
-                <?php
-                    endforeach;
-                ?>
-            </select>
+    <body class="login-register" style="text-align: center;">
+    <div class="sidebar close">
+                <div class="logo-details">
+                <img class="logo" src="images/Logo con contorno.png" alt="Logo de Higea" width="60" height="60">
+                <img class="logo_name" src="images/Letras.png" alt="HIGEA" width="135" height="40">
+                </div>
+                <ul class="nav-links">
+                <li>
+                        <a href="registro-paciente.php">
+                        <i class="fi fi-rr-procedures"></i>
+                        <span class="link_name">Pacientes</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="registro-paciente.php">Pacientes</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-rr-microscope"></i>
+                                <span class="link_name">Muestras</span>
+                        </a>
+                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Muestras y Exámenes</a></li>
+                        <li><a href="registro-citologia.php">Citología</a></li>
+                        <li><a href="registro-biopsia.php">Biopsia</a></li>
+                        <li><a href="registro-examen.php">Examen</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-rr-box-open-full"></i>
+                                <span class="link_name">Insumos</span>
+                        </a>
+                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Insumos</a></li>
+                        <li><a href="registro-insumo.php">Registrar</a></li>
+                        <li><a href="visualizar-insumo.php">Visualizar</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-rr-document-signed"></i>
+                                <span class="link_name">Informes médicos</span>
+                        </a>
+                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Informes médicos</a></li>
+                        <li><a href="registro-informes.php">Registrar</a></li>
+                        <li><a href="visualizar-informe.php">Visualizar</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="registro-pagos.php">
+                        <i class="fi fi-rr-file-invoice-dollar"></i>
+                        <span class="link_name">Facturación</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="registro-pagos.php">Facturación</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-rr-eye"></i>
+                                <span class="link_name">Detalles</span>
+                        </a>
+                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Detalles</a></li>
+                        <li><a href="#">Pacientes</a></li>
+                        <li><a href="#">Muestras</a></li>
+                        <li><a href="#">Insumos</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-rr-database"></i>
+                                <span class="link_name">Mantenimiento</span>
+                        </a>
+                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Mantenimiento</a></li>
+                        <li><a href="#">Backup</a></li>
+                        <li><a href="#">Restore</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-rr-info"></i>
+                                <span class="link_name">Acerca de</span>
+                        </a>
+                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Acerca de</a></li>
+                        <li><a href="#">Sobre HIGEA</a></li>
+                        <li><a href="developers.php">Developers</a></li>
+                        <li><a href="#">Ayuda</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="#">
+                        <i class="fi fi-rr-users-alt"></i>
+                        <span class="link_name">Gestión de usuarios</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="#">Gestión de usuarios</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="profile-details">
+                        <a href="php/exit.php">
+                                <i class="fi fi-rr-exit"></i>
+                                <span class="link_name">Salir</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                                <li><a class="link_name" href="php/exit.php">Salir</a></li>
+                        </ul>
+                        </div>
+                </li>
+                </ul>
+        </div>
 
-                    <br><br>
+        <main class="home-section">
+                <div class="home-content">
+                        <i class="fi fi-rr-menu-burger bx-menu"></i>
+                </div>
 
-            <label for="existencia">Existencia actual:</label>
-            <input type="text" id="existencia" readonly style="text-align: right;">
-            <label for="existencia" id="unidades_existencia"></label>
+                <section class="form-register">
+                        <h1>VISUALIZADOR DE INSUMOS</h1>
+                        <form action="php/actu_insumo.php" method="post" class="form" id="form" autocomplete="off">
 
-                    <br><br>
+                            <select id="insumo" name="id_insumo" required>
+                                <option disabled selected></option>
+                                <?php
+                                    $listaInsumo = $user->buscar("insumo","1");
 
-            <label for="cant_minima">Cantidad minima:</label>
-            <input type="text" id="cant_minima" readonly style="text-align: right;">
-            <label for="cant_minima" id="unidades_cant_minima"></label>
+                                    foreach($listaInsumo as $insumo):
+                                ?>
+                                <option value="<?php echo($insumo["ID_Insumo"]); ?>">
+                                    <?php echo($insumo["Material"]); ?>
+                                </option>
+                                <?php
+                                    endforeach;
+                                ?>
+                            </select>
 
-                <br><br><br>
+                                    <br>
 
-            <h2>Agregar Insumos:</h2>
+                            <label for="existencia">Existencia actual:</label>
+                            <input type="text" id="existencia" readonly style="text-align: right;">
+                            <label for="existencia" id="unidades_existencia"></label>
 
-            <input type="radio" name="tipo_act" id="directo" value="directo" required> <label for="directo">Directo</label>
-            <input type="radio" name="tipo_act" id="lote" value="lote">       <label for="lote">Lote</label>
+                                    
 
-                    <br>
+                            <label for="cant_minima">Cantidad minima:</label>
+                            <input type="text" id="cant_minima" readonly style="text-align: right;">
+                            <label for="cant_minima" id="unidades_cant_minima"></label>
 
-            <section id="sec_directo" style="display: none;">
-                <h3>Directo:</h3>
-                <label for="cant">Cantidad a añadir:</label>
-                <input type="number" name="cant" min="0" disabled>
-                <label for="cant" id="unidades_cant"></label>
-            </section>
+                                
 
-            <section id="sec_lote" style="display: none;">
-                <h3>Por Lote:</h3>
-                <label for="cant">Cantidad a añadir:</label>
-                <input type="number" name="cant" min="0" disabled>
-                <label for="cant" id="unidades_cant"></label>
+                            <div>
+                                <label>Agregar insumos por:</label>
+                                <div class="radio" id="tipo_act">
+                                    <input type="radio" name="tipo_act" id="directo" value="directo" required>
+                                    <label for="directo">Directo</label>
+                                            
+                                    <input type="radio" name="tipo_act" id="lote" value="lote">
+                                    <label for="lote">Lote</label>
+                                </div>
+                            </div>
 
-                    <br><br>
 
-                <label>ID Lote:</label>
-                <input type="text" name="id_lote" disabled>
+                            <section id="sec_directo" style="display: none;">
+                                <h3>Directo:</h3>
+                                <label for="cant">Cantidad a añadir:</label>
+                                <input type="number" name="cant" min="0" disabled>
+                                <label for="cant" id="unidades_cant"></label>
+                            </section>
 
-                    <br><br>
+                            <section id="sec_lote" style="display: none;">
+                                <h3>Por Lote:</h3>
+                                <label for="cant">Cantidad a añadir:</label>
+                                <input type="number" name="cant" min="0" placeholder="Ingrese la cantidad" disabled>
+                                <label for="cant" id="unidades_cant"></label>
 
-                <label>Fecha de Elaboracion:</label>
-                <input type="date" name="f_elab" disabled>
 
-                    <br><br>
+                                <label>ID Lote:</label>
+                                <input type="text" name="id_lote" placeholder="Ingrese el ID del lote" disabled>
 
-                <label>Fecha de Expiracion:</label>
-                <input type="date" name="f_exp" disabled>
+                                    <br>
 
-                    <br><br>
+                                <label>Fecha de Elaboracion:</label>
+                                <input type="date" name="f_elab" disabled>
 
-                <label>Proveedor:</label>
-                <input type="text" name="proveedor" disabled>
-            </section>
+                                    <br>
 
-                    <br>
+                                <label>Fecha de Expiracion:</label>
+                                <input type="date" name="f_exp" disabled>
 
-            <input type="submit" value="Guardar">
-        </form>
+                                    <br>
+
+                                <label>Proveedor:</label>
+                                <input type="text" name="proveedor" placeholder="Indique el proveedor" disabled>
+                            </section>
+
+                                    <br>
+
+                            <input class="button-submit" type="submit" name="guardar" id="guardar" value="Guardar">
+                               
+                        </form>
+                </section>
+        </main>
+        
+        <script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+          arrow[i].addEventListener("click", (e)=>{
+         let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+         arrowParent.classList.toggle("showMenu");
+          });
+        }
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".bx-menu");
+        console.log(sidebarBtn);
+        sidebarBtn.addEventListener("click", ()=>{
+          sidebar.classList.toggle("close");
+        });
+        </script>
+
     </body>
+
     <script>
         $("[name='tipo_act']").change(
             function(){
