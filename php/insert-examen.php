@@ -45,7 +45,47 @@
             $ejecutado_act_mremitido = mysqli_query($conex, $sql_act_mremitido);
             if (!$ejecutado_act_mremitido) {
                 throw new Exception("Error al actualizar material en la tabla 'm_remitido'" . mysqli_error($conex));
-            }  
+            }
+
+            // Consumo de Insumos
+            // BIOPSIA
+            //     6 envases de 400cc de alcohol 	    	(2400cc total)
+            //     3 envases de 400cc de xilol   	    	(1200cc total)
+            //     2 envases de 400cc de Parafina Liquida	( 800cc total)
+            //         UPDATE `insumo` SET `Existencia`= `Existencia` - 2400 WHERE Material="Alcohol";
+            //         UPDATE `insumo` SET `Existencia`= `Existencia` - 1200 WHERE Material="Xilol";
+            //         UPDATE `insumo` SET `Existencia`= `Existencia` -  800 WHERE Material="Parafina Liquida";
+
+            // CITOLOGIA
+            //     6 envases de 200cc de alcohol (1200cc total)
+            //     3 envases de 200cc de xilol   ( 600cc total)
+            //         UPDATE `insumo` SET `Existencia`= `Existencia` - 1200 WHERE Material="Alcohol";
+            //         UPDATE `insumo` SET `Existencia`= `Existencia` -  600 WHERE Material="Xilol";
+
+            if($tipo_examen == "biopsia") {
+                $sql_insumo_biopsia1 = 'UPDATE `insumo` SET `Existencia`= `Existencia` - 2400 WHERE Material="Alcohol";';
+                if (!(mysqli_query($conex,$sql_insumo_biopsia1))){
+                    throw new Exception("Error al descontar insumos (biopsia)" . mysqli_error($conex));
+                }
+                $sql_insumo_biopsia2 = 'UPDATE `insumo` SET `Existencia`= `Existencia` - 1200 WHERE Material="Xilol";';
+                if (!(mysqli_query($conex,$sql_insumo_biopsia2))){
+                    throw new Exception("Error al descontar insumos (biopsia)" . mysqli_error($conex));
+                }
+                $sql_insumo_biopsia3 = 'UPDATE `insumo` SET `Existencia`= `Existencia` -  800 WHERE Material="Parafina Liquida";';
+                if (!(mysqli_query($conex,$sql_insumo_biopsia3))){
+                    throw new Exception("Error al descontar insumos (biopsia)" . mysqli_error($conex));
+                }
+            }
+            elseif($tipo_examen == "citologia") {
+                $sql_insumo_citologia1 = 'UPDATE `insumo` SET `Existencia`= `Existencia` - 1200 WHERE Material="Alcohol";';
+                if (!(mysqli_query($conex,$sql_insumo_citologia1))){
+                    throw new Exception("Error al descontar insumos (citologia)" . mysqli_error($conex));
+                }
+                $sql_insumo_citologia2 = 'UPDATE `insumo` SET `Existencia`= `Existencia` -  600 WHERE Material="Xilol";';
+                if (!(mysqli_query($conex,$sql_insumo_citologia2))){
+                    throw new Exception("Error al descontar insumos (citologia)" . mysqli_error($conex));
+                }
+            }
 
             echo "<script>
             alert('Los datos se han insertado correctamente.');

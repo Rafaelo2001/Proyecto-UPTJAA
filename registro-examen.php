@@ -131,7 +131,7 @@
                 </div>
 
                 <section class="form-register">
-                        <h1>REGISTRO DE INFORMES</h1>
+                        <h1>REGISTRO DE EXAMEN</h1>
                         <form action="php/insert-examen.php" method="post" class="form" id="form" autocomplete="off">
 
                         <label for="paciente">Paciente:</label>
@@ -177,10 +177,10 @@
                         <div>
                             <label>Tipo de examen</label>
                             <div class="radio" id="tipo_examen">
-                                <input type="radio" name="tipo_examen" id="tipo1" value="Biopsia" required>
+                                <input type="radio" name="tipo_examen" id="tipo1" value="biopsia" required>
                                 <label for="tipo1">Biopsia</label>
                                 
-                                <input type="radio" name="tipo_examen" id="tipo2" value="Citologia">
+                                <input type="radio" name="tipo_examen" id="tipo2" value="citologia">
                                 <label for="tipo2">Citología</label>
                             </div>
                         </div>
