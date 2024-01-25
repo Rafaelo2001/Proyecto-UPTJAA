@@ -112,7 +112,7 @@ $conex = mysqli_connect("localhost","root","","higea_db");
         $query->close();
 
         // Prepara la consulta SQL para seleccionar el codigo de area y numero de telefono del paciente
-        $query = $conex->prepare("SELECT Cod_Area, Nro_Telf FROM telefono WHERE CI = ?");
+        $query = $conex->prepare("SELECT Nro_Telf FROM telefono WHERE CI = ?");
 
         // Vincula el parámetro $cip a la consulta SQL
         $query->bind_param("s", $cip);
@@ -121,7 +121,7 @@ $conex = mysqli_connect("localhost","root","","higea_db");
         $query->execute();
 
         // Vincula las variables $codigo y $numero a las columnas del resultado
-        $query->bind_result($codigo, $numero);
+        $query->bind_result($numero);
 
         // Obtiene los resultados
         $query->fetch();
@@ -258,7 +258,7 @@ $pdf->SetFont('Montserrat-Regular','',12);
 $pdf->SetTextColor(13,13,13);
 
 // Agrega la cuarta celda con el teléfono recuperado de la base de datos
-$pdf->Cell(35,10,utf8_decode($codigo.$numero),0);
+$pdf->Cell(35,10,utf8_decode($numero),0);
 
 // Agrega una nueva línea para la siguiente fila de la tabla
 $pdf->Ln();

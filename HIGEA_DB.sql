@@ -752,6 +752,12 @@ CREATE TABLE `insumo` (
   `Duracion`    varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `insumo`
+--
+
+INSERT INTO `insumo` (`ID_Insumo`, `Material`, `Unidades`, `Existencia`, `Cant_minima`) VALUES (1, 'Alcohol', 'ml', '0', '400'), (2, 'Xilol', 'cc', '0', '400'), (3, 'Parafina Liquida', 'cc', '0', '400');
+
 -- --------------------------------------------------------
 
 --
