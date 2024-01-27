@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="css/styles_higea.css">
         <link rel="stylesheet" type="text/css" href="css/styles_higea.css?v=1.1">
         <link rel="icon" type="image/png" href="images/favicon.png">
-        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
     </head>
 <body class="login-register">
 <div class="sidebar close">
@@ -34,7 +34,7 @@
                 <ul class="nav-links">
                 <li>
                         <a href="registro-paciente.php">
-                        <i class="fi fi-rr-procedures"></i>
+                        <i class="fi fi-sr-hospital-user"></i>
                         <span class="link_name">Pacientes</span>
                         </a>
                         <ul class="sub-menu blank">
@@ -44,10 +44,10 @@
                 <li>
                         <div class="iocn-link">
                         <a href="#">
-                                <i class="fi fi-rr-microscope"></i>
+                                <i class="fi fi-sr-microscope"></i>
                                 <span class="link_name">Muestras</span>
                         </a>
-                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
                         </div>
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Muestras y Exámenes</a></li>
@@ -59,10 +59,10 @@
                 <li>
                         <div class="iocn-link">
                         <a href="#">
-                                <i class="fi fi-rr-box-open-full"></i>
+                                <i class="fi fi-sr-box-open-full"></i>
                                 <span class="link_name">Insumos</span>
                         </a>
-                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
                         </div>
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Insumos</a></li>
@@ -73,10 +73,10 @@
                 <li>
                         <div class="iocn-link">
                         <a href="#">
-                                <i class="fi fi-rr-document-signed"></i>
+                                <i class="fi fi-sr-document-signed"></i>
                                 <span class="link_name">Informes médicos</span>
                         </a>
-                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
                         </div>
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Informes médicos</a></li>
@@ -86,7 +86,7 @@
                 </li>
                 <li>
                         <a href="registro-pagos.php">
-                        <i class="fi fi-rr-file-invoice-dollar"></i>
+                        <i class="fi fi-sr-file-invoice-dollar"></i>
                         <span class="link_name">Facturación</span>
                         </a>
                         <ul class="sub-menu blank">
@@ -96,10 +96,10 @@
                 <li>
                         <div class="iocn-link">
                         <a href="#">
-                                <i class="fi fi-rr-eye"></i>
+                                <i class="fi fi-sr-eye"></i>
                                 <span class="link_name">Detalles</span>
                         </a>
-                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
                         </div>
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Detalles</a></li>
@@ -111,10 +111,10 @@
                 <li>
                         <div class="iocn-link">
                         <a href="#">
-                                <i class="fi fi-rr-database"></i>
+                                <i class="fi fi-sr-database"></i>
                                 <span class="link_name">Mantenimiento</span>
                         </a>
-                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
                         </div>
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Mantenimiento</a></li>
@@ -125,10 +125,10 @@
                 <li>
                         <div class="iocn-link">
                         <a href="#">
-                                <i class="fi fi-rr-info"></i>
+                                <i class="fi fi-sr-info"></i>
                                 <span class="link_name">Acerca de</span>
                         </a>
-                        <i class="fi fi-rr-angle-small-down arrow"></i>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
                         </div>
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Acerca de</a></li>
@@ -139,7 +139,7 @@
                 </li>
                 <li>
                         <a href="#">
-                        <i class="fi fi-rr-users-alt"></i>
+                        <i class="fi fi-sr-users-alt"></i>
                         <span class="link_name">Gestión de usuarios</span>
                         </a>
                         <ul class="sub-menu blank">
@@ -149,7 +149,7 @@
                 <li>
                         <div class="profile-details">
                         <a href="php/exit.php">
-                                <i class="fi fi-rr-exit"></i>
+                                <i class="fi fi-sr-exit"></i>
                                 <span class="link_name">Salir</span>
                         </a>
                         <ul class="sub-menu blank">
