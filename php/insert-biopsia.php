@@ -98,8 +98,8 @@
                 </script>
                 ";
               }
-              */
-
+              
+*/
             // Mostramos un mensaje de éxito utilizando una ventana emergente de alerta de JavaScript.
             // Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
             echo "<script>

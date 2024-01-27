@@ -1,0 +1,84 @@
+.imagen-hover{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+    margin: 25px 0px 25px 0px;
+    padding: 0;
+}
+
+.imagen-hover figure{
+    position: relative;
+    height: 150px;
+    width: 250px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
+    cursor: pointer;
+}
+
+.imagen-hover figure img{
+    width: 100%;
+    height: 100%;
+    transition: all 500ms ease-out;
+}
+
+.imagen-hover figure .capa{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 103, 123, 0.7);
+    opacity: 0;
+    visibility: hidden;
+    text-align: center;
+}
+
+.imagen-hover figure:hover > .capa {
+    opacity: 1;
+    visibility: visible;
+}
+
+.imagen-hover figure:hover > .capa h3{
+    margin-top: 60px;
+    margin-bottom: 15px;
+}
+
+.imagen-hover figure:hover > img{
+    transform: scale(1.3);
+}
+
+.imagen-hover figure .capa h3{
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 120px;
+    transition: all 500ms ease-out;
+    margin-top: 30px;
+}
+
+.imagen-hover figure .capa p{
+    color: #fff;
+    font-size: 15px;
+    line-height: 1.5;
+    width: 100%;
+    max-width: 220px;
+    margin: auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0;
+    padding: 0;
+}
+
+.body-home {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background: url(../images/bg_home.jpg) no-repeat center top fixed;
+    background-size: cover;
+    position: relative;
+    min-height: 100vh;
+}
