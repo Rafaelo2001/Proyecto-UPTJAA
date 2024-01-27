@@ -4,7 +4,7 @@ $user = new CodeaDB();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,12 +15,12 @@ $user = new CodeaDB();
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" type="text/css" href="css/styles.css?v=1.2">
+    <link rel="stylesheet" type="text/css" href="css/styles.css?v=1.1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
 </head>
 
 <body class="login-register">
@@ -32,7 +32,7 @@ $user = new CodeaDB();
             </a>
 
             <ul class="items">
-                <button class="buttom"><a href="index.php" class="buttom-item"><i class="fi fi-rr-enter"></i>Iniciar Sesión</a></button>
+                <button class="buttom"><a href="index.php" class="buttom-item"><i class="fi fi-sr-enter"></i>Iniciar Sesión</a></button>
             </ul>
         </nav>
     </header>

@@ -13,9 +13,9 @@ $user = new CodeaDB();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <link rel="stylesheet" href="css/styles.css">
-        <link rel="stylesheet" type="text/css" href="css/styles.css?v=1.2">
+        <link rel="stylesheet" type="text/css" href="css/styles.css?v=1.1">
         <link rel="icon" type="image/png" href="images/favicon.png">
-        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
     </head>
     <body class="login-register">
         <header>
@@ -26,7 +26,7 @@ $user = new CodeaDB();
                 </a>
 
                 <ul class="items">
-                    <button class="buttom"><a href="user_register.php" class="buttom-item"><i class="fi fi-rr-user-add"></i>Registrarse</a></button>
+                    <button class="buttom"><a href="user_register.php" class="buttom-item"><i class="fi fi-sr-user-add"></i>Registrarse</a></button>
                 </ul>
             </nav>
         </header>
