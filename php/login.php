@@ -35,7 +35,7 @@
             // Si la contraseña es incorrecta, muestra un mensaje emergente de error
             echo '<script type="text/javascript">
             alert("Error: Nombre de usuario o contraseña incorrectos");
-            window.location.href = "../"; 
+            window.location.href = "../";
             </script>';
         }
     }
@@ -44,7 +44,7 @@
         // Si no hay una coincidencia, muestra un mensaje emergente de error
         echo '<script type="text/javascript">
         alert("Error: Nombre de usuario o contraseña incorrectos");
-        window.location.href = "../"; 
+        window.location.href = "../";
         </script>';
     }
 

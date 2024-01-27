@@ -58,10 +58,18 @@
                         <i class="fi fi-sr-angle-small-down arrow"></i>
                         </div>
                         <ul class="sub-menu">
-                        <li><a class="link_name" href="#">Muestras y Exámenes</a></li>
+                        <li><a class="link_name" href="#">Muestras</a></li>
                         <li><a href="registro-citologia.php">Citología</a></li>
                         <li><a href="registro-biopsia.php">Biopsia</a></li>
-                        <li><a href="registro-examen.php">Examen</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="registro-examen.php">
+                        <i class="fi fi-sr-flask"></i>
+                        <span class="link_name">Exámenes</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="registro-examen.php">Exámenes</a></li>
                         </ul>
                 </li>
                 <li>
@@ -81,7 +89,7 @@
                 <li>
                         <div class="iocn-link">
                         <a href="#">
-                                <i class="fi fi-sr-document-signed"></i>
+                                <i class="fi fi-sr-file-medical-alt"></i>
                                 <span class="link_name">Informes médicos</span>
                         </a>
                         <i class="fi fi-sr-angle-small-down arrow"></i>
@@ -114,20 +122,6 @@
                         <li><a href="#">Pacientes</a></li>
                         <li><a href="#">Muestras</a></li>
                         <li><a href="#">Insumos</a></li>
-                        </ul>
-                </li>
-                <li>
-                        <div class="iocn-link">
-                        <a href="#">
-                                <i class="fi fi-sr-database"></i>
-                                <span class="link_name">Mantenimiento</span>
-                        </a>
-                        <i class="fi fi-sr-angle-small-down arrow"></i>
-                        </div>
-                        <ul class="sub-menu">
-                        <li><a class="link_name" href="#">Mantenimiento</a></li>
-                        <li><a href="#">Backup</a></li>
-                        <li><a href="#">Restore</a></li>
                         </ul>
                 </li>
                 <li>
@@ -170,7 +164,8 @@
 
         <main class="home-section">
                 <div class="home-content">
-                        <i class="fi fi-rr-menu-burger bx-menu"></i>
+                        <i class="fi fi-sr-menu-burger bx-menu"></i>
+                        <a href="mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
                 </div>
 
                 <section class="form-register">

@@ -178,14 +178,14 @@ footer {
 
 .form-register a,
 .form-login a {
-    color: #2a9cc1;
+    color: #ffffff;
     text-decoration: none;
     transition: color .5s;
 }
 
 .form-register a:hover,
 .form-login a:hover {
-    color: #026b88;
+    color: #ffffff;
     text-decoration: underline;
 }
 
@@ -599,4 +599,19 @@ form .form-group-input {
 
 .form-register input[type="radio"]:checked + label:before {
     display: none;
+}
+
+body::-webkit-scrollbar{
+    width: 15px;
+  }
+  
+body::-webkit-scrollbar-thumb{
+  background: rgb(9,175,203);
+  background: linear-gradient(180deg, rgba(9,175,203,1) 0%, rgba(0,122,151,1) 100%);
+  border-radius: 50px;
+}
+  
+body::-webkit-scrollbar-thumb:hover{
+  background: rgb(0,127,164);
+  background: linear-gradient(180deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
 }
