@@ -50,7 +50,7 @@
 }
 .sidebar .nav-links{
   height: 100%;
-  padding: 30px 0 150px 0;
+  padding: 0px 0 150px 0;
   overflow: auto;
 }
 .sidebar.close .nav-links{
@@ -243,7 +243,17 @@
   height: 60px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
+
+a {
+  text-decoration-line: none;
+}
+
+a:visited{
+  color: #fff;
+}
+
 .home-section .home-content .bx-menu,
 .home-section .home-content .text{
   color: #035E73;
@@ -446,7 +456,7 @@ form .form-group-input {
 .register-box-citology h1,
 .register-box-supplies h1{
     margin: 0;
-    padding: 0 0 20px;
+    padding: 0 0 10px;
     text-align: center;
     font-size: 22px;
     color: #F2F2F2;
@@ -647,4 +657,36 @@ input::placeholder { /* Standard (Chrome, Firefox, Safari, Edge) */
 
 .texto{
   color: #F2F2F2;
+}
+
+.buttom {
+  background: rgb(254,153,0);
+  background: linear-gradient(135deg, rgba(254,153,0,1) 0%, rgba(254,101,0,1) 100%);
+  border: none;
+  border-radius: 30px;
+  padding: 10px 25px;
+  font-size: 18px;
+  font-weight: 600;
+  transition: background-color .2s;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px 2px rgb(0 21 49 / 20%);
+}
+
+button:hover {
+  background: #fe6500;
+}
+
+body::-webkit-scrollbar{
+  width: 15px;
+}
+
+body::-webkit-scrollbar-thumb{
+  background: rgb(9,175,203);
+  background: linear-gradient(180deg, rgba(9,175,203,1) 0%, rgba(0,122,151,1) 100%);
+  border-radius: 50px;
+}
+
+body::-webkit-scrollbar-thumb:hover{
+  background: rgb(0,127,164);
+  background: linear-gradient(180deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
 }
