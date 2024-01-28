@@ -60,10 +60,12 @@
         <div class="grid">
                 <div class="imagen-hover">
                         <figure>
-                                <img src="images/image_hover.png" alt="imagen1">
-                                <div class="capa">
-                                        <h3>Imagen Hover</h3>
-                                </div>
+                                <a href="">
+                                        <img src="images/image_hover.png" alt="imagen1">
+                                        <div class="capa">
+                                                <h3>Imagen Hover</h3>
+                                        </div>
+                                </a>
                         </figure>
                 </div>
 

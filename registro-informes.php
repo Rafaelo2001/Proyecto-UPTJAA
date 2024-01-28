@@ -132,7 +132,8 @@
                         </div>
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Acerca de</a></li>
-                        <li><a href="#">Sobre HIGEA</a></li>
+                        <li><a href="info_lab.html">Sobre el Lab.</a></li>
+                        <li><a href="info_higea.html">Sobre HIGEA</a></li>
                         <li><a href="developers.php">Developers</a></li>
                         <li><a href="#">Ayuda</a></li>
                         </ul>
