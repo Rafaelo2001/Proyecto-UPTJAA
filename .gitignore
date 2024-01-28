@@ -1,4 +1,4 @@
 .registros de biopsia y citologia/
-mantenimiento/backup/*.sql
+mantenimiento/backup/
 .ddb versiones anteriores/
 .task.todo
