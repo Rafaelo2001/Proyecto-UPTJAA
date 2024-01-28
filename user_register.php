@@ -162,8 +162,8 @@ $user = new CodeaDB();
                     <div class="grid">
                         <!--group: state-->
                         <div class="questions">
-                                <label for="quest-security">Estado</label>
-                                <select id="lista_estados" name="estado" class="quest-security">
+                                <label for="lista_estados">Estado</label>
+                                <select id="lista_estados" name="estado" class="quest-security quest-direction">
                                     <option value="0" disabled selected>Seleccione</option>
                                     <?php $estados=$user->buscar("estado","1");?>
                                     <?php foreach($estados as $estado): ?>
@@ -173,18 +173,18 @@ $user = new CodeaDB();
                         </div>
 
                         <div class="questions" id="ciudades">
-                            <label for="quest-security">Ciudad</label>
-                            <select id="lista_ciudades" name="ciudad" class="quest-security"></select>
+                            <label for="lista_ciudades">Ciudad</label>
+                            <select id="lista_ciudades" name="ciudad" class="quest-security quest-direction"></select>
                         </div>
 
                         <div class="questions" id="municipios">
-                            <label for="quest-security">Municipio</label>
-                            <select id="lista_municipios" name="municipio" class="quest-security"></select>
+                            <label for="lista_municipios">Municipio</label>
+                            <select id="lista_municipios" name="municipio" class="quest-security quest-direction"></select>
                         </div>
 
                         <div class="questions" id="parroquias">
-                            <label for="quest-security">Parroquia</label>
-                            <select id="lista_parroquias" name="parroquia" class="quest-security">
+                            <label for="lista_parroquias">Parroquia</label>
+                            <select id="lista_parroquias" name="parroquia" class="quest-security quest-direction">
                                 <option value="" selected disabled>-- Seleccione Parroquia--</option>
                             </select>
                         </div>
@@ -279,8 +279,8 @@ $user = new CodeaDB();
                     <div class="grid">
                         <div>
                             <div class="questions">
-                                <label for="quest-security">Pregunta de seguridad 1</label>
-                                <select class="quest-security" name="quest1" id="quest-security">
+                                <label for="quest-security1">Pregunta de seguridad 1</label>
+                                <select class="quest-security quest-question" name="quest1" id="quest-security1">
                                     <option value="0" selected="selected" disabled selected>Seleccione</option>
                                     <option value="Ciudad de nacimiento">Ciudad de nacimiento</option>
                                     <option value="Nombre de mi mascota">Nombre de mi mascota</option>
@@ -300,8 +300,8 @@ $user = new CodeaDB();
                         </div>
                         <div>
                             <div class="questions">
-                                <label for="quest-security">Pregunta de seguridad 2</label>
-                                <select class="quest-security" name="quest2" id="quest-security">
+                                <label for="quest-security2">Pregunta de seguridad 2</label>
+                                <select class="quest-security quest-question" name="quest2" id="quest-security2">
                                     <option value="0" selected="selected" disabled selected>Seleccione</option>
                                     <option value="Ciudad de nacimiento">Ciudad de nacimiento</option>
                                     <option value="Nombre de mi mascota">Nombre de mi mascota</option>
@@ -321,8 +321,8 @@ $user = new CodeaDB();
                         </div>
                         <div>
                             <div class="questions">
-                                <label for="quest-security">Pregunta de seguridad 3</label>
-                                <select class="quest-security" name="quest3" id="quest-security" required>
+                                <label for="quest-security3">Pregunta de seguridad 3</label>
+                                <select class="quest-security quest-question" name="quest3" id="quest-security3" required>
                                     <option value="" selected="selected" disabled selected>Seleccione</option>
                                     <option value="Ciudad de nacimiento">Ciudad de nacimiento</option>
                                     <option value="Nombre de mi mascota">Nombre de mi mascota</option>
@@ -433,7 +433,7 @@ $user = new CodeaDB();
 
 <script>
     // Obtén todos los selectores de preguntas de seguridad
-let selects = document.querySelectorAll('.quest-security');
+let selects = document.querySelectorAll('.quest-question');
 
 // Añade un evento 'change' a cada selector
 selects.forEach((select) => {
