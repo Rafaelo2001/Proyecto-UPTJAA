@@ -8,7 +8,7 @@
 	$sql=explode(";",file_get_contents($restorePoint));
 
 	$totalErrors=0;
-	set_time_limit (600);
+	set_time_limit (1800);
 
 	$con=mysqli_connect(SERVER, USER, PASS, BD);
 	$con->query("SET FOREIGN_KEY_CHECKS=0");
