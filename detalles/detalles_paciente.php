@@ -8,7 +8,8 @@
 <html>
 
         <body>
-                <table>
+                <h1>Listado de Pacientes</h1>
+                <table style="text-align: center;">
                         <thead>
                                 <th>CI</th>
                                 <th>Nombre Completo</th>
@@ -16,6 +17,7 @@
                                 <th>Género</th>
                                 <th>Teléfono</th>
                                 <th>Correo</th>
+                                <th></th>
                         </thead>
                         <?php 
                                 $listaPacientes = $user->buscar("paciente","1"); 
@@ -51,10 +53,11 @@
                                                 
                                                 echo ("<td>".$cedula."</td>");
                                                 echo ("<td>".$nombre_completo."</td>");
-                                                echo ("<td>".$f_nac."</td>");
+                                                echo ("<td><input type='date' readonly value='".$f_nac."' /></td>");
                                                 echo ("<td>".$genero."</td>");
                                                 echo ("<td>".$tlfn."</td>");
                                                 echo ("<td>".$email."</td>");
+                                                echo ("<td><form action='./edit_paciente.php' method='post'><input type='hidden' name='ci' value='$cedula' required><input type='submit' value='Editar Paciente'></form></td>")
                                                 // , $cedula_a_mostrar.' ', $genero.' ', $tlfn.' ', $email, "<br>";
 
                         ?>
