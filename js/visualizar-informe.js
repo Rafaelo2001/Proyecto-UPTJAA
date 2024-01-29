@@ -27,7 +27,7 @@ informe.change(function(){
             }
             else{
                 $.each(response, function( index, value ) {
-                    if(value.tipo == "biopsia")
+                    if(value.tipo == "Biopsia")
                     {
                         $("#seccion_biopsia").css("display","block");
                         $("#seccion_biopsia > *").prop("required", true);
@@ -52,7 +52,7 @@ informe.change(function(){
 
                         $("#seccion_biopsia > #fecha").val(value.fecha);
                     }
-                    else if(value.tipo == "citologia")
+                    else if(value.tipo == "Citologia")
                     {
                         $("#seccion_citologia").css("display","block");
                         $("#seccion_citologia > *").prop("required", true);

@@ -15,7 +15,14 @@
 					foreach ($b as $m_biopsia)
 					{
 						$fecha_formateada = date("d-m-Y", strtotime($material['F_Entrada']));
-						$descripcion = $material['Descripcion_material']." - ";
+						
+						if(strlen($material['Descripcion_material']) > 30){
+							$Des_corta = substr($material['Descripcion_material'],0,30);
+							$descripcion = $Des_corta."... - ";	
+						}
+						else{
+							$descripcion = $material['Descripcion_material']." - ";
+						}
 
 						$material_remitido[] = ["id"=>$m_biopsia['ID_M_Remitido'] ,"descripcion"=>$descripcion, "fecha"=>$fecha_formateada, "tipo"=>"b"];
 					}
@@ -25,7 +32,14 @@
 					foreach ($c as $m_citologia)
 					{
 						$fecha_formateada = date("d-m-Y", strtotime($material['F_Entrada']));
-						$descripcion = $material['Descripcion_material']." - ";
+
+						if(strlen($material['Descripcion_material']) > 30){
+							$Des_corta = substr($material['Descripcion_material'],0,30);
+							$descripcion = $Des_corta."... - ";	
+						}
+						else{
+							$descripcion = $material['Descripcion_material']." - ";
+						}
 
 						$material_remitido[] = ["id"=>$m_citologia['ID_M_Remitido'] ,"descripcion"=>$descripcion, "fecha"=>$fecha_formateada, "tipo"=>"c"];
 					}

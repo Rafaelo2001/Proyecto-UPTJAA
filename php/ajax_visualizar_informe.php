@@ -23,7 +23,7 @@
                             "cip"       => $informe["CIP"],
                             "medico"    => $nombreMedico,
                             
-                            "tipo"      => "biopsia",
+                            "tipo"      => "Biopsia",
                             "id_b"      => $b["ID_Inf_Biopsia"],
                             "des_macro" => $b["Desc_Macro"],
                             "des_micro" => $b["Desc_Micro"],
@@ -44,7 +44,7 @@
                             "cip"       => $informe["CIP"],
                             "medico"    => $nombreMedico,
                             
-                            "tipo"      => "citologia",
+                            "tipo"      => "Citologia",
                             "id_c"      => $c["ID_Inf_Citologia"],
                             "calidad"   => $c["Calidad"],
                             "ctg_gnrl"  => $c["Categ_Gral"],

@@ -31,7 +31,7 @@
     </head>
 
     <body class="login-register" style="text-align: center;">
-    <div class="sidebar close">
+        <div class="sidebar close">
                 <div class="logo-details">
                 <img class="logo" src="images/Logo con contorno.png" alt="Logo de Higea" width="60" height="60">
                 <img class="logo_name" src="images/Letras.png" alt="HIGEA" width="135" height="40">
@@ -179,7 +179,7 @@
                                 foreach($listaInformes as $informe):
                                     $fechaInforme = date("d/m/Y", strtotime($informe["Fecha"]));
                                     
-                                    $datosPaciente = $user->buscar("persona","CI = ".$informe["CIP"]);
+                                    $datosPaciente = $user->buscar("persona","CI = '".$informe["CIP"]."'");
                                     $nombrePaciente = '';
                                     foreach($datosPaciente as $p):
                                         $nombrePaciente = $p["PN"]." ".$p["PA"];
