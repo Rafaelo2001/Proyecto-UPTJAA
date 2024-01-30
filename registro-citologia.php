@@ -171,10 +171,11 @@
 
                 <section class="form-register">
                         <h1>REGISTRO DE CITOLOGÍA</h1>
+                        <h4>Obligatorio (*).</h4>
                         <form action="php/insert-citologia.php" method="post" class="form" id="form" autocomplete="off">
 
 
-                                                <label for="paciente">Paciente</label>
+                                                <label for="paciente">Paciente (*)</label>
                                                         <select id="paciente" name="paciente" style="min-width: 100px;" required>
                                                                 <option></option>
 
@@ -208,8 +209,8 @@
                                                         </select>
 
                                         <br><br>
-                                        <label for="descripcion">Descripcion Material Remitido: <small><i>obligatorio</i></small></label>
-                                        <textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material"></textarea>
+                                        <label for="descripcion">Descripcion Material Remitido (*)</label>
+                                        <textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material" required></textarea>
                                         
 
                 <br><br>
@@ -219,7 +220,7 @@
                                         <!--group: state-->
                                         <div class="form-group" id="group_state">
                                                 <div id="medico_en_bdd">
-                                                        <label for="medico">Médico</label>
+                                                        <label for="medico">Médico (*)</label>
                                                         <select id="medico" name="medico" required>
                                                                 <option value="" selected disabled>-- Selecciona Medico--</option>
 
@@ -241,7 +242,7 @@
                                         <!--group: name1-->
                                         <div class="form-group" id="group_name_patient1">
                                         <div class="form-group-input">
-                                        <label for="resumen">Resumen de Historia Clínica</label>
+                                        <label for="resumen">Resumen de Historia Clínica (*)</label>
                                         <input type="text" name="resumen" id="resumen" placeholder="Escriba el resumen" required>
                                         </div>
                                         <span class="form-input-error">
@@ -253,7 +254,7 @@
                                         <!--group: name2-->
                                         <div class="form-group" id="group_name_patient2">
                                         <div class="form-group-input">
-                                        <label for="diagnostico">Diagnóstico Clínico:</label>
+                                        <label for="diagnostico">Diagnóstico Clínico (*)</label>
                                         <input type="text" name="diagnostico" id="diagnostico" placeholder="Escriba el diagnóstico" required>
                                         </div>
                                         <span class="form-input-error">
@@ -265,8 +266,8 @@
                                         <!--group: name3-->
                                         <div class="form-group" id="group_name_patient3">
                                         <div class="form-group-input">
-                                        <label for="FUR">Fecha de la Última Regla (FUR):</label>
-                                        <input type="date" name="FUR" id="FUR">
+                                        <label for="FUR">Fecha de la Última Regla (*)</label>
+                                        <input type="date" name="FUR" id="FUR" min="1900-01-01" required>
                                         </div>
                                         <span class="form-input-error">
                                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
@@ -274,12 +275,18 @@
                                         </span>
                                         </div>
 
+                                        <script>
+                                                var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 - 4*60*60*1000);
+                                                var fechaMaxima = hoy.toISOString().split('T')[0];
+                                                document.getElementById("FUR").max = fechaMaxima;
+                                        </script>
+
                                         
                                 </div>
 
 
                                 <div class="checkbox" id="frotis">
-                                        <h2>Frotis de:</h2>
+                                        <h2>Frotis de: (*)</h2>
                                         <input type="checkbox" name="endocervix" id="endocervix" value="endocervix">
                                         <label for="endocervix">Endocervix</label>
                             
@@ -295,6 +302,17 @@
                                         <label for="otro_check">Otro:</label>
                                         <input type="text" name="otro" id="otro" placeholder="Especifique" disabled>
                                 </div>
+
+                                <script>
+                                        document.getElementById('form').addEventListener('submit', function(event) {
+                                        var checkboxes = document.querySelectorAll('#frotis input[type="checkbox"]');
+                                        var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+                                        if (!checkedOne) {
+                                        alert('Por favor, selecciona al menos una opción de Frotis.');
+                                        event.preventDefault();
+                                        }
+                                        });
+                                </script>
                                         
                                 <div class="form-mess" id="form-mess">
                                 <p><i class="fi fi-rr-triangle-warning"></i><b>Error:</b> ¡Revise los campos!</p>

@@ -169,6 +169,7 @@
 
                 <section class="form-register">
                         <h1>REGISTRO DE INFORMES</h1>
+                        <h4>Obligatorio (*).</h4>
                         <form action="" method="post" class="form" id="form" autocomplete="off">
 
                                 <div class="grid2">
@@ -185,7 +186,7 @@
                                         <!--group: ci-->
                                         <div class="form-group" id="group_ci_patient">
                                         <div class="form-group-input">
-                                        <label for="paciente_id">Paciente:</label>
+                                        <label for="paciente_id">Paciente (*)</label>
                                             <select style="min-width: 100px;" id="paciente_id" name="paciente_id" required>
                                                 <option></option>
 
@@ -227,7 +228,7 @@
                                         <!--group: name1-->
                                         <div class="form-group" id="group_name_patient1">
                                         <div class="form-group-input">
-                                        <label for="medico">Medico:</label>
+                                        <label for="medico">Medico (*)</label>
                                             <select id="medico" name="medico_id" style="width: 506px;" required>
                                                 <option></option>
 
@@ -248,7 +249,7 @@
                                         <section id="informe_biopsia" style="display:none">
                                             <h1>INFORME BIOPSIA</h1>
 
-                                            <label for="examen_id_b">Examenes del Paciente:</label>
+                                            <label for="examen_id_b">Examenes del Paciente (*)</label>
                                             <select id="examen_id_b" name="examen_id_b" required>
                                                 <option value="" selected disabled>Seleccione paciente</option>
                                             </select>
@@ -257,35 +258,35 @@
                                                 <br>
 
 
-                                            <label for="info_b"><h2>Informacion material remitido</h2></label>
+                                            <label for="info_b"><h2>Información de material remitido (*)</h2></label>
                                             <textarea id="info_b" name="info_b" cols="80" rows="7" style="resize: none;" required></textarea>
 
 
                                                 <br>
                                             
                                         
-                                            <label for="des_macro_b"><h2>Descripción Macro</h2></label>
+                                            <label for="des_macro_b"><h2>Descripción Macro (*)</h2></label>
                                             <textarea id="des_macro_b" name="des_macro_b" cols="80" rows="12" style="resize: none;" required></textarea>
                                             
                                             
                                                 <br>
 
 
-                                            <label for="des_micro_b"><h2>Descripción Micro</h2></label>
+                                            <label for="des_micro_b"><h2>Descripción Micro (*)</h2></label>
                                             <textarea id="des_micro_b" name="des_micro_b" cols="80" rows="12" style="resize: none;" required></textarea>
                                             
                                             
                                                 <br>
 
                                             
-                                            <label for="diag_b"><h2>Diagnostico</h2></label>
+                                            <label for="diag_b"><h2>Diagnostico (*)</h2></label>
                                             <textarea id="diag_b" name="diag_b" cols="65" rows="15" style="resize: none;" required></textarea>     
                                                 
 
                                                 <br>
                                                         
                                             
-                                            <label for="obs_b"><h2>Obsevaciones/Comentarios</h2></label>
+                                            <label for="obs_b"><h2>Obsevaciones/Comentarios (*)</h2></label>
                                             <textarea id="obs_b" name="obs_b" cols="65" rows="8" style="resize: none;" required></textarea>
                                             
                                                 <br>
@@ -316,54 +317,54 @@
                                         <section id="informe_citologia" style="display:none">
                                             <h1>INFORME CITOLOGÍA</h1>
 
-                                            <label for="examen_id_c">Examenes del Paciente:</label>
+                                            <label for="examen_id_c">Examenes del Paciente (*)</label>
                                             <select id="examen_id_c" name="examen_id_c" required>
                                                 <option value="" selected disabled>Seleccione paciente</option>
                                             </select>
 
-                                            <label for="info_c"><h2>Informacion material remitido</h2></label>
+                                            <label for="info_c"><h2>Información de material remitido (*)</h2></label>
                                             <textarea id="info_c" name="info_c" cols="80" rows="7" style="resize: none;" required></textarea>
 
 
                                                 <br>
 
 
-                                            <label for="calidad_c"><h2>Calidad de muestras</h2></label>
+                                            <label for="calidad_c"><h2>Calidad de muestras (*)</h2></label>
                                             <textarea id="calidad_c" name="calidad_c" cols="80" rows="12" style="resize: none;" required></textarea>
 
 
                                                 <br>
 
 
-                                            <label for="categ_c"><h2>Categoría General</h2></label>
+                                            <label for="categ_c"><h2>Categoría General (*)</h2></label>
                                             <textarea id="categ_c" name="categ_c" cols="80" rows="12" style="resize: none;" required></textarea>
                                             
 
                                                 <br>
                                             
 
-                                            <label for="hallazgos_c"><h2>Hallazgos</h2></label>
+                                            <label for="hallazgos_c"><h2>Hallazgos (*)</h2></label>
                                             <textarea id="hallazgos_c" name="hallazgos_c" cols="80" rows="12" style="resize: none;" required></textarea>
                                             
                                             
                                                 <br>
 
 
-                                            <label for="diag_c"><h2>Diagnostico</h2></label>
+                                            <label for="diag_c"><h2>Diagnostico (*)</h2></label>
                                             <textarea id="diag_c" name="diag_c" cols="65" rows="15" style="resize: none;" required></textarea>     
                                                 
                                             
                                                 <br>
 
                                                 
-                                            <label for="conducta_c"><h2>Conducta</h2></label>
+                                            <label for="conducta_c"><h2>Conducta (*)</h2></label>
                                             <textarea id="conducta_c" name="conducta_c" cols="65" rows="8" style="resize: none;" required></textarea>
                                             
 
                                                 <br>
 
 
-                                            <label for="obs_c"><h2>Obsevaciones/Comentarios</h2></label>
+                                            <label for="obs_c"><h2>Obsevaciones/Comentarios (*)</h2></label>
                                             <textarea name="obs_c" id="obs_c" cols="65" rows="8" style="resize: none;" required></textarea>
 
                                                 <br>

@@ -40,11 +40,13 @@ $user = new CodeaDB();
             <section class="form-register">
                 <h1>REGISTRO DE EMPLEADO</h1>
                 <form action="php/insert-user.php" method="post" class="form" id="form">
+                    <h4>Obligatorio (*).</h4>
+
                     <h2>INFORMACIÓN PRINCIPAL:</h2>
                     <div class="grid">
                         <!--group: V/E/P/J-->
                         <div class="questions" id="tipo_identidad" name="tipo_identidad">
-                            <label for="tipo_identidad">Tipo de identificación</label>
+                            <label for="tipo_identidad">Tipo de identificación (*)</label>
                             <select class="tipo_identidad" name="tipo_identidad" id="tipo_identidad" required>
                                 <option value="" selected="selected" disabled selected>Seleccione</option>
                                 <option value="V">Venezolano (V)</option>
@@ -57,8 +59,8 @@ $user = new CodeaDB();
                         <!--group: ci-->
                         <div class="form-group" id="group_ci_empl">
                             <div class="form-group-input">
-                                <label for="ci_empl">Documento de identidad</label>
-                                <input type="text" name="ci_empl" id="ci_empl" placeholder="Ingrese nro. de documento" autocomplete="off">
+                                <label for="ci_empl">Documento de identidad (*)</label>
+                                <input type="text" name="ci_empl" id="ci_empl" placeholder="Ingrese nro. de documento" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">La cédula debe contener entre 6-8 caracteres, solo puede contener números</p>
@@ -67,8 +69,8 @@ $user = new CodeaDB();
                         <!--group: name1-->
                         <div class="form-group" id="group_name_empl1">
                             <div class="form-group-input">
-                                <label for="name_empl1">Primer Nombre</label>
-                                <input   type="text" name="name_empl1" id="name_empl1" placeholder="Ingrese su nombre" autocomplete="off">
+                                <label for="name_empl1">Primer Nombre (*)</label>
+                                <input   type="text" name="name_empl1" id="name_empl1" placeholder="Ingrese su nombre" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">Rellene este campo correctamente</p>
@@ -77,7 +79,7 @@ $user = new CodeaDB();
                         <!--group: name2-->
                         <div class="form-group" id="group_name_empl2">
                             <div class="form-group-input">
-                                <label for="name_empl2">Segundo Nombre <small>(Opcional)</small></label>
+                                <label for="name_empl2">Segundo Nombre</label>
                                 <input   type="text" name="name_empl2" id="name_empl2" placeholder="Ingrese su nombre" autocomplete="off">
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
@@ -87,7 +89,7 @@ $user = new CodeaDB();
                         <!--group: name3-->
                         <div class="form-group" id="group_name_empl3">
                             <div class="form-group-input">
-                                <label for="name_empl3">Tercer Nombre <small>(Opcional)</small></label>
+                                <label for="name_empl3">Tercer Nombre</label>
                                 <input   type="text" name="name_empl3" id="name_empl3" placeholder="Ingrese su nombre" autocomplete="off">
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
@@ -97,8 +99,8 @@ $user = new CodeaDB();
                         <!--group: surname1-->
                         <div class="form-group" id="group_surname_empl1">
                             <div class="form-group-input">
-                                <label for="surname_empl1">Primer Apellido</label>
-                                <input   type="text" name="surname_empl1" id="surname_empl1" placeholder="Ingrese su apellido" autocomplete="off">
+                                <label for="surname_empl1">Primer Apellido (*)</label>
+                                <input   type="text" name="surname_empl1" id="surname_empl1" placeholder="Ingrese su apellido" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">Rellene este campo correctamente</p>
@@ -107,7 +109,7 @@ $user = new CodeaDB();
                         <!--group: surname2-->
                         <div class="form-group" id="group_surname_empl2">
                             <div class="form-group-input">
-                                <label for="surname_empl2">Segundo Apellido <small>(Opcional)</small></label>
+                                <label for="surname_empl2">Segundo Apellido</label>
                                 <input   type="text" name="surname_empl2" id="surname_empl2" placeholder="Ingrese su apellido" autocomplete="off">
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
@@ -117,32 +119,46 @@ $user = new CodeaDB();
                         <!--group: datebirth-->
                         <div class="form-group" id="group_date_birth">
                             <div class="form-group-input">
-                                <label for="date_birth">Fecha de nacimiento</label>
-                                <input type="date" class="date_birth" name="date_birth" id="date_birth" placeholder="(dd/mm/aaaa)" autocomplete="off">
+                                <label for="date_birth">Fecha de nacimiento (*)</label>
+                                <input type="date" class="date_birth" name="date_birth" id="date_birth" placeholder="(dd/mm/aaaa)" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
                         </div>
 
+                        <script>
+                            var minima = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 - 4*60*60*1000);
+                            minima.setFullYear(minima.getFullYear() - 40);
+                            var fechaMinima = minima.toISOString().split('T')[0];
+                            document.getElementById("date_birth").min = fechaMinima;
+
+
+                            var maxima = new Date();
+                            maxima.setFullYear(maxima.getFullYear() - 18);
+                            var fechaMaxima = maxima.toISOString().split('T')[0];
+                            document.getElementById("date_birth").max = fechaMaxima;
+                        </script>
+
                         <div>
-                            <label>Sexo</label>
+                            <label>Sexo (*)</label>
                             <div class="radio" id="sexo">
-                                    <input type="radio" name="sexo" id="masculino" value="M">
+                                    <input type="radio" name="sexo" id="masculino" value="M" required>
                                     <label for="masculino">Masculino</label>
                                     <br>
-                                    <input type="radio" name="sexo" id="femenino" value="F">
+                                    <input type="radio" name="sexo" id="femenino" value="F" required>
                                     <label for="femenino">Femenino</label>
                             </div>
                         </div>
                     </div>
+
                     <h2>INFORMACIÓN DE CONTACTO:</h2>
                     <div class="grid">
 
                         <!--group: tel-->
                         <div class="form-group" id="group_telf_empl">
                             <div class="form-group-input">
-                                <label for="telf_empl">Teléfono</label>
-                                <input   type="tel" name="telf_empl" id="telf_empl" placeholder="Ingrese su nro. de teléfono" autocomplete="off">
+                                <label for="telf_empl">Teléfono (*)</label>
+                                <input   type="tel" name="telf_empl" id="telf_empl" placeholder="Ingrese su nro. de teléfono" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">El número telefónico debe tener 12 dígitos: 1234-1234567</p>
@@ -151,8 +167,8 @@ $user = new CodeaDB();
                         <!--group: e-mail-->
                         <div class="form-group" id="group_email_empl">
                             <div class="form-group-input">
-                                <label for="email_empl">Correo electrónico</label>
-                                <input   type="email" name="email_empl" id="email_empl" placeholder="Ingrese su e-mail" autocomplete="off">
+                                <label for="email_empl">Correo electrónico (*)</label>
+                                <input   type="email" name="email_empl" id="email_empl" placeholder="Ingrese su e-mail" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">Formato incorrecto de e-mail: jhon123@example.com</p>
@@ -162,8 +178,8 @@ $user = new CodeaDB();
                     <div class="grid">
                         <!--group: state-->
                         <div class="questions">
-                                <label for="lista_estados">Estado</label>
-                                <select id="lista_estados" name="estado" class="quest-security quest-direction">
+                                <label for="lista_estados">Estado (*)</label>
+                                <select id="lista_estados" name="estado" class="quest-security quest-direction" required>
                                     <option value="0" disabled selected>Seleccione</option>
                                     <?php $estados=$user->buscar("estado","1");?>
                                     <?php foreach($estados as $estado): ?>
@@ -173,18 +189,18 @@ $user = new CodeaDB();
                         </div>
 
                         <div class="questions" id="ciudades">
-                            <label for="lista_ciudades">Ciudad</label>
-                            <select id="lista_ciudades" name="ciudad" class="quest-security quest-direction"></select>
+                            <label for="lista_ciudades">Ciudad (*)</label>
+                            <select id="lista_ciudades" name="ciudad" class="quest-security quest-direction" required></select>
                         </div>
 
                         <div class="questions" id="municipios">
-                            <label for="lista_municipios">Municipio</label>
-                            <select id="lista_municipios" name="municipio" class="quest-security quest-direction"></select>
+                            <label for="lista_municipios">Municipio (*)</label>
+                            <select id="lista_municipios" name="municipio" class="quest-security quest-direction" required></select>
                         </div>
 
                         <div class="questions" id="parroquias">
-                            <label for="lista_parroquias">Parroquia</label>
-                            <select id="lista_parroquias" name="parroquia" class="quest-security quest-direction">
+                            <label for="lista_parroquias">Parroquia (*)</label>
+                            <select id="lista_parroquias" name="parroquia" class="quest-security quest-direction" required>
                                 <option value="" selected disabled>-- Seleccione Parroquia--</option>
                             </select>
                         </div>
@@ -192,8 +208,8 @@ $user = new CodeaDB();
                         <!--group: location-->
                         <div class="form-group" id="group_location">
                             <div class="form-group-input">
-                                <label for="location">Localización</label>
-                                <input   type="text" name="location" id="location" placeholder="Ingrese su localización" autocomplete="off">
+                                <label for="location">Punto de referencia (*)</label>
+                                <input   type="text" name="location" id="location" placeholder="Ingrese su localización" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">Rellene este campo correctamente</p>
@@ -201,8 +217,8 @@ $user = new CodeaDB();
                         <!--group: sector-->
                         <div class="form-group" id="group_sector">
                             <div class="form-group-input">
-                                <label for="sector">Sector</label>
-                                <input   type="text" name="sector" id="sector" placeholder="Ingrese su sector" autocomplete="off">
+                                <label for="sector">Sector (*)</label>
+                                <input   type="text" name="sector" id="sector" placeholder="Ingrese su sector" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">Rellene este campo correctamente</p>
@@ -210,8 +226,8 @@ $user = new CodeaDB();
                         <!--group: street-->
                         <div class="form-group" id="group_street">
                             <div class="form-group-input">
-                                <label for="street">Calle</label>
-                                <input   type="text" name="street" id="street" placeholder="Ingrese su calle" autocomplete="off">
+                                <label for="street">Calle (*)</label>
+                                <input   type="text" name="street" id="street" placeholder="Ingrese su calle" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">Rellene este campo correctamente</p>
@@ -219,7 +235,7 @@ $user = new CodeaDB();
                         <!--group: house-->
                         <div class="form-group" id="group_house">
                             <div class="form-group-input">
-                                <label for="house">Número de casa</label>
+                                <label for="house">Número de casa/apto</label>
                                 <input   type="text" name="house" id="house" placeholder="Ingrese su número de casa" autocomplete="off">
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
@@ -231,8 +247,8 @@ $user = new CodeaDB();
                         <!--group: username-->
                         <div class="form-group" id="group_username">
                             <div class="form-group-input">
-                                <label for="username">Nombre de usuario</label>
-                                <input   type="text" name="username" id="username" placeholder="Ingrese su nombre de usuario" autocomplete="off">
+                                <label for="username">Nombre de usuario (*)</label>
+                                <input   type="text" name="username" id="username" placeholder="Ingrese su nombre de usuario" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">Rellene este campo correctamente</p>
@@ -240,8 +256,8 @@ $user = new CodeaDB();
                         <!--group: password-->
                         <div class="form-group" id="group_password">
                             <div class="form-group-input">
-                                <label for="password">Contraseña</label>
-                                <input type="password" name="password" id="password" placeholder="Ingrese una contraseña" autocomplete="off">
+                                <label for="password">Contraseña (*)</label>
+                                <input type="password" name="password" id="password" placeholder="Ingrese una contraseña" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">
@@ -254,33 +270,67 @@ $user = new CodeaDB();
                             </p>
                         </div>
 
+                        <script>
+                            document.getElementById('form').addEventListener('submit', function(event) {
+                            var password = document.getElementById('password').value;
+                            var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/; // Reemplaza esto con tu expresión regular
+
+                            if (!regex.test(password)) {
+                                event.preventDefault();
+                                alert('La contraseña no cumple con los requisitos.');
+                            }
+                            });
+                        </script>
+
                         <!--group: confirmation_pass-->
                         <div class="form-group" id="group_confirmation_pass">
                             <div class="form-group-input">
-                                <label for="confirmation_pass">Confirme la contraseña</label>
-                                <input type="password" name="confirmation_pass" id="confirmation_pass" placeholder="confirme la contraseña" autocomplete="off">
+                                <label for="confirmation_pass">Confirme la contraseña (*)</label>
+                                <input type="password" name="confirmation_pass" id="confirmation_pass" placeholder="confirme la contraseña" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">Las contraseñas no coinciden</p>
                         </div>
 
+                        <script>
+                            // Obtén los elementos del formulario
+                            var passwordInput = document.getElementById('password');
+                            var confirmPasswordInput = document.getElementById('confirmation_pass');
+
+                            // Añade un controlador de eventos al formulario
+                            document.getElementById('form').addEventListener('submit', function(event) {
+                            // Obtén las contraseñas
+                            var password = passwordInput.value;
+                            var confirmPassword = confirmPasswordInput.value;
+
+                            // Verifica si las contraseñas son iguales
+                            if (password !== confirmPassword) {
+                                // Si las contraseñas no son iguales, muestra un mensaje de error y evita que el formulario se envíe
+                                alert('Las contraseñas no coinciden.');
+                                event.preventDefault();
+                            }
+                            });
+                        </script>
+
+                    </div>
+
                         <div>
-                            <label>Tipo de usuario</label>
+                            <label>Tipo de usuario (*)</label>
                             <div class="radio" id="tipe">
-                                    <input type="radio" name="tipe" id="admin" value="admin">
+                                    <input type="radio" name="tipe" id="admin" value="admin" required>
                                     <label for="admin">Admin</label>
                                     <br>
-                                    <input type="radio" name="tipe" id="analista" value="analista">
+                                    <input type="radio" name="tipe" id="analista" value="analista" required>
                                     <label for="analista">Analista</label>
                             </div>
                         </div>
-                    </div>
+
                     <h2>PREGUNTAS DE SEGURIDAD:</h2>
                     <div class="grid">
                         <div>
                             <div class="questions">
-                                <label for="quest-security1">Pregunta de seguridad 1</label>
-                                <select class="quest-security quest-question" name="quest1" id="quest-security1">
+                                <label for="quest-security1">Pregunta de seguridad 1 (*)</label>
+                                <select class="quest-security quest-question" name="quest1" id="quest-security1" required>
                                     <option value="0" selected="selected" disabled selected>Seleccione</option>
                                     <option value="Ciudad de nacimiento">Ciudad de nacimiento</option>
                                     <option value="Nombre de mi mascota">Nombre de mi mascota</option>
@@ -291,8 +341,8 @@ $user = new CodeaDB();
                             </div>
                             <div class="questions" id="group_respuesta1">
                                 <div class="form-group-input">
-                                    <label for="respuesta1">Respuesta</label>
-                                    <input type="text" name="respuesta1" id="respuesta1" placeholder="Ingrese su respuesta" autocomplete="off">
+                                    <label for="respuesta1">Respuesta (*)</label>
+                                    <input type="text" name="respuesta1" id="respuesta1" placeholder="Ingrese su respuesta" autocomplete="off" required>
                                     <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                                 </div>
                                 <p class="form-input-error">Campo obligatorio</p>
@@ -300,8 +350,8 @@ $user = new CodeaDB();
                         </div>
                         <div>
                             <div class="questions">
-                                <label for="quest-security2">Pregunta de seguridad 2</label>
-                                <select class="quest-security quest-question" name="quest2" id="quest-security2">
+                                <label for="quest-security2">Pregunta de seguridad 2 (*)</label>
+                                <select class="quest-security quest-question" name="quest2" id="quest-security2" required>
                                     <option value="0" selected="selected" disabled selected>Seleccione</option>
                                     <option value="Ciudad de nacimiento">Ciudad de nacimiento</option>
                                     <option value="Nombre de mi mascota">Nombre de mi mascota</option>
@@ -312,8 +362,8 @@ $user = new CodeaDB();
                             </div>
                             <div class="questions" id="group_respuesta2">
                                 <div class="form-group-input">
-                                    <label for="respuesta1">Respuesta</label>
-                                    <input type="text" name="respuesta2" id="respuesta2" placeholder="Ingrese su respuesta" autocomplete="off">
+                                    <label for="respuesta1">Respuesta (*)</label>
+                                    <input type="text" name="respuesta2" id="respuesta2" placeholder="Ingrese su respuesta" autocomplete="off" required>
                                     <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                                 </div>
                                 <p class="form-input-error">Campo obligatorio</p>
@@ -321,7 +371,7 @@ $user = new CodeaDB();
                         </div>
                         <div>
                             <div class="questions">
-                                <label for="quest-security3">Pregunta de seguridad 3</label>
+                                <label for="quest-security3">Pregunta de seguridad 3 (*)</label>
                                 <select class="quest-security quest-question" name="quest3" id="quest-security3" required>
                                     <option value="" selected="selected" disabled selected>Seleccione</option>
                                     <option value="Ciudad de nacimiento">Ciudad de nacimiento</option>
@@ -333,24 +383,25 @@ $user = new CodeaDB();
                             </div>
                             <div class="questions" id="group_respuesta3">
                                 <div class="form-group-input">
-                                    <label for="respuesta1">Respuesta</label>
-                                    <input type="text" name="respuesta3" id="respuesta3" placeholder="Ingrese su respuesta" autocomplete="off">
+                                    <label for="respuesta1">Respuesta (*)</label>
+                                    <input type="text" name="respuesta3" id="respuesta3" placeholder="Ingrese su respuesta" autocomplete="off" required>
                                     <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                                 </div>
                                 <p class="form-input-error">Campo obligatorio</p>
                             </div>
                         </div>
                     </div>
-
+                        <!--
                         <div class="form-mess" id="form-mess">
                             <p><i class="fi fi-rr-triangle-warning"></i><b>Error:</b> ¡Revise los campos!</p>
                         </div>
+                        -->
 
                         <div class="button-container">
                             <div class="form__group form__group-btn-submit">
                                 <input class="button-submit" type="submit" name="registrar" id="registrar" value="Registrar">
                             </div>
-                            <p class="form-mess-good" id="form-mess-good">¡Formulario enviado!</p>
+                            <!--<p class="form-mess-good" id="form-mess-good">¡Formulario enviado!</p>-->
                         </div>
                 </form>
             </section>

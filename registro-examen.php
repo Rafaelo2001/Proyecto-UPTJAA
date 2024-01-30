@@ -168,9 +168,10 @@
 
                 <section class="form-register">
                         <h1>REGISTRO DE EXAMEN</h1>
+                        <h4>Obligatorio (*).</h4>
                         <form action="php/insert-examen.php" method="post" class="form" id="form" autocomplete="off">
 
-                        <label for="paciente">Paciente:</label>
+                        <label for="paciente">Paciente (*)</label>
                         <select id="paciente" name="paciente" style="min-width: 200px;" required>
                             <option></option>
 
@@ -205,18 +206,24 @@
 
                         <br>
 
-                        <label for="fecha">Fecha del Examen:</label>
-                        <input type="date" placeholder="dd/mm/aaaa" name="fecha" required id="fecha">
+                        <label for="fecha">Fecha del Examen (*)</label>
+                        <input type="date" placeholder="dd/mm/aaaa" name="fecha" id="fecha" min="1900-01-01" required>
+
+                        <script>
+                                var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 - 4*60*60*1000);
+                                var fechaMaxima = hoy.toISOString().split('T')[0];
+                                document.getElementById("fecha").max = fechaMaxima;
+                        </script>
                             
                             <br>
 
                         <div>
-                            <label>Tipo de examen</label>
+                            <label>Tipo de examen (*)</label>
                             <div class="radio" id="tipo_examen">
                                 <input type="radio" name="tipo_examen" id="tipo1" value="biopsia" required>
                                 <label for="tipo1">Biopsia</label>
                                 
-                                <input type="radio" name="tipo_examen" id="tipo2" value="citologia">
+                                <input type="radio" name="tipo_examen" id="tipo2" value="citologia" required>
                                 <label for="tipo2">Citología</label>
                             </div>
                         </div>
@@ -225,15 +232,15 @@
 
                         <p id="texto" class="texto">Seleccione Paciente y Tipo de Examen</p>
                         <section id="biopsia" style="display: none;">
-                            <label for="m_remitido_b">Material a Examinar:</label>
-                            <select name="m_remitido" id="m_remitido_b" disabled>
+                            <label for="m_remitido_b">Material a Examinar (*)</label>
+                            <select name="m_remitido" id="m_remitido_b" disabled required>
                                 <option value="">Seleccione Paciente</option>
                             </select>
                         </section>
 
                         <section id="citologia" style="display: none;">
-                            <label for="m_remitido_c">Material a Examinar:</label>
-                            <select name="m_remitido" id="m_remitido_c" disabled>
+                            <label for="m_remitido_c">Material a Examinar (*)</label>
+                            <select name="m_remitido" id="m_remitido_c" disabled required>
                                 <option value="">Seleccione Paciente</option>
                             </select>
                         </section>

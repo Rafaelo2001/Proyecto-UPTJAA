@@ -205,43 +205,67 @@
                                     <input type="radio" name="tipo_act" id="directo" value="directo" required>
                                     <label for="directo">Directo</label>
                                             
-                                    <input type="radio" name="tipo_act" id="lote" value="lote">
+                                    <input type="radio" name="tipo_act" id="lote" value="lote" required>
                                     <label for="lote">Lote</label>
                                 </div>
                             </div>
 
 
                             <section id="sec_directo" style="display: none;">
-                                <h3>Directo:</h3>
-                                <label for="cant">Cantidad a añadir:</label>
-                                <input type="number" name="cant" min="0" disabled>
+                                <h3>Directo</h3>
+                                <h4>Obligatorio (*).</h4>
+                                <label for="cant">Cantidad a añadir (*)</label>
+                                <input type="number" name="cant" min="0" disabled required>
                                 <label for="cant" id="unidades_cant"></label>
                             </section>
 
                             <section id="sec_lote" style="display: none;">
-                                <h3>Por Lote:</h3>
-                                <label for="cant">Cantidad a añadir:</label>
-                                <input type="number" name="cant" min="0" placeholder="Ingrese la cantidad" disabled>
+                                <h3>Por Lote</h3>
+                                <h4>Obligatorio (*).</h4>
+                                <label for="cant">Cantidad a añadir (*)</label>
+                                <input type="number" name="cant" min="0" placeholder="Ingrese la cantidad" disabled required>
                                 <label for="cant" id="unidades_cant"></label>
 
 
-                                <label>ID Lote:</label>
-                                <input type="text" name="id_lote" placeholder="Ingrese el ID del lote" disabled>
+                                <label for="id_lote">ID Lote (*)</label>
+                                <input type="text" name="id_lote" placeholder="Ingrese el ID del lote" disabled required>
 
                                     <br>
 
-                                <label>Fecha de Elaboracion:</label>
-                                <input type="date" name="f_elab" disabled>
+                                <label for="f_elab">Fecha de Elaboracion (*)</label>
+                                <input type="date" name="f_elab" id="f_elab" required>
+
+                                <script>
+                                        var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 - 4*60*60*1000);
+                                        var fechaMaxima = hoy.toISOString().split('T')[0];
+                                        document.getElementById("f_elab").max = fechaMaxima;
+
+                                        var haceUnAno = new Date(hoy.getTime());
+                                        haceUnAno.setFullYear(hoy.getFullYear() - 1);
+                                        var fechaMinima = haceUnAno.toISOString().split('T')[0];
+                                        document.getElementById("f_elab").min = fechaMinima;
+                                </script>
 
                                     <br>
 
-                                <label>Fecha de Expiracion:</label>
-                                <input type="date" name="f_exp" disabled>
+                                <label for="f_exp">Fecha de Expiracion (*)</label>
+                                <input type="date" name="f_exp" id="f_exp" required>
+
+                                <script>
+                                        var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 - 4*60*60*1000);
+                                        var fechaMinima = hoy.toISOString().split('T')[0];
+                                        document.getElementById("f_exp").min = fechaMinima;
+
+                                        var dentroDeDiezAnos = new Date(hoy.getTime());
+                                        dentroDeDiezAnos.setFullYear(hoy.getFullYear() + 10);
+                                        var fechaMaxima = dentroDeDiezAnos.toISOString().split('T')[0];
+                                        document.getElementById("f_exp").max = fechaMaxima;
+                                </script>
 
                                     <br>
 
-                                <label>Proveedor:</label>
-                                <input type="text" name="proveedor" placeholder="Indique el proveedor" disabled>
+                                <label for="proveedor">Proveedor (*)</label>
+                                <input type="text" name="proveedor" placeholder="Indique el proveedor" disabled required>
                             </section>
 
                                     <br>

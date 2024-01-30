@@ -2,16 +2,7 @@ const form = document.getElementById('form');
 const inputs = document.querySelectorAll('#form input');
 
 const expressions = {
-    ci: /^\d{6,8}$/, // 6 a 8 numeros.
-	user: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
-	sur_name: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-	password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/, // al menos una M, una m, un digito, un caracter @$!%*?& y una longitud de 8 a 16 caracteres.
-	email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-	tel: /^\d{11}$/, // 11 numeros.
-    text: /^[a-zA-ZÀ-ÿ\s]{1,60}$/, // Letras y espacios, no pueden llevar acentos.
-    number: /^\d{1,3}$/, // 1 a 3 numeros.
-    decimal: /^[0-9]+(\.[0-9]+)?$/,
-    fecha: /^(?:(?:(?:0?[1-9]|1\d|2[0-8])[/](?:0?[1-9]|1[0-2])|(?:29|30)[/](?:0?[13-9]|1[0-2])|31[/](?:0?[13578]|1[02]))[/](?:0{2,3}[1-9]|0{1,2}[1-9]\d|0?[1-9]\d{2}|[1-9]\d{3})|29[/]0?2[/](?:\d{1,2}(?:0[48]|[2468][048]|[13579][26])|(?:0?[48]|[13579][26]|[2468][048])00))$/
+	password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/ // al menos una M, una m, un digito, un caracter @$!%*?& y una longitud de 8 a 16 caracteres.
 }
 
 const campos = {
@@ -90,5 +81,8 @@ form.addEventListener('submit', (e) => {
         });
     } else {
         document.getElementById('form-mess').classList.add('form-mess-active');
+
+        event.preventDefault();
+        alert('La contraseña no cumple con los requisitos.');
     }
 });

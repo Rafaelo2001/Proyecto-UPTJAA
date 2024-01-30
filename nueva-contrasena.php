@@ -33,14 +33,15 @@ $user = new CodeaDB();
 
     <div class="login-box-pass">
         <h1>NUEVA CONTRASEÑA</h1>
+        <h4>Obligatorio (*).</h4>
         <form action="php/guardar-nueva-contra.php" method="post" class="form" id="form">
 
                     <div class="grid">
                         <!--group: password-->
                         <div class="form-group" id="group_password">
                             <div class="form-group-input">
-                                <label for="password">Contraseña</label>
-                                <input type="password" name="password" id="password" placeholder="Ingrese una contraseña" autocomplete="off">
+                                <label for="password">Contraseña (*)</label>
+                                <input type="password" name="password" id="password" placeholder="Ingrese una contraseña" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">
@@ -53,15 +54,48 @@ $user = new CodeaDB();
                             </p>
                         </div>
 
+                        <script>
+                            document.getElementById('form').addEventListener('submit', function(event) {
+                            var password = document.getElementById('password').value;
+                            var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/; // Reemplaza esto con tu expresión regular
+
+                            if (!regex.test(password)) {
+                                event.preventDefault();
+                                alert('La contraseña no cumple con los requisitos.');
+                            }
+                            });
+                        </script>
+
                         <!--group: confirmation_pass-->
                         <div class="form-group" id="group_confirmation_pass">
                             <div class="form-group-input">
-                                <label for="confirmation_pass">Confirme la contraseña</label>
-                                <input type="password" name="confirmation_pass" id="confirmation_pass" placeholder="confirme la contraseña" autocomplete="off">
+                                <label for="confirmation_pass">Confirme la contraseña (*)</label>
+                                <input type="password" name="confirmation_pass" id="confirmation_pass" placeholder="confirme la contraseña" autocomplete="off" required>
                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                             </div>
                             <p class="form-input-error">Las contraseñas no coinciden</p>
                         </div>
+
+                        <script>
+                            // Obtén los elementos del formulario
+                            var passwordInput = document.getElementById('password');
+                            var confirmPasswordInput = document.getElementById('confirmation_pass');
+
+                            // Añade un controlador de eventos al formulario
+                            document.getElementById('form').addEventListener('submit', function(event) {
+                            // Obtén las contraseñas
+                            var password = passwordInput.value;
+                            var confirmPassword = confirmPasswordInput.value;
+
+                            // Verifica si las contraseñas son iguales
+                            if (password !== confirmPassword) {
+                                // Si las contraseñas no son iguales, muestra un mensaje de error y evita que el formulario se envíe
+                                alert('Las contraseñas no coinciden.');
+                                event.preventDefault();
+                            }
+                            });
+                        </script>
+
                     </div>
             
 

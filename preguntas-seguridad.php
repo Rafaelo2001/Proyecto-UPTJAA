@@ -60,7 +60,7 @@
                 echo '<div class="form-group" id="group_username">';
                     echo '<div class="form-group-input">';
                         echo '<label for="r1">' . $_SESSION['p1'] . '</label>';
-                        echo '<input type="text" name="r1" id="r1" placeholder="Ingresa la respuesta" autocomplete="off">';
+                        echo '<input type="text" name="r1" id="r1" placeholder="Ingresa la respuesta" autocomplete="off" required>';
                     echo '</div>';
                     echo '<p class="form-input-error">Rellene este campo correctamente</p>';
                 echo '</div>';
@@ -68,7 +68,7 @@
                 echo '<div class="form-group" id="group_username">';
                     echo '<div class="form-group-input">';
                         echo '<label for="r2">' . $_SESSION['p2'] . '</label>';
-                        echo '<input type="text" name="r2" id="r2" placeholder="Ingresa la respuesta" autocomplete="off">';
+                        echo '<input type="text" name="r2" id="r2" placeholder="Ingresa la respuesta" autocomplete="off" required>';
                     echo '</div>';
                     echo '<p class="form-input-error">Rellene este campo correctamente</p>';
                 echo '</div>';
@@ -76,7 +76,7 @@
                 echo '<div class="form-group" id="group_username">';
                     echo '<div class="form-group-input">';
                         echo '<label for="r3">' . $_SESSION['p3'] . '</label>';
-                        echo '<input type="text" name="r3" id="r3" placeholder="Ingresa la respuesta" autocomplete="off">';
+                        echo '<input type="text" name="r3" id="r3" placeholder="Ingresa la respuesta" autocomplete="off" required>';
                     echo '</div>';
                     echo '<p class="form-input-error">Rellene este campo correctamente</p>';
                 echo '</div>';

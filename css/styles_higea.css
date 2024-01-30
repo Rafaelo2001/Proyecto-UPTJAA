@@ -480,6 +480,7 @@ form .form-group-input {
     font-weight: 600;
     color: #fe9900;
 }
+
 .form-register label,
 .register-box-biopsia label,
 .register-box-citology label,
@@ -689,4 +690,15 @@ body::-webkit-scrollbar-thumb{
 body::-webkit-scrollbar-thumb:hover{
   background: rgb(0,127,164);
   background: linear-gradient(180deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
+}
+
+.form-register h4,
+.login-box-pass h4,
+.register-box-supplies h4{
+  margin: 0;
+  padding: 10px 0 5px 0;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fbff00;
 }

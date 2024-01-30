@@ -171,9 +171,10 @@
 
                 <section class="form-register">
                         <h1>REGISTRO DE BIOPSIA</h1>
+                        <h4>Obligatorio (*).</h4>
                         <form action="php/insert-biopsia.php" method="post" class="form" id="form" autocomplete="off">
 
-                        <label for="paciente">Paciente:</label>
+                        <label for="paciente">Paciente (*)</label>
                                 <select id="paciente" name="paciente" style="min-width: 100px;" required>
                                 <option></option>
 
@@ -206,9 +207,9 @@
                                 <?php endforeach; ?>
                                 </select>
 
-                                        <label for="descripcion">Descripcion Material Remitido: <small><i>obligatorio</i></small></label>
+                                        <label for="descripcion">Descripcion Material Remitido (*)</label>
                                         <br>
-                                        <textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material"></textarea>
+                                        <textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material" required></textarea>
 
 
                                 <br><br>
@@ -218,7 +219,7 @@
                                     <!--group: state-->
                                     <div class="form-group" id="group_state">
                                                 <div id="medico_en_bdd">
-                                                <label for="medico">Médico</label>
+                                                <label for="medico">Médico (*)</label>
                                                     <select id="medico" name="medico" required>
                                                         <option value="" selected disabled>-- Selecciona Medico--</option>
 
@@ -239,7 +240,7 @@
                                         <!--group: name1-->
                                         <div class="form-group" id="group_name_patient1">
                                         <div class="form-group-input">
-                                        <label for="resumen">Resumen de Historia Clínica</label>
+                                        <label for="resumen">Resumen de Historia Clínica (*)</label>
                                         <input type="text" name="resumen" id="resumen" placeholder="Escriba el resumen" required>
                                         </div>
                                         <span class="form-input-error">
@@ -251,7 +252,7 @@
                                         <!--group: name2-->
                                         <div class="form-group" id="group_name_patient2">
                                         <div class="form-group-input">
-                                        <label for="diagnostico">Diagnóstico Clínico</label>
+                                        <label for="diagnostico">Diagnóstico Clínico (*)</label>
                                         <input type="text" name="diagnostico" id="diagnostico" placeholder="Escriba el diagnóstico" required>
                                         </div>
                                         <span class="form-input-error">
@@ -263,7 +264,7 @@
                                         <!--group: name3-->
                                         <div class="form-group" id="group_name_patient3">
                                         <div class="form-group-input">
-                                        <label for="sitio_lesion">Sitio de la Lesión</label>
+                                        <label for="sitio_lesion">Sitio de la Lesión (*)</label>
                                         <input type="text" name="sitio_lesion" id="sitio_lesion" placeholder="Indique" required>
                                         </div>
                                         <span class="form-input-error">

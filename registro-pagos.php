@@ -165,9 +165,10 @@
 
                 <section class="form-register">
                         <h1>REGISTRO DE PAGOS</h1>
+                        <h4>Obligatorio (*).</h4>
                         <form action="php/generador-factura.php" method="post" class="form" id="form" autocomplete="off">
 
-                        <label for="paciente">Paciente</label>
+                        <label for="paciente">Paciente (*)</label>
                             <select id="paciente" name="paciente" style="min-width: 100px;" required>
                                     <option></option>
 
@@ -205,17 +206,28 @@
                                         <!--group: datebirth-->
                                         <div class="form-group" id="group_date_birth">
                                         <div class="form-group-input">
-                                        <label for="fecha">Fecha de pago</label>
+                                        <label for="fecha">Fecha de pago (*)</label>
                                         <input type="datetime-local" placeholder="dd/mm/aaaa" name="fecha" id="fecha" class="fecha" required>
                                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                                         </div>
                                         <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
                                         </div>
 
+                                        <script>
+                                                var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 - 4*60*60*1000);
+                                                var fechaMaxima = hoy.toISOString().split('.')[0];
+                                                document.getElementById("fecha").max = fechaMaxima;
+
+                                                var haceUnAno = new Date(hoy.getTime());
+                                                haceUnAno.setFullYear(hoy.getFullYear() - 1);
+                                                var fechaMinima = haceUnAno.toISOString().split('.')[0];
+                                                document.getElementById("fecha").min = fechaMinima;
+                                        </script>
+
                                         <!--group: datebirth-->
                                         <div class="form-group" id="group_date_birth">
                                         <div class="form-group-input">
-                                        <label for="monto">Ingrese monto</label>
+                                        <label for="monto">Ingrese monto (*)</label>
                                         <input type="number" step="0.01" placeholder="Monto a pagar" name="monto" id="monto" class="monto" required> 
                                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                                         </div>
@@ -225,7 +237,7 @@
                                         <!--group: datebirth-->
                                         <div class="form-group" id="group_date_birth">
                                         <div class="form-group-input">
-                                        <label for="monto">Descripción de la factura</label>
+                                        <label for="monto">Descripción de la factura (*)</label>
                                         <input type="text" placeholder="Indique la descripción" name="desc" id="desc" class="desc" required> 
                                                 <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                                         </div>
@@ -234,18 +246,18 @@
                                 </div>
 
                                 <div>
-                                        <label>Método de pago</label>
+                                        <label>Método de pago (*)</label>
                                         <div class="radio" id="tipo-pago">
-                                            <input type="radio" name="tipo_pago" id="tipo_pago1" value="Bs.D">
+                                            <input type="radio" name="tipo_pago" id="tipo_pago1" value="Bs.D" required>
                                             <label for="tipo_pago1">Bs.D</label>
                                             
-                                            <input type="radio" name="tipo_pago" id="tipo_pago2" value="Divisa">
+                                            <input type="radio" name="tipo_pago" id="tipo_pago2" value="Divisa" required>
                                             <label for="tipo_pago2">Divisas</label>
 
-                                            <input type="radio" name="tipo_pago" id="tipo_pago3" value="Pago móvil">
+                                            <input type="radio" name="tipo_pago" id="tipo_pago3" value="Pago móvil" required>
                                             <label for="tipo_pago3">Pago móvil</label>
 
-                                            <input type="radio" name="tipo_pago" id="tipo_pago4" value="Transferencia">
+                                            <input type="radio" name="tipo_pago" id="tipo_pago4" value="Transferencia" required>
                                             <label for="tipo_pago4">Transferencia</label>
                                         </div>
                                 </div>

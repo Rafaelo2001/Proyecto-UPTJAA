@@ -21,7 +21,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Registro de Insumos</title>
         <link rel="stylesheet" href="css/styles_higea.css">
-        <link rel="stylesheet" type="text/css" href="css/styles_higea.css?v=1.1">
+        <link rel="stylesheet" type="text/css" href="css/styles_higea.css?v=1.2">
         <link rel="icon" type="image/png" href="images/favicon.png">
         <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
     </head>
@@ -163,6 +163,7 @@
 
         <div class="register-box-supplies">
             <h1>REGISTRO DE INSUMOS</h1>
+            <h4>Obligatorio (*).</h4>
             <form action="php/insert-insumo.php" method="post" class="form" id="form">
 
             <!-- Se usan para el procesamiento 6 envases de alcohol cada uno con 400cc, 
@@ -175,8 +176,8 @@
                     <!--group: material-->
                     <div class="form-group" id="group_material">
                         <div class="form-group-input">
-                            <label for="material">Material</label>
-                            <input   type="text" name="material" id="material" required placeholder="Nombre del material">
+                            <label for="material">Material (*)</label>
+                            <input   type="text" name="material" id="material" required placeholder="Nombre del material" required>
                             <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                         </div>
                         <p class="form-input-error">Rellene este campo correctamente</p>
@@ -185,8 +186,8 @@
                     <!--group: unidades-->
                     <div class="form-group" id="group_duration">
                         <div class="form-group-input">
-                            <label for="unidades">Unidades</label>
-                            <input   type="text" name="unidades" id="unidades" required placeholder="Unidad de medida del material">
+                            <label for="unidades">Unidades (*)</label>
+                            <input   type="text" name="unidades" id="unidades" required placeholder="Unidad de medida" required>
                             <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                         </div>
                         <p class="form-input-error">Rellene este campo correctamente</p>
@@ -195,8 +196,8 @@
                     <!--group: cant minima-->
                     <div class="form-group" id="group_top">
                         <div class="form-group-input">
-                            <label for="cant_minima">Cantidad Minima</label>
-                            <input   type="number" min="0" name="cant_minima" required id="cant_minima" placeholder="Establesca una cantidad minima">
+                            <label for="cant_minima">Cantidad Minima (*)</label>
+                            <input   type="number" min="0" name="cant_minima" required id="cant_minima" placeholder="Indique cant. mínima" required>
                             <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                         </div>
                         <p class="form-input-error">Rellene este campo correctamente</p>
@@ -205,7 +206,7 @@
                     <!--group: stock-->
                     <div class="form-group" id="group_stock">
                         <div class="form-group-input">
-                            <label for="existencia">Existencia (opcional)</label>
+                            <label for="existencia">Existencia</label>
                             <input   type="number" name="existencia" id="existencia" placeholder="Indique la existencia">
                             <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                         </div>
@@ -216,8 +217,8 @@
                     <!--group: duracion-->
                     <div class="form-group" id="group_supplier">
                         <div class="form-group-input">
-                            <label for="duracion">Duracion</label>
-                            <input   type="text" name="duracion" id="duracion" placeholder="Indique la duracion">
+                            <label for="duracion">Duracion (*)</label>
+                            <input   type="text" name="duracion" id="duracion" placeholder="Indique la duración" required>
                             <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                         </div>
                         <p class="form-input-error">Rellene este campo correctamente</p>

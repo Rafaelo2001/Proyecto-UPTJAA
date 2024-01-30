@@ -38,7 +38,7 @@ $user = new CodeaDB();
             <div class="form-group" id="group_username">
                 <div class="form-group-input">
                     <label for="username">Nombre de usuario</label>
-                    <input type="text" name="username" id="username" placeholder="Ingresa nombre de usuario" autocomplete="off">
+                    <input type="text" name="username" id="username" placeholder="Ingresa nombre de usuario" autocomplete="off" required>
                 </div>
                 <p class="form-input-error">Rellene este campo correctamente</p>
             </div>
