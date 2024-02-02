@@ -207,13 +207,18 @@
                         <br>
 
                         <label for="fecha">Fecha del Examen (*)</label>
-                        <input type="date" placeholder="dd/mm/aaaa" name="fecha" id="fecha" min="1900-01-01" required>
+                        <input type="date" placeholder="dd/mm/aaaa" name="fecha" id="fecha" required>
 
                         <script>
                                 var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 - 4*60*60*1000);
                                 var fechaMaxima = hoy.toISOString().split('T')[0];
                                 document.getElementById("fecha").max = fechaMaxima;
+
+                                var haceUnMes = new Date(hoy.getTime() - 30*24*60*60*1000);
+                                var fechaMinima = haceUnMes.toISOString().split('T')[0];
+                                document.getElementById("fecha").min = fechaMinima;
                         </script>
+
                             
                             <br>
 

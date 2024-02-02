@@ -474,29 +474,29 @@
                                 </div>
 
                                 <div class="button-container">
-                                <div class="form__group form__group-btn-submit">
-                                        <input class="button-submit" type="submit" name="registrar" id="registrar" value="Registrar">
-                                </div>
-                                <p class="form-mess-good" id="form-mess-good">¡Formulario enviado!</p>
+                                        <div class="form__group form__group-btn-submit">
+                                                <input class="button-submit" type="submit" name="registrar" id="registrar" value="Registrar">
+                                        </div>
+                                        <p class="form-mess-good" id="form-mess-good">¡Formulario enviado!</p>
                                 </div>
                         </form>
                 </section>
         </main>
         
         <script>
-        let arrow = document.querySelectorAll(".arrow");
-        for (var i = 0; i < arrow.length; i++) {
-          arrow[i].addEventListener("click", (e)=>{
-         let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-         arrowParent.classList.toggle("showMenu");
-          });
-        }
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".bx-menu");
-        console.log(sidebarBtn);
-        sidebarBtn.addEventListener("click", ()=>{
-          sidebar.classList.toggle("close");
-        });
+                let arrow = document.querySelectorAll(".arrow");
+                for (var i = 0; i < arrow.length; i++) {
+                arrow[i].addEventListener("click", (e)=>{
+                let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+                arrowParent.classList.toggle("showMenu");
+                });
+                }
+                let sidebar = document.querySelector(".sidebar");
+                let sidebarBtn = document.querySelector(".bx-menu");
+                console.log(sidebarBtn);
+                sidebarBtn.addEventListener("click", ()=>{
+                sidebar.classList.toggle("close");
+                });
         </script>
 
         <script src="js/form-paciente.js"></script>
