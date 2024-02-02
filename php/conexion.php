@@ -31,7 +31,6 @@ class CodeaDB{
 
     // BUSCAR SINGLE ROW
     // Utilizar esta funcion para extraer una sola fila de la BDD, usado cuando se sepa que solo puede existir un solo resultado
-    // Esta funcion retorna el ultimo valor registrado en la tabla
     public function buscarSINGLE($tabla, $condicion)
     {
         $resultado = $this->conexion->query("SELECT * FROM $tabla WHERE $condicion") or die($this->conexion->error);
@@ -44,7 +43,6 @@ class CodeaDB{
 
     // BUSCAR ONE CELL
     // Utilizar esta funcion para extraer un solo valor de una casilla en especifico de la BDD
-    // Esta funcion retorna el ultimo valor registrado en la tabla
     public function buscarONE($tabla, $condicion, $columna)
     {
         $resultado = $this->conexion->query("SELECT * FROM $tabla ORDER BY $condicion DESC LIMIT 1") or die($this->conexion->error);

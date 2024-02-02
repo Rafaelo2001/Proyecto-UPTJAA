@@ -214,11 +214,21 @@
                     </div>
 
     
-                    <!--group: duracion-->
+                    <!--group: consumo_biop-->
                     <div class="form-group" id="group_supplier">
                         <div class="form-group-input">
-                            <label for="duracion">Duracion (*)</label>
-                            <input   type="text" name="duracion" id="duracion" placeholder="Indique la duración" required>
+                            <label for="consumo_biop">Consumo en Biopsias (*)</label>
+                            <input   type="number" min="0" name="consumo_biop" id="consumo_biop" placeholder="Indique cantidad" required>
+                            <i class="formulario_validacion_estado fi fi-rr-cross"></i>
+                        </div>
+                        <p class="form-input-error">Rellene este campo correctamente</p>
+                    </div>
+
+                    <!--group: consumo_cito-->
+                    <div class="form-group" id="group_supplier">
+                        <div class="form-group-input">
+                            <label for="consumo_cito">Consumo en Citologías (*)</label>
+                            <input   type="number" min="0" name="consumo_cito" id="consumo_cito" placeholder="Indique cantidad" required>
                             <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                         </div>
                         <p class="form-input-error">Rellene este campo correctamente</p>

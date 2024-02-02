@@ -4,22 +4,11 @@
 
     // REGISTRO DE EXAMEN
 
-    class BySearch
-    {
-        // BUSCAR x BY
-        // Utilizar esta funcion para extraer un valor de la BDD y utilizar en otras funciones
-        // Esta funcion retorna el ultimo valor registrado en la tabla
-        public function buscarBY($tabla, $columna)
-        {
-            $resultado = $this->conexion->query("SELECT * FROM $tabla ORDER BY $columna DESC LIMIT 1") or die($this->conexion->error);
-            if($resultado)
-                return $resultado->fetch_all(MYSQLI_ASSOC);
-            return false;
-        }
-    }
-    
+    require "../php/conexion.php";
+    $user = new CodeaDB();
+
     // Conectando con la base de datos Higea
-    $conex = mysqli_connect("localhost","root","","higea_db");
+    $conex = $user->conexion;   
 
     
         // TABLA: examen
@@ -52,39 +41,34 @@
             //     6 envases de 400cc de alcohol 	    	(2400cc total)
             //     3 envases de 400cc de xilol   	    	(1200cc total)
             //     2 envases de 400cc de Parafina Liquida	( 800cc total)
-            //         UPDATE `insumo` SET `Existencia`= `Existencia` - 2400 WHERE Material="Alcohol";
-            //         UPDATE `insumo` SET `Existencia`= `Existencia` - 1200 WHERE Material="Xilol";
-            //         UPDATE `insumo` SET `Existencia`= `Existencia` -  800 WHERE Material="Parafina Liquida";
 
             // CITOLOGIA
             //     6 envases de 200cc de alcohol (1200cc total)
             //     3 envases de 200cc de xilol   ( 600cc total)
-            //         UPDATE `insumo` SET `Existencia`= `Existencia` - 1200 WHERE Material="Alcohol";
-            //         UPDATE `insumo` SET `Existencia`= `Existencia` -  600 WHERE Material="Xilol";
 
             if($tipo_examen == "biopsia") {
-                $sql_insumo_biopsia1 = 'UPDATE `insumo` SET `Existencia`= `Existencia` - 2400 WHERE Material="Alcohol";';
-                if (!(mysqli_query($conex,$sql_insumo_biopsia1))){
-                    throw new Exception("Error al descontar insumos (biopsia)" . mysqli_error($conex));
+                
+                $lista_Actualizar = $user->buscar('insumo','Consumo_Biop > 0');
+
+                foreach($lista_Actualizar as $insumo){
+                    $sql_insumo_biopsia = 'UPDATE `insumo` SET `Existencia`= `Existencia` - '.$insumo['Consumo_Biop'].' WHERE Material="'. $insumo['Material'] .'";';
+                    if (!(mysqli_query($conex,$sql_insumo_biopsia))){
+                        throw new Exception("Error al descontar insumos (biopsia)" . mysqli_error($conex));
+                    }
                 }
-                $sql_insumo_biopsia2 = 'UPDATE `insumo` SET `Existencia`= `Existencia` - 1200 WHERE Material="Xilol";';
-                if (!(mysqli_query($conex,$sql_insumo_biopsia2))){
-                    throw new Exception("Error al descontar insumos (biopsia)" . mysqli_error($conex));
-                }
-                $sql_insumo_biopsia3 = 'UPDATE `insumo` SET `Existencia`= `Existencia` -  800 WHERE Material="Parafina Liquida";';
-                if (!(mysqli_query($conex,$sql_insumo_biopsia3))){
-                    throw new Exception("Error al descontar insumos (biopsia)" . mysqli_error($conex));
-                }
+
             }
             elseif($tipo_examen == "citologia") {
-                $sql_insumo_citologia1 = 'UPDATE `insumo` SET `Existencia`= `Existencia` - 1200 WHERE Material="Alcohol";';
-                if (!(mysqli_query($conex,$sql_insumo_citologia1))){
-                    throw new Exception("Error al descontar insumos (citologia)" . mysqli_error($conex));
+                
+                $lista_Actualizar = $user->buscar('insumo','Consumo_Cito > 0');
+
+                foreach($lista_Actualizar as $insumo){
+                    $sql_insumo_citologia = 'UPDATE `insumo` SET `Existencia`= `Existencia` - '.$insumo['Consumo_Cito'].' WHERE Material="'. $insumo['Material'] .'";';
+                    if (!(mysqli_query($conex,$sql_insumo_citologia))){
+                        throw new Exception("Error al descontar insumos (citologia)" . mysqli_error($conex));
+                    }
                 }
-                $sql_insumo_citologia2 = 'UPDATE `insumo` SET `Existencia`= `Existencia` -  600 WHERE Material="Xilol";';
-                if (!(mysqli_query($conex,$sql_insumo_citologia2))){
-                    throw new Exception("Error al descontar insumos (citologia)" . mysqli_error($conex));
-                }
+
             }
 
             echo "<script>

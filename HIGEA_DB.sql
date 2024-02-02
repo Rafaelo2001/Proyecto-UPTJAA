@@ -749,14 +749,15 @@ CREATE TABLE `insumo` (
   `Unidades`    varchar(45) DEFAULT NULL,
   `Existencia`  int(11) DEFAULT NULL,
   `Cant_minima` int(11) DEFAULT NULL,
-  `Duracion`    varchar(45) DEFAULT NULL
+  `Consumo_Biop`    int(11) DEFAULT NULL,
+  `Consumo_Cito`    int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `insumo`
 --
 
-INSERT INTO `insumo` (`ID_Insumo`, `Material`, `Unidades`, `Existencia`, `Cant_minima`) VALUES (1, 'Alcohol', 'ml', '0', '400'), (2, 'Xilol', 'cc', '0', '400'), (3, 'Parafina Liquida', 'cc', '0', '400');
+INSERT INTO `insumo` (`ID_Insumo`, `Material`, `Unidades`, `Existencia`, `Cant_minima`,`Consumo_Biop`, `Consumo_Cito`) VALUES (1, 'Alcohol', 'ml', '0', '400', '2400', '1200'), (2, 'Xilol', 'cc', '0', '400', '1200', '600'), (3, 'Parafina Liquida', 'cc', '0', '400', '800', '0');
 
 -- --------------------------------------------------------
 
