@@ -668,7 +668,7 @@ input::placeholder { /* Standard (Chrome, Firefox, Safari, Edge) */
   padding: 10px 25px;
   font-size: 18px;
   font-weight: 600;
-  transition: background-color .2s;
+  transition: background .2s;
   cursor: pointer;
   box-shadow: 5px 5px 10px 2px rgb(0 21 49 / 20%);
 }
@@ -701,4 +701,50 @@ body::-webkit-scrollbar-thumb:hover{
   font-size: 16px;
   font-weight: 600;
   color: #fbff00;
+}
+
+#table.table {
+  width: 90%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#table.table th {
+  background-color: #003971;
+  color: #f2f2f2;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+#table.table td {
+  background-color: #f2f2f2;
+  color: #0d0d0d;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+#table.table input[type='submit'] {
+  background: rgb(254,153,0);
+  background: linear-gradient(135deg, rgba(254,153,0,1) 0%, rgba(254,101,0,1) 100%);
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  padding: 5px 20px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background .2s;
+}
+
+#table.table input[type='submit']:hover{
+  background: #fe6500;
+}
+
+.center-table {
+  display: flex;
+  justify-content: center;
+}
+
+.table-title {
+  color: #003971;
 }

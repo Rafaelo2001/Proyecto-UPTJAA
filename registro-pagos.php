@@ -218,11 +218,12 @@
                                                 var fechaMaxima = hoy.toISOString().split('.')[0];
                                                 document.getElementById("fecha").max = fechaMaxima;
 
-                                                var haceUnAno = new Date(hoy.getTime());
-                                                haceUnAno.setFullYear(hoy.getFullYear() - 1);
-                                                var fechaMinima = haceUnAno.toISOString().split('.')[0];
+                                                var haceUnMes = new Date(hoy.getTime());
+                                                haceUnMes.setMonth(hoy.getMonth() - 1);
+                                                var fechaMinima = haceUnMes.toISOString().split('.')[0];
                                                 document.getElementById("fecha").min = fechaMinima;
                                         </script>
+
 
                                         <!--group: datebirth-->
                                         <div class="form-group" id="group_date_birth">
