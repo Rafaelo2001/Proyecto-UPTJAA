@@ -1,5 +1,10 @@
 <?php
 
+    if($_SERVER['REQUEST_METHOD'] !== 'POST' || $_POST['ci'] == ""){
+        header('Location: ./detalles_paciente.php', true, 303);
+        exit;
+    }
+    
     require "../php/conexion.php";
     $user = new CodeaDB();
 

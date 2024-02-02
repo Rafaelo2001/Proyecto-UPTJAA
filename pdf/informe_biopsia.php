@@ -185,7 +185,7 @@
             $b->SetFillColor(186,236,247);
             $b->SetTextColor(3,94,115);
             $b->Cell(5,8,"", 0,0, "", true);
-        $b->Cell(0,8,mb_convert_encoding($_POST["des_mr"]."; BIOPSIA", 'ISO-8859-1'), 0,1, "C", true);
+        $b->Cell(0,8,mb_convert_encoding("BIOPSIA", 'ISO-8859-1'), 0,1, "C", true);
 
         // Diagnostico
             $b->SetFont('Arial', 'U', 10);

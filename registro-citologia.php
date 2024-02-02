@@ -34,7 +34,7 @@
     </head>
 
     <body class="login-register">
-    <div class="sidebar close">
+        <div class="sidebar close">
                 <div class="logo-details">
                 <img class="logo" src="images/Logo con contorno.png" alt="Logo de Higea" width="60" height="60">
                 <img class="logo_name" src="images/Letras.png" alt="HIGEA" width="135" height="40">
