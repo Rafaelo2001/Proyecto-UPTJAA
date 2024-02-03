@@ -111,9 +111,9 @@
                         </div>
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Detalles</a></li>
-                        <li><a href="#">Pacientes</a></li>
-                        <li><a href="#">Muestras</a></li>
-                        <li><a href="#">Insumos</a></li>
+                        <li><a href="detalles/detalles_paciente.php">Pacientes</a></li>
+                        <li><a href="detalles/detalles_muestras.php">Muestras</a></li>
+                        <li><a href="detalles/detalles_insumo.php">Insumos</a></li>
                         </ul>
                 </li>
                 <li>
@@ -126,8 +126,8 @@
                         </div>
                         <ul class="sub-menu">
                         <li><a class="link_name" href="#">Acerca de</a></li>
-                        <li><a href="info_lab.html">Sobre el Lab.</a></li>
-                        <li><a href="info_higea.html">Sobre HIGEA</a></li>
+                        <li><a href="info_lab.php">Sobre el Lab.</a></li>
+                        <li><a href="info_higea.php">Sobre HIGEA</a></li>
                         <li><a href="developers.php">Developers</a></li>
                         <li><a href="#">Ayuda</a></li>
                         </ul>
