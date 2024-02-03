@@ -12,7 +12,7 @@
                 <table style="text-align: center;">
                         <thead>
                                 <th>N° Muestra</th>
-                                <!-- <th>ID</th> -->
+                                <th>ID</th>
                                 <th>Paciente</th>
                                 <th>Tipo</th>
                                 <th>Descripción</th>
@@ -46,12 +46,12 @@
                                     
                                     echo ("<td>".$m['ID_M_Remitido']."</td>");
                                     
-                                    // if(isset($m["ID_M_Biopsia"])){
-                                    //     echo ("<td>".$m["ID_M_Biopsia"]."</td>");
-                                    // }
-                                    // elseif(isset($m["ID_M_Citologia"])){
-                                    //     echo ("<td>".$m["ID_M_Citologia"]."</td>");
-                                    // }
+                                    if(isset($m["ID_M_Biopsia"])){
+                                        echo ("<td>B-".$m["ID_M_Biopsia"]."</td>");
+                                    }
+                                    elseif(isset($m["ID_M_Citologia"])){
+                                        echo ("<td>C-".$m["ID_M_Citologia"]."</td>");
+                                    }
                                     
                                     echo ("<td>".$datos_paciente."</td>");
 

@@ -768,7 +768,7 @@ INSERT INTO `insumo` (`ID_Insumo`, `Material`, `Unidades`, `Existencia`, `Cant_m
 CREATE TABLE `insumo_tiene_lote` (
   `ID_Insumo` int(11) NOT NULL,
   `ID_Lote` int(11) NOT NULL,
-  `F_Ingreso_Lote` datetime DEFAULT NULL
+  `F_Registro_Lote` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
