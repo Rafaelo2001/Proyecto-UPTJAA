@@ -1,4 +1,14 @@
 <?php
+    session_start();
+    header('Cache-Control: no-cache, no-store, must-revalidate');
+    header('Pragma: no-cache');
+    header('Expires: 0');
+
+    if(!isset($_SESSION['username'])) {
+        header('Location: ../index.php');
+        exit;
+    }
+
     if($_SERVER['REQUEST_METHOD'] !== 'POST' || $_POST['id_m'] == "" || $_POST['tipo_m'] == ""){
         header('Location: ./detalles_muestras.php', true, 303);
         exit;
@@ -32,83 +42,292 @@
 <html lang="es">
     <head>
         <title>Edición de Muestra <?php echo ($_POST["tipo_m"]); ?></title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/styles_higea.css">
+        <link rel="stylesheet" type="text/css" href="../css/styles_higea.css?v=1.2">
+        <link rel="icon" type="image/png" href="../images/favicon.png">
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+        <link href="../css/select2.min.css" rel="stylesheet"/>
         <script src="../js/jquery-3.7.1.js"></script>
+        <script src="../js/select2.min.js"></script>
+
+        <link href="../css/sweetalert2.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="../css/sweetalert2.min.css?v=1.2">
     </head>
-    <body>
-        <h1>Edición de Muestra de <?php echo( $_POST['tipo_m'] ) ?></h1>
-        <main>
-            <form action="./insert_edit_muestras.php" method="post">
-                <label for="des_m">Descripción Material:</label>
-                    <br>
-                    <textarea id="des_m" name="des_m" cols="100" rows="8"><?php echo($datosMuestra['Descripcion_material']) ?></textarea>
 
-                    <br><br>
+    <body class="login-register">
+    <div class="sidebar close">
+                <div class="logo-details">
+                <img class="logo" src="../images/Logo con contorno.png" alt="Logo de Higea" width="60" height="60">
+                <img class="logo_name" src="../images/Letras.png" alt="HIGEA" width="135" height="40">
+                </div>
+                <ul class="nav-links">
+                <li>
+                        <a href="../registro-paciente.php">
+                        <i class="fi fi-sr-hospital-user"></i>
+                        <span class="link_name">Pacientes</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="../registro-paciente.php">Pacientes</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-sr-microscope"></i>
+                                <span class="link_name">Muestras</span>
+                        </a>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Muestras</a></li>
+                        <li><a href="../registro-citologia.php">Citología</a></li>
+                        <li><a href="../registro-biopsia.php">Biopsia</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="../registro-examen.php">
+                        <i class="fi fi-sr-flask"></i>
+                        <span class="link_name">Exámenes</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="../registro-examen.php">Exámenes</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-sr-box-open-full"></i>
+                                <span class="link_name">Insumos</span>
+                        </a>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Insumos</a></li>
+                        <li><a href="../registro-insumo.php">Registrar</a></li>
+                        <li><a href="../visualizar-insumo.php">Visualizar</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-sr-file-medical-alt"></i>
+                                <span class="link_name">Informes médicos</span>
+                        </a>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Informes médicos</a></li>
+                        <li><a href="../registro-informes.php">Registrar</a></li>
+                        <li><a href="../visualizar-informe.php">Visualizar</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="../registro-pagos.php">
+                        <i class="fi fi-sr-file-invoice-dollar"></i>
+                        <span class="link_name">Facturación</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="../registro-pagos.php">Facturación</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-sr-eye"></i>
+                                <span class="link_name">Detalles</span>
+                        </a>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Detalles</a></li>
+                        <li><a href="detalles_pacientes.php">Pacientes</a></li>
+                        <li><a href="#">Muestras</a></li>
+                        <li><a href="#">Insumos</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-sr-info"></i>
+                                <span class="link_name">Acerca de</span>
+                        </a>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Acerca de</a></li>
+                        <li><a href="../info_lab.html">Sobre el Lab.</a></li>
+                        <li><a href="../info_higea.html">Sobre HIGEA</a></li>
+                        <li><a href="../developers.php">Developers</a></li>
+                        <li><a href="#">Ayuda</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="#">
+                        <i class="fi fi-sr-users-alt"></i>
+                        <span class="link_name">Gestión de usuarios</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="#">Gestión de usuarios</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="profile-details">
+                        <a href="../php/exit.php">
+                                <i class="fi fi-sr-exit"></i>
+                                <span class="link_name">Salir</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                                <li><a class="link_name" href="../php/exit.php">Salir</a></li>
+                        </ul>
+                        </div>
+                </li>
+                </ul>
+        </div>
 
-                <label for="diag">Diagnóstico:</label>
-                    <br>
-                    <textarea id="diag" name="diag" cols="100" rows="8"><?php echo($datosMuestra["Diagnostico"]) ?></textarea>
 
-                    <br><br>
+        <main class="home-section">
 
-                <label for="resumen">Resumen:</label>
-                    <br>
-                    <textarea id="resumen" name="resumen" cols="100" rows="8"><?php echo($datosMuestra["Resumen"]) ?></textarea>
+            <div class="home-content">
+                <i class="fi fi-sr-menu-burger bx-menu"></i>
+                <a href="../mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
+            </div>
 
-                    <br><br>
+            <section class="form-register">
+                <h1>Edición de Muestra de <?php echo( $_POST['tipo_m'] ) ?></h1>
+                <h4>Obligatorio (*).</h4>
 
-                <label>Examinado:</label>
-                    <br>
-                    <label for="E_si">Si:</label>
-                    <input id="E_si" name="examinado" type="radio" value="1" <?php echo($examen_si) ?>>
-                        <br>
-                    <label for="E_no">No:</label>
-                    <input id="E_no" name="examinado" type="radio" value="0" <?php echo($examen_no) ?>>
 
-                    <br><br>
-                
-                <label for="f_ent">Fecha de Entrada:</label>
-                    <input id="f_ent" name="f_ent" type="datetime-local" value="<?php echo($datosMuestra["F_Entrada"]) ?>">
+                <form action="./insert_edit_muestras.php" method="post" class="form" id="form" autocomplete="off">
 
-                    <br><br>
+                    <label for="des_m">Descripcion Material Remitido (*)</label>
+                        <textarea type="text" name="des_m" id="des_m" cols="40" rows="3" placeholder="Escriba una descripcion del material" required><?php echo($datosMuestra['Descripcion_material']) ?></textarea>
 
-                <?php if($_POST['tipo_m'] == "Biopsia"): ?>
-                
-                    <label for="sitio">Sitio de Lesión:</label>
-                    <textarea id="sitio" name="sitio"><?php echo($datosBiop["Sitio_lesion"]) ?></textarea>
+                    <label for="diag">Diagnóstico Clínico (*)</label>
+                        <textarea type="text" name="diag" id="diag" cols="40" rows="3" placeholder="Escriba el diágnostico clínico" required><?php echo($datosMuestra["Diagnostico"]) ?></textarea>
 
-                <?php elseif($_POST['tipo_m'] == "Citología"): ?>
+                    <label for="resumen">Resumen de Historia Clínica (*)</label>
+                        <textarea type="text" name="resumen" id="resumen" cols="40" rows="3" placeholder="Escriba el Resumen de Historia Clínica" required><?php echo($datosMuestra["Resumen"]) ?></textarea>
 
-                    <label for="FUR">Fecha Ultima Regla:</label>
-                    <input id="FUR" name="FUR" type="date" value="<?php echo($datosCito["FUR"]) ?>">
+                    <div>
+                        <label>Examinado (*)</label>
+                        <div class="radio" id="examinado">
+                            <input type="radio" name="examinado" id="E_si" value="1" <?php echo($examen_si) ?> required>
+                            <label for="E_si">Si</label>
+                                
+                            <input type="radio" name="examinado" id="E_no" value="0" <?php echo($examen_no) ?> required>
+                            <label for="E_no">No</label>
+                        </div>
+                    </div>
 
-                        <br><br>
+                    <!--group: datebirth-->
+                    <div class="form-group" id="group_date_birth">
+                        <div class="form-group-input">
+                        <label for="f_ent">Fecha de Entrada (*)</label>
+                        <input type="datetime-local" placeholder="dd/mm/aaaa" name="f_ent" id="f_ent" class="f_ent" value="<?php echo($datosMuestra["F_Entrada"]) ?>" required>
+                            <i class="formulario_validacion_estado fi fi-rr-cross"></i>
+                        </div>
+                        <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
+                    </div>
 
-                    <label>Frotis:</label>
-                    <input type="checkbox" name="endocervix" id="endocervix" value="1" <?php echo ($datosCito['Endocervix']) ? "checked" : "" ?>>
-                    <label for="endocervix">Endocervix</label>
-        
-                    <input type="checkbox" name="exocervix" id="exocervix" value="1" <?php echo ($datosCito['Exocervix']) ? "checked" : "" ?>>
-                    <label for="exocervix">Exocervix</label>
-        
-                    <input type="checkbox" name="vagina" id="vagina" value="1" <?php echo ($datosCito['Vagina']) ? "checked" : "" ?>>
-                    <label for="vagina">Vagina</label>
+                    <script>
+                        var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 - 4*60*60*1000);
+                        var fechaMaxima = hoy.toISOString().split('.')[0];
+                        document.getElementById("f_ent").max = fechaMaxima;
 
-                    <br>
+                        var haceUnMes = new Date(hoy.getTime());
+                        haceUnMes.setMonth(hoy.getMonth() - 2);
+                        var fechaMinima = haceUnMes.toISOString().split('.')[0];
+                        document.getElementById("f_ent").min = fechaMinima;
+                    </script>
 
-                    <input type="checkbox" name="otro_check" id="otro_check" value="1" <?php echo ($datosCito['Otros']) ? "checked" : "" ?>>
-                    <label for="otro_check">Otro:</label>
-                    <input type="text" name="otro" id="otro" value="<?php echo ($datosCito['Otros']) ? $datosCito['Otros'] : "" ?>">
 
-                <?php endif; ?>
+                    <?php if($_POST['tipo_m'] == "Biopsia"): ?>
 
-                    <br><br><br>
+                        <label for="sitio">Sitio de Lesión (*)</label>
+                        <textarea type="text" name="sitio" id="sitio" cols="40" rows="3" placeholder="Indique el sitio de lesión" required><?php echo($datosBiop["Sitio_lesion"]) ?></textarea>
                     
-                    <input type="hidden" name="id_m" value="<?php echo $_POST['id_m']; ?>">
-                    <input type="hidden" name="tipo_m" value="<?php echo $_POST['tipo_m']; ?>">
-                    <input type="submit" id="enviar" value="Aplicar Cambios" disabled>
-                
+                    <?php elseif($_POST['tipo_m'] == "Citología"): ?>
+
+                        <!--group: name3-->
+                        <div class="form-group" id="group_name_patient3">
+                            <div class="form-group-input">
+                            <label for="FUR">Fecha de la Última Regla (*)</label>
+                            <input type="date" name="FUR" id="FUR" min="1900-01-01" value="<?php echo($datosCito["FUR"]) ?>" required>
+                            </div>
+                            <span class="form-input-error">
+                                <i class="formulario_validacion_estado fi fi-rr-cross"></i>
+                                <p>Rellene este campo correctamente</p>
+                            </span>
+                        </div>
+
+                        <script>
+                            var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 - 4*60*60*1000);
+                            var fechaMaxima = hoy.toISOString().split('T')[0];
+                            document.getElementById("FUR").max = fechaMaxima;
+                        </script>
+
+                        <div class="checkbox" id="frotis">
+                            <h2>Frotis de: (*)</h2>
+                            <input type="checkbox" name="endocervix" id="endocervix" value="1" <?php echo ($datosCito['Endocervix']) ? "checked" : "" ?>>
+                            <label for="endocervix">Endocervix</label>
+                            
+                            <input type="checkbox" name="exocervix" id="exocervix" value="1" <?php echo ($datosCito['Exocervix']) ? "checked" : "" ?>>
+                            <label for="exocervix">Exocervix</label>
+                            
+                            <input type="checkbox" name="vagina" id="vagina" value="1" <?php echo ($datosCito['Vagina']) ? "checked" : "" ?>>
+                            <label for="vagina">Vagina</label>
+
+                            <br>
+
+                            <input type="checkbox" name="otro_check" id="otro_check" value="1" <?php echo ($datosCito['Otros']) ? "checked" : "" ?>>
+                            <label for="otro_check">Otro:</label>
+                            <input type="text" name="otro" id="otro" placeholder="Especifique" value="<?php echo ($datosCito['Otros']) ? $datosCito['Otros'] : "" ?>" disabled>
+                        </div>
+
+                        <script>
+                            document.getElementById('form').addEventListener('submit', function(event) {
+                            var checkboxes = document.querySelectorAll('#frotis input[type="checkbox"]');
+                            var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+                            if (!checkedOne) {
+                            alert('Por favor, selecciona al menos una opción de Frotis.');
+                            event.preventDefault();
+                            }
+                            });
+                        </script>
+
+                    <?php endif; ?>
+
+                    <div class="button-container">
+                        <div class="form__group form__group-btn-submit">
+                            <input type="hidden" name="id_m" value="<?php echo $_POST['id_m']; ?>">
+                            <input type="hidden" name="tipo_m" value="<?php echo $_POST['tipo_m']; ?>">
+                            <input class="button-submit" type="submit" name="enviar" id="enviar" value="Aplicar cambios" disabled>
+                        </div>
+                        <p class="form-mess-good" id="form-mess-good">¡Formulario enviado!</p>
+                    </div>
                 </form>
+            </section>
         </main> 
+
+        <script>
+            let arrow = document.querySelectorAll(".arrow");
+            for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e)=>{
+            let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+            arrowParent.classList.toggle("showMenu");
+            });
+            }
+            let sidebar = document.querySelector(".sidebar");
+            let sidebarBtn = document.querySelector(".bx-menu");
+            console.log(sidebarBtn);
+            sidebarBtn.addEventListener("click", ()=>{
+            sidebar.classList.toggle("close");
+            });
+        </script>
+
     </body>
     <script>
         $(":input").change(function(){
