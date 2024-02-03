@@ -96,7 +96,7 @@
                 $fecha_actual_detallada = date('Y-m-d H:i:s');
 
             // Llenando Insumo_tiene_lote
-            $sql_itl = "INSERT INTO insumo_tiene_lote (ID_Insumo, ID_Lote, F_Ingreso_Lote) VALUES ('$id_insumo', '$id_lote', '$fecha_actual_detallada')";
+            $sql_itl = "INSERT INTO insumo_tiene_lote (ID_Insumo, ID_Lote, F_Registro_Lote) VALUES ('$id_insumo', '$id_lote', '$fecha_actual_detallada')";
             $ejecutado_itl = mysqli_query($conex, $sql_itl);
             if (!$ejecutado_itl) {
                 throw new Exception("Error al actualizar material en la tabla 'insumo_tiene_lote'" . mysqli_error($conex));

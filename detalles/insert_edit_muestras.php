@@ -139,7 +139,10 @@
                 </script>";
             }
             else{
-                echo "<script>alert('no cambiaste nada pa')</script>";
+                echo "<script>
+                alert('no cambiaste nada pa');
+                window.location.href = './detalles_muestras.php';
+                </script>";
             }
 
             // UPDATE `persona` SET `PN` = 'MarlirioA', `SN` = 'AAAA', `PA` = 'Márquez', `Edad` = '50' WHERE `persona`.`CI` = 'V-5315064' AND `persona`.`ID_Direccion` = 2
