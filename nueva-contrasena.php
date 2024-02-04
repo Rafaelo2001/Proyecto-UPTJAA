@@ -50,15 +50,15 @@ $user = new CodeaDB();
                                 *Una letra mayúscula. <br>
                                 *Una letra minúscula. <br>
                                 *Un dígito. <br>
-                                *Un caracter esp: @$!%*?&
+                                *Un caracter esp: @$!%*?&._-
                             </p>
                         </div>
 
                         <script>
                             document.getElementById('form').addEventListener('submit', function(event) {
                             var password = document.getElementById('password').value;
-                            var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/; // Reemplaza esto con tu expresión regular
-
+                            var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,16}$/; // al menos una M, una m, un digito, un caracter @$!%*?&._- y una longitud de 8 a 16 caracteres.
+                            
                             if (!regex.test(password)) {
                                 event.preventDefault();
                                 alert('La contraseña no cumple con los requisitos.');

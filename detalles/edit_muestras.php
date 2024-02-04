@@ -37,6 +37,9 @@
         $examen_si = "";
         $examen_no = "checked";
     }
+
+    $fecha = new DateTime($datosMuestra["F_Entrada"]);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -88,12 +91,35 @@
                         </ul>
                 </li>
                 <li>
+                        <a href="../registro-pagos.php">
+                        <i class="fi fi-sr-file-invoice-dollar"></i>
+                        <span class="link_name">Facturación</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="../registro-pagos.php">Facturación</a></li>
+                        </ul>
+                </li>
+                <li>
                         <a href="../registro-examen.php">
                         <i class="fi fi-sr-flask"></i>
                         <span class="link_name">Exámenes</span>
                         </a>
                         <ul class="sub-menu blank">
                         <li><a class="link_name" href="../registro-examen.php">Exámenes</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-sr-file-medical-alt"></i>
+                                <span class="link_name">Informes médicos</span>
+                        </a>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Informes médicos</a></li>
+                        <li><a href="../registro-informes.php">Registrar</a></li>
+                        <li><a href="../visualizar-informe.php">Visualizar</a></li>
                         </ul>
                 </li>
                 <li>
@@ -113,29 +139,6 @@
                 <li>
                         <div class="iocn-link">
                         <a href="#">
-                                <i class="fi fi-sr-file-medical-alt"></i>
-                                <span class="link_name">Informes médicos</span>
-                        </a>
-                        <i class="fi fi-sr-angle-small-down arrow"></i>
-                        </div>
-                        <ul class="sub-menu">
-                        <li><a class="link_name" href="#">Informes médicos</a></li>
-                        <li><a href="../registro-informes.php">Registrar</a></li>
-                        <li><a href="../visualizar-informe.php">Visualizar</a></li>
-                        </ul>
-                </li>
-                <li>
-                        <a href="../registro-pagos.php">
-                        <i class="fi fi-sr-file-invoice-dollar"></i>
-                        <span class="link_name">Facturación</span>
-                        </a>
-                        <ul class="sub-menu blank">
-                        <li><a class="link_name" href="../registro-pagos.php">Facturación</a></li>
-                        </ul>
-                </li>
-                <li>
-                        <div class="iocn-link">
-                        <a href="#">
                                 <i class="fi fi-sr-eye"></i>
                                 <span class="link_name">Detalles</span>
                         </a>
@@ -146,6 +149,15 @@
                         <li><a href="detalles_paciente.php">Pacientes</a></li>
                         <li><a href="detalles_muestras.php">Muestras</a></li>
                         <li><a href="detalles_insumo.php">Insumos</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="#">
+                        <i class="fi fi-sr-users-alt"></i>
+                        <span class="link_name">Gestión de usuarios</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="#">Gestión de usuarios</a></li>
                         </ul>
                 </li>
                 <li>
@@ -162,15 +174,6 @@
                         <li><a href="../info_higea.php">Sobre HIGEA</a></li>
                         <li><a href="../developers.php">Developers</a></li>
                         <li><a href="#">Ayuda</a></li>
-                        </ul>
-                </li>
-                <li>
-                        <a href="#">
-                        <i class="fi fi-sr-users-alt"></i>
-                        <span class="link_name">Gestión de usuarios</span>
-                        </a>
-                        <ul class="sub-menu blank">
-                        <li><a class="link_name" href="#">Gestión de usuarios</a></li>
                         </ul>
                 </li>
                 <li>
@@ -226,7 +229,7 @@
                     <div class="form-group" id="group_date_birth">
                         <div class="form-group-input">
                         <label for="f_ent">Fecha de Entrada (*)</label>
-                        <input type="datetime-local" placeholder="dd/mm/aaaa" name="f_ent" id="f_ent" class="f_ent" value="<?php echo($datosMuestra["F_Entrada"]) ?>" required>
+                        <input type="datetime-local" placeholder="dd/mm/aaaa" name="f_ent" id="f_ent" class="f_ent" value="<?php echo $fecha->format('Y-m-d H:i') ?>" required>
                             <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                         </div>
                         <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
@@ -234,11 +237,13 @@
 
                     <script>
                         var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 - 4*60*60*1000);
+                        hoy.setSeconds(0); // Ajusta los segundos a 0
                         var fechaMaxima = hoy.toISOString().split('.')[0];
                         document.getElementById("f_ent").max = fechaMaxima;
 
                         var haceUnMes = new Date(hoy.getTime());
                         haceUnMes.setMonth(hoy.getMonth() - 2);
+                        haceUnMes.setSeconds(0); // Ajusta los segundos a 0
                         var fechaMinima = haceUnMes.toISOString().split('.')[0];
                         document.getElementById("f_ent").min = fechaMinima;
                     </script>

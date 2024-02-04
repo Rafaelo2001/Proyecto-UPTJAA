@@ -64,12 +64,35 @@
                         </ul>
                 </li>
                 <li>
+                        <a href="registro-pagos.php">
+                        <i class="fi fi-sr-file-invoice-dollar"></i>
+                        <span class="link_name">Facturación</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="registro-pagos.php">Facturación</a></li>
+                        </ul>
+                </li>
+                <li>
                         <a href="registro-examen.php">
                         <i class="fi fi-sr-flask"></i>
                         <span class="link_name">Exámenes</span>
                         </a>
                         <ul class="sub-menu blank">
                         <li><a class="link_name" href="registro-examen.php">Exámenes</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-sr-file-medical-alt"></i>
+                                <span class="link_name">Informes médicos</span>
+                        </a>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Informes médicos</a></li>
+                        <li><a href="registro-informes.php">Registrar</a></li>
+                        <li><a href="visualizar-informe.php">Visualizar</a></li>
                         </ul>
                 </li>
                 <li>
@@ -89,29 +112,6 @@
                 <li>
                         <div class="iocn-link">
                         <a href="#">
-                                <i class="fi fi-sr-file-medical-alt"></i>
-                                <span class="link_name">Informes médicos</span>
-                        </a>
-                        <i class="fi fi-sr-angle-small-down arrow"></i>
-                        </div>
-                        <ul class="sub-menu">
-                        <li><a class="link_name" href="#">Informes médicos</a></li>
-                        <li><a href="registro-informes.php">Registrar</a></li>
-                        <li><a href="visualizar-informe.php">Visualizar</a></li>
-                        </ul>
-                </li>
-                <li>
-                        <a href="registro-pagos.php">
-                        <i class="fi fi-sr-file-invoice-dollar"></i>
-                        <span class="link_name">Facturación</span>
-                        </a>
-                        <ul class="sub-menu blank">
-                        <li><a class="link_name" href="registro-pagos.php">Facturación</a></li>
-                        </ul>
-                </li>
-                <li>
-                        <div class="iocn-link">
-                        <a href="#">
                                 <i class="fi fi-sr-eye"></i>
                                 <span class="link_name">Detalles</span>
                         </a>
@@ -122,6 +122,15 @@
                         <li><a href="detalles/detalles_paciente.php">Pacientes</a></li>
                         <li><a href="detalles/detalles_muestras.php">Muestras</a></li>
                         <li><a href="detalles/detalles_insumo.php">Insumos</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="#">
+                        <i class="fi fi-sr-users-alt"></i>
+                        <span class="link_name">Gestión de usuarios</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="#">Gestión de usuarios</a></li>
                         </ul>
                 </li>
                 <li>
@@ -138,15 +147,6 @@
                         <li><a href="info_higea.php">Sobre HIGEA</a></li>
                         <li><a href="developers.php">Developers</a></li>
                         <li><a href="#">Ayuda</a></li>
-                        </ul>
-                </li>
-                <li>
-                        <a href="#">
-                        <i class="fi fi-sr-users-alt"></i>
-                        <span class="link_name">Gestión de usuarios</span>
-                        </a>
-                        <ul class="sub-menu blank">
-                        <li><a class="link_name" href="#">Gestión de usuarios</a></li>
                         </ul>
                 </li>
                 <li>
@@ -211,6 +211,12 @@
                                         <br><br>
                                         <label for="descripcion">Descripcion Material Remitido (*)</label>
                                         <textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material" required></textarea>
+
+                                        <label for="resumen">Resumen de Historia Clínica (*)</label>
+                                        <textarea type="text" name="resumen" id="resumen" cols="40" rows="3" placeholder="Escriba el resumen" required></textarea>
+
+                                        <label for="diagnostico">Diagnóstico Clínico (*)</label>
+                                        <textarea type="text" name="diagnostico" id="diagnostico" cols="40" rows="3" placeholder="Escriba el diagnóstico" required></textarea>
                                         
 
                 <br><br>
@@ -238,32 +244,8 @@
                                                         <p>Rellene este campo correctamente</p>
                                                 </span>
                                         </div>
-
-                                        <!--group: name1-->
-                                        <div class="form-group" id="group_name_patient1">
-                                        <div class="form-group-input">
-                                        <label for="resumen">Resumen de Historia Clínica (*)</label>
-                                        <input type="text" name="resumen" id="resumen" placeholder="Escriba el resumen" required>
-                                        </div>
-                                        <span class="form-input-error">
-                                                <i class="formulario_validacion_estado fi fi-rr-cross"></i>
-                                                <p>Rellene este campo correctamente</p>
-                                        </span>
-                                        </div>
                                         
-                                        <!--group: name2-->
-                                        <div class="form-group" id="group_name_patient2">
-                                        <div class="form-group-input">
-                                        <label for="diagnostico">Diagnóstico Clínico (*)</label>
-                                        <input type="text" name="diagnostico" id="diagnostico" placeholder="Escriba el diagnóstico" required>
-                                        </div>
-                                        <span class="form-input-error">
-                                                <i class="formulario_validacion_estado fi fi-rr-cross"></i>
-                                                <p>Rellene este campo correctamente</p>
-                                        </span>
-                                        </div>
-                                        
-                                        <!--group: name3-->
+                                        <!--group: FUR-->
                                         <div class="form-group" id="group_name_patient3">
                                         <div class="form-group-input">
                                         <label for="FUR">Fecha de la Última Regla (*)</label>

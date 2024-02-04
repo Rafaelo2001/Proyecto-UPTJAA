@@ -28,7 +28,7 @@
     </head>
     <body class="login-register">
 
-    <div class="sidebar close">
+        <div class="sidebar close">
                 <div class="logo-details">
                 <img class="logo" src="images/Logo con contorno.png" alt="Logo de Higea" width="60" height="60">
                 <img class="logo_name" src="images/Letras.png" alt="HIGEA" width="135" height="40">
@@ -58,12 +58,35 @@
                         </ul>
                 </li>
                 <li>
+                        <a href="registro-pagos.php">
+                        <i class="fi fi-sr-file-invoice-dollar"></i>
+                        <span class="link_name">Facturación</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="registro-pagos.php">Facturación</a></li>
+                        </ul>
+                </li>
+                <li>
                         <a href="registro-examen.php">
                         <i class="fi fi-sr-flask"></i>
                         <span class="link_name">Exámenes</span>
                         </a>
                         <ul class="sub-menu blank">
                         <li><a class="link_name" href="registro-examen.php">Exámenes</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <div class="iocn-link">
+                        <a href="#">
+                                <i class="fi fi-sr-file-medical-alt"></i>
+                                <span class="link_name">Informes médicos</span>
+                        </a>
+                        <i class="fi fi-sr-angle-small-down arrow"></i>
+                        </div>
+                        <ul class="sub-menu">
+                        <li><a class="link_name" href="#">Informes médicos</a></li>
+                        <li><a href="registro-informes.php">Registrar</a></li>
+                        <li><a href="visualizar-informe.php">Visualizar</a></li>
                         </ul>
                 </li>
                 <li>
@@ -83,29 +106,6 @@
                 <li>
                         <div class="iocn-link">
                         <a href="#">
-                                <i class="fi fi-sr-file-medical-alt"></i>
-                                <span class="link_name">Informes médicos</span>
-                        </a>
-                        <i class="fi fi-sr-angle-small-down arrow"></i>
-                        </div>
-                        <ul class="sub-menu">
-                        <li><a class="link_name" href="#">Informes médicos</a></li>
-                        <li><a href="registro-informes.php">Registrar</a></li>
-                        <li><a href="visualizar-informe.php">Visualizar</a></li>
-                        </ul>
-                </li>
-                <li>
-                        <a href="registro-pagos.php">
-                        <i class="fi fi-sr-file-invoice-dollar"></i>
-                        <span class="link_name">Facturación</span>
-                        </a>
-                        <ul class="sub-menu blank">
-                        <li><a class="link_name" href="registro-pagos.php">Facturación</a></li>
-                        </ul>
-                </li>
-                <li>
-                        <div class="iocn-link">
-                        <a href="#">
                                 <i class="fi fi-sr-eye"></i>
                                 <span class="link_name">Detalles</span>
                         </a>
@@ -116,6 +116,15 @@
                         <li><a href="detalles/detalles_paciente.php">Pacientes</a></li>
                         <li><a href="detalles/detalles_muestras.php">Muestras</a></li>
                         <li><a href="detalles/detalles_insumo.php">Insumos</a></li>
+                        </ul>
+                </li>
+                <li>
+                        <a href="#">
+                        <i class="fi fi-sr-users-alt"></i>
+                        <span class="link_name">Gestión de usuarios</span>
+                        </a>
+                        <ul class="sub-menu blank">
+                        <li><a class="link_name" href="#">Gestión de usuarios</a></li>
                         </ul>
                 </li>
                 <li>
@@ -132,15 +141,6 @@
                         <li><a href="info_higea.php">Sobre HIGEA</a></li>
                         <li><a href="developers.php">Developers</a></li>
                         <li><a href="#">Ayuda</a></li>
-                        </ul>
-                </li>
-                <li>
-                        <a href="#">
-                        <i class="fi fi-sr-users-alt"></i>
-                        <span class="link_name">Gestión de usuarios</span>
-                        </a>
-                        <ul class="sub-menu blank">
-                        <li><a class="link_name" href="#">Gestión de usuarios</a></li>
                         </ul>
                 </li>
                 <li>
@@ -215,12 +215,16 @@
 
                                         <script>
                                                 var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 - 4*60*60*1000);
+                                                hoy.setSeconds(0); // Ajusta los segundos a 0
                                                 var fechaMaxima = hoy.toISOString().split('.')[0];
+
                                                 document.getElementById("fecha").max = fechaMaxima;
 
                                                 var haceUnMes = new Date(hoy.getTime());
                                                 haceUnMes.setMonth(hoy.getMonth() - 1);
+                                                haceUnMes.setSeconds(0); // Ajusta los segundos a 0
                                                 var fechaMinima = haceUnMes.toISOString().split('.')[0];
+
                                                 document.getElementById("fecha").min = fechaMinima;
                                         </script>
 

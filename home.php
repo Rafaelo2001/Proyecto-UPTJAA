@@ -58,61 +58,93 @@
         </header>
 
         <div class="grid">
-                <div class="imagen-hover">
-                        <figure>
-                                <a href="">
-                                        <img src="images/image_hover.png" alt="imagen1">
+                <a href="detalles/detalles_paciente.php">
+                        <div class="imagen-hover">
+                                <figure>
+                                        <img src="images/home-pacientes.jpg" alt="imagen1">
                                         <div class="capa">
-                                                <h3>Imagen Hover</h3>
+                                                <h3>PACIENTES</h3>
                                         </div>
-                                </a>
-                        </figure>
-                </div>
+                                </figure>
+                        </div>
+                </a>
 
-                <div class="imagen-hover">
-                        <figure>
-                                <img src="images/image_hover.png" alt="imagen1">
-                                <div class="capa">
-                                        <h3>Imagen Hover</h3>
-                                </div>
-                        </figure>
-                </div>
+                <a href="detalles/detalles_muestras.php">
+                        <div class="imagen-hover">
+                                <figure>
+                                        <img src="images/home-muestras.jpg" alt="imagen1">
+                                        <div class="capa">
+                                                <h3>MUESTRAS</h3>
+                                        </div>
+                                </figure>
+                        </div>
+                </a>
 
-                <div class="imagen-hover">
-                        <figure>
-                                <img src="images/image_hover.png" alt="imagen1">
-                                <div class="capa">
-                                        <h3>Imagen Hover</h3>
-                                </div>
-                        </figure>
-                </div>
+                <a href="registro-examen.php">
+                        <div class="imagen-hover">
+                                <figure>
+                                        <img src="images/home-examenes.jpg" alt="imagen1">
+                                        <div class="capa">
+                                                <h3>EXÁMENES</h3>
+                                        </div>
+                                </figure>
+                        </div>
+                </a>
 
-                <div class="imagen-hover">
-                        <figure>
-                                <img src="images/image_hover.png" alt="imagen1">
-                                <div class="capa">
-                                        <h3>Imagen Hover</h3>
-                                </div>
-                        </figure>
-                </div>
+                <a href="detalles/detalles_insumo.php">
+                        <div class="imagen-hover">
+                                <figure>
+                                        <img src="images/home-insumos.jpg" alt="imagen1">
+                                        <div class="capa">
+                                                <h3>INSUMOS</h3>
+                                        </div>
+                                </figure>
+                        </div>
+                </a>
 
-                <div class="imagen-hover">
-                        <figure>
-                                <img src="images/image_hover.png" alt="imagen1">
-                                <div class="capa">
-                                        <h3>Imagen Hover</h3>
-                                </div>
-                        </figure>
-                </div>
+                <a href="visualizar-informe.php">
+                        <div class="imagen-hover">
+                                <figure>
+                                        <img src="images/home-informes.jpg" alt="imagen1">
+                                        <div class="capa">
+                                                <h3>INFORMES MÉDICOS</h3>
+                                        </div>
+                                </figure>
+                        </div>
+                </a>
 
-                <div class="imagen-hover">
-                        <figure>
-                                <img src="images/image_hover.png" alt="imagen1">
-                                <div class="capa">
-                                        <h3>Imagen Hover</h3>
-                                </div>
-                        </figure>
-                </div>
+                <a href="registro-pagos.php">
+                        <div class="imagen-hover">
+                                <figure>
+                                        <img src="images/home-factura.jpg" alt="imagen1">
+                                        <div class="capa">
+                                                <h3>FACTURACIÓN</h3>
+                                        </div>
+                                </figure>
+                        </div>
+                </a>
+
+                <a href="#">
+                        <div class="imagen-hover">
+                                <figure>
+                                        <img src="images/home-usuarios.jpg" alt="imagen1">
+                                        <div class="capa">
+                                                <h3>GESTIÓN DE USUARIOS</h3>
+                                        </div>
+                                </figure>
+                        </div>
+                </a>
+
+                <a href="mantenimiento/php/Gestion-BDD.php">
+                        <div class="imagen-hover">
+                                <figure>
+                                        <img src="images/home-mantenimiento.jpg" alt="imagen1">
+                                        <div class="capa">
+                                                <h3>MANTENIMIENTO</h3>
+                                        </div>
+                                </figure>
+                        </div>
+                </a>
 
         </div>
 
