@@ -2,7 +2,46 @@
 
     require "../php/conexion.php";
     $user = new CodeaDB();
-    echo("<html><link href='../css/sweetalert2.min.css' rel='stylesheet'/><link rel='stylesheet' type='text/css' href='../css/sweetalert2.min.css?v=1.1'><head><script src='../js/sweetalert2.all.min.js?v=1.2'></script></head><body style='background: rgb(248,255,254);background: linear-gradient(132deg, rgb(248, 255, 254) 0%, rgba(171,255,255,1) 100%);'</body>");
+    echo(
+        "<html>
+            <head>
+                <title>Registro Paciente</title>
+                <link   href='../css/styles_higea.css'    rel='stylesheet'/>
+                <link   href='../css/sweetalert2.min.css' rel='stylesheet'/>
+                <script src='../js/sweetalert2.all.min.js'></script>
+                <script src='../js/jquery-3.7.1.js'></script>
+            </head>
+            <style>
+                body {
+                    background: linear-gradient(132deg, rgb(248, 255, 254) 0%, rgba(171,255,255,1) 100%);
+                }
+
+                .swal2-popup {
+                    background: rgb(248,255,254);
+                    background: linear-gradient(135deg, rgba(248,255,254,1) 0%, rgba(171,255,255,1) 100%);
+                }
+
+                .boton-higea{
+                    border: none !important;
+                    outline: none !important;
+                    padding: 1px 20px !important;
+                    height: 40px !important;
+                    margin-top: 10px !important;
+                    background: linear-gradient(135deg, rgba(254,153,0,1) 0%, rgba(254,101,0,1) 100%) !important;
+                    color: #ffffff !important;
+                    font-size: 18px !important;
+                    border-radius: 20px !important;
+                    cursor: pointer !important;
+                    transition: background .005s !important;
+                    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2) !important;
+                    font-weight: 600 !important;
+                }
+                .boton-higea:hover {
+                    background: #fe6500 !important;
+                }
+            </style>
+            <body></body>"
+    );
 
     class BySearch
     {
@@ -166,11 +205,43 @@
                     }
                 }
                 else{
-                    echo "<script>Swal.fire('Paciente ya se encuentra registrado.');</script>";
+                    die (
+                        "   <script>
+                                Swal.fire({
+                                    title: 'Paciente ya se encuentra registrado',
+                                    icon: 'warning',
+                                    timer: 15000,
+                                    confirmButtonText: 'Regresar',
+                                    customClass: {
+                                        confirmButton: 'boton-higea',
+                                    }
+                                })
+                                .then(
+                                    (click) => { window.location.href = '../registro-paciente.php'; }
+                                );
+                            </script>
+                        </html>"
+                    );
                 }
     
                 // Mostramos un mensaje de éxito utilizando una ventana emergente de alerta de JavaScript.
                 // Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
-                echo "</html><script>Swal.fire('Los datos del paciente se han insertado correctamente.');</script>";
-// window.location.href = '../registro-paciente.php';
+                die (
+                    "   <script>
+                            Swal.fire({
+                                title: 'Los datos del paciente se han insertado correctamente',
+                                icon: 'success',
+                                timer: 10000,
+                                confirmButtonText: 'Regresar',
+                                customClass: {
+                                    confirmButton: 'boton-higea',
+                                }
+                            })
+                            .then(
+                                (click) => { window.location.href = '../registro-paciente.php'; }
+                            );
+                        </script>
+                    </html>"
+                );
+                
 ?>
