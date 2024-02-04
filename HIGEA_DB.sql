@@ -595,16 +595,15 @@ INSERT INTO `direccion` (`ID_Direccion`, `Localizacion`, `Calle`, `Sector`, `Nro
 --
 
 CREATE TABLE `empleado` (
-  `CIE` varchar(15) NOT NULL,
-  `Tipo` varchar(45) DEFAULT NULL
+  `CIE` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `empleado`
 --
 
-INSERT INTO `empleado` (`CIE`, `Tipo`) VALUES
-('V-123456', 'admin');
+INSERT INTO `empleado` (`CIE`) VALUES
+('V-123456');
 
 -- --------------------------------------------------------
 
@@ -2478,6 +2477,7 @@ CREATE TABLE `usuario` (
   `ID_Usuario` int(11) NOT NULL,
   `Nombre` varchar(45) DEFAULT NULL,
   `Password` varchar(250) DEFAULT NULL,
+  `Rol` set('admin','analista') NOT NULL,
   `CIE` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -2485,8 +2485,8 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`ID_Usuario`, `Nombre`, `Password`, `CIE`) VALUES
-(1, 'ADMIN', '$2y$10$Dx8gHR45bvQJFbR1ri3pleB5D1eX5/DTUhbgkyFk2Utks9s2St.46', 'V-123456');
+INSERT INTO `usuario` (`ID_Usuario`, `Nombre`, `Password`, `Rol`, `CIE`) VALUES
+(1, 'ADMIN', '$2y$10$Dx8gHR45bvQJFbR1ri3pleB5D1eX5/DTUhbgkyFk2Utks9s2St.46', 'admin', 'V-123456');
 
 -- --------------------------------------------------------
 
