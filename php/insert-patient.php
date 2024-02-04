@@ -2,6 +2,7 @@
 
     require "../php/conexion.php";
     $user = new CodeaDB();
+    echo("<html><link href='../css/sweetalert2.min.css' rel='stylesheet'/><link rel='stylesheet' type='text/css' href='../css/sweetalert2.min.css?v=1.1'><head><script src='../js/sweetalert2.all.min.js?v=1.2'></script></head><body style='background: rgb(248,255,254);background: linear-gradient(132deg, rgb(248, 255, 254) 0%, rgba(171,255,255,1) 100%);'</body>");
 
     class BySearch
     {
@@ -34,9 +35,9 @@
     */
 
         // Medico OK
-            $registro_medico_nuevo = $_POST['registro_medico_nuevo'];
+            $registro_medico_nuevo = isset($_POST['registro_medico_nuevo']);
             
-            $id_medico = $_POST['medico-bdd'];
+            $id_medico = (isset($_POST['medico-bdd'])) ? $_POST['medico-bdd'] : null;
 
             $nombre_medico = $_POST['nombre-medico-registro'];
             $telefono_medico = $_POST['telefono-medico-registro'];
@@ -165,17 +166,11 @@
                     }
                 }
                 else{
-                    echo "<script>
-                    alert('Paciente ya se encuentra registrado.');
-                    window.location.href = '../registro-paciente.php';
-                    </script>";
+                    echo "<script>Swal.fire('Paciente ya se encuentra registrado.');</script>";
                 }
     
                 // Mostramos un mensaje de éxito utilizando una ventana emergente de alerta de JavaScript.
                 // Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
-                echo "<script>
-                alert('Los datos se han insertado correctamente.');
-                window.location.href = '../registro-paciente.php';
-                </script>";
-
+                echo "</html><script>Swal.fire('Los datos del paciente se han insertado correctamente.');</script>";
+// window.location.href = '../registro-paciente.php';
 ?>
