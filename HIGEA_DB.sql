@@ -2463,12 +2463,11 @@ INSERT INTO `telefono` (`ID_Telefono`, `Nro_Telf`, `CI`) VALUES
 DELIMITER $$
 CREATE TRIGGER `call_actualizar_columna_edad` AFTER INSERT ON `telefono` FOR EACH ROW BEGIN
 	CALL actualizar_columna_edad();
-END
+END$$
 
 CREATE TRIGGER `call_actualizar_update_columna_edad` AFTER UPDATE ON `telefono` FOR EACH ROW BEGIN
 	CALL actualizar_columna_edad();
-END
-$$
+END$$
 DELIMITER ;
 
 -- --------------------------------------------------------
