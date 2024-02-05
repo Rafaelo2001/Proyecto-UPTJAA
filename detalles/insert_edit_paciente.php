@@ -60,6 +60,9 @@
             if($_POST['nro_telf'] != $datosTelefono) {
                 $sqlTelefonoActualizar = "`Nro_Telf` = '".$_POST['nro_telf']."'";
             }
+            else {
+                $sqlTelefonoActualizar = "`Nro_Telf` = '".$datosTelefono."'";
+            }
 
             if($datosPacienteActualizar || $sqlCorreoActualizar || $sqlTelefonoActualizar){
 
