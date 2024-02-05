@@ -1,64 +1,15 @@
 <?php
 
-    require "../php/conexion.php";
-    $user = new CodeaDB();
-    echo(
-        "<html>
-            <head>
-                <title>Registro Paciente</title>
-                <link   href='../css/styles_higea.css'    rel='stylesheet'/>
-                <link   href='../css/sweetalert2.min.css' rel='stylesheet'/>
-                <script src='../js/sweetalert2.all.min.js'></script>
-                <script src='../js/jquery-3.7.1.js'></script>
-            </head>
-            <style>
-                body {
-                    background: linear-gradient(132deg, rgb(248, 255, 254) 0%, rgba(171,255,255,1) 100%);
-                }
+    require "conexion.php";
+    require "sweet.php";
 
-                .swal2-popup {
-                    background: rgb(248,255,254);
-                    background: linear-gradient(135deg, rgba(248,255,254,1) 0%, rgba(171,255,255,1) 100%);
-                }
+    $user  = new CodeaDB();
+    $alert = new SweetForInsert();
 
-                .boton-higea{
-                    border: none !important;
-                    outline: none !important;
-                    padding: 1px 20px !important;
-                    height: 40px !important;
-                    margin-top: 10px !important;
-                    background: linear-gradient(135deg, rgba(254,153,0,1) 0%, rgba(254,101,0,1) 100%) !important;
-                    color: #ffffff !important;
-                    font-size: 18px !important;
-                    border-radius: 20px !important;
-                    cursor: pointer !important;
-                    transition: background .005s !important;
-                    box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2) !important;
-                    font-weight: 600 !important;
-                }
-                .boton-higea:hover {
-                    background: #fe6500 !important;
-                }
-            </style>
-            <body></body>"
-    );
-
-    class BySearch
-    {
-        // BUSCAR x BY
-        // Utilizar esta funcion para extraer un valor de la BDD y utilizar en otras funciones
-        // Esta funcion retorna el ultimo valor registrado en la tabla
-        public function buscarBY($tabla, $columna)
-        {
-            $resultado = $this->conexion->query("SELECT * FROM $tabla ORDER BY $columna DESC LIMIT 1") or die($this->conexion->error);
-            if($resultado)
-                return $resultado->fetch_all(MYSQLI_ASSOC);
-            return false;
-        }
-    }
+    echo($alert->sweetHead("Registro Paciente"));
     
     // Conectando con la base de datos Higea
-    $conex = mysqli_connect("localhost","root","","higea_db");
+    $conex = $user->conexion;
 
     // Declarando las variables a utilizar, conectandolas con los datos recibidos de patient-register
     /* 
@@ -117,131 +68,97 @@
             Por ahora el rollback se descartara xq la unica forma que funcione es rediseñando el DER
             */
 
-                // Enviando MEDICO
+                try {
 
-                if ($registro_medico_nuevo) {
+                    // Enviando MEDICO
 
-                    $sql_Medico_Nuevo = "INSERT INTO medico (Nombre_Medico, Telefono_Medico) VALUES ('$nombre_medico', '$telefono_medico')";
+                    if ($registro_medico_nuevo) {
 
-                    $ejecutado_Medico_Nuevo = mysqli_query($conex,$sql_Medico_Nuevo);
-                    if (!$ejecutado_Medico_Nuevo) {
-                        throw new Exception("Error al insertar en la tabla Medico" . mysqli_error($conex));
+                        $sql_Medico_Nuevo = "INSERT INTO medico (Nombre_Medico, Telefono_Medico) VALUES ('$nombre_medico', '$telefono_medico')";
+
+                        $ejecutado_Medico_Nuevo = mysqli_query($conex,$sql_Medico_Nuevo);
+                        if (!$ejecutado_Medico_Nuevo) {
+                            throw new Exception("Error al insertar en la tabla Medico" . mysqli_error($conex));
+                        }
+
+                        // Registro del ID del Medico recien creado en $id_medico
+                        $id_medico = $user->buscarONE('medico','ID_Medico','ID_Medico');
+
                     }
 
-                    // Registro del ID del Medico recien creado en $id_medico
+                    // Confirmar que cedula persona no este registrada
+                        $buscar_ci_persona = $user->buscarExistencia("persona","CI='".$documento_id."'");                    
 
-                    $buscar_id_medico = new BySearch();
-                    $buscar_id_medico->conexion = new mysqli("localhost","root","","higea_db");
-                    $resultado_id_medico = $buscar_id_medico->buscarBY('medico','ID_Medico');
+                    if(!$buscar_ci_persona){
+                                
+                        // Enviando DIRECCION
+                        $sqlDireccion = "INSERT INTO Direccion (ID_Parroquia, Localizacion, Calle, Sector, Nro_Casa) VALUES ('$parroquia', '$localizacion', '$calle', '$sector', '$nro_casa')";
+                        $ejecutadoDireccion = mysqli_query($conex,$sqlDireccion);
+                        if (!$ejecutadoDireccion) {
+                            throw new Exception("Error al insertar en la tabla Direccion" . mysqli_error($conex));
+                        }
+                                
 
-                    foreach ($resultado_id_medico as $fila_id_medico) {
-                        $id_medico = $fila_id_medico['ID_Medico'];
+                        // Enviando PERSONA
+                        $resultadoDireccion = $user->buscarBY('direccion','ID_Direccion');
+
+                        foreach ($resultadoDireccion as $filaIdDireccion) {
+                            $idDireccion = $filaIdDireccion['ID_Direccion'];
+                            $sqlPersona = "INSERT INTO persona (CI, PN, SN, TN, PA, SA, F_nac, Edad, Sexo, ID_Direccion) VALUES ('$documento_id', '$nombre1_paciente', '$nombre2_paciente', '$nombre3_paciente', '$apellido1_paciente', '$apellido2_paciente', '$date_birth', '$edad', '$sexo', '$idDireccion')";
+                            $ejecutadoPersona = mysqli_query($conex,$sqlPersona);
+                            if (!$ejecutadoPersona) {
+                                throw new Exception("Error al insertar en la tabla Persona: " . mysqli_error($conex));
+                            }
+                        }
+                
+
+                        // Enviando TELEFONO
+                        $sqlTelefono = "INSERT INTO telefono (Nro_Telf, CI) VALUES ('$telf_paciente', '$documento_id')";
+                        $ejecutadoTelefono = mysqli_query($conex,$sqlTelefono);
+                        if (!$ejecutadoTelefono) {
+                            throw new Exception("Error al insertar en la tabla Telefono" . mysqli_error($conex));
+                        }
+                    
+                
+                        // Enviando CORREO
+                        $sqlCorreo = "INSERT INTO correo (Correo, CI) VALUES ('$email_paciente', '$documento_id')";
+                        $ejecutadoCorreo = mysqli_query($conex,$sqlCorreo);
+                        if (!$ejecutadoCorreo) {
+                            throw new Exception("Error al insertar en la tabla Correo" . mysqli_error($conex));
+                        }
+                    
                     }
 
-                }
+                    // Confirmar que cedula paciente no este registrada
+                        $buscar_ci_paciente = $user->buscarExistencia("paciente", "CIP='".$documento_id."'");
 
-                // Confirmar que cedula persona no este registrada
-                    $buscar_ci_persona = $user->buscarExistencia("persona","CI='".$documento_id."'");                    
+                    if(!$buscar_ci_paciente){
+                        
+                        // Enviando PACIENTE
+                        $sql_Paciente = "INSERT INTO paciente (CIP) VALUES ('$documento_id')";
+                        $ejecutado_Paciente = mysqli_query($conex,$sql_Paciente);
+                        if (!$ejecutado_Paciente) {
+                            throw new Exception("Error al insertar en la tabla Empleado" . mysqli_error($conex));
+                        }
 
-                if(!$buscar_ci_persona){
-                            
-                    // Enviando DIRECCION
-                    $sqlDireccion = "INSERT INTO Direccion (ID_Parroquia, Localizacion, Calle, Sector, Nro_Casa) VALUES ('$parroquia', '$localizacion', '$calle', '$sector', '$nro_casa')";
-                    $ejecutadoDireccion = mysqli_query($conex,$sqlDireccion);
-                    if (!$ejecutadoDireccion) {
-                        throw new Exception("Error al insertar en la tabla Direccion" . mysqli_error($conex));
-                    }
-                            
 
-                    // Enviando PERSONA
-                    $buscarIdDirecion = new BySearch();
-                    $buscarIdDirecion->conexion = new mysqli("localhost","root","","higea_db");
-                    $resultadoDireccion = $buscarIdDirecion->buscarBY('direccion','ID_Direccion');
-                    foreach ($resultadoDireccion as $filaIdDireccion) {
-                        $idDireccion = $filaIdDireccion['ID_Direccion'];
-                        $sqlPersona = "INSERT INTO persona (CI, PN, SN, TN, PA, SA, F_nac, Edad, Sexo, ID_Direccion) VALUES ('$documento_id', '$nombre1_paciente', '$nombre2_paciente', '$nombre3_paciente', '$apellido1_paciente', '$apellido2_paciente', '$date_birth', '$edad', '$sexo', '$idDireccion')";
-                        $ejecutadoPersona = mysqli_query($conex,$sqlPersona);
-                        if (!$ejecutadoPersona) {
-                            throw new Exception("Error al insertar en la tabla Persona: " . mysqli_error($conex));
+                        // Enviando MEDICO_REMITE_PACIENTE
+                        $sql_Medico_Remite_Paciente = "INSERT INTO medico_remite_paciente (ID_Medico, CIP, F_Registro, Obs) VALUES ('$id_medico', '$documento_id', '$f_registro', '$obs')";
+                        $ejecutado_Medico_Remite_Paciente = mysqli_query($conex,$sql_Medico_Remite_Paciente);
+                        if (!$ejecutado_Medico_Remite_Paciente) {
+                            throw new Exception("Error al insertar en la tabla Empleado" . mysqli_error($conex));
                         }
                     }
-            
-
-                    // Enviando TELEFONO
-                    $sqlTelefono = "INSERT INTO telefono (Nro_Telf, CI) VALUES ('$telf_paciente', '$documento_id')";
-                    $ejecutadoTelefono = mysqli_query($conex,$sqlTelefono);
-                    if (!$ejecutadoTelefono) {
-                        throw new Exception("Error al insertar en la tabla Telefono" . mysqli_error($conex));
-                    }
-                
-            
-                    // Enviando CORREO
-                    $sqlCorreo = "INSERT INTO correo (Correo, CI) VALUES ('$email_paciente', '$documento_id')";
-                    $ejecutadoCorreo = mysqli_query($conex,$sqlCorreo);
-                    if (!$ejecutadoCorreo) {
-                        throw new Exception("Error al insertar en la tabla Correo" . mysqli_error($conex));
-                    }
-                
-                }
-
-                // Confirmar que cedula paciente no este registrada
-                    $buscar_ci_paciente = $user->buscarExistencia("paciente", "CIP='".$documento_id."'");
-
-                if(!$buscar_ci_paciente){
-                    
-                    // Enviando PACIENTE
-                    $sql_Paciente = "INSERT INTO paciente (CIP) VALUES ('$documento_id')";
-                    $ejecutado_Paciente = mysqli_query($conex,$sql_Paciente);
-                    if (!$ejecutado_Paciente) {
-                        throw new Exception("Error al insertar en la tabla Empleado" . mysqli_error($conex));
-                    }
-
-
-                    // Enviando MEDICO_REMITE_PACIENTE
-                    $sql_Medico_Remite_Paciente = "INSERT INTO medico_remite_paciente (ID_Medico, CIP, F_Registro, Obs) VALUES ('$id_medico', '$documento_id', '$f_registro', '$obs')";
-                    $ejecutado_Medico_Remite_Paciente = mysqli_query($conex,$sql_Medico_Remite_Paciente);
-                    if (!$ejecutado_Medico_Remite_Paciente) {
-                        throw new Exception("Error al insertar en la tabla Empleado" . mysqli_error($conex));
+                    else{
+                        die ($alert->sweetWar("../registro-paciente.php", "Paciente ya se encuentra registrado", "Dirijase a <b>Detalles→Paciente</b> si necesita modificar datos."));
                     }
                 }
-                else{
-                    die (
-                        "   <script>
-                                Swal.fire({
-                                    title: 'Paciente ya se encuentra registrado',
-                                    icon: 'warning',
-                                    timer: 15000,
-                                    confirmButtonText: 'Regresar',
-                                    customClass: {
-                                        confirmButton: 'boton-higea',
-                                    }
-                                })
-                                .then(
-                                    (click) => { window.location.href = '../registro-paciente.php'; }
-                                );
-                            </script>
-                        </html>"
-                    );
+                catch (Exception $e){
+                    die($alert->sweetError("../registro-paciente.php","Error al guardar datos",$e->getMessage()));
                 }
-    
+
                 // Mostramos un mensaje de éxito utilizando una ventana emergente de alerta de JavaScript.
                 // Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
-                die (
-                    "   <script>
-                            Swal.fire({
-                                title: 'Los datos del paciente se han insertado correctamente',
-                                icon: 'success',
-                                timer: 10000,
-                                confirmButtonText: 'Regresar',
-                                customClass: {
-                                    confirmButton: 'boton-higea',
-                                }
-                            })
-                            .then(
-                                (click) => { window.location.href = '../registro-paciente.php'; }
-                            );
-                        </script>
-                    </html>"
-                );
+                die ($alert->sweetOK("../registro-paciente.php", "Los datos del paciente se han insertado correctamente"));
                 
 ?>

@@ -4,8 +4,13 @@
 
     // REGISTRO DE NUEVOS INSUMOS
 
-    require "../php/conexion.php";
-    $user = new CodeaDB();
+    require "conexion.php";
+    require "sweet.php";
+
+    $user  = new CodeaDB();
+    $alert = new SweetForInsert();
+
+    echo($alert->sweetHead("Registro de Insumo"));
 
     // Conectando con la base de datos Higea
     $conex = $user->conexion;   
@@ -21,15 +26,19 @@
         
         // ENVIANDO DATOS
 
-            // Enviando Insumo
-            $sql_insumo = "INSERT INTO insumo (Material, Unidades, Existencia, Cant_minima, Consumo_Biop, Consumo_Cito) VALUES ('$material', '$unidades', '$existencia', '$cant_minima', '$consumo_b', '$consumo_c')";
-            $ejecutado_insumo = mysqli_query($conex,$sql_insumo);
-            if (!$ejecutado_insumo) {
-                throw new Exception("Error al insertar en la tabla 'insumo'" . mysqli_error($conex));
+            try {
+                // Enviando Insumo
+                $sql_insumo = "INSERT INTO insumo (Material, Unidades, Existencia, Cant_minima, Consumo_Biop, Consumo_Cito) VALUES ('$material', '$unidades', '$existencia', '$cant_minima', '$consumo_b', '$consumo_c')";
+                $ejecutado_insumo = mysqli_query($conex,$sql_insumo);
+                if (!$ejecutado_insumo) {
+                    throw new Exception("Error al insertar en la tabla 'insumo'" . mysqli_error($conex));
+                }
+            }
+            catch (Exception $e){
+                die($alert->sweetError("../registro-insumo.php","Error al guardar datos",$e->getMessage()));
             }
 
-            echo "<script>
-            alert('Los datos se han insertado correctamente.');
-            window.location.href = '../registro-insumo.php'; 
-            </script>";      
+
+            die ($alert->sweetOK("../registro-insumo.php", "Los datos del insumo se han insertado correctamente"));
+            
 ?>

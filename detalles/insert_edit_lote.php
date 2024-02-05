@@ -1,12 +1,17 @@
 <?php
 
-    // if($_SERVER['REQUEST_METHOD'] !== 'POST' || $_POST['id'] == "" || $_POST['id_lote'] == ""){
-    //     header('Location: ./detalles_insumo.php', true, 303);
-    //     exit;
-    // }
+    if($_SERVER['REQUEST_METHOD'] !== 'POST' || $_POST['id'] == "" || $_POST['id_lote'] == ""){
+        header('Location: ./detalles_insumo.php', true, 303);
+        exit;
+    }
     
     require "../php/conexion.php";
-    $user = new CodeaDB();
+    require "../php/sweet.php";
+
+    $user  = new CodeaDB();
+    $alert = new SweetForInsert();
+
+    echo($alert->sweetHead("Edición de Lote"));
 
     // Conectando con la base de datos Higea
     $conex = $user->conexion;    
@@ -51,37 +56,109 @@
                     }
                 }
             
-                // Actualizando Lote
-                $ActSqlLote = "UPDATE `lote` SET $sqlLoteActualizar WHERE `lote`.`ID_Lote` = '$id_lote';";
-                if (!(mysqli_query($conex,$ActSqlLote))) {
-                    throw new Exception("Error al actualizar en la tabla Lote: " . mysqli_error($conex));
+                try {
+                    // Actualizando Lote
+                    $ActSqlLote = "UPDATE `lote` SET $sqlLoteActualizar WHERE `lote`.`ID_Lote` = '$id_lote';";
+                    if (!(mysqli_query($conex,$ActSqlLote))) {
+                        throw new Exception("Error al actualizar en la tabla Lote: " . mysqli_error($conex));
+                    }
                 }
-             
-                echo (
-                    "<html><form></form></html>
-                    
-                    <script>
-                        alert('Lote actualizado');
-                        
-                        var form = document.createElement('form');
-                        form.method = 'POST';
-                        form.action = './edit_insumo.php';
-                        
-                        var campo = document.createElement('input');
-                        campo.type = 'hidden';
-                        campo.name = 'id';
-                        campo.value = '$id';
-                        form.appendChild(campo);
-                        
-                        document.body.appendChild(form);
-                        form.submit();
-                    </script>"
+                catch (Exception $e){
+                    $html =  'html: "'.str_replace('"',"'",$e->getMessage()).'",';
+                    die (
+                        "   <script>
+                                Swal.fire({
+                                    title: 'Error al guardar datos',
+                                    $html
+                                    icon: 'error',
+                                    timer: 10000,
+                                    confirmButtonText: 'Regresar',
+                                    customClass: {
+                                        confirmButton: 'boton-higea',
+                                    }
+                                })
+                                .then(
+                                    (click) => {
+                                        var form = document.createElement('form');
+                                        form.method = 'POST';
+                                        form.action = './edit_insumo.php';
+                                        
+                                        var campo = document.createElement('input');
+                                        campo.type = 'hidden';
+                                        campo.name = 'id';
+                                        campo.value = '$id';
+                                        form.appendChild(campo);
+                                        
+                                        document.body.appendChild(form);
+                                        form.submit();
+                                    }
+                                );
+                            </script>
+                        </html>"
+                    );
+                }
+
+                die (
+                    "   <script>
+                            Swal.fire({
+                                title: 'Lote actualizado',
+                                icon: 'success',
+                                timer: 10000,
+                                confirmButtonText: 'Regresar',
+                                customClass: {
+                                    confirmButton: 'boton-higea',
+                                }
+                            })
+                            .then(
+                                (click) => {
+                                    var form = document.createElement('form');
+                                    form.method = 'POST';
+                                    form.action = './edit_insumo.php';
+                                    
+                                    var campo = document.createElement('input');
+                                    campo.type = 'hidden';
+                                    campo.name = 'id';
+                                    campo.value = '$id';
+                                    form.appendChild(campo);
+                                    
+                                    document.body.appendChild(form);
+                                    form.submit();
+                                }
+                            );
+                        </script>
+                    </html>"
                 );
             }
             else{
-                echo "<script>
-                alert('no cambiaste nada pa');
-                window.location.href = './detalles_insumo.php';
-                </script>";
+                die (
+                    "   <script>
+                            Swal.fire({
+                                title: 'No se han introducidos datos para actualizar',
+                                icon: 'warning',
+                                timer: 15000,
+                                confirmButtonText: 'Regresar',
+                                customClass: {
+                                    confirmButton: 'boton-higea',
+                                }
+                            })
+                            .then(
+                                (click) => {
+                                    var form = document.createElement('form');
+                                    form.method = 'POST';
+                                    form.action = './edit_insumo.php';
+                                    
+                                    var campo = document.createElement('input');
+                                    campo.type = 'hidden';
+                                    campo.name = 'id';
+                                    campo.value = '$id';
+                                    form.appendChild(campo);
+                                    
+                                    document.body.appendChild(form);
+                                    form.submit();
+                                }
+                            );
+                        </script>
+                    </html>"
+                );
             }           
 ?>

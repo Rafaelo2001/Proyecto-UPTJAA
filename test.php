@@ -36,6 +36,15 @@
     </head>
         
     <body style='background: rgb(248,255,254);background: linear-gradient(132deg, rgb(248, 255, 254) 0%, rgba(171,255,255,1) 100%);'>
+    <?php
+    require "php/conexion.php";
+    $user = new CodeaDB();
+    echo($user->hola);
+
+    $user->hola = "hola";
+
+    echo($user->hola);
+    ?>
     </body>
 
     
@@ -55,7 +64,7 @@
                     imageUrl: "https://th.bing.com/th/id/OIP.7JLJou7fjvCFbtUnQbf3BQHaLr?rs=1&pid=ImgDetMain",
                     imageHeight: 500,
                     imageAlt: "HUMUNGOSAURIO",
-                    text: "btw, paciente registrado correctamente.",
+                    html: 'Dirijase a <b>Detalles→Paciente</b> si necesita modificar datos.',
                     confirmButtonText: "Regresar",
                     customClass: {
                         confirmButton: 'boton2',
