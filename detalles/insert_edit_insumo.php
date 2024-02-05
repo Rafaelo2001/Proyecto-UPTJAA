@@ -1,12 +1,17 @@
 <?php
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST' || $_POST['id'] == "") {
-    header('Location: ./detalles_insumo.php', true, 303);
-    exit;
-}
+    if($_SERVER['REQUEST_METHOD'] !== 'POST' || $_POST['id'] == ""){
+        header('Location: ./detalles_insumo.php', true, 303);
+        exit;
+    }
+    
+    require "../php/conexion.php";
+    require "../php/sweet.php";
 
-require "../php/conexion.php";
-$user = new CodeaDB();
+    $user  = new CodeaDB();
+    $alert = new SweetForInsert();
+
+    echo($alert->sweetHead("Edición de Insumo"));
 
 // Conectando con la base de datos Higea
 $conex = $user->conexion;
@@ -43,29 +48,32 @@ if ($_POST['con_cito'] != $insumo['Consumo_Cito']) {
 }
 
 
-if ($datosInsumoActualizar) {
-    for ($i = 0; $i < count($datosInsumoActualizar); $i++) {
-        if ($i < count($datosInsumoActualizar) - 1) {
-            $sqlInsumoActualizar .= $datosInsumoActualizar[$i] . ", ";
-        } else {
-            $sqlInsumoActualizar .= $datosInsumoActualizar[$i];
-        }
-    }
+            if($datosInsumoActualizar){
+                try {
+                    for($i = 0; $i < count($datosInsumoActualizar); $i++){
+                        if($i < count($datosInsumoActualizar)-1){
+                        $sqlInsumoActualizar .= $datosInsumoActualizar[$i].", ";
+                        }
+                        else{
+                            $sqlInsumoActualizar .= $datosInsumoActualizar[$i];
+                        }
+                    }
+                
+                    // Actualizando Insumo
+                    $ActSqlInsumo = "UPDATE `insumo` SET $sqlInsumoActualizar WHERE `insumo`.`ID_Insumo` = '".$_POST['id']."';";
+                    if (!(mysqli_query($conex,$ActSqlInsumo))) {
+                        throw new Exception("Error al actualizar en la tabla Insumo: " . mysqli_error($conex));
+                    }
+                }
+                catch (Exception $e){
+                    die($alert->sweetError("./detalles_insumo.php","Error al guardar datos",$e->getMessage()));
+                }
 
-    // Actualizando Insumo
-    $ActSqlInsumo = "UPDATE `insumo` SET $sqlInsumoActualizar WHERE `insumo`.`ID_Insumo` = '" . $_POST['id'] . "';";
-    if (!(mysqli_query($conex, $ActSqlInsumo))) {
-        throw new Exception("Error al actualizar en la tabla Insumo: " . mysqli_error($conex));
-    }
+                die ($alert->sweetOK("./detalles_insumo.php", "Los datos se han actualizado correctamente"));
 
-    echo "<script>
-                alert('Los datos se han insertado correctamente.');
-                window.location.href = './detalles_insumo.php';
-                </script>";
-} else {
-    echo "<script>
-                alert('no cambiaste nada pa');
-                window.location.href = './detalles_insumo.php';
-                </script>";
-}
+            }
+            else{
+                die ($alert->sweetWar("./detalles_insumo.php", "No se han introducidos datos para actualizar"));
+            }     
+
 ?>

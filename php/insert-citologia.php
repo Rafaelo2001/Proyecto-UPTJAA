@@ -1,21 +1,15 @@
 <?php
 
-class BySearch
-{
-    // BUSCAR x BY
-    // Utilizar esta funcion para extraer un valor de la BDD y utilizar en otras funciones
-    // Esta funcion retorna el ultimo valor registrado en la tabla
-    public function buscarBY($tabla, $columna)
-    {
-        $resultado = $this->conexion->query("SELECT * FROM $tabla ORDER BY $columna DESC LIMIT 1") or die($this->conexion->error);
-        if ($resultado)
-            return $resultado->fetch_all(MYSQLI_ASSOC);
-        return false;
-    }
-}
+    require "conexion.php";
+    require "sweet.php";
 
-// Conectando con la base de datos Higea
-$conex = mysqli_connect("localhost", "root", "", "higea_db");
+    $user  = new CodeaDB();
+    $alert = new SweetForInsert();
+
+    echo($alert->sweetHead("Registro Citología"));
+
+    // Conectando con la base de datos Higea
+    $conex = $user->conexion;
 
 // Cambiando la zona horaria
 date_default_timezone_set('America/Caracas');
@@ -34,52 +28,51 @@ date_default_timezone_set('America/Caracas');
             6.FUR
             7. Endocervix, Exocervix, Vagina, Otro
     */
-
-// TABLA: m_remitido
-$f_entrada   = date("Y-m-d H:i:s");
-$ci_paciente = $_POST['paciente'];
-$id_medico   = $_POST['medico'];
-$descripcion = $_POST['descripcion'];
-$resumen     = $_POST['resumen'];
-$diagnostico = $_POST['diagnostico'];
-
-// TABLA: m_citologia
-$FUR        = $_POST['FUR'];
-$endocervix = (isset($_POST['endocervix']))  ? 1 : 0;
-$exocervix  = (isset($_POST['exocervix']))  ? 1 : 0;
-$vagina     = (isset($_POST['vagina']))  ? 1 : 0;
-$otro       = (empty($_POST['otro'])) ? 0 : $_POST['otro'];
+    
+        // TABLA: m_remitido
+            $f_entrada   = date("Y-m-d H:i:s");
+            $ci_paciente = $_POST['paciente'];
+            $id_medico   = $_POST['medico'];
+            $descripcion = $_POST['descripcion'];
+            $resumen     = $_POST['resumen'];
+            $diagnostico = $_POST['diagnostico'];
+            
+        // TABLA: m_citologia
+            $FUR        = $_POST['FUR'];
+            $endocervix = (isset($_POST['endocervix']))  ? 1 : 0;
+            $exocervix  = (isset($_POST['exocervix']))  ? 1 : 0;
+            $vagina     = (isset($_POST['vagina']))  ? 1 : 0;
+            $otro       = (empty($_POST['otro']))  ? 0 : $_POST['otro'];
 
 
 // ENVIANDO DATOS
 
-// Enviando M_REMITIDO
-$sql_m_remitido = "INSERT INTO m_remitido (ID_Medico, CI_Paciente, Descripcion_material, Diagnostico, Resumen, F_Entrada) VALUES ('$id_medico', '$ci_paciente', '$descripcion', '$diagnostico', '$resumen', '$f_entrada')";
-$ejecutado_m_remitido = mysqli_query($conex, $sql_m_remitido);
-if (!$ejecutado_m_remitido) {
-    throw new Exception("Error al insertar en la tabla 'm_remitido'" . mysqli_error($conex));
-}
+            try {
+                // Enviando M_REMITIDO
+                $sql_m_remitido = "INSERT INTO m_remitido (ID_Medico, CI_Paciente, Descripcion_material, Diagnostico, Resumen, F_Entrada) VALUES ('$id_medico', '$ci_paciente', '$descripcion', '$diagnostico', '$resumen', '$f_entrada')";
+                $ejecutado_m_remitido = mysqli_query($conex,$sql_m_remitido);
+                if (!$ejecutado_m_remitido) {
+                    throw new Exception("Error al insertar en la tabla 'm_remitido'" . mysqli_error($conex));
+                }
 
-// Buscando ID_M_Citologia
-$buscar_id_m_remitido = new BySearch();
-$buscar_id_m_remitido->conexion = new mysqli("localhost", "root", "", "higea_db");
-$resultado_id_m_remitido = $buscar_id_m_remitido->buscarBY('m_remitido', 'ID_M_Remitido');
+                    // Buscando ID_M_Citologia
+                    $id_m_remitido = $user->buscarONE('m_remitido','ID_M_Remitido','ID_M_Remitido');
+                    
 
-foreach ($resultado_id_m_remitido as $fila_id) {
-    $id_m_remitido = $fila_id['ID_M_Remitido'];
-}
+                // Enviando M_CITOLOGIA
+                $sql_m_citologia = "INSERT INTO m_citologia (ID_M_Remitido, FUR, Endocervix, Exocervix, Vagina, Otros) VALUES ('$id_m_remitido', '$FUR', '$endocervix', '$exocervix', '$vagina', '$otro')";
+                $ejecutado_m_citologia = mysqli_query($conex,$sql_m_citologia);
+                if (!$ejecutado_m_citologia) {
+                    throw new Exception("Error al insertar en la tabla 'm_citologia'" . mysqli_error($conex));
+                }            
+            }
+            catch (Exception $e){
+                die($alert->sweetError("../registro-citologia.php","Error al guardar datos",$e->getMessage()));
+            }
 
-// Enviando M_CITOLOGIA
-$sql_m_citologia = "INSERT INTO m_citologia (ID_M_Remitido, FUR, Endocervix, Exocervix, Vagina, Otros) VALUES ('$id_m_remitido', '$FUR', '$endocervix', '$exocervix', '$vagina', '$otro')";
-$ejecutado_m_citologia = mysqli_query($conex, $sql_m_citologia);
-if (!$ejecutado_m_citologia) {
-    throw new Exception("Error al insertar en la tabla 'm_citologia'" . mysqli_error($conex));
-}
 
-// Mostramos un mensaje de éxito utilizando una ventana emergente de alerta de JavaScript.
-// Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
-echo "<script>
-            alert('Los datos se han insertado correctamente.');
-            window.location.href = '../registro-citologia.php'; 
-            </script>";
+            // Mostramos un mensaje de éxito utilizando una ventana emergente de alerta de JavaScript.
+            // Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
+            die ($alert->sweetOK("../registro-citologia.php", "Los datos de la muestra se han insertado correctamente"));
+
 ?>

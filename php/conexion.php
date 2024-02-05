@@ -5,10 +5,13 @@ class CodeaDB{
     private $clave  ="";
     private $db     ="higea_db";
     public $conexion;
+
     public function __construct(){
         $this->conexion = new mysqli($this->host, $this->usuario, $this->clave,$this->db) or die("error");
         $this->conexion->set_charset("utf8");
     }
+
+
     //BUSCAR
     public function buscar($tabla, $condicion){
         $resultado = $this->conexion->query("SELECT * FROM $tabla WHERE $condicion") or die($this->conexion->error);
@@ -16,6 +19,7 @@ class CodeaDB{
             return $resultado->fetch_all(MYSQLI_ASSOC);
         return false;
     }
+
 
     // BUSCAR x BY
     // Utilizar esta funcion para extraer un valor de la BDD y utilizar en otras funciones
@@ -41,8 +45,9 @@ class CodeaDB{
         return false;
     }
 
+
     // BUSCAR ONE CELL
-    // Utilizar esta funcion para extraer un solo valor de una casilla en especifico de la BDD
+    // Utilizar esta funcion para extraer un solo valor de una casilla en especifico de la BDD, siendo el ultimo registro guardado si no hay mas condiciones
     public function buscarONE($tabla, $condicion, $columna)
     {
         $resultado = $this->conexion->query("SELECT * FROM $tabla ORDER BY $condicion DESC LIMIT 1") or die($this->conexion->error);
@@ -53,6 +58,7 @@ class CodeaDB{
         return false;
     }
 
+    
     // BUSCAR EXISTENCIA
     // Utilizar esta funcion para determinar si existe o no un registro
     // Esta funcion retorna verdaro si existe o falso si no existe
