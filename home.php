@@ -1,33 +1,36 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: index.php');
+		exit;
+	}
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+	// Incluye el archivo de permisos
+	require 'php/permisos.php';
+	require("php/conexion.php");
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+		$user = new CodeaDB();
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	// Obtiene el rol del usuario de la variable de sesión
+	$rol = $_SESSION['Rol'];
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	// Si el usuario no tiene permiso, muestra una alerta y redirige al usuario
-	echo "<script>
-				alert('No tienes permiso para acceder a esta página.');
-				window.location.href = 'index.php';
-		</script>";
+	// Obtiene el nombre de la página actual
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-	exit();
-}
+	// Verifica si el usuario tiene permiso para acceder a la página actual
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		// Si el usuario no tiene permiso, muestra una alerta y redirige al usuario
+		echo "<script>
+					alert('No tienes permiso para acceder a esta página.');
+					window.location.href = 'index.php';
+			</script>";
+
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -169,7 +172,58 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 	</div>
 
+		<br>
 
+	<div class="grid-lower">
+		<section class="info-muestra">
+			<?php
+				$n_examenes = count($user->buscar("m_remitido","Examinado = 0"));
+
+				echo("<h2>Muestras por Analizar: <big>$n_examenes</big></h2>");
+			?>
+		</section>
+		<section class="info-muestra">
+			<h2>Insumos por Reponer:</h2>
+			<?php
+				$lista_insumos = $user->buscar("insumo","1");
+				$lista_reponer = "";
+
+				foreach($lista_insumos as $insumo):
+					$material = ucfirst($insumo['Material']);
+					$existencia = $insumo['Existencia'];
+					$minimoRojo = $insumo['Cant_minima'];
+
+					if($insumo['Consumo_Biop'] > $insumo['Consumo_Cito']){
+						$minimoAmarillo = $insumo['Consumo_Biop']*3;
+					}
+					else{
+						$minimoAmarillo = $insumo['Consumo_Cito']*3;
+					}
+					
+					if($existencia < $minimoRojo){
+						$lista_reponer .= "<li style='background: #DA3838;'><h3>$material (URGENTE)</h3></li>";
+					}
+					elseif($existencia < $minimoAmarillo){
+						$lista_reponer .= "<li style='background: yellow;'><h3>$material</h3></li>";
+					}
+				endforeach;
+
+				if(empty($lista_reponer)){
+					echo("<h3 style='text-align: center; background-color: lightgreen; padding: 0 10px; border-radius: 5px;'>Materiales en cantidades suficientes</h3>");
+				}
+				else{
+					echo("<ul>");
+					echo($lista_reponer);
+					echo("</ul>");
+				}
+			?>
+		</section>
+	</div>
+
+	<br>
+	<br>
+	<br>
+	<br>
 
 	<footer>
 		<div class="div-footer">
