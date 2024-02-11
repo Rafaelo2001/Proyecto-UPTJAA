@@ -148,7 +148,7 @@
 			</div>
 		</a>
 
-		<a href="#">
+		<a href="gestion/gestion_usuarios.php">
 			<div class="imagen-hover">
 				<figure>
 					<img src="images/home-usuarios.jpg" alt="imagen1">
