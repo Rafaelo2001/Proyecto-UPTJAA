@@ -3,7 +3,8 @@ $(document).ready(
         $('#paciente').select2(
             {
                 placeholder: "Busque paciente por nombre o cédula de identidad",
-                allowClear: true
+                allowClear: false,
+                width: "auto"
             }
         );
     }

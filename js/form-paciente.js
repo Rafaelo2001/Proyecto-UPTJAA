@@ -84,3 +84,17 @@
             $("#medicos-bdd").prop("required", true);
         }
     });
+
+// Select2 Medico
+    $(document).ready(
+        function() {
+            $('#medicos-bdd').select2(
+                {
+                    tags: false,
+                    placeholder: "Seleccione Medico",
+                    allowClear: true,
+                    width: "auto"
+                }
+            );
+        }
+    );

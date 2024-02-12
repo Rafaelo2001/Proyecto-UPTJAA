@@ -45,7 +45,10 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	<link rel="stylesheet" type="text/css" href="css/styles_higea.css?v=1.2">
 	<link rel="icon" type="image/png" href="images/favicon.png">
 	<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+	
+	<link href="css/select2.min.css" rel="stylesheet" />
 	<script src="js/jquery-3.7.1.js"></script>
+	<script src="js/select2.min.js"></script>
 </head>
 
 <body class="login-register">
@@ -208,11 +211,11 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 								$nombre_completo = $paciente['PN'] . " " . $paciente['SN'] . " " . $paciente['TN'] . " " . $paciente['PA'] . " " . $paciente['SA'];
 
-								list($tipo_identidad, $ci_numerica) = explode('-', $cedula);
-								$ci_numerica_formateada = number_format($ci_numerica, 0, ',', '.');
-								$cedula_formateada = $tipo_identidad . '-' . $ci_numerica_formateada;
+								// list($tipo_identidad, $ci_numerica) = explode('-', $cedula);
+								// $ci_numerica_formateada = number_format($ci_numerica, 0, ',', '.');
+								// $cedula_formateada = $tipo_identidad . '-' . $ci_numerica_formateada;
 
-								$cedula_a_mostrar = " - C.I.: $cedula_formateada";
+								$cedula_a_mostrar = " - C.I.: $cedula";
 
 								echo $nombre_completo, $cedula_a_mostrar;
 
@@ -344,6 +347,6 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</script>
 
 </body>
-<!--<script src="js/form-pago.js"></script>-->
+<script src="js/form-pago.js"></script>
 
 </html>

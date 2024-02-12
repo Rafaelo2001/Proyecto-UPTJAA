@@ -279,7 +279,11 @@ $pdf->SetFont('Montserrat-Regular','',12);
 $pdf->SetTextColor(13,13,13);
 
 // Agrega la segunda celda con el número de C.I./RIF/Pasaporte recuperado de la base de datos
-$pdf->Cell(60,10,utf8_decode($cip),0);
+        list($tipo_identidad, $ci_numerica) = explode('-', $cip);
+        $ci_numerica_formateada = number_format($ci_numerica, 0, ',', '.');
+        $cedula_formateada = $tipo_identidad . '-' . $ci_numerica_formateada;
+
+$pdf->Cell(60,10,utf8_decode($cedula_formateada),0);
 
 $pdf->Ln(10); // Agrega una línea en blanco
 
@@ -324,7 +328,7 @@ $x = $pdf->GetX();
 $y = $pdf->GetY();
 
 // Agrega la celda de descripción con MultiCell
-$pdf->MultiCell(110,5,utf8_decode($descripcion),0,'L',true);
+$pdf->MultiCell(110,10,utf8_decode($descripcion),0,'L',true);
 
 // Restaura la posición a la derecha de la celda de descripción
 $pdf->SetXY($x + 110, $y);

@@ -46,7 +46,10 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	<link rel="stylesheet" type="text/css" href="css/styles_higea.css?v=1.2">
 	<link rel="icon" type="image/png" href="images/favicon.png">
 	<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+	
+	<link href="css/select2.min.css" rel="stylesheet" />
 	<script src="js/jquery-3.7.1.js"></script>
+	<script src="js/select2.min.js"></script>
 </head>
 
 <body class="login-register">

@@ -37,13 +37,14 @@
         
     <body style='background: rgb(248,255,254);background: linear-gradient(132deg, rgb(248, 255, 254) 0%, rgba(171,255,255,1) 100%);'>
     <?php
-    require "php/conexion.php";
-    $user = new CodeaDB();
-    echo($user->hola);
+    require "vendor/autoload.php";
 
-    $user->hola = "hola";
+    $faker = Faker\Factory::create('es_VE');
 
-    echo($user->hola);
+    for($i = 0; $i < 100; $i++){
+        echo($faker->numberBetween(0,10)."<br>");
+    }
+    
     ?>
     </body>
 
@@ -80,28 +81,4 @@
 
     </script>
 
-<!-- echo(
-
-'<template id="my-template">
-<swal-title>
-  Save changes to "Untitled 1" before closing?
-</swal-title>
-<swal-icon type="warning" color="red"></swal-icon>
-<swal-button type="confirm">
-  Save As
-</swal-button>
-<swal-button type="cancel" color="green">
-  Cancel
-</swal-button>
-<swal-button type="deny">
-  Close without Saving
-</swal-button>
-<swal-param name="allowEscapeKey" value="false" />
-<swal-param
-  name="customClass"
-  value='."'".'{ "popup": "my-popup" }'."'".' />
-<swal-function-param
-  name="didOpen"
-  value="popup => console.log(popup)" />
-</template>') -->
 </html>
