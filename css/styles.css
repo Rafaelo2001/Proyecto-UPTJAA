@@ -435,7 +435,7 @@ form .form-group-input {
 
 .login-box-quest {
     width: 300px;
-    height: 470px;
+    height: 475px;
     border-radius: 10px;
     background: rgb(0,127,164);
     background: linear-gradient(135deg, rgba(0,127,164,1) 0%, rgba(0,57,113,1) 100%);
@@ -550,15 +550,20 @@ form .form-group-input {
     box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
 }
 
-.login-box a {
+.login-box a,
+.login-box-quest a{
     text-decoration: none;
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 500;
     line-height: 20px;
     color:#b3ffff;
-    transition: color .5s; 
+    transition: color .5s;
+    display: flex;
+    justify-content: center;
 }
 
-.login-box a:hover {
+.login-box a:hover,
+.login-box-quest a:hover{
     color: #ffffff;
 }
 

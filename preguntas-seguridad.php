@@ -102,6 +102,7 @@
 				</div>
 				<!--<p class="form-mess-good" id="form-mess-good">¡Formulario enviado exitosamente!</p>-->
 			</div>
+			<a href="token-seguridad.php">¿Olvidó sus respuestas?</a>
 		</form>
 	</div>
 
