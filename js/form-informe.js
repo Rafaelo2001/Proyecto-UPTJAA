@@ -7,6 +7,7 @@ $(document).ready(
         tags: false,
         placeholder: "Busque paciente por nombre o cédula de identidad",
         allowClear: false,
+        width: "auto"
       }
     );
   }
@@ -18,7 +19,8 @@ $(document).ready(
       {
         tags: false,
         placeholder: "Busque medico por nombre",
-        allowClear: true
+        allowClear: true,
+        width: "auto"
       }
     );
   }

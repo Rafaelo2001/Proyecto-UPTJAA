@@ -2,3 +2,8 @@
 mantenimiento/backup/
 .ddb versiones anteriores/
 .task.todo
+.vscode
+composer.json
+composer.lock
+vendor/
+datos_fake/

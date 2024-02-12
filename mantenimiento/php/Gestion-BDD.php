@@ -192,8 +192,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 				<h2>BACKUP</h2>
 
-				<button class="buttom"><a href="./Backup.php" class="buttom-item">Realizar copia de
-						seguridad</a></button>
+				<a href="./Backup.php" class="buttom-item"><button class="buttom" style="color: white;">Realizar copia de seguridad</button></a>
 
 				<form action="./Restore.php" method="POST" class="form" id="form" autocomplete="off">
 

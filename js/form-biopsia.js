@@ -6,11 +6,25 @@ $(document).ready(
       $('#paciente').select2(
         {
           placeholder: "Busque paciente por nombre o cédula de identidad",
-          allowClear: true
+          allowClear: true,
+          width: "auto"
         }
       );
     }
   );
+
+$(document).ready(
+    function() {
+        $('#medico').select2(
+            {
+                tags: false,
+                placeholder: "Seleccione Medico",
+                allowClear: true,
+                width: "auto"
+            }
+        );
+    }
+);
 
 const expressions = {
     ci: /^\d{6,8}$/, // 6 a 8 numeros.

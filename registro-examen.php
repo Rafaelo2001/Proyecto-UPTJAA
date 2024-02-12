@@ -189,7 +189,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 		<section class="form-register">
 			<h1>REGISTRO DE EXAMEN</h1>
-			<h4>Obligatorio (*).</h4>
+			<h4>Obligatorio (*)</h4>
 			<form action="php/insert-examen.php" method="post" class="form" id="form" autocomplete="off">
 
 				<label for="paciente">Paciente (*)</label>
@@ -210,11 +210,11 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 								$nombre_completo = $paciente['PN'] . " " . $paciente['SN'] . " " . $paciente['TN'] . " " . $paciente['PA'] . " " . $paciente['SA'];
 
-								list($tipo_identidad, $ci_numerica) = explode('-', $cedula);
-								$ci_numerica_formateada = number_format($ci_numerica, 0, ',', '.');
-								$cedula_formateada = $tipo_identidad . '-' . $ci_numerica_formateada;
+								// list($tipo_identidad, $ci_numerica) = explode('-', $cedula);
+								// $ci_numerica_formateada = number_format($ci_numerica, 0, ',', '.');
+								// $cedula_formateada = $tipo_identidad . '-' . $ci_numerica_formateada;
 
-								$cedula_a_mostrar = " - C.I.: $cedula_formateada";
+								$cedula_a_mostrar = " - C.I.: $cedula";
 
 								echo $nombre_completo, $cedula_a_mostrar;
 
