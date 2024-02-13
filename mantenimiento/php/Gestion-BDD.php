@@ -192,7 +192,14 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 				<h2>BACKUP</h2>
 
-				<a href="./Backup.php" class="buttom-item"><button class="buttom" style="color: white;">Realizar copia de seguridad</button></a>
+				<div class="button-container">
+					<div class="form__group form__group-btn-submit">
+					<a href="./Backup.php" class="buttom-item"><button class="buttom" style="color: white;">Realizar copia de seguridad</button></a>
+					</div>
+					<!--<p class="form-mess-good" id="form-mess-good">¡Formulario enviado exitosamente!</p>-->
+				</div>
+
+				
 
 				<form action="./Restore.php" method="POST" class="form" id="form" autocomplete="off">
 
@@ -225,6 +232,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						?>
 					</select>
 					<br>
+
 					<input class="button-submit" type="submit" name="restaurar" id="restaurar" value="Restaurar">
 				</form>
 			</div>

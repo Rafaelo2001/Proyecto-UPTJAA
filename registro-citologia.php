@@ -43,12 +43,13 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="css/styles_higea.css">
-	<link rel="stylesheet" type="text/css" href="css/styles_higea.css?v=1.2">
 	<link rel="icon" type="image/png" href="images/favicon.png">
 	<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
 
 	<link href="css/select2.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="css/styles_higea.css">
+	<link rel="stylesheet" type="text/css" href="css/styles_higea.css?v=1.2">
+	
 	<script src="js/jquery-3.7.1.js"></script>
 	<script src="js/select2.min.js"></script>
 </head>
@@ -193,7 +194,6 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			<h1>REGISTRO DE CITOLOGÍA</h1>
 			<h4>Obligatorio (*).</h4>
 			<form action="php/insert-citologia.php" method="post" class="form" id="form" autocomplete="off">
-
 
 				<label for="paciente">Paciente (*)</label>
 				<select id="paciente" name="paciente" style="min-width: 100px;" required>
