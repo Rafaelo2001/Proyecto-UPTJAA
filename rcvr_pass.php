@@ -20,15 +20,13 @@ $user = new CodeaDB();
 <body class="login-register">
 	<header>
 		<nav>
-			<a href="index.php" class="title">
+			<a class="title">
 				<img src="images/Logo con contorno.png" alt="Logo de Higea" width="90" height="90">
 				<img src="images/Letras.png" alt="Higea" width="180px" height="45px">
 			</a>
 
 			<ul class="items">
-				<button class="buttom"><a href="index.php" class="buttom-item"><i class="fi fi-sr-enter"></i>Iniciar
-						Sesión</a></button>
-				<button class="buttom"><a href="user_register.php" class="buttom-item"><i class="fi fi-sr-user-add"></i>Registrarse</a></button>
+				<button class="buttom"><a href="gestion/gestion_usuarios.php" class="buttom-item"><i class="fi fi-sr-enter"></i>Gestión de usuarios</a></button>
 			</ul>
 		</nav>
 	</header>

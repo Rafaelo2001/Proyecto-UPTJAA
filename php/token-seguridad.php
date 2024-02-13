@@ -4,14 +4,15 @@ $conex = mysqli_connect("localhost", "root", "", "higea_db");
 session_start();
 
 // Utiliza el ID de usuario de la sesión
-$id_usuario = $_SESSION['id_usuario'];
+$id_usuario = $_POST['id'];
+$_SESSION['id_user'] = $id_usuario;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+require '../PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
 
 $mail = new PHPMailer(true);
 $mail->CharSet = 'UTF-8';
@@ -35,7 +36,7 @@ try {
     $email = $resultado['Correo'];
 
     if ($email) {
-         // Configuración del servidor de correo
+        // Configuración del servidor de correo
         $mail->SMTPDebug = 2;
         $mail->isSMTP();
         $mail->Host = 'smtp-mail.outlook.com';  // Servidor SMTP de Outlook
@@ -67,7 +68,7 @@ try {
         // Muestra una alerta y redirige al usuario
         echo '<script type="text/javascript">';
         echo 'alert("Se ha enviado el código de recuperación a su correo: ' . $email . '");';
-        echo 'window.location.href = "verificacion_token.php";';
+        echo 'window.location.href = "../verificacion_token.php";';
         echo '</script>';
     } else {
         echo 'No se encontró un usuario con ese nombre';

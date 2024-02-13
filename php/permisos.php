@@ -17,6 +17,7 @@ $permisos = array(
         'registro-paciente.php',
         'registro-pagos.php',
         'user-register.php',
+        'verificacion_token.php',
         'visualizar-informe.php',
         'visualizar-insumo.php',
         'detalles_insumo.php',
@@ -25,6 +26,8 @@ $permisos = array(
         'edit_insumo.php',
         'edit_muestras.php',
         'edit_paciente.php',
+        'gestion_usuarios.php',
+        'edit_usuario.php',
         'Gestion-BDD.php'
     ),
 

@@ -1,6 +1,36 @@
 <?php
 include "php/conexion.php";
 $user = new CodeaDB();
+
+session_start();
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
+
+if (!isset($_SESSION['username'])) {
+	header('Location: index.php');
+	exit;
+}
+
+// Incluye el archivo de permisos
+require 'php/permisos.php';
+
+// Obtiene el rol del usuario de la variable de sesión
+$rol = $_SESSION['Rol'];
+
+// Obtiene el nombre de la página actual
+$paginaActual = basename($_SERVER['PHP_SELF']);
+
+// Verifica si el usuario tiene permiso para acceder a la página actual
+if (!in_array($paginaActual, $permisos[$rol])) {
+	// Si el usuario no tiene permiso, muestra una alerta y redirige al usuario
+	echo "<script>
+						alert('No tienes permiso para acceder a esta página.');
+						window.location.href = 'home.php';
+				</script>";
+
+	exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -14,23 +44,19 @@ $user = new CodeaDB();
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css?v=1.1">
     <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel='stylesheet'
-        href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
 </head>
 
 <body class="login-register">
     <header>
         <nav>
-            <a href="index.php" class="title">
+            <a class="title">
                 <img src="images/Logo con contorno.png" alt="Logo de Higea" width="90" height="90">
                 <img src="images/Letras.png" alt="Higea" width="180px" height="45px">
             </a>
 
             <ul class="items">
-                <button class="buttom"><a href="index.php" class="buttom-item"><i class="fi fi-sr-enter"></i>Iniciar
-                        Sesión</a></button>
-                <button class="buttom"><a href="user_register.php" class="buttom-item"><i
-                            class="fi fi-sr-user-add"></i>Registrarse</a></button>
+                <button class="buttom"><a href="gestion/gestion_usuarios.php" class="buttom-item"><i class="fi fi-sr-users-alt"></i>Gestión de usuarios</a></button>
             </ul>
         </nav>
     </header>
@@ -48,16 +74,6 @@ $user = new CodeaDB();
                 <p class="form-input-error">Rellene este campo correctamente</p>
             </div>
 
-            <script>
-            let input = document.getElementById('token');
-            input.addEventListener('input', function() {
-                let regex = /^.{8}$/;
-                if (!regex.test(this.value)) {
-                    alert('Por favor, ingresa exactamente 8 caracteres.');
-                }
-            });
-            </script>
-
             <div class="form-mess" id="form-mess">
                 <p><i class="fi fi-rr-triangle-warning"></i> <b>Error:</b> ¡Revise los campos!</p>
             </div>
@@ -69,6 +85,18 @@ $user = new CodeaDB();
                 <p class="form-mess-good" id="form-mess-good">¡Formulario enviado exitosamente!</p>
             </div>
         </form>
+
+        <script>
+            document.getElementById('form').addEventListener('submit', function(event) {
+                let input = document.getElementById('token');
+                let regex = /^.{8}$/;
+                if (!regex.test(input.value)) {
+                    alert('Por favor, ingresa exactamente 8 caracteres.');
+                    event.preventDefault(); // Evita que se envíe el formulario
+                }
+            });
+        </script>
+
     </div>
 
     <footer>

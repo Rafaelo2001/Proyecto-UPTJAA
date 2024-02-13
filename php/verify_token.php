@@ -16,10 +16,10 @@ if (isset($_SESSION['token']) && $_SESSION['token']['expiry'] > time()) {
     if ($_SESSION['token']['value'] === $user_token) {
         // Redirige al usuario a la página para cambiar su contraseña
         header('Location: ../nueva-contrasena.php');
-        
+
         // Elimina el token de la variable de sesión
         unset($_SESSION['token']);
-        
+
         exit();
     }
 } else {

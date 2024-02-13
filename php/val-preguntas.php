@@ -26,7 +26,7 @@ if (mysqli_num_rows($resultado) > 0) {
     // Si hay una coincidencia, guarda el ID  del usuario en una variable y redirige a una página
     $row = mysqli_fetch_assoc($resultado); //se usa para obtener una fila de resultados como una matriz asociativa
     //luego se puede acceder a los campos individuales de la fila por su nombre
-    $_SESSION['id_usuario'] = $row['id_usuario'];
+    $_SESSION['id_user'] = $row['id_usuario'];
     header('Location: ../nueva-contrasena.php');
 } else {
     // Si no hay una coincidencia, muestra un mensaje emergente de error
