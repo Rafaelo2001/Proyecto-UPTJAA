@@ -26,10 +26,6 @@ $user = new CodeaDB();
 				<img src="images/Logo con contorno.png" alt="Logo de Higea" width="90" height="90">
 				<img src="images/Letras.png" alt="Higea" width="180px" height="45px">
 			</a>
-
-			<ul class="items">
-				<button class="buttom"><a href="user_register.php" class="buttom-item"><i class="fi fi-sr-user-add"></i>Registrarse</a></button>
-			</ul>
 		</nav>
 	</header>
 
@@ -65,8 +61,10 @@ $user = new CodeaDB();
 				</div>
 				<p class="form-mess-good" id="form-mess-good">¡Formulario enviado!</p>
 			</div>
+			<!--
 			<a href="rcvr_pass.php">¿Olvidó su contraseña?</a><br>
 			<a href="user_register.php">¿No tiene una cuenta?</a>
+			-->
 		</form>
 	</div>
 

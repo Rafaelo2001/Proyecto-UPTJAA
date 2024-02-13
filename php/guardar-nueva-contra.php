@@ -10,7 +10,7 @@ if ($conex->connect_error) {
 session_start();
 
 // Utiliza el ID de usuario de la sesión
-$id_usuario = $_SESSION['id_usuario'];
+$id_usuario = $_SESSION['id_user'];
 // Guarda los datos recibidos por el método POST en una variable
 $password = $_POST['password'];
 
@@ -26,8 +26,13 @@ $resultado = $conex->query("UPDATE usuario SET password = '$password_hashed' WHE
 if ($resultado === TRUE) {
     echo '<script type="text/javascript">';
     echo 'alert("¡Contraseña actualizada con éxito!");';
-    echo 'window.location.href = "../index.php";';
+    echo 'window.location.href = "../gestion/gestion_usuarios.php";';
     echo '</script>';
+
+    // Elimina el id del usuario de la variable
+    unset($id_usuario);
+
+    exit();
 } else {
     echo '<script type="text/javascript">';
     echo 'alert("Error actualizando contraseña.' . $conex->error . '");';

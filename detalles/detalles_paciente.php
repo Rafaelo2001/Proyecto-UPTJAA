@@ -5,7 +5,7 @@ header('Pragma: no-cache');
 header('Expires: 0');
 
 if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
+	header('Location: ../index.php');
 	exit;
 }
 
@@ -144,12 +144,12 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 				</ul>
 			</li>
 			<li>
-				<a href="#">
+				<a href="../gestion/gestion_usuarios.php">
 					<i class="fi fi-sr-users-alt"></i>
 					<span class="link_name">Gestión de usuarios</span>
 				</a>
 				<ul class="sub-menu blank">
-					<li><a class="link_name" href="#">Gestión de usuarios</a></li>
+					<li><a class="link_name" href="../gestion/gestion_usuarios.php">Gestión de usuarios</a></li>
 				</ul>
 			</li>
 			<li>

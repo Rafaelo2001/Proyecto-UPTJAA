@@ -1,6 +1,36 @@
 <?php
 include "php/conexion.php";
 $user = new CodeaDB();
+
+session_start();
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
+
+if (!isset($_SESSION['username'])) {
+	header('Location: index.php');
+	exit;
+}
+
+// Incluye el archivo de permisos
+require 'php/permisos.php';
+
+// Obtiene el rol del usuario de la variable de sesión
+$rol = $_SESSION['Rol'];
+
+// Obtiene el nombre de la página actual
+$paginaActual = basename($_SERVER['PHP_SELF']);
+
+// Verifica si el usuario tiene permiso para acceder a la página actual
+if (!in_array($paginaActual, $permisos[$rol])) {
+	// Si el usuario no tiene permiso, muestra una alerta y redirige al usuario
+	echo "<script>
+						alert('No tienes permiso para acceder a esta página.');
+						window.location.href = 'home.php';
+				</script>";
+
+	exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,15 +52,14 @@ $user = new CodeaDB();
 <body class="login-register">
     <header>
         <nav>
-            <a href="index.php" class="title">
+            <a class="title">
                 <img src="images/Logo con contorno.png" alt="Logo de Higea" width="90" height="90">
                 <img src="images/Letras.png" alt="Higea" width="180px" height="45px">
             </a>
 
             <ul class="items">
-                <button class="buttom"><a href="index.php" class="buttom-item"><i class="fi fi-sr-enter"></i>Iniciar Sesión</a></button>
-                <button class="buttom"><a href="user_register.php" class="buttom-item"><i class="fi fi-sr-user-add"></i>Registrarse</a></button>
-            </ul>
+				<button class="buttom"><a href="gestion/gestion_usuarios.php" class="buttom-item"><i class="fi fi-sr-users-alt"></i>Gestión de usuarios</a></button>
+			</ul>
         </nav>
     </header>
 
