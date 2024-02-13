@@ -77,7 +77,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			}
 
 			//inicia la sesión
-			session_start();
+			// session_start();
 
 			// Utiliza el ID de usuario de la sesión
 			$id_usuario = $_POST['id'];

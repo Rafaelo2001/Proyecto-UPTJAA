@@ -139,9 +139,9 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Detalles</a></li>
-                    <li><a href="../detalles_paciente.php">Pacientes</a></li>
-                    <li><a href="../detalles_muestras.php">Muestras</a></li>
-                    <li><a href="../detalles_insumo.php">Insumos</a></li>
+                    <li><a href="../detalles/detalles_paciente.php">Pacientes</a></li>
+                    <li><a href="../detalles/detalles_muestras.php">Muestras</a></li>
+                    <li><a href="../detalles/detalles_insumo.php">Insumos</a></li>
                 </ul>
             </li>
             <li>

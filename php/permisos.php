@@ -16,7 +16,7 @@ $permisos = array(
         'registro-insumo.php',
         'registro-paciente.php',
         'registro-pagos.php',
-        'user-register.php',
+        'user_register.php',
         'verificacion_token.php',
         'visualizar-informe.php',
         'visualizar-insumo.php',
