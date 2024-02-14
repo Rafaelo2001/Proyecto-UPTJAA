@@ -63,10 +63,10 @@ if (!in_array($paginaActual, $permisos[$rol])) {
         </nav>
     </header>
 
-    <div class="login-box-pass">
+    <div class="login-box-pass" style="height: 400px;">
         <h1>NUEVA CONTRASEÑA</h1>
         <h4>Obligatorio (*).</h4>
-        <form action="php/guardar-nueva-contra.php" method="post" class="form" id="form">
+        <form action="php/guardar-nueva-contra.php" method="post" class="form" id="form" style="height: 280px;">
 
             <div class="grid">
                 <!--group: password-->
@@ -77,7 +77,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                             autocomplete="off" required>
                         <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                     </div>
-                    <p class="form-input-error">
+                    <p class="form-input-error" style="position: absolute;">
                         Debe contener al menos: <br>
                         *Entre 8 y 16 caracteres. <br>
                         *Una letra mayúscula. <br>
@@ -138,7 +138,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 				<p><i class="fi fi-rr-triangle-warning"></i> <b>Error:</b> ¡Revise los campos!</p>
 			</div>-->
 
-            <div class="button-container">
+            <div class="button-container" style="align-self: flex-end; height: 250px;">
                 <div class="form__group form__group-btn-submit">
                     <input class="button-submit" type="submit" name="registrar" id="registrar" value="Guardar">
                 </div>

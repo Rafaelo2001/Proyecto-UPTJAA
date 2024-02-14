@@ -24,10 +24,7 @@ $paginaActual = basename($_SERVER['PHP_SELF']);
 // Verifica si el usuario tiene permiso para acceder a la página actual
 if (!in_array($paginaActual, $permisos[$rol])) {
 	// Si el usuario no tiene permiso, muestra una alerta y redirige al usuario
-	echo "<script>
-							alert('No tienes permiso para acceder a esta página.');
-							window.location.href = '../home.php';
-					</script>";
+	echo "<script>alert('No tienes permiso para acceder a esta página.');window.location.href = '../home.php';</script>";
 
 	exit();
 }
@@ -190,6 +187,8 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 		<h1 style="text-align: center;" class="table-title">Listado de Insumos</h1>
 
+		<input type="text" id="filtro" onkeyup="filtrarTabla()" placeholder="Filtrar por Nombre, Cedula, Fecha, etc...">
+
 		<div class="center-table">
 			<table style="text-align: center;" class="table" id="table">
 				<thead>
@@ -243,6 +242,37 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 		sidebarBtn.addEventListener("click", () => {
 			sidebar.classList.toggle("close");
 		});
+
+		function filtrarTabla() {
+            // Obtener el valor ingresado en el campo de entrada
+            var filtro = document.getElementById("filtro").value.toUpperCase();
+
+            // Obtener la tabla y las filas de la tabla
+            var tabla = document.getElementById("table");
+            var filas = tabla.getElementsByTagName("tr");
+
+            // Recorrer las filas de la tabla y mostrar u ocultar según el filtro
+            for (var i = 1; i < filas.length; i++) {
+                var celdas = filas[i].getElementsByTagName("td");
+                var mostrarFila = false;
+
+                // Comparar el valor del filtro con cada celda de la fila
+                for (var j = 0; j < celdas.length; j++) {
+                    var contenidoCelda = celdas[j].textContent || celdas[j].innerText;
+                    if (contenidoCelda.toUpperCase().indexOf(filtro) > -1) {
+                        mostrarFila = true;
+                        break;
+                    }
+                }
+
+                // Mostrar u ocultar la fila según el resultado de la comparación
+                if (mostrarFila) {
+                    filas[i].style.display = "";
+                } else {					
+                    filas[i].style.display = "none";
+                }
+            }
+        }
 	</script>
 
 </body>

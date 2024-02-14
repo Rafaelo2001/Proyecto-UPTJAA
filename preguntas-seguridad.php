@@ -13,6 +13,11 @@ if (!isset($_SESSION['username'])) {
 	exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['id'])) {
+    header('Location: ./gestion/gestion_usuarios.php', true, 303);
+    exit;
+}
+
 // Incluye el archivo de permisos
 require 'php/permisos.php';
 
@@ -63,9 +68,9 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 		</nav>
 	</header>
 
-	<div class="login-box-quest">
+	<div class="login-box-quest" style="height: 520px;">
 		<h1>PREGUNTAS DE SEGURIDAD</h1>
-		<form action="php/val-preguntas.php" method="post" class="form" id="form">
+		<form action="./php/val-preguntas.php" method="post" class="form" id="form">
 
 			<?php
 			// Crea la conexión
@@ -127,22 +132,21 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			$conex->close();
 			?>
 
-			<!--<div class="form-mess" id="form-mess">
-				<p><i class="fi fi-rr-triangle-warning"></i> <b>Error:</b> ¡Revise los campos!</p>
-			</div>-->
-
 			<div class="button-container">
 				<div class="form__group form__group-btn-submit">
+					<input type="hidden" name="id" value="<?php echo ($id_usuario); ?>" required>
 					<input class="button-submit" type="submit" name="registrar" id="registrar" value="Siguiente">
 				</div>
-				<!--<p class="form-mess-good" id="form-mess-good">¡Formulario enviado exitosamente!</p>-->
 			</div>
 		</form>
+
+		<p></p>
 
 		<div class="acciones">
 			<div class="button-container">
 				<div class="form__group form__group-btn-submit">
 					<form action="php/token-seguridad.php" method="post"><input type="hidden" name="id" value="<?php echo ($id_usuario); ?>" required><input type="submit" value="¿Olvidó sus respuestas?"></form>
+					<label style="font-size: 12px; text-align: center;">Requiere conexión a internet</label>
 				</div>
 				<p class="form-mess-good" id="form-mess-good">¡Formulario enviado!</p>
 			</div>

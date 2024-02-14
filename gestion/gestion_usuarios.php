@@ -192,6 +192,8 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
         <h1 style="text-align: center;" class="table-title">Listado de Usuarios</h1>
 
+        <input type="text" id="filtro" onkeyup="filtrarTabla()" placeholder="Filtrar por Nombre, Cedula, Fecha, etc...">
+
         <div class="items">
 				<button class="buttom"><a href="../user_register.php" class="buttom-item"><i class="fi fi-sr-user-add"></i> Agregar</a></button>
         </div>
@@ -224,10 +226,6 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                         $sa = (empty($datosUsuario['SA'])) ? "" : " " . $datosUsuario['SA'];
                         $nombre_completo = $datosUsuario['PN'] . " " . $sn . $tn . $datosUsuario['PA'] . $sa;
 
-                        list($tipo_identidad, $ci_numerica) = explode('-', $cedula);
-                        $ci_numerica_formateada = number_format($ci_numerica, 0, ',', '.');
-                        $cedula_formateada = $tipo_identidad . '-' . $ci_numerica_formateada;
-
                         $id = $usuario['ID_Usuario'];
                         $nombre_usuario = $usuario['Nombre'];
                         $rol = ucfirst($usuario['Rol']);
@@ -235,7 +233,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                         echo ("<td>$id</td>");
                         echo ("<td>$nombre_usuario</td>");
                         echo ("<td>$nombre_completo</td>");
-                        echo ("<td>$cedula_formateada</td>");
+                        echo ("<td>$cedula</td>");
                         echo ("<td>$rol</td>");
                         echo ("<td><form action='./edit_usuario.php' method='post'><input type='hidden' name='id' value='$id' required><input type='submit' value='Editar'></form></td>");
 
@@ -262,6 +260,37 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 		sidebarBtn.addEventListener("click", () => {
 			sidebar.classList.toggle("close");
 		});
+
+        function filtrarTabla() {
+            // Obtener el valor ingresado en el campo de entrada
+            var filtro = document.getElementById("filtro").value.toUpperCase();
+
+            // Obtener la tabla y las filas de la tabla
+            var tabla = document.getElementById("table");
+            var filas = tabla.getElementsByTagName("tr");
+
+            // Recorrer las filas de la tabla y mostrar u ocultar según el filtro
+            for (var i = 1; i < filas.length; i++) {
+                var celdas = filas[i].getElementsByTagName("td");
+                var mostrarFila = false;
+
+                // Comparar el valor del filtro con cada celda de la fila
+                for (var j = 0; j < celdas.length; j++) {
+                    var contenidoCelda = celdas[j].textContent || celdas[j].innerText;
+                    if (contenidoCelda.toUpperCase().indexOf(filtro) > -1) {
+                        mostrarFila = true;
+                        break;
+                    }
+                }
+
+                // Mostrar u ocultar la fila según el resultado de la comparación
+                if (mostrarFila) {
+                    filas[i].style.display = "";
+                } else {					
+                    filas[i].style.display = "none";
+                }
+            }
+        }
 	</script>
 
 </body>

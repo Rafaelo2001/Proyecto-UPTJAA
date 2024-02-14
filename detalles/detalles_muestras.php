@@ -190,6 +190,8 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 		<h1 style="text-align: center;" class="table-title">Listado de Muestras</h1>
 
+		<input type="text" id="filtro" onkeyup="filtrarTabla()" placeholder="Filtrar por Nombre, Cedula, Fecha, etc...">
+
 		<div class="center-table">
 
 			<table style="text-align: center;" class="table" id="table">
@@ -263,27 +265,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						}
 
 						echo ("<td><form action='./edit_muestras.php' method='post'><input type='hidden' name='id_m' value='" . $m['ID_M_Remitido'] . "' required><input type='hidden' name='tipo_m' value='" . $tipo_m . "' required><input type='submit' value='Editar'></form></td>")
-
-
-						// $genero = ($paciente['Sexo'] == "M") ? "Masculino" : "Femenino";
-
-						// $telefono = $user->buscar("telefono", $ci_sql);
-						// $tlfn = $telefono[0]['Nro_Telf'];
-
-						// $correo = $user->buscar("correo", $ci_sql);
-						// $email = $correo[0]['Correo'];
-
-						// $f_nac = $paciente['F_nac'];
-
-						// echo ("<td>".$cedula."</td>");
-						// echo ("<td>".$nombre_completo."</td>");
-						// echo ("<td><input type='date' readonly value='".$f_nac."' /></td>");
-						// echo ("<td>".$genero."</td>");
-						// echo ("<td>".$tlfn."</td>");
-						// echo ("<td>".$email."</td>");
-						// echo ("<td><form action='./edit_paciente.php' method='post'><input type='hidden' name='ci' value='$cedula' required><input type='submit' value='Editar Paciente'></form></td>")
-						// // , $cedula_a_mostrar.' ', $genero.' ', $tlfn.' ', $email, "<br>";
-
+						
 						?>
 					</tr>
 				<?php
@@ -310,6 +292,37 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 		sidebarBtn.addEventListener("click", () => {
 			sidebar.classList.toggle("close");
 		});
+
+		function filtrarTabla() {
+            // Obtener el valor ingresado en el campo de entrada
+            var filtro = document.getElementById("filtro").value.toUpperCase();
+
+            // Obtener la tabla y las filas de la tabla
+            var tabla = document.getElementById("table");
+            var filas = tabla.getElementsByTagName("tr");
+
+            // Recorrer las filas de la tabla y mostrar u ocultar según el filtro
+            for (var i = 1; i < filas.length; i++) {
+                var celdas = filas[i].getElementsByTagName("td");
+                var mostrarFila = false;
+
+                // Comparar el valor del filtro con cada celda de la fila
+                for (var j = 0; j < celdas.length; j++) {
+                    var contenidoCelda = celdas[j].textContent || celdas[j].innerText;
+                    if (contenidoCelda.toUpperCase().indexOf(filtro) > -1) {
+                        mostrarFila = true;
+                        break;
+                    }
+                }
+
+                // Mostrar u ocultar la fila según el resultado de la comparación
+                if (mostrarFila) {
+                    filas[i].style.display = "";
+                } else {					
+                    filas[i].style.display = "none";
+                }
+            }
+        }
 	</script>
 
 </body>
