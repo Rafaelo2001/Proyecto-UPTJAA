@@ -4,15 +4,15 @@
         // SweetAlert (Same Folder)
         // Esta funcion toma como argumento el titulo de la pagina y devuelve un header de la pagina para usar sweetAlert2
 
-        public function sweetHead($pagTitle = "Higea") {
+        public function sweetHead($pagTitle = "Higea", $carpetasPorSalir = "../") {
             $header =
                 "<html>
                     <head>
                         <title>$pagTitle</title>
-                        <link   href='../css/styles_higea.css'    rel='stylesheet'/>
-                        <link   href='../css/sweetalert2.min.css' rel='stylesheet'/>
-                        <script src='../js/sweetalert2.all.min.js'></script>
-                        <script src='../js/jquery-3.7.1.js'></script>
+                        <link   href='".$carpetasPorSalir."css/styles_higea.css'    rel='stylesheet'/>
+                        <link   href='".$carpetasPorSalir."css/sweetalert2.min.css' rel='stylesheet'/>
+                        <script src='".$carpetasPorSalir."js/sweetalert2.all.min.js'></script>
+                        <script src='".$carpetasPorSalir."js/jquery-3.7.1.js'></script>
                     </head>
                     <style>
                         body {
@@ -48,11 +48,13 @@
             return $header;
         }
 
-        public function sweetOK($retorno, $mensaje = "Datos insertados correctamente") {
+        public function sweetOK($retorno, $mensaje = "Datos insertados correctamente", $detalle = "") {
+            $html = ($detalle != "") ? 'html: "'.str_replace('"',"'",$detalle).'",' : "";
             $alert =
                 "   <script>
                         Swal.fire({
                             title: '$mensaje',
+                            $html
                             icon: 'success',
                             timer: 10000,
                             confirmButtonText: 'Regresar',
@@ -115,4 +117,3 @@
             return $alert;
         }
     }
-?>

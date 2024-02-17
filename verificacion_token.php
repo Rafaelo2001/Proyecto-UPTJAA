@@ -63,6 +63,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
     <div class="login-box-rcvr">
         <h1>VALIDACIÓN</h1>
+
         <form action="php/verify_token.php" method="post" class="form" id="form">
 
             <!--username-->
@@ -77,6 +78,8 @@ if (!in_array($paginaActual, $permisos[$rol])) {
             <div class="form-mess" id="form-mess">
                 <p><i class="fi fi-rr-triangle-warning"></i> <b>Error:</b> ¡Revise los campos!</p>
             </div>
+
+            <br>
 
             <div class="button-container">
                 <div class="form__group form__group-btn-submit">

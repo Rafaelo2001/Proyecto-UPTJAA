@@ -233,7 +233,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 					</select>
 					<br>
 
-					<input class="button-submit" type="submit" name="restaurar" id="restaurar" value="Restaurar">
+					<input class="button-submit" type="submit" id="restaurar" value="Restaurar">
 				</form>
 			</div>
 		</section>

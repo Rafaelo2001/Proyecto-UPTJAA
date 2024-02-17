@@ -1,36 +1,36 @@
 <?php
-include "php/conexion.php";
-$user = new CodeaDB();
+    include "php/conexion.php";
+    $user = new CodeaDB();
 
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+    session_start();
+    header('Cache-Control: no-cache, no-store, must-revalidate');
+    header('Pragma: no-cache');
+    header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+    if (!isset($_SESSION['username'])) {
+        header('Location: index.php');
+        exit;
+    }
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+    // Incluye el archivo de permisos
+    require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+    // Obtiene el rol del usuario de la variable de sesión
+    $rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+    // Obtiene el nombre de la página actual
+    $paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	// Si el usuario no tiene permiso, muestra una alerta y redirige al usuario
-	echo "<script>
-						alert('No tienes permiso para acceder a esta página.');
-						window.location.href = 'home.php';
-				</script>";
+    // Verifica si el usuario tiene permiso para acceder a la página actual
+    if (!in_array($paginaActual, $permisos[$rol])) {
+        // Si el usuario no tiene permiso, muestra una alerta y redirige al usuario
+        echo "<script>
+                            alert('No tienes permiso para acceder a esta página.');
+                            window.location.href = 'home.php';
+                    </script>";
 
-	exit();
-}
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>

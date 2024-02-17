@@ -55,16 +55,14 @@ $user = new CodeaDB();
 				<p><i class="fi fi-rr-triangle-warning"></i><b>Error:</b> ¡Revise los campos!</p>
 			</div>
 
+			<br><br>
+
 			<div class="button-container">
 				<div class="form__group form__group-btn-submit">
 					<input class="button-submit" type="submit" name="registrar" id="registrar" value="Acceder">
 				</div>
 				<p class="form-mess-good" id="form-mess-good">¡Formulario enviado!</p>
 			</div>
-			<!--
-			<a href="rcvr_pass.php">¿Olvidó su contraseña?</a><br>
-			<a href="user_register.php">¿No tiene una cuenta?</a>
-			-->
 		</form>
 	</div>
 
@@ -75,8 +73,6 @@ $user = new CodeaDB();
 			<span class="copyright">&copy; 2024 HIGEA - Laboratorio Dr. Miguel Blanco. Todos los derechos reservados.</span>
 		</div>
 	</footer>
-
-	<!--  <script src="js/form-login.js"></script>-->
 
 </body>
 

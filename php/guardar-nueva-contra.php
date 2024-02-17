@@ -1,43 +1,47 @@
 <?php
-// Crea la conexión
-$conex = mysqli_connect("localhost", "root", "", "higea_db");
 
-// Verifica la conexión
-if ($conex->connect_error) {
-    die("Conexión fallida: " . $conex->connect_error);
-}
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['password'])) {
+        header('Location: ../gestion/gestion_usuarios.php', true, 303);
+        exit;
+    }
 
-session_start();
+    // Crea la conexión
+    $conex = mysqli_connect("localhost", "root", "", "higea_db");
 
-// Utiliza el ID de usuario de la sesión
-$id_usuario = $_SESSION['id_user'];
-// Guarda los datos recibidos por el método POST en una variable
-$password = $_POST['password'];
+    // Verifica la conexión
+    if ($conex->connect_error) {
+        die("Conexión fallida: " . $conex->connect_error);
+    }
 
-// Escapa los caracteres especiales en las variables para evitar inyecciones SQL
-$password = $conex->real_escape_string($password);
+    require "./sweet.php";
+    $alert = new SweetForInsert();
 
-// Cifra la contraseña
-$password_hashed = password_hash($password, PASSWORD_BCRYPT);
+    echo($alert->sweetHead("Cambio de Contraseña"));
 
-// Ejecuta la consulta SQL para actualizar la contraseña del usuario
-$resultado = $conex->query("UPDATE usuario SET password = '$password_hashed' WHERE id_usuario = '$id_usuario'");
+    session_start();
 
-if ($resultado === TRUE) {
-    echo '<script type="text/javascript">';
-    echo 'alert("¡Contraseña actualizada con éxito!");';
-    echo 'window.location.href = "../gestion/gestion_usuarios.php";';
-    echo '</script>';
+    // Utiliza el ID de usuario de la sesión
+    $id_usuario = $_SESSION['id_user'];
+    // Guarda los datos recibidos por el método POST en una variable
+    $password = $_POST['password'];
 
-    // Elimina el id del usuario de la variable
-    unset($id_usuario);
+    // Escapa los caracteres especiales en las variables para evitar inyecciones SQL
+    $password = $conex->real_escape_string($password);
 
-    exit();
-} else {
-    echo '<script type="text/javascript">';
-    echo 'alert("Error actualizando contraseña.' . $conex->error . '");';
-    echo '</script>';
-}
+    // Cifra la contraseña
+    $password_hashed = password_hash($password, PASSWORD_BCRYPT);
 
-$conex->close();
-?>
+    // Ejecuta la consulta SQL para actualizar la contraseña del usuario
+    $resultado = $conex->query("UPDATE usuario SET password = '$password_hashed' WHERE id_usuario = '$id_usuario'");
+
+    if ($resultado === TRUE) {
+        unset($id_usuario);
+
+        echo ($alert->sweetOK("../gestion/gestion_usuarios.php","¡Contraseña actualizada con éxito!"));
+
+        exit();
+    } else {
+        echo($alert->sweetError("../gestion/gestion_usuarios.php","Error actualizando contraseña","$conex->error"));
+    }
+
+    $conex->close();
