@@ -285,7 +285,7 @@ $pdf->SetTextColor(13,13,13);
 
 $pdf->Cell(60,10,utf8_decode($cedula_formateada),0);
 
-$pdf->Ln(10); // Agrega una línea en blanco
+$pdf->Ln(20); // Agrega una línea en blanco
 
 // Configura el tamaño de letra para CANTIDAD, CONCEPTO O DESCRIPCIÓN y TOTAL
 $pdf->SetFont('Montserrat-Bold','',14);
@@ -328,12 +328,20 @@ $x = $pdf->GetX();
 $y = $pdf->GetY();
 
 // Agrega la celda de descripción con MultiCell
-$pdf->MultiCell(110,10,utf8_decode($descripcion),0,'L',true);
+if (strlen($descripcion) > 400) {
+    $descripcion = substr($descripcion, 0, 400);
+}
+
+$pdf->MultiCell(105,10,utf8_decode($descripcion),0 ,'L',true);
+
+$newY = $pdf->GetY();
 
 // Restaura la posición a la derecha de la celda de descripción
-$pdf->SetXY($x + 110, $y);
+$pdf->SetXY($x + 105, $y);
 
-$pdf->Cell(25,10,utf8_decode('Bs.D '.$monto),0,0,'C',true);
+$neoMonto = number_format($monto, 2, ',', '.');
+
+$pdf->Cell(30,10,utf8_decode('Bs.D '.$neoMonto),0,0,'R',true);
 
 $pdf->Ln(30); // Agrega una línea en blanco
 
@@ -346,11 +354,13 @@ $pdf->SetTextColor(3,94,115);
 // Configura el color de fondo para TOTAL
 $pdf->SetFillColor(186,236,247);
 
+$pdf->SetY($newY + 10);
+
 // Agrega la celda con el texto "TOTAL:"
 $pdf->Cell(80,10,utf8_decode('TOTAL:'),0,0,'L',true);
 
 // Agrega la segunda celda con el monto recuperado de la base de datos
-$pdf->Cell(85,10,utf8_decode('Bs.D '.$monto),0,0,'R',true);
+$pdf->Cell(85,10,utf8_decode('Bs.D '.$neoMonto),0,0,'R',true);
 
 $pdf->Ln(10); // Agrega una línea en blanco
 
