@@ -268,7 +268,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 					<div class="form-group" id="group_date_birth">
 						<div class="form-group-input">
 							<label for="monto">Descripción de la factura (*)</label>
-							<input type="text" placeholder="Indique la descripción" name="desc" id="desc" class="desc" required>
+							<input type="text" placeholder="Indique la descripción" name="desc" id="desc" class="desc" maxlength="400" required>
 							<i class="formulario_validacion_estado fi fi-rr-cross"></i>
 						</div>
 						<p class="form-input-error">Rellene este campo correctamente. Ej: 2000</p>
