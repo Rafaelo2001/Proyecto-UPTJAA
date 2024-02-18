@@ -194,7 +194,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 				<select id="informes" required>
 					<option></option>
 					<?php
-					$listaInformes = $user->buscar("informe", "1");
+					$listaInformes = $user->buscar("informe", "1 ORDER BY ID_Informe DESC");
 					?>
 					<?php
 					foreach ($listaInformes as $informe) :

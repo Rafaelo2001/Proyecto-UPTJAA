@@ -1,20 +1,14 @@
 <?php
 
-// session_start();
-// header('Cache-Control: no-cache, no-store, must-revalidate');
-// header('Pragma: no-cache');
-// header('Expires: 0');
+session_start();
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
 
-// if(!isset($_SESSION['username'])) {
-//     header('Location: index.php');
-//     exit;
-
-// }
-
-//     Texto:
-// Turquesa oscuro: 3, 94, 115
-// Rojo: 225, 22, 31
-// Negro: 13, 13, 13
+if(!isset($_SESSION['username'])) {
+    header('Location: index.php');
+    exit;
+}
 
 include "../php/conexion.php";
 $user = new CodeaDB();
@@ -25,38 +19,50 @@ class PDF extends FPDF
 {
     function Header()
     {
-        $this->Image('../images/logo.png', 10, 0, 50);
+        if ($this->PageNo() == 1)
+        {
+            $this->Image('../images/logo.png', 10, 0, 50);
 
-        $this->SetFont('Montserrat-Regular', '', 12);
+            $this->SetFont('Montserrat-Regular', '', 12);
 
-        $this->SetFillColor(186, 236, 247);
+            $this->SetFillColor(186, 236, 247);
 
-        $this->SetXY(60, 23);
+            $this->SetXY(60, 23);
 
-        $direccionCabecera1 = mb_convert_encoding(' Médico Anatomopatologo ', 'ISO-8859-1');
-        $this->Cell(58, 8, $direccionCabecera1, 0, 2, "C", true);
-        $this->SetFontSize(10);
-        $direccionCabecera2 = mb_convert_encoding('Citologías y Biopsias', 'ISO-8859-1');
-        $this->Cell(58, 7, $direccionCabecera2, 0, 0, "C", true);
+            $direccionCabecera1 = mb_convert_encoding(' Médico Anatomopatologo ', 'ISO-8859-1');
+            $this->Cell(58, 8, $direccionCabecera1, 0, 2, "C", true);
+            $this->SetFontSize(10);
+            $direccionCabecera2 = mb_convert_encoding('Citologías y Biopsias', 'ISO-8859-1');
+            $this->Cell(58, 7, $direccionCabecera2, 0, 0, "C", true);
 
-        $this->SetXY(130, 25);
-        $this->SetFont('Montserrat-Bold', '', 18);
-        $n_citologia = mb_convert_encoding("CITOLOGÍA N°: " . $_POST["id_c"], "ISO-8859-1");
-        $this->Cell(67, 10, $n_citologia, 0, 0, "C");
+            $this->SetXY(130, 25);
+            $this->SetFont('Montserrat-Bold', '', 18);
+            $n_citologia = mb_convert_encoding("CITOLOGÍA N°: " . $_POST["id_c"], "ISO-8859-1");
+            $this->Cell(67, 10, $n_citologia, 0, 0, "C");
+        
+            $this->Ln(25);
+        }
+        else
+        {
+            $this->SetXY(130, 10);
+            $this->SetFont('Montserrat-Bold', '', 10);
+            $n_citologia = mb_convert_encoding("C-" . $_POST["id_c"], "ISO-8859-1");
+            $this->Cell(67, 10, $n_citologia, 0, 0, "R");
 
-        $this->Ln(25);
+            $this->Ln(15);
+        }
     }
 
     function Footer()
     {
-        $this->SetFont('Arial', 'BI', 10);
+            $this->SetFont('Arial', 'BI', 10);
 
-        $this->SetY(-25);
-        $this->MultiCell(0, 5, "DR. MIGUEL BLANCO     \nMEDICO ANATOMOPATOLOGO     ", 0, "R");
+            $this->SetY(-24);
+            $this->MultiCell(0, 5, "DR. MIGUEL BLANCO     \nMEDICO ANATOMOPATOLOGO     ", 0, "R");
 
-        $this->SetFont('Arial', 'I', 8);
+            $this->SetFont('Arial', 'I', 8);
 
-        $this->Cell(0, 10, mb_convert_encoding("Av. Francisco de Miranda, C.C. Mansión Flamingo, Piso 1, Local N°5, Telf.: (0283) 2356539, El Tigre - Edo. Anzoátegui", "ISO-8859-1"), 0, 0, 'C');
+            $this->Cell(0, 10, mb_convert_encoding("Av. Francisco de Miranda, C.C. Mansión Flamingo, Piso 1, Local N°5, Telf.: (0283) 2356539, El Tigre - Edo. Anzoátegui", "ISO-8859-1"), 0, 0, 'C');
     }
 }
 
@@ -219,10 +225,6 @@ $c->SetTextColor(13, 13, 13);
 $c->cell($c->GetStringWidth("COMENTARIO"), 5, "COMENTARIO", 0, 0);
 $c->SetFont('Arial', '', 7);
 $c->cell(3, 5, ": ", 0, 0);
-$c->MultiCell(0, 5, mb_convert_encoding($_POST["obs"], 'ISO-8859-1'), 0, 1);
-$c->cell(0, 5, "", 0, 1);
-
-
+$c->MultiCell(0, 5, mb_convert_encoding($_POST["obs"], 'ISO-8859-1'), 0, 1);          
 
 $c->Output();
-?>
