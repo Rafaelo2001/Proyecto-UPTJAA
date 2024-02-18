@@ -242,7 +242,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                         echo ("<td>$cedula</td>");
                         echo ("<td>$descripcion</td>");
                         echo ("<td>$emision</td>");
-                        echo ("<td><form action='./imprimir_factura.php' method='post'><button name='id' value='$id'>Imprimir</button></form></td>");
+                        echo ("<td><form action='./imprimir_factura.php' method='post'><button class='button-imprimir' name='id' value='$id'>Imprimir</button></form></td>");
 
                         echo ("</tr>");
 

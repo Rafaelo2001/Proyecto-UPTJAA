@@ -715,6 +715,25 @@ form .form-group-input {
 	font-weight: 600;
 }
 
+.button-imprimir{
+	border: none;
+	outline: none;
+	height: 30px;
+	background: rgb(254, 153, 0);
+	background: linear-gradient(135deg, rgba(254, 153, 0, 1) 0%, rgba(254, 101, 0, 1) 100%);
+	color: #ffffff;
+	font-size: 14px;
+	border-radius: 20px;
+	cursor: pointer;
+	transition: background .2s;
+	box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
+	font-weight: 600;
+}
+
+.button-imprimir:hover {
+	background: #fe6500;
+}
+
 .button-submit:disabled,
 .button-delete:disabled {
 	background: gray;
