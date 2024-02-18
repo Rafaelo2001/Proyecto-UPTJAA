@@ -83,12 +83,17 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 				</ul>
 			</li>
 			<li>
-				<a href="../registro-pagos.php">
-					<i class="fi fi-sr-file-invoice-dollar"></i>
-					<span class="link_name">Facturación</span>
-				</a>
-				<ul class="sub-menu blank">
-					<li><a class="link_name" href="../registro-pagos.php">Facturación</a></li>
+				<div class="iocn-link">
+					<a href="#">
+						<i class="fi fi-sr-file-invoice-dollar"></i>
+						<span class="link_name">Facturación</span>
+					</a>
+					<i class="fi fi-sr-angle-small-down arrow"></i>
+				</div>
+				<ul class="sub-menu">
+					<li><a class="link_name" href="#">Facturación</a></li>
+					<li><a href="../registro-pagos.php">Nueva Factura</a></li>
+					<li><a href="detalles_pagos.php">Lista de Facturas</a></li>
 				</ul>
 			</li>
 			<li>
@@ -190,7 +195,9 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 		<h1 style="text-align: center;" class="table-title">Listado de Muestras</h1>
 
-		<input type="text" id="filtro" onkeyup="filtrarTabla()" placeholder="Filtrar por Nombre, Cedula, Fecha, etc...">
+		<div class="items">
+			<input type="text" id="filtro" onkeyup="filtrarTabla()" placeholder="Filtrar por Nombre, Cedula, Fecha, etc...">
+        </div>
 
 		<div class="center-table">
 

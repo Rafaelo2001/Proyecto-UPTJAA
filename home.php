@@ -70,7 +70,7 @@
 
 	<header>
 		<nav>
-			<a href="#" class="title">
+			<a class="title">
 				<img src="images/Logo con contorno.png" alt="Logo de Higea" width="115" height="115">
 				<img src="images/Letras.png" alt="Higea" width="180px" height="45px">
 			</a>

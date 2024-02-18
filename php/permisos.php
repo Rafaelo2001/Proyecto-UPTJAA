@@ -23,6 +23,7 @@ $permisos = array(
         'detalles_insumo.php',
         'detalles_muestras.php',
         'detalles_paciente.php',
+        'detalles_pagos.php',
         'edit_insumo.php',
         'edit_muestras.php',
         'edit_paciente.php',
@@ -48,6 +49,7 @@ $permisos = array(
         'detalles_insumo.php',
         'detalles_muestras.php',
         'detalles_paciente.php',
+        'detalles_pagos.php',
         'edit_insumo.php',
         'edit_muestras.php',
         'edit_paciente.php'
