@@ -55,4 +55,3 @@ $permisos = array(
         'edit_paciente.php'
     )
 );
-?>

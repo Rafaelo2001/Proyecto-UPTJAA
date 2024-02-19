@@ -23,11 +23,7 @@ $paginaActual = basename($_SERVER['PHP_SELF']);
 
 // Verifica si el usuario tiene permiso para acceder a la página actual
 if (!in_array($paginaActual, $permisos[$rol])) {
-    // Si el usuario no tiene permiso, muestra una alerta y redirige al usuario
-    echo "<script>
-							alert('No tienes permiso para acceder a esta página.');
-							window.location.href = '../home.php';
-					</script>";
+    header('Location: ../sin_permiso.php', true, 303);
 
     exit();
 }
