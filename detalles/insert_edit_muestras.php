@@ -150,5 +150,3 @@ if ($_POST['f_ent'] != $datosMuestra['F_Entrada']) {
             else{
                 die ($alert->sweetWar("./detalles_muestras.php", "No se han introducidos datos para actualizar"));
             }
-           
-?>

@@ -6,9 +6,9 @@ $permisos = array(
         'home.php',
         'info_higea.php',
         'info_lab.php',
-        'nueva-contrasena.php',
-        'preguntas-seguridad.php',
-        'rcvr_pass.php',
+            'nueva-contrasena.php',
+            'preguntas-seguridad.php',
+            'rcvr_pass.php',
         'registro-biopsia.php',
         'registro-citologia.php',
         'registro-examen.php',
@@ -16,8 +16,8 @@ $permisos = array(
         'registro-insumo.php',
         'registro-paciente.php',
         'registro-pagos.php',
-        'user_register.php',
-        'verificacion_token.php',
+            'user_register.php',
+            'verificacion_token.php',
         'visualizar-informe.php',
         'visualizar-insumo.php',
         'detalles_insumo.php',
@@ -27,9 +27,9 @@ $permisos = array(
         'edit_insumo.php',
         'edit_muestras.php',
         'edit_paciente.php',
-        'gestion_usuarios.php',
-        'edit_usuario.php',
-        'Gestion-BDD.php'
+            'gestion_usuarios.php',
+            'edit_usuario.php',
+            'Gestion-BDD.php'
     ),
 
     'analista' => array(
