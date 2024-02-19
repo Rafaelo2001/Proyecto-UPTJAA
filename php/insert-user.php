@@ -146,6 +146,6 @@ foreach ($resultadoUsuario as $filaIdUsuario) {
 // Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
 echo "<script>
                 alert('Los datos se han insertado correctamente.');
-                window.location.href = '../index.php';
+                window.location.href = '../gestion/gestion_usuarios.php';
                 </script>";
 ?>

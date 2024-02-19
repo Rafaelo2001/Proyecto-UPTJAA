@@ -53,10 +53,12 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 <body class="login-register">
 	<div class="sidebar close">
-		<div class="logo-details">
-			<img class="logo" src="images/Logo con contorno.png" alt="Logo de Higea" width="60" height="60">
-			<img class="logo_name" src="images/Letras.png" alt="HIGEA" width="135" height="40">
-		</div>
+		<a href="home.php">
+			<div class="logo-details">
+				<img class="logo" src="images/Logo con contorno.png" alt="Logo de Higea" width="60" height="60">
+				<img class="logo_name" src="images/Letras.png" alt="HIGEA" width="135" height="40">
+			</div>
+		</a>
 		<ul class="nav-links">
 			<li>
 				<a href="registro-paciente.php">
