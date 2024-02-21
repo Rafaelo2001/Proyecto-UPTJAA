@@ -69,7 +69,7 @@ $user = new CodeaDB();
 	<footer>
 		<div class="div-footer">
 			<img src="images/Logo.png" alt="Logo de Higea" width="70" height="70">
-			<img src="images/higea_color.png" alt="Logo de Higea" width="70" height="70">
+			<a href="./recuperacion_admin/recuperacion_admin.php"><img src="images/higea_color.png" alt="Logo de Higea" width="70" height="70"></a>
 			<span class="copyright">&copy; 2024 HIGEA - Laboratorio Dr. Miguel Blanco. Todos los derechos reservados.</span>
 		</div>
 	</footer>

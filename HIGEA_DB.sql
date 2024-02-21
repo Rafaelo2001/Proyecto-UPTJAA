@@ -564,7 +564,7 @@ CREATE TABLE `correo` (
 --
 
 INSERT INTO `correo` (`ID_Correo`, `Correo`, `CI`) VALUES
-(1, 'admin@admin.com', 'V-123456');
+(1, 'blancot30@gmail.com', 'V-123456');
 
 -- --------------------------------------------------------
 
@@ -2455,7 +2455,7 @@ CREATE TABLE `telefono` (
 --
 
 INSERT INTO `telefono` (`ID_Telefono`, `Nro_Telf`, `CI`) VALUES
-(1, '1234-1234567', 'V-123456');
+(1, '0414-8415418', 'V-123456');
 
 --
 -- Disparadores `telefono`
