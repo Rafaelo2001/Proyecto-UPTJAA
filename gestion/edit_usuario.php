@@ -260,7 +260,7 @@ if ($datosUsuario["Rol"] == "admin") {
                     <li><a href="../info_lab.php">Sobre el Lab.</a></li>
                     <li><a href="../info_higea.php">Sobre HIGEA</a></li>
                     <li><a href="../developers.php">Developers</a></li>
-                    <li><a href="#">Ayuda</a></li>
+                    <li><a href="../ayuda.php">Ayuda</a></li>
                 </ul>
             </li>
             <li>

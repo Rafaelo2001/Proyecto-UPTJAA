@@ -2,6 +2,7 @@
 
 $permisos = array(
     'admin' => array(
+        'ayuda.php',
         'developers.php',
         'home.php',
         'info_higea.php',
@@ -33,6 +34,7 @@ $permisos = array(
     ),
 
     'analista' => array(
+        'ayuda.php',
         'developers.php',
         'home.php',
         'info_higea.php',
