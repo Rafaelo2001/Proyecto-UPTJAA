@@ -17,81 +17,84 @@
     $conex = $user->conexion;    
     
     // Declarando las variables a utilizar
-    $datosMuestra = $user->buscarSINGLE("m_remitido","ID_M_Remitido=".$_POST['id_m']);
-        $datosMuestraActualizar = [];
-        $sqlMuestraActualizar = "";
+        $datosMuestra = $user->buscarSINGLE("m_remitido","ID_M_Remitido=".$_POST['id_m']);
+            $datosMuestraActualizar = [];
+            $sqlMuestraActualizar = "";
 
-    if($_POST['tipo_m'] == "Biopsia"){
-        $datosBiopsia = $user->buscarSINGLE("m_biopsia","ID_M_Remitido=".$_POST['id_m']);
-        $sqlBiopsiaActualizar = "";
-    }
-    elseif($_POST['tipo_m'] == "Citología"){
-        $datosCitologia = $user->buscarSINGLE("m_citologia","ID_M_Remitido=".$_POST['id_m']);
-        $datosCitologiaActualizar = [];
-        $sqlCitologiaActualizar = "";
-    }    
+        if($_POST['tipo_m'] == "Biopsia"){
+            $datosBiopsia = $user->buscarSINGLE("m_biopsia","ID_M_Remitido=".$_POST['id_m']);
+            $sqlBiopsiaActualizar = "";
+        }
+        elseif($_POST['tipo_m'] == "Citología"){
+            $datosCitologia = $user->buscarSINGLE("m_citologia","ID_M_Remitido=".$_POST['id_m']);
+            $datosCitologiaActualizar = [];
+            $sqlCitologiaActualizar = "";
+        }    
 
-// m_remitido
-if ($_POST['des_m'] != $datosMuestra['Descripcion_material']) {
-    $datosMuestraActualizar[] .= "`Descripcion_material` = '" . $_POST['des_m'] . "'";
-}
-
-if ($_POST['diag'] != $datosMuestra['Diagnostico']) {
-    $datosMuestraActualizar[] .= "`Diagnostico` = '" . $_POST['diag'] . "'";
-}
-
-if ($_POST['resumen'] != $datosMuestra['Resumen']) {
-    $datosMuestraActualizar[] .= "`Resumen` = '" . $_POST['resumen'] . "'";
-}
-
-if ($_POST['examinado'] != $datosMuestra['Examinado']) {
-    $datosMuestraActualizar[] .= "`Examinado` = '" . $_POST['examinado'] . "'";
-}
-
-if ($_POST['f_ent'] != $datosMuestra['F_Entrada']) {
-    $datosMuestraActualizar[] .= "`F_Entrada` = '" . $_POST['f_ent'] . "'";
-}
-
-
-            if($_POST['tipo_m'] == "Biopsia"){
-
-                // m_biopsia
-                    if($_POST['sitio'] != $datosBiopsia['Sitio_lesion']) {
-                        $sqlBiopsiaActualizar = "`Sitio_lesion` = '".$_POST['sitio']."'";
-                    }
-
+    // Comprueba si los datos han sido modificado con respecto a su contraparte en la BDD
+    // Si hay cambios, los guarda en una variable, sino los ignora
+    
+        // m_remitido
+            if ($_POST['des_m'] != $datosMuestra['Descripcion_material']) {
+                $datosMuestraActualizar[] .= "`Descripcion_material` = '" . $_POST['des_m'] . "'";
             }
-            elseif($_POST['tipo_m'] == "Citología"){
 
-                // m_citologia
-                    if($_POST['FUR'] != $datosCitologia['FUR']) {
-                        $datosCitologiaActualizar[] .= "`FUR` = '".$_POST['FUR']."'";
-                    }
-
-    if (isset($_POST['endocervix']) xor $datosCitologia['Endocervix']) {
-        $datosCitologiaActualizar[] .= "`Endocervix` = '" . $_POST['endocervix'] . "'";
-    }
-
-    if (isset($_POST['exocervix']) xor $datosCitologia['Exocervix']) {
-        $datosCitologiaActualizar[] .= "`Exocervix` = '" . $_POST['exocervix'] . "'";
-    }
-
-    if (isset($_POST['vagina']) xor $datosCitologia['Vagina']) {
-        $datosCitologiaActualizar[] .= "`Vagina` = '" . $_POST['vagina'] . "'";
-    }
-
-                    if(isset($_POST['otro_check'])) {
-                        if($_POST['otro'] != $datosCitologia['Otros']) {
-                            $datosCitologiaActualizar[] .= "`Otros` = '".$_POST['otro']."'";
-                        }
-                    }
-                    else{
-                        $datosCitologiaActualizar[] .= "`Otros` = 0";
-                    }
-
+            if ($_POST['diag'] != $datosMuestra['Diagnostico']) {
+                $datosMuestraActualizar[] .= "`Diagnostico` = '" . $_POST['diag'] . "'";
             }
+
+            if ($_POST['resumen'] != $datosMuestra['Resumen']) {
+                $datosMuestraActualizar[] .= "`Resumen` = '" . $_POST['resumen'] . "'";
+            }
+
+            if ($_POST['examinado'] != $datosMuestra['Examinado']) {
+                $datosMuestraActualizar[] .= "`Examinado` = '" . $_POST['examinado'] . "'";
+            }
+
+            if ($_POST['f_ent'] != $datosMuestra['F_Entrada']) {
+                $datosMuestraActualizar[] .= "`F_Entrada` = '" . $_POST['f_ent'] . "'";
+            }
+
+
+        if($_POST['tipo_m'] == "Biopsia"){
+
+            // m_biopsia
+                if($_POST['sitio'] != $datosBiopsia['Sitio_lesion']) {
+                    $sqlBiopsiaActualizar = "`Sitio_lesion` = '".$_POST['sitio']."'";
+                }
+
+        }
+        elseif($_POST['tipo_m'] == "Citología"){
+
+            // m_citologia
+                if($_POST['FUR'] != $datosCitologia['FUR']) {
+                    $datosCitologiaActualizar[] .= "`FUR` = '".$_POST['FUR']."'";
+                }
+
+                if (isset($_POST['endocervix']) xor $datosCitologia['Endocervix']) {
+                    $datosCitologiaActualizar[] .= "`Endocervix` = '" . $_POST['endocervix'] . "'";
+                }
+
+                if (isset($_POST['exocervix']) xor $datosCitologia['Exocervix']) {
+                    $datosCitologiaActualizar[] .= "`Exocervix` = '" . $_POST['exocervix'] . "'";
+                }
+
+                if (isset($_POST['vagina']) xor $datosCitologia['Vagina']) {
+                    $datosCitologiaActualizar[] .= "`Vagina` = '" . $_POST['vagina'] . "'";
+                }
+
+                if(isset($_POST['otro_check'])) {
+                    if($_POST['otro'] != $datosCitologia['Otros']) {
+                        $datosCitologiaActualizar[] .= "`Otros` = '".$_POST['otro']."'";
+                    }
+                }
+                else{
+                    $datosCitologiaActualizar[] .= "`Otros` = 0";
+                }
+
+        }
        
-
+        // Si hay cambios en alguno de los array, ejecuta el siguiente codigo
             if($datosMuestraActualizar || !empty($sqlBiopsiaActualizar) || !empty($datosCitologiaActualizar)){
 
                 try {

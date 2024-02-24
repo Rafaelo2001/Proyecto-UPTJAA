@@ -19,6 +19,7 @@
     if (isset($_SESSION['token']) && $_SESSION['token']['expiry'] > time()) {
         if ($_SESSION['token']['value'] === $user_token) {
             
+            // Agrega una combinacion extra para mayor seguridad y evitar que ingresen el codigo de una pagina externa
             $_SESSION['token']['si_plus'] = $_SESSION['token']['value']."si";
             header('Location: ./nueva_contrasena_master.php');
 

@@ -1,32 +1,28 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: ../index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: ../index.php');
+		exit;
+	}
 
-include "../php/conexion.php";
-$user = new CodeaDB();
+	include "../php/conexion.php";
+	$user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require '../php/permisos.php';
+	require '../php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ../sin_permiso.php', true, 303);
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ../sin_permiso.php', true, 303);
 
-	exit();
-}
+		exit();
+	}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -193,10 +189,12 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 		<h1 style="text-align: center;" class="table-title">Listado de Insumos</h1>
 
+        <!-- Cuadro de Busqueda de la Tabla -->
 		<div class="items">
 			<input type="text" id="filtro" onkeyup="filtrarTabla()" placeholder="Filtrar por Nombre, Cedula, Fecha, etc...">
         </div>
 
+        <!-- Tabla con el Listado de Insumos -->
 		<div class="center-table">
 			<table style="text-align: center;" class="table" id="table">
 				<thead>
@@ -209,26 +207,28 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 					<th>Acciones</th>
 				</thead>
 				<?php
+				// Busca todos los insumos almacenados en la BDD
 				$listaInsumos = $user->buscar("insumo", "1");
 				foreach ($listaInsumos as $insumo) :
 				?>
 					<tr>
 						<?php
-						$material = $insumo['Material'];
-						$unidades = $insumo['Unidades'];
+						// Muestra los datos en forma de tabla
+							$material = $insumo['Material'];
+							$unidades = $insumo['Unidades'];
 
-						$existencia = number_format($insumo['Existencia'], 0, ',', '.');
-						$minimo     = number_format($insumo['Cant_minima'], 0, ',', '.');
-						$con_biop   = number_format($insumo['Consumo_Biop'], 0, ',', '.');
-						$con_cito   = number_format($insumo['Consumo_Cito'], 0, ',', '.');
+							$existencia = number_format($insumo['Existencia'], 0, ',', '.');
+							$minimo     = number_format($insumo['Cant_minima'], 0, ',', '.');
+							$con_biop   = number_format($insumo['Consumo_Biop'], 0, ',', '.');
+							$con_cito   = number_format($insumo['Consumo_Cito'], 0, ',', '.');
 
-						echo ("<td>" . $material . "</td>");
-						echo ("<td>" . $unidades . "</td>");
-						echo ("<td style='text-align: right;'>" . $existencia . "</td>");
-						echo ("<td style='text-align: right;'>" . $minimo . "</td>");
-						echo ("<td style='text-align: right;'>" . $con_biop . "</td>");
-						echo ("<td style='text-align: right;'>" . $con_cito . "</td>");
-						echo ("<td><form action='./edit_insumo.php' method='post'><input type='hidden' name='id' value='" . $insumo['ID_Insumo'] . "' required><input type='submit' value='Editar'></form></td>")
+							echo ("<td>" . $material . "</td>");
+							echo ("<td>" . $unidades . "</td>");
+							echo ("<td style='text-align: right;'>" . $existencia . "</td>");
+							echo ("<td style='text-align: right;'>" . $minimo . "</td>");
+							echo ("<td style='text-align: right;'>" . $con_biop . "</td>");
+							echo ("<td style='text-align: right;'>" . $con_cito . "</td>");
+							echo ("<td><form action='./edit_insumo.php' method='post'><input type='hidden' name='id' value='" . $insumo['ID_Insumo'] . "' required><input type='submit' value='Editar'></form></td>")
 						?>
 					</tr>
 				<?php endforeach; ?>
@@ -237,6 +237,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</main>
 
 	<script>
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
 		let arrow = document.querySelectorAll(".arrow");
 		for (var i = 0; i < arrow.length; i++) {
 			arrow[i].addEventListener("click", (e) => {
@@ -250,8 +251,8 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 		sidebarBtn.addEventListener("click", () => {
 			sidebar.classList.toggle("close");
 		});
-
-		function filtrarTabla() {
+        // Funcion de filtrado para el campo de busqueda
+        function filtrarTabla() {
             // Obtener el valor ingresado en el campo de entrada
             var filtro = document.getElementById("filtro").value.toUpperCase();
 

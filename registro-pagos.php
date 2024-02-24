@@ -1,32 +1,28 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: index.php');
+		exit;
+	}
 
-include "php/conexion.php";
-$user = new CodeaDB();
+	include "php/conexion.php";
+	$user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+	require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ./sin_permiso.php', true, 303);
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ./sin_permiso.php', true, 303);
 
-	exit();
-}
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -191,11 +187,13 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			<a href="mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
 		</div>
 
+		<!-- Formulario para el registro de una nueva factura -->
 		<section class="form-register">
 			<h1>REGISTRO DE PAGOS</h1>
 			<h4>Obligatorio (*).</h4>
 			<form action="php/generador-factura.php" method="post" class="form" id="form" autocomplete="off">
 
+				<!-- Muestra una lista con todos los pacientes registrados en la BDD -->
 				<label for="paciente">Paciente (*)</label>
 				<select id="paciente" name="paciente" style="min-width: 100px;" required>
 					<option></option>
@@ -214,10 +212,6 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 								$nombre_completo = $paciente['PN'] . " " . $paciente['SN'] . " " . $paciente['TN'] . " " . $paciente['PA'] . " " . $paciente['SA'];
 
-								// list($tipo_identidad, $ci_numerica) = explode('-', $cedula);
-								// $ci_numerica_formateada = number_format($ci_numerica, 0, ',', '.');
-								// $cedula_formateada = $tipo_identidad . '-' . $ci_numerica_formateada;
-
 								$cedula_a_mostrar = " - C.I.: $cedula";
 
 								echo $nombre_completo, $cedula_a_mostrar;
@@ -231,7 +225,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 				<div class="grid">
 
-					<!--group: datebirth-->
+					<!-- Fehca de Pago -->
 					<div class="form-group" id="group_date_birth">
 						<div class="form-group-input">
 							<label for="fecha">Fecha de pago (*)</label>
@@ -241,6 +235,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
 					</div>
 
+					<!-- Script de Validacion de Fecha -->
 					<script>
 						var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 - 4 * 60 * 60 * 1000);
 						hoy.setSeconds(0); // Ajusta los segundos a 0
@@ -257,7 +252,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 					</script>
 
 
-					<!--group: datebirth-->
+					<!-- Monto -->
 					<div class="form-group" id="group_date_birth">
 						<div class="form-group-input">
 							<label for="monto">Ingrese monto (*)</label>
@@ -267,7 +262,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<p class="form-input-error">Rellene este campo correctamente. Ej: 2000</p>
 					</div>
 
-					<!--group: datebirth-->
+					<!-- Descripcion Factura -->
 					<div class="form-group" id="group_date_birth">
 						<div class="form-group-input">
 							<label for="monto">Descripción de la factura (*)</label>
@@ -279,6 +274,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 				</div>
 
 				<div>
+					<!-- Metodo de Pago -->
 					<label>Método de pago (*)</label>
 					<div class="radio" id="tipo-pago">
 						<input type="radio" name="tipo_pago" id="tipo_pago1" value="Bs.D" required>
@@ -297,7 +293,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 				<div class="grid">
 
-					<!--group: datebirth-->
+					<!-- Referencia -->
 					<div class="form-group" id="group_date_birth">
 						<div class="form-group-input">
 							<label for="referencia">Referencia (si aplica)</label>
@@ -307,7 +303,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
 					</div>
 
-					<!--group: datebirth-->
+					<!-- Observaciones -->
 					<div class="form-group" id="group_date_birth">
 						<div class="form-group-input">
 							<label for="obs">Observaciones del pago</label>
@@ -317,11 +313,6 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<p class="form-input-error">Rellene este campo correctamente. Ej: 2000</p>
 					</div>
 				</div>
-
-
-				<!--<div class="form-mess" id="form-mess">
-								<p><i class="fi fi-rr-triangle-warning"></i><b>Error:</b> ¡Revise los campos!</p>
-								</div>-->
 
 				<div class="button-container">
 					<div class="form__group form__group-btn-submit">
@@ -334,6 +325,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</main>
 
 	<script>
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
 		let arrow = document.querySelectorAll(".arrow");
 		for (var i = 0; i < arrow.length; i++) {
 			arrow[i].addEventListener("click", (e) => {
@@ -350,6 +342,8 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</script>
 
 </body>
-<script src="js/form-pago.js"></script>
+
+	<!-- Codigo JS necesario para el funcionamiento del formulario -->
+	<script src="js/form-pago.js"></script>
 
 </html>

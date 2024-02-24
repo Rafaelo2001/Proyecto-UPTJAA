@@ -72,9 +72,12 @@
         <button type="button" id="index">Regresar</button>
     </body>
     <script>
+        // Boton de Regreso
         $('#index').click(function(){
             window.location.href = "../index.php";
         });
+
+        // SweetAlert2 para el envio del correo de verificacion
         $('#continuar').click(function () {
             Swal.fire({
                 title: '¿Continuar?',

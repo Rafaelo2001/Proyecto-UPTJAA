@@ -12,17 +12,19 @@
     $id_usuario = $_POST['id'];
     $_SESSION['id_user'] = $id_usuario;
 
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
+    // Solicita la libreria PHPMailer para enviar emails
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
 
-    require '../PHPMailer/src/Exception.php';
-    require '../PHPMailer/src/PHPMailer.php';
-    require '../PHPMailer/src/SMTP.php';
+        require '../PHPMailer/src/Exception.php';
+        require '../PHPMailer/src/PHPMailer.php';
+        require '../PHPMailer/src/SMTP.php';
 
     $mail = new PHPMailer(true);
     $mail->CharSet = 'UTF-8';
 
 
+    // Crea el contenido del email y lo envia
     try {
         $stmt = $conex->prepare('SELECT Nombre, CIE FROM usuario WHERE ID_Usuario = ?');
         $stmt->bind_param('s', $id_usuario); // 's' indica que $id_usuario es una cadena (string)

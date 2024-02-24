@@ -1,52 +1,53 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+    session_start();
+    header('Cache-Control: no-cache, no-store, must-revalidate');
+    header('Pragma: no-cache');
+    header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-    header('Location: ../index.php');
-    exit;
-}
+    if (!isset($_SESSION['username'])) {
+        header('Location: ../index.php');
+        exit;
+    }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST' || $_POST['ci'] == "") {
-    header('Location: ./detalles_paciente.php', true, 303);
-    exit;
-}
+    // Comprueba si se ingresó a esta pagina por un metodo POST y si la variable 'ci' no esta vacia
+    // Si alguna de esas condiciones no se cumplen, redirige fuera de la pagina
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST' || $_POST['ci'] == "") {
+        header('Location: ./detalles_paciente.php', true, 303);
+        exit;
+    }
 
-require "../php/conexion.php";
-$user = new CodeaDB();
+    require "../php/conexion.php";
+    $user = new CodeaDB();
 
-$datosPaciente = $user->buscarBY("persona", "CI='" . $_POST['ci'] . "'");
-$datosTelefono = $user->buscarONE("telefono", "CI='" . $_POST['ci'] . "'", "Nro_Telf");
-$datosCorreo = $user->buscarONE("correo", "CI='" . $_POST['ci'] . "'", "Correo");
+    // Solicita varios datos referentes al paciente
+        $datosPaciente = $user->buscarBY("persona", "CI='" . $_POST['ci'] . "'");
+        $datosTelefono = $user->buscarONE("telefono", "CI='" . $_POST['ci'] . "'", "Nro_Telf");
+        $datosCorreo = $user->buscarONE("correo", "CI='" . $_POST['ci'] . "'", "Correo");
 
-$its_a_boy = "";
-$its_a_girl = "";
+    // Variables para determinar si el paciente es hombre o mujer
+        $its_a_boy = "";
+        $its_a_girl = "";
 
-if ($datosPaciente[0]["Sexo"] == "M") {
-    $its_a_boy = "checked";
-    $its_a_girl = "";
-} elseif ($datosPaciente[0]["Sexo"] == "F") {
-    $its_a_boy = "";
-    $its_a_girl = "checked";
-}
+    // Verifica si el paciente es hombre o mujer
+        if ($datosPaciente[0]["Sexo"] == "M") {
+            $its_a_boy = "checked";
+            $its_a_girl = "";
+        } elseif ($datosPaciente[0]["Sexo"] == "F") {
+            $its_a_boy = "";
+            $its_a_girl = "checked";
+        }
 
-// Incluye el archivo de permisos
-require '../php/permisos.php';
+    require '../php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+    $rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+    $paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-    header('Location: ../sin_permiso.php', true, 303);
+    if (!in_array($paginaActual, $permisos[$rol])) {
+        header('Location: ../sin_permiso.php', true, 303);
 
-    exit();
-}
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -212,6 +213,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
             <a href="../mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
         </div>
 
+        <!-- Formulario para la edicion de datos del Paciente -->
         <section class="form-register">
             <h1>Edición de Paciente: <?php echo $datosPaciente[0]["CI"] ?></h1>
             <h4>Obligatorio (*).</h4>
@@ -289,6 +291,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                         <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
                     </div>
 
+                    <!-- Validacion de la fecha -->
                     <script>
                         var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 - 4 * 60 * 60 *
                             1000);
@@ -298,6 +301,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                 </div>
 
                 <div>
+                    <!-- Sexo del paciente -->
                     <label>Sexo (*)</label>
                     <div class="radio" id="sexo">
                         <input type="radio" name="sexo" id="masculino" value="M" <?php echo ($its_a_boy) ?> required>
@@ -335,6 +339,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                     </div>
                 </div>
 
+                <!-- Envia los datos del paciente para su edicion en la BDD -->
                 <div class="button-container">
                     <div class="form__group form__group-btn-submit">
                         <input type="hidden" name="ci" value="<?php echo $_POST['ci']; ?>">
@@ -347,7 +352,8 @@ if (!in_array($paginaActual, $permisos[$rol])) {
     </main>
 
     <script>
-        let arrow = document.querySelectorAll(".arrow");
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
+		let arrow = document.querySelectorAll(".arrow");
         for (var i = 0; i < arrow.length; i++) {
             arrow[i].addEventListener("click", (e) => {
                 let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
@@ -362,13 +368,15 @@ if (!in_array($paginaActual, $permisos[$rol])) {
         });
     </script>
 </body>
-<script>
-    $(":input").change(function() {
-        $("#enviar").prop("disabled", false);
-    })
-    $(":input").keypress(function() {
-        $("#enviar").prop("disabled", false);
-    })
-</script>
+
+    <!-- Habilita o desabilita el boton de envio de formulario segun haya algun cambio en los datos del paciente  o no -->
+    <script>
+        $(":input").change(function() {
+            $("#enviar").prop("disabled", false);
+        })
+        $(":input").keypress(function() {
+            $("#enviar").prop("disabled", false);
+        })
+    </script>
 
 </html>

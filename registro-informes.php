@@ -1,32 +1,28 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: index.php');
+		exit;
+	}
 
-include "php/conexion.php";
-$user = new CodeaDB();
+	include "php/conexion.php";
+	$user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+	require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ./sin_permiso.php', true, 303);
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ./sin_permiso.php', true, 303);
 
-	exit();
-}
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -191,12 +187,15 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			<a href="mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
 		</div>
 
+		<!-- Formulario para el registro de Formulario -->
 		<section class="form-register">
 			<h1>REGISTRO DE INFORMES</h1>
 			<h4>Obligatorio (*)</h4>
 			<form action="" method="post" class="form" id="form" autocomplete="off">
 
 				<div class="grid2">
+
+					<!-- Seleccion del tipo de Informe -->
 					<div>
 						<div class="radio" id="tipo_informe">
 							<input type="radio" name="tipo_informe" class="tipo_informe" id="citologia" value="citologia">
@@ -207,7 +206,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						</div>
 					</div>
 
-					<!--group: ci-->
+					<!-- Muestra una lista con todos los pacientes registrados en la BDD -->
 					<div class="form-group" id="group_ci_patient">
 						<div class="form-group-input">
 							<label for="paciente_id">Paciente (*)</label>
@@ -228,10 +227,6 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 											$nombre_completo = $paciente['PN'] . " " . $paciente['SN'] . " " . $paciente['TN'] . " " . $paciente['PA'] . " " . $paciente['SA'];
 
-											// list($tipo_identidad, $ci_numerica) = explode('-', $cedula);
-											// $ci_numerica_formateada = number_format($ci_numerica, 0, ',', '.');
-											// $cedula_formateada = $tipo_identidad . '-' . $ci_numerica_formateada;
-
 											$cedula_a_mostrar = " - C.I.: $cedula";
 
 											echo $nombre_completo, $cedula_a_mostrar;
@@ -249,7 +244,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						</span>
 					</div>
 
-					<!--group: name1-->
+					<!-- Muestra una lista con todos los medicos registrados en la BDD -->
 					<div class="form-group" id="group_name_patient1">
 						<div class="form-group-input">
 							<label for="medico">Medico (*)</label>
@@ -272,9 +267,11 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						</span>
 					</div>
 
+					<!-- Formulario para el registro de Informe de Biopsia -->
 					<section id="informe_biopsia" style="display:none">
 						<h1>INFORME BIOPSIA</h1>
 
+						<!-- Lista con las muestras de biopsias examinadas del paciente del paciente -->
 						<label for="examen_id_b">Examenes del Paciente (*)</label>
 						<select id="examen_id_b" name="examen_id_b" required>
 							<option value="" selected disabled>Seleccione paciente</option>
@@ -284,6 +281,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<br>
 
 
+						<!-- Informacion de la muestra -->
 						<label for="info_b">
 							<h2>Información de material remitido (*)</h2>
 						</label>
@@ -293,6 +291,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<br>
 
 
+						<!-- Descripcion Macro -->
 						<label for="des_macro_b">
 							<h2>Descripción Macro (*)</h2>
 						</label>
@@ -302,6 +301,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<br>
 
 
+						<!-- Descripcion Micro -->
 						<label for="des_micro_b">
 							<h2>Descripción Micro (*)</h2>
 						</label>
@@ -311,6 +311,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<br>
 
 
+						<!-- Diagnostico -->
 						<label for="diag_b">
 							<h2>Diagnostico (*)</h2>
 						</label>
@@ -320,6 +321,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<br>
 
 
+						<!-- Observaciones -->
 						<label for="obs_b">
 							<h2>Obsevaciones/Comentarios (*)</h2>
 						</label>
@@ -327,6 +329,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 						<br>
 
+						<!-- AJAX para la seleccion de muestras de biopsia del paciente -->
 						<script>
 							$("#paciente_id").change(function() {
 								$.ajax({
@@ -351,14 +354,17 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						</script>
 					</section>
 
+					<!-- Formulario para el registro de Informe de Citologia -->
 					<section id="informe_citologia" style="display:none">
 						<h1>INFORME CITOLOGÍA</h1>
 
+						<!-- Lista con las muestras citologicas examinadas del paciente del paciente -->
 						<label for="examen_id_c">Examenes del Paciente (*)</label>
 						<select id="examen_id_c" name="examen_id_c" required>
 							<option value="" selected disabled>Seleccione paciente</option>
 						</select>
 
+						<!-- Informacion de la muestra -->
 						<label for="info_c">
 							<h2>Información de material remitido (*)</h2>
 						</label>
@@ -368,6 +374,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<br>
 
 
+						<!-- Calidad de la muestra -->
 						<label for="calidad_c">
 							<h2>Calidad de muestras (*)</h2>
 						</label>
@@ -377,6 +384,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<br>
 
 
+						<!-- Categoria General -->
 						<label for="categ_c">
 							<h2>Categoría General (*)</h2>
 						</label>
@@ -386,6 +394,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<br>
 
 
+						<!-- Hallazgos -->
 						<label for="hallazgos_c">
 							<h2>Hallazgos (*)</h2>
 						</label>
@@ -395,6 +404,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<br>
 
 
+						<!-- Diagnostico -->
 						<label for="diag_c">
 							<h2>Diagnostico (*)</h2>
 						</label>
@@ -404,6 +414,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<br>
 
 
+						<!-- Conducta -->
 						<label for="conducta_c">
 							<h2>Conducta (*)</h2>
 						</label>
@@ -413,6 +424,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<br>
 
 
+						<!-- Observaciones -->
 						<label for="obs_c">
 							<h2>Obsevaciones/Comentarios (*)</h2>
 						</label>
@@ -420,6 +432,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 						<br>
 
+						<!-- AJAX para la seleccion de muestras citologicas del paciente -->
 						<script>
 							$("#paciente_id").change(function() {
 								$.ajax({
@@ -460,10 +473,11 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</main>
 
 	<script>
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
 		let arrow = document.querySelectorAll(".arrow");
 		for (var i = 0; i < arrow.length; i++) {
 			arrow[i].addEventListener("click", (e) => {
-				let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
+				let arrowParent = e.target.parentElement.parentElement;
 				arrowParent.classList.toggle("showMenu");
 			});
 		}
@@ -476,6 +490,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</script>
 
 
+	<!-- Codigo JS necesario para el funcionamiento del formulario -->
 	<script src="js/form-informe.js"></script>
 </body>
 

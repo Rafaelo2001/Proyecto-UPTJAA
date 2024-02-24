@@ -1,32 +1,28 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: index.php');
+		exit;
+	}
 
-include "php/conexion.php";
-$user = new CodeaDB();
+	include "php/conexion.php";
+	$user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+	require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ./sin_permiso.php', true, 303);
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ./sin_permiso.php', true, 303);
 
-	exit();
-}
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -193,11 +189,13 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			<a href="mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
 		</div>
 
+		<!-- Formulario para el registro de una muestra citologica -->
 		<section class="form-register">
 			<h1>REGISTRO DE CITOLOGÍA</h1>
 			<h4>Obligatorio (*).</h4>
 			<form action="php/insert-citologia.php" method="post" class="form" id="form" autocomplete="off">
 
+				<!-- Muestra una lista con todos los pacientes registrados en la BDD -->
 				<label for="paciente">Paciente (*)</label>
 				<select id="paciente" name="paciente" style="min-width: 100px;" required>
 					<option></option>
@@ -216,10 +214,6 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 								$nombre_completo = $paciente['PN'] . " " . $paciente['SN'] . " " . $paciente['TN'] . " " . $paciente['PA'] . " " . $paciente['SA'];
 
-								// list($tipo_identidad, $ci_numerica) = explode('-', $cedula);
-								// $ci_numerica_formateada = number_format($ci_numerica, 0, ',', '.');
-								// $cedula_formateada = $tipo_identidad . '-' . $ci_numerica_formateada;
-
 								$cedula_a_mostrar = " - C.I.: $cedula";
 
 								echo $nombre_completo, $cedula_a_mostrar;
@@ -232,12 +226,15 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 				</select>
 
 				<br><br>
+				<!-- Descripcion Material Remitido -->
 				<label for="descripcion">Descripcion Material Remitido (*)</label>
 				<textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material" required></textarea>
 
+				<!-- Resumen Historia Medica -->
 				<label for="resumen">Resumen de Historia Clínica (*)</label>
 				<textarea type="text" name="resumen" id="resumen" cols="40" rows="3" placeholder="Escriba el resumen" required></textarea>
 
+				<!-- Diagnotico -->
 				<label for="diagnostico">Diagnóstico Clínico (*)</label>
 				<textarea type="text" name="diagnostico" id="diagnostico" cols="40" rows="3" placeholder="Escriba el diagnóstico" required></textarea>
 
@@ -246,7 +243,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 
 				<div class="grid">
-					<!--group: state-->
+					<!-- Lista de Medicos -->
 					<div class="form-group" id="group_state">
 						<div id="medico_en_bdd">
 							<label for="medico">Médico (*)</label>
@@ -261,7 +258,6 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 								<?php endforeach; ?>
 							</select>
 
-
 						</div>
 						<span class="form-input-error">
 							<i class="formulario_validacion_estado fi fi-rr-cross"></i>
@@ -269,7 +265,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						</span>
 					</div>
 
-					<!--group: FUR-->
+					<!-- FUR -->
 					<div class="form-group" id="group_name_patient3">
 						<div class="form-group-input">
 							<label for="FUR">Fecha de la Última Regla (*)</label>
@@ -281,6 +277,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						</span>
 					</div>
 
+					<!-- Script de Validacion de Fecha -->
 					<script>
 						var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 - 4 * 60 * 60 *
 							1000);
@@ -292,6 +289,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 				</div>
 
 
+				<!-- Checkbox de tipos de frotis -->
 				<div class="checkbox" id="frotis">
 					<h2>Frotis de: (*)</h2>
 					<input type="checkbox" name="endocervix" id="endocervix" value="endocervix">
@@ -310,6 +308,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 					<input type="text" name="otro" id="otro" placeholder="Especifique" disabled>
 				</div>
 
+				<!-- Validacion de Frotis -->
 				<script>
 					document.getElementById('form').addEventListener('submit', function(event) {
 						var checkboxes = document.querySelectorAll('#frotis input[type="checkbox"]');
@@ -336,10 +335,11 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</main>
 
 	<script>
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
 		let arrow = document.querySelectorAll(".arrow");
 		for (var i = 0; i < arrow.length; i++) {
 			arrow[i].addEventListener("click", (e) => {
-				let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
+				let arrowParent = e.target.parentElement.parentElement;
 				arrowParent.classList.toggle("showMenu");
 			});
 		}
@@ -351,15 +351,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 		});
 	</script>
 
-
-	<!-- Observaciones no se encuentra en la BDD, asi que lo dejare comentado por ahora -->
-	<!--
-				<label for="diagnosis">Observaciones:</label>
-				<input type="text" name="obsevations" id="observations" placeholder="Indique la observacion">
-
-				<br><br>
-				-->
-
+	<!-- Codigo JS necesario para el funcionamiento del formulario -->
 	<script src="js/form-citologia.js"></script>
 </body>
 

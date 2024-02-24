@@ -1,32 +1,28 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: index.php');
+		exit;
+	}
 
-include "php/conexion.php";
-$user = new CodeaDB();
+	include "php/conexion.php";
+	$user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+	require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ./sin_permiso.php', true, 303);
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ./sin_permiso.php', true, 303);
 
-	exit();
-}
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -192,11 +188,13 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			<a href="mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
 		</div>
 
+		<!-- Formulario para el registro de una muestra de biopsia -->
 		<section class="form-register">
 			<h1>REGISTRO DE BIOPSIA</h1>
 			<h4>Obligatorio (*).</h4>
 			<form action="php/insert-biopsia.php" method="post" class="form" id="form" autocomplete="off">
 
+				<!-- Muestra una lista con todos los pacientes registrados en la BDD -->
 				<label for="paciente">Paciente (*)</label>
 				<select id="paciente" name="paciente" style="min-width: 100px;" required>
 					<option></option>
@@ -232,12 +230,15 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 				<br><br>
 
+				<!-- Descripcion Material Remitido -->
 				<label for="descripcion">Descripcion Material Remitido (*)</label>
 				<textarea type="text" name="descripcion" id="descripcion" cols="40" rows="3" placeholder="Escriba una descripcion del material" required></textarea>
 
+				<!-- Resumen Historia Medica -->
 				<label for="resumen">Resumen de Historia Clínica (*)</label>
 				<textarea type="text" name="resumen" id="resumen" cols="40" rows="3" placeholder="Escriba el resumen" required></textarea>
 
+				<!-- Diagnotico -->
 				<label for="diagnostico">Diagnóstico Clínico (*)</label>
 				<textarea type="text" name="diagnostico" id="diagnostico" cols="40" rows="3" placeholder="Escriba el diagnóstico" required></textarea>
 
@@ -246,7 +247,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 
 				<div class="grid">
-					<!--group: state-->
+					<!-- Lista de Medicos -->
 					<div class="form-group" id="group_state">
 						<div id="medico_en_bdd">
 							<label for="medico">Médico (*)</label>
@@ -268,7 +269,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						</span>
 					</div>
 
-					<!--group: name3-->
+					<!-- Sitio Lesion -->
 					<div class="form-group" id="group_name_patient3">
 						<div class="form-group-input">
 							<label for="sitio_lesion">Sitio de la Lesión (*)</label>
@@ -281,12 +282,6 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 					</div>
 				</div>
 
-				<!--
-							<div class="form-mess" id="form-mess">
-							<p><i class="fi fi-rr-triangle-warning"></i><b>Error:</b> ¡Revise los campos!</p>
-							</div>
-							-->
-
 				<div class="button-container">
 					<div class="form__group form__group-btn-submit">
 						<input class="button-submit" type="submit" name="registrar" id="registrar" value="Registrar">
@@ -297,8 +292,10 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 		</section>
 	</main>
 
+	<!-- JS para alertas estilizadas -->
 	<script src="js/sweetalert2.all.min.js?v=1.2"></script>
 
+	<!-- Codigo JS necesario para el funcionamiento del formulario -->
 	<script src="js/form-biopsia.js"></script>
 </body>
 

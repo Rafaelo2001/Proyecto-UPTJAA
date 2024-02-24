@@ -1,8 +1,8 @@
 <?php
 
-session_start(); // Inicia la sesión
+// Actualizacion de Insumo
 
-// REGISTRO DE EXAMEN
+    session_start(); // Inicia la sesión
 
     require "conexion.php";
     require "sweet.php";
@@ -12,10 +12,8 @@ session_start(); // Inicia la sesión
 
     echo($alert->sweetHead("Actualización de Insumo"));
 
-    // Conectando con la base de datos Higea
     $conex = $user->conexion;
 
-    // Cambiando la zona horaria
     date_default_timezone_set('America/Caracas');
 
 
@@ -81,7 +79,4 @@ session_start(); // Inicia la sesión
                 die($alert->sweetError("../visualizar-insumo.php","Error al guardar datos",$e->getMessage()));
             }
 
-
             die ($alert->sweetOK("../visualizar-insumo.php", "Se ha actualizado el insumo correctamente"));
-
-?>

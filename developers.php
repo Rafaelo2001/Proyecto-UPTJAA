@@ -1,29 +1,29 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: index.php');
+		exit;
+	}
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+	// Incluye el archivo de permisos
+	require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	// Obtiene el rol del usuario de la variable de sesión
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	// Obtiene el nombre de la página actual
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ./sin_permiso.php', true, 303);
+	// Verifica si el usuario tiene permiso para acceder a la página actual
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ./sin_permiso.php', true, 303);
 
-	exit();
-}
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -191,6 +191,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			<a href="mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
 		</div>
 
+		<!-- Area de Developers -->
 
 		<section class="swiper mySwiper">
 
@@ -351,6 +352,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</section>
 
 	<script>
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
 		let arrow = document.querySelectorAll(".arrow");
 		for (var i = 0; i < arrow.length; i++) {
 			arrow[i].addEventListener("click", (e) => {

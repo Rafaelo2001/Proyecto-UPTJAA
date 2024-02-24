@@ -11,17 +11,18 @@
     $alert = new SweetForInsert();
     echo ($alert->sweetHead("Envío de Token Maestro"));
 
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
+    // Solicita la libreria PHPMailer para enviar emails
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
 
-    require '../PHPMailer/src/Exception.php';
-    require '../PHPMailer/src/PHPMailer.php';
-    require '../PHPMailer/src/SMTP.php';
+        require '../PHPMailer/src/Exception.php';
+        require '../PHPMailer/src/PHPMailer.php';
+        require '../PHPMailer/src/SMTP.php';
 
     $mail = new PHPMailer(true);
     $mail->CharSet = 'UTF-8';
 
-    $email = $user->buscarONE("usuario","CI = 'V-123456'","Correo");
+    $email = $user->buscarONE("correo","CI = 'V-123456'","Correo");
 
     try {        
         // Configuración del servidor de correo
@@ -55,10 +56,10 @@
 
         $mail->send();
 
-        // Muestra una alerta y redirige al usuario
+        // Muestra una alerta y redirige al usuario al siguiente paso
         die ("<script>
                 Swal.fire({
-                    title: 'Se ha enviado el código de recuperación al correo <b><i>blancot30@gmail.com</i></b>',
+                    title: 'Se ha enviado el código de recuperación al correo <b><i>$email</i></b>',
                     html: 'Si no aparece en la bandeja de entrada de su correo, revise en los correos no deseados.',
                     icon: 'success',
                     timer: 10000,

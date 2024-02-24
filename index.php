@@ -1,6 +1,7 @@
 <?php
-include "php/conexion.php";
-$user = new CodeaDB();
+	// Coneccion con la BDD
+	include "php/conexion.php";
+	$user = new CodeaDB();
 ?>
 
 <!DOCTYPE html>
@@ -31,9 +32,10 @@ $user = new CodeaDB();
 
 	<div class="login-box">
 		<h1>INICIO DE SESIÓN</h1>
+
+		<!-- Formulario de login con el cual se ingresara al sistema -->
 		<form action="php/login.php" method="post" class="form" id="form">
 
-			<!--username-->
 			<div class="form-group" id="group_username">
 				<div class="form-group-input">
 					<label for="username">Nombre de usuario</label>
@@ -42,7 +44,6 @@ $user = new CodeaDB();
 				<p class="form-input-error">Rellene este campo correctamente</p>
 			</div>
 
-			<!--password-->
 			<div class="form-group" id="group_password">
 				<div class="form-group-input">
 					<label for="password">Contraseña</label>

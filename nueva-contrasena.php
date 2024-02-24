@@ -59,6 +59,7 @@
         </nav>
     </header>
 
+    <!-- Formulario para el cambio de contraseña -->
     <div class="login-box-pass" style="height: 400px;">
         <h1>NUEVA CONTRASEÑA</h1>
         <h4>Obligatorio (*).</h4>
@@ -83,6 +84,7 @@
                     </p>
                 </div>
 
+                <!-- Validacion de contraseña -->
                 <script>
                 document.getElementById('form').addEventListener('submit', function(event) {
                     var password = document.getElementById('password').value;
@@ -130,15 +132,10 @@
             </div>
 
 
-            <!--<div class="form-mess" id="form-mess">
-				<p><i class="fi fi-rr-triangle-warning"></i> <b>Error:</b> ¡Revise los campos!</p>
-			</div>-->
-
             <div class="button-container" style="align-self: flex-end; height: 250px;">
                 <div class="form__group form__group-btn-submit">
                     <input class="button-submit" type="submit" name="registrar" id="registrar" value="Guardar">
                 </div>
-                <!--<p class="form-mess-good" id="form-mess-good">¡Formulario enviado exitosamente!</p>-->
             </div>
         </form>
     </div>
@@ -151,6 +148,7 @@
         </div>
     </footer>
 
+    <!-- Codigo JS necesario para el funcionamiento del formulario -->
     <script src="js/nueva-contra.js"></script>
 
 </body>

@@ -1,9 +1,11 @@
 <?php
+	// Limpia la cache del servidor
 	session_start();
 	header('Cache-Control: no-cache, no-store, must-revalidate');
 	header('Pragma: no-cache');
 	header('Expires: 0');
 
+	// Revisa que se haya iniciado seccion correctamente
 	if (!isset($_SESSION['username'])) {
 		header('Location: index.php');
 		exit;
@@ -68,6 +70,7 @@
 
 <body class="body-home">
 
+	<!-- Encabezado -->
 	<header>
 		<nav>
 			<a class="title">
@@ -81,6 +84,7 @@
 		</nav>
 	</header>
 
+	<!-- Atajos del sistema -->
 	<div class="grid">
 		<a href="detalles/detalles_paciente.php">
 			<div class="imagen-hover">
@@ -177,6 +181,7 @@
 	<div class="grid-lower">
 		<section class="info-muestra">
 			<?php
+				// Muestra la cantidad de examenes pendientes por realizar
 				$n_examenes = count($user->buscar("m_remitido","Examinado = 0"));
 
 				echo("<h2>Muestras por Analizar: <big>$n_examenes</big></h2>");
@@ -185,6 +190,7 @@
 		<section class="info-muestra">
 			<h2>Insumos por Reponer:</h2>
 			<?php
+				// Recupera informacion de los insumos y muestra su estado de necesidad de reposicion
 				$lista_insumos = $user->buscar("insumo","1");
 				$lista_reponer = "";
 
@@ -235,6 +241,7 @@
 	</footer>
 
 	<script>
+		// Alerta estilizada de bienvenida
 		Swal.fire({
 			position: 'center',
 			html: '<img src="images/higea_color.png" style="width:150px;height:150px;"><p>¡Inicio de sesión exitoso, le damos la bienvenida a HIGEA!</p>',

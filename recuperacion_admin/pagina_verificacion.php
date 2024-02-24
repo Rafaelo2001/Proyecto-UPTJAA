@@ -41,7 +41,7 @@
 
             <form action="./verificacion_master.php" method="post" class="form" id="form">
 
-                <!--username-->
+                <!-- Formulario de ingreso de token -->
                 <div class="form-group" id="group_username">
                     <div class="form-group-input">
                         <label for="token">Token enviado a correo</label>
@@ -64,6 +64,7 @@
                 </div>
             </form>
 
+            <!-- Validacion del token -->
             <script>
                 document.getElementById('form').addEventListener('submit', function(event) {
                     let input = document.getElementById('token');

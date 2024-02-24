@@ -1,5 +1,7 @@
 <?php
 
+    // Registro del Informe de Biopsia en la BDD
+
     require "conexion.php";
     require "sweet.php";
 
@@ -8,11 +10,10 @@
 
     echo($alert->sweetHead("Registro de Informe Biopsia"));
 
-    // Conectando con la base de datos Higea
     $conex = $user->conexion;
 
-// Declarando las variables a utilizar, conectandolas con los datos recibidos de registro-informe
-/* 
+    // Declarando las variables a utilizar, conectandolas con los datos recibidos de registro-informe
+    /* 
         Orden de llenado
             
             Tabla 'informe'
@@ -31,21 +32,21 @@
                 10. ID_Examen   *
     */
 
-// informe OK
-$CIP             =  $_POST['paciente_id'];
-$id_medico       =  $_POST['medico_id'];
-$fecha           =  date("Y-m-d");
-$des_m_remitido  =  $_POST['info_b'];
-$diagnostico     =  $_POST['diag_b'];
-$obs             =  $_POST['obs_b'];
+    // informe OK
+    $CIP             =  $_POST['paciente_id'];
+    $id_medico       =  $_POST['medico_id'];
+    $fecha           =  date("Y-m-d");
+    $des_m_remitido  =  $_POST['info_b'];
+    $diagnostico     =  $_POST['diag_b'];
+    $obs             =  $_POST['obs_b'];
 
-// inf_biopsia
-$des_macro = $_POST['des_macro_b'];
-$des_micro = $_POST['des_micro_b'];
-$id_examen = $_POST['examen_id_b'];
+    // inf_biopsia
+    $des_macro = $_POST['des_macro_b'];
+    $des_micro = $_POST['des_micro_b'];
+    $id_examen = $_POST['examen_id_b'];
 
 
-// ENVIANDO DATOS
+    // ENVIANDO DATOS
 
         try {
             // Enviando 'informe'
@@ -71,9 +72,6 @@ $id_examen = $_POST['examen_id_b'];
             die($alert->sweetError("../registro-informes.php","Error al guardar datos",$e->getMessage()));
         }
 
-
         // Mostramos un mensaje de éxito utilizando una ventana emergente de alerta de JavaScript.
         // Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
         die ($alert->sweetOK("../registro-informes.php", "Se ha guardado el informe de biopsia correctamente"));
-
-?>

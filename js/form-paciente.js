@@ -85,7 +85,7 @@
         }
     });
 
-// Select2 Medico
+// Select2 Medico - Estilizado de campos selects
     $(document).ready(
         function() {
             $('#medicos-bdd').select2(

@@ -13,59 +13,63 @@
 
     echo($alert->sweetHead("Edición de Usuario"));
 
-// Conectando con la base de datos Higea
-$conex = $user->conexion;
+    // Conectando con la base de datos Higea
+    $conex = $user->conexion;
 
-// Declarando las variables a utilizar
-$datosPersona = $user->buscarSINGLE("persona", "CI='" . $_POST['ci'] . "'");
-$datosPersonaActualizar = [];
-$sqlPersonaActualizar = "";
+    // Declarando las variables a utilizar
+        $datosPersona = $user->buscarSINGLE("persona", "CI='" . $_POST['ci'] . "'");
+        $datosPersonaActualizar = [];
+        $sqlPersonaActualizar = "";
 
-$datosCorreo = $user->buscarONE("correo", "CI='" . $_POST['ci'] . "'", "Correo");
-$sqlCorreoActualizar = "";
+        $datosCorreo = $user->buscarONE("correo", "CI='" . $_POST['ci'] . "'", "Correo");
+        $sqlCorreoActualizar = "";
 
-$datosTelefono = $user->buscarONE("telefono", "CI='" . $_POST['ci'] . "'", "Nro_Telf");
-$sqlTelefonoActualizar = "";
+        $datosTelefono = $user->buscarONE("telefono", "CI='" . $_POST['ci'] . "'", "Nro_Telf");
+        $sqlTelefonoActualizar = "";
 
-$datosUsuario = $user->buscarONE("usuario", "CIE='" . $_POST['ci'] . "'", "Nombre");
-$sqlUsuarioActualizar = "";
+        $datosUsuario = $user->buscarONE("usuario", "CIE='" . $_POST['ci'] . "'", "Nombre");
+        $sqlUsuarioActualizar = "";
 
-$datosRol = $user->buscarONE("usuario", "CIE='" . $_POST['ci'] . "'", "Rol");
-$sqlRolActualizar = "";
+        $datosRol = $user->buscarONE("usuario", "CIE='" . $_POST['ci'] . "'", "Rol");
+        $sqlRolActualizar = "";
 
-// Persona
-if ($_POST['pn'] != $datosPersona['PN']) {
-    $datosPersonaActualizar[] .= "`PN` = '" . $_POST['pn'] . "'";
-}
 
-if ($_POST['sn'] != $datosPersona['SN']) {
-    $datosPersonaActualizar[] .= "`SN` = '" . $_POST['sn'] . "'";
-}
+    // Comprueba si los datos han sido modificado con respecto a su contraparte en la BDD
+    // Si hay cambios, los guarda en una variable, sino los ignora
 
-if ($_POST['tn'] != $datosPersona['TN']) {
-    $datosPersonaActualizar[] .= "`TN` = '" . $_POST['tn'] . "'";
-}
+        // Persona
+            if ($_POST['pn'] != $datosPersona['PN']) {
+                $datosPersonaActualizar[] .= "`PN` = '" . $_POST['pn'] . "'";
+            }
 
-if ($_POST['pa'] != $datosPersona['PA']) {
-    $datosPersonaActualizar[] .= "`PA` = '" . $_POST['pa'] . "'";
-}
+            if ($_POST['sn'] != $datosPersona['SN']) {
+                $datosPersonaActualizar[] .= "`SN` = '" . $_POST['sn'] . "'";
+            }
 
-if ($_POST['sa'] != $datosPersona['SA']) {
-    $datosPersonaActualizar[] .= "`SA` = '" . $_POST['sa'] . "'";
-}
+            if ($_POST['tn'] != $datosPersona['TN']) {
+                $datosPersonaActualizar[] .= "`TN` = '" . $_POST['tn'] . "'";
+            }
 
-if ($_POST['f_nac'] != $datosPersona['F_nac']) {
-    $datosPersonaActualizar[] .= "`F_nac` = '" . $_POST['f_nac'] . "'";
-}
+            if ($_POST['pa'] != $datosPersona['PA']) {
+                $datosPersonaActualizar[] .= "`PA` = '" . $_POST['pa'] . "'";
+            }
 
-if ($_POST['sexo'] != $datosPersona['Sexo']) {
-    $datosPersonaActualizar[] .= "`Sexo` = '" . $_POST['sexo'] . "'";
-}
+            if ($_POST['sa'] != $datosPersona['SA']) {
+                $datosPersonaActualizar[] .= "`SA` = '" . $_POST['sa'] . "'";
+            }
 
-// Correo
-if ($_POST['correo'] != $datosCorreo) {
-    $sqlCorreoActualizar = "`Correo` = '" . $_POST['correo'] . "'";
-}
+            if ($_POST['f_nac'] != $datosPersona['F_nac']) {
+                $datosPersonaActualizar[] .= "`F_nac` = '" . $_POST['f_nac'] . "'";
+            }
+
+            if ($_POST['sexo'] != $datosPersona['Sexo']) {
+                $datosPersonaActualizar[] .= "`Sexo` = '" . $_POST['sexo'] . "'";
+            }
+
+        // Correo
+            if ($_POST['correo'] != $datosCorreo) {
+                $sqlCorreoActualizar = "`Correo` = '" . $_POST['correo'] . "'";
+            }
 
         // Telefono
             if($_POST['nro_telf'] != $datosTelefono) {
@@ -75,17 +79,18 @@ if ($_POST['correo'] != $datosCorreo) {
                 $sqlTelefonoActualizar = "`Nro_Telf` = '".$datosTelefono."'";
             }
 
-// Usuario
-if ($_POST['usuario'] != $datosUsuario) {
-    $sqlUsuarioActualizar = "`Nombre` = '" . $_POST['usuario'] . "'";
-}
+        // Usuario
+            if ($_POST['usuario'] != $datosUsuario) {
+                $sqlUsuarioActualizar = "`Nombre` = '" . $_POST['usuario'] . "'";
+            }
 
-// Rol
-if ($_POST['rol'] != $datosRol) {
-    $sqlRolActualizar = "`Rol` = '" . $_POST['rol'] . "'";
-}
+        // Rol
+            if ($_POST['rol'] != $datosRol) {
+                $sqlRolActualizar = "`Rol` = '" . $_POST['rol'] . "'";
+            }
 
-if ($datosPersonaActualizar || $sqlCorreoActualizar || $sqlTelefonoActualizar || $sqlUsuarioActualizar || $sqlRolActualizar) {
+        // Si hay cambios en alguno de los array, ejecuta el siguiente codigo 
+            if ($datosPersonaActualizar || $sqlCorreoActualizar || $sqlTelefonoActualizar || $sqlUsuarioActualizar || $sqlRolActualizar) {
 
                 try {
                     if($datosPersonaActualizar){
@@ -152,5 +157,3 @@ if ($datosPersonaActualizar || $sqlCorreoActualizar || $sqlTelefonoActualizar ||
             else{
                 die ($alert->sweetWar("./gestion_usuarios.php", "No se han introducidos datos para actualizar"));
             }
-
-?>

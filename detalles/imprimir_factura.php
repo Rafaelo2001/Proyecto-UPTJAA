@@ -1,5 +1,7 @@
 <?php
 
+    // Imprime la factura requerida
+
     require '../fpdf/fpdf.php';
     require "../php/conexion.php";
     $user = new CodeaDB();

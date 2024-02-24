@@ -1,32 +1,32 @@
 <?php
-include "php/conexion.php";
-$user = new CodeaDB();
+    include "php/conexion.php";
+    $user = new CodeaDB();
 
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+    session_start();
+    header('Cache-Control: no-cache, no-store, must-revalidate');
+    header('Pragma: no-cache');
+    header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+    if (!isset($_SESSION['username'])) {
+        header('Location: index.php');
+        exit;
+    }
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+    // Incluye el archivo de permisos
+    require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+    // Obtiene el rol del usuario de la variable de sesión
+    $rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+    // Obtiene el nombre de la página actual
+    $paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ./sin_permiso.php', true, 303);
+    // Verifica si el usuario tiene permiso para acceder a la página actual
+    if (!in_array($paginaActual, $permisos[$rol])) {
+        header('Location: ./sin_permiso.php', true, 303);
 
-	exit();
-}
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +60,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
     <div class="login-box-rcvr">
         <h1>VALIDACIÓN</h1>
 
+        <!-- Formulario para ingresar token enviado por correo -->
         <form action="php/verify_token.php" method="post" class="form" id="form">
 
             <!--username-->
@@ -85,6 +86,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
             </div>
         </form>
 
+        <!-- Validacion del token -->
         <script>
             document.getElementById('form').addEventListener('submit', function(event) {
                 let input = document.getElementById('token');

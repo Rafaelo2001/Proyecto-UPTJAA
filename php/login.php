@@ -1,7 +1,8 @@
 <?php
-    // Crea la conexión
+    // Crea la conexión con la BDD
     $conex = mysqli_connect("localhost", "root", "", "higea_db");
 
+    // Comprueba que se haya llegado a esta pagina por un metodo POST y que las variables 'username' u 'login' no esten vacias
     if($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['username']) || empty($_POST['password'])){
         header('Location: ../index.php', true, 303);
         exit;
@@ -14,6 +15,7 @@
 
     session_start();
 
+    // Solicita el archivo sweet.php para alertas estilizadas
     require "sweet.php";
     $alert = new SweetForInsert();
 
@@ -53,16 +55,11 @@
 
             header('Location: ../home.php');
         } else {
-            // Si la contraseña es incorrecta, muestra un mensaje emergente de error
-            // echo '<script type="text/javascript">
-            //     alert("Error: Nombre de usuario o contraseña incorrectos");
-            //     window.location.href = "../";
-            //     </script>';
-
             echo($alert->sweetError("../","Error de Conexión","Nombre  de usuario o contraseña incorrectos"));
         }
     } else {
         echo($alert->sweetError("../","Error de Conexión","Nombre  de usuario o contraseña incorrectos"));
     }
 
+    // Cierra la conexion
     $conex->close();

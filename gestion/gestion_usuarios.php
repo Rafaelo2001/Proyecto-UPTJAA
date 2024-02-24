@@ -1,32 +1,28 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+    session_start();
+    header('Cache-Control: no-cache, no-store, must-revalidate');
+    header('Pragma: no-cache');
+    header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-    header('Location: ../index.php');
-    exit;
-}
+    if (!isset($_SESSION['username'])) {
+        header('Location: ../index.php');
+        exit;
+    }
 
-include "../php/conexion.php";
-$user = new CodeaDB();
+    include "../php/conexion.php";
+    $user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require '../php/permisos.php';
+    require '../php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+    $rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+    $paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-    header('Location: ../sin_permiso.php', true, 303);
+    if (!in_array($paginaActual, $permisos[$rol])) {
+        header('Location: ../sin_permiso.php', true, 303);
 
-    exit();
-}
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -195,11 +191,13 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
         <h1 style="text-align: center;" class="table-title">Listado de Usuarios</h1>
 
+        <!-- Cuadro de Busqueda de la Tabla -->
         <div class="items">
             <input type="text" id="filtro" onkeyup="filtrarTabla()" placeholder="Filtrar por Nombre, Cedula, Fecha, etc...">
 			<button class="buttom"><a href="../user_register.php" class="buttom-item"><i class="fi fi-sr-user-add"></i> Agregar</a></button>
         </div>
 
+        <!-- Tabla con el Listado de Usuarios -->
         <div class="center-table">
             <table style="text-align: center;" class="table" id="table">
                 <thead>
@@ -212,6 +210,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                 </thead>
                 <tbody>
                     <?php
+				// Busca todos los usuarios almacenados en la BDD
                     $listaUsuarios = $user->buscar("usuario", "`ID_Usuario` <> 1;");
 
                     foreach ($listaUsuarios as $usuario) :
@@ -223,21 +222,23 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
                         $datosUsuario = $user->buscarSINGLE("persona", $ci_sql);
 
-                        $sn = (empty($datosUsuario['SN'])) ? "" : $datosUsuario['SN'] . " ";
-                        $tn = (empty($datosUsuario['TN'])) ? "" : $datosUsuario['TN'] . " ";
-                        $sa = (empty($datosUsuario['SA'])) ? "" : " " . $datosUsuario['SA'];
+                        // Comprueba si los segundos y tercer nombres y apellidos exiten y luego combina todo el nombre en una sola variable
+                            $sn = (empty($datosUsuario['SN'])) ? "" : $datosUsuario['SN'] . " ";
+                            $tn = (empty($datosUsuario['TN'])) ? "" : $datosUsuario['TN'] . " ";
+                            $sa = (empty($datosUsuario['SA'])) ? "" : " " . $datosUsuario['SA'];
                         $nombre_completo = $datosUsuario['PN'] . " " . $sn . $tn . $datosUsuario['PA'] . $sa;
 
                         $id = $usuario['ID_Usuario'];
                         $nombre_usuario = $usuario['Nombre'];
                         $rol = ucfirst($usuario['Rol']);
 
-                        echo ("<td>$id</td>");
-                        echo ("<td>$nombre_usuario</td>");
-                        echo ("<td>$nombre_completo</td>");
-                        echo ("<td>$cedula</td>");
-                        echo ("<td>$rol</td>");
-                        echo ("<td><form action='./edit_usuario.php' method='post'><input type='hidden' name='id' value='$id' required><input type='submit' value='Editar'></form></td>");
+						// Muestra los datos en forma de tabla
+                            echo ("<td>$id</td>");
+                            echo ("<td>$nombre_usuario</td>");
+                            echo ("<td>$nombre_completo</td>");
+                            echo ("<td>$cedula</td>");
+                            echo ("<td>$rol</td>");
+                            echo ("<td><form action='./edit_usuario.php' method='post'><input type='hidden' name='id' value='$id' required><input type='submit' value='Editar'></form></td>");
 
                         echo ("</tr>");
                     endforeach;
@@ -249,6 +250,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
     </main>
 
     <script>
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
 		let arrow = document.querySelectorAll(".arrow");
 		for (var i = 0; i < arrow.length; i++) {
 			arrow[i].addEventListener("click", (e) => {

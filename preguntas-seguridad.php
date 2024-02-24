@@ -1,38 +1,38 @@
 <?php
 
-include "php/conexion.php";
-$user = new CodeaDB();
+	include "php/conexion.php";
+	$user = new CodeaDB();
 
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: index.php');
+		exit;
+	}
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['id'])) {
-    header('Location: ./gestion/gestion_usuarios.php', true, 303);
-    exit;
-}
+	if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['id'])) {
+		header('Location: ./gestion/gestion_usuarios.php', true, 303);
+		exit;
+	}
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+	// Incluye el archivo de permisos
+	require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	// Obtiene el rol del usuario de la variable de sesión
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	// Obtiene el nombre de la página actual
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ./sin_permiso.php', true, 303);
+	// Verifica si el usuario tiene permiso para acceder a la página actual
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ./sin_permiso.php', true, 303);
 
-	exit();
-}
+		exit();
+	}
 
 ?>
 
@@ -64,68 +64,66 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 		</nav>
 	</header>
 
+	<!-- Formulario con las Preguntas de Seguridad -->
 	<div class="login-box-quest" style="height: 520px;">
 		<h1>PREGUNTAS DE SEGURIDAD</h1>
 		<form action="./php/val-preguntas.php" method="post" class="form" id="form">
 
 			<?php
-			// Crea la conexión
-			$conex = mysqli_connect("localhost", "root", "", "higea_db");
+				// Crea la conexión
+				$conex = mysqli_connect("localhost", "root", "", "higea_db");
 
-			// Verifica la conexión
-			if ($conex->connect_error) {
-				die("Conexión fallida: " . $conex->connect_error);
-			}
+				// Verifica la conexión
+				if ($conex->connect_error) {
+					die("Conexión fallida: " . $conex->connect_error);
+				}
 
-			//inicia la sesión
-			// session_start();
+				// Utiliza el ID de usuario de la sesión
+				$id_usuario = $_POST['id'];
 
-			// Utiliza el ID de usuario de la sesión
-			$id_usuario = $_POST['id'];
+				// Ejecuta la consulta SQL para verificar si los datos ingresados coinciden con alguno de los datos almacenados en la tabla recup_password
+				$resultado = $conex->query("SELECT p1, p2, p3 FROM recup_password WHERE id_usuario = '$id_usuario'");
 
-			// Ejecuta la consulta SQL para verificar si los datos ingresados coinciden con alguno de los datos almacenados en la tabla recup_password
-			$resultado = $conex->query("SELECT p1, p2, p3 FROM recup_password WHERE id_usuario = '$id_usuario'");
+				if (mysqli_num_rows($resultado) > 0) {
+					// Si hay una coincidencia, guarda p1, p2, p3, r1, r2 y r3 en unas variables y redirige a una página
+					$row = mysqli_fetch_assoc($resultado); //se usa para obtener una fila de resultados como una matriz asociativa
+					//luego se puede acceder a los campos individuales de la fila por su nombre
+					$_SESSION['p1'] = $row['p1'];
+					$_SESSION['p2'] = $row['p2'];
+					$_SESSION['p3'] = $row['p3'];
 
-			if (mysqli_num_rows($resultado) > 0) {
-				// Si hay una coincidencia, guarda p1, p2, p3, r1, r2 y r3 en unas variables y redirige a una página
-				$row = mysqli_fetch_assoc($resultado); //se usa para obtener una fila de resultados como una matriz asociativa
-				//luego se puede acceder a los campos individuales de la fila por su nombre
-				$_SESSION['p1'] = $row['p1'];
-				$_SESSION['p2'] = $row['p2'];
-				$_SESSION['p3'] = $row['p3'];
-				//header('Location: nueva-contrasena.php'); //página de nueva contraseña
+					// Visualiza los campos de preguntas
+					echo '<div class="form-group" id="group_username">';
+					echo '<div class="form-group-input">';
+					echo '<label for="r1">' . $_SESSION['p1'] . '</label>';
+					echo '<input type="text" name="r1" id="r1" placeholder="Ingresa la respuesta" autocomplete="off" required>';
+					echo '</div>';
+					echo '<p class="form-input-error">Rellene este campo correctamente</p>';
+					echo '</div>';
 
-				echo '<div class="form-group" id="group_username">';
-				echo '<div class="form-group-input">';
-				echo '<label for="r1">' . $_SESSION['p1'] . '</label>';
-				echo '<input type="text" name="r1" id="r1" placeholder="Ingresa la respuesta" autocomplete="off" required>';
-				echo '</div>';
-				echo '<p class="form-input-error">Rellene este campo correctamente</p>';
-				echo '</div>';
+					echo '<div class="form-group" id="group_username">';
+					echo '<div class="form-group-input">';
+					echo '<label for="r2">' . $_SESSION['p2'] . '</label>';
+					echo '<input type="text" name="r2" id="r2" placeholder="Ingresa la respuesta" autocomplete="off" required>';
+					echo '</div>';
+					echo '<p class="form-input-error">Rellene este campo correctamente</p>';
+					echo '</div>';
 
-				echo '<div class="form-group" id="group_username">';
-				echo '<div class="form-group-input">';
-				echo '<label for="r2">' . $_SESSION['p2'] . '</label>';
-				echo '<input type="text" name="r2" id="r2" placeholder="Ingresa la respuesta" autocomplete="off" required>';
-				echo '</div>';
-				echo '<p class="form-input-error">Rellene este campo correctamente</p>';
-				echo '</div>';
+					echo '<div class="form-group" id="group_username">';
+					echo '<div class="form-group-input">';
+					echo '<label for="r3">' . $_SESSION['p3'] . '</label>';
+					echo '<input type="text" name="r3" id="r3" placeholder="Ingresa la respuesta" autocomplete="off" required>';
+					echo '</div>';
+					echo '<p class="form-input-error">Rellene este campo correctamente</p>';
+					echo '</div>';
+				} else {
+					// Si no hay una coincidencia, muestra un mensaje emergente de error
+					echo '<script type="text/javascript">';
+					echo 'alert("Error: ID de usuario incorrecto");';
+					echo '</script>';
+				}
 
-				echo '<div class="form-group" id="group_username">';
-				echo '<div class="form-group-input">';
-				echo '<label for="r3">' . $_SESSION['p3'] . '</label>';
-				echo '<input type="text" name="r3" id="r3" placeholder="Ingresa la respuesta" autocomplete="off" required>';
-				echo '</div>';
-				echo '<p class="form-input-error">Rellene este campo correctamente</p>';
-				echo '</div>';
-			} else {
-				// Si no hay una coincidencia, muestra un mensaje emergente de error
-				echo '<script type="text/javascript">';
-				echo 'alert("Error: ID de usuario incorrecto");';
-				echo '</script>';
-			}
-
-			$conex->close();
+				$conex->close();
 			?>
 
 			<div class="button-container">

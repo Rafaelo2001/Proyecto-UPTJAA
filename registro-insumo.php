@@ -1,32 +1,28 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: index.php');
+		exit;
+	}
 
-include "php/conexion.php";
-$user = new CodeaDB();
+	include "php/conexion.php";
+	$user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+	require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ./sin_permiso.php', true, 303);
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ./sin_permiso.php', true, 303);
 
-	exit();
-}
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -186,15 +182,17 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			<a href="mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
 		</div>
 
+		<!-- Formulario para el registro de un nuevo Insumo -->
 		<div class="register-box-supplies">
 			<h1>REGISTRO DE INSUMOS</h1>
 			<h4>Obligatorio (*).</h4>
 			<form action="php/insert-insumo.php" method="post" class="form" id="form">
 
-				<!-- Se usan para el procesamiento 6 envases de alcohol cada uno con 400cc, 
-			Tres envases con xilol cada uno de 400 cc
-			Y dos envases con parafina líquida cada uno con 400 cc. 
-			Estas cantidades se reponen una vez al mes. -->
+			<!-- Normalmente se usan para el procesamiento 6 envases de alcohol cada uno con 400cc, 
+				Tres envases con xilol cada uno de 400 cc
+				Y dos envases con parafina líquida cada uno con 400 cc. 
+				Estas cantidades se reponen una vez al mes. 
+			-->
 
 				<div class="grid">
 
@@ -275,6 +273,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</section>
 
 	<script>
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
 		let arrow = document.querySelectorAll(".arrow");
 		for (var i = 0; i < arrow.length; i++) {
 			arrow[i].addEventListener("click", (e) => {
@@ -290,6 +289,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 		});
 	</script>
 
+	<!-- Codigo JS necesario para el funcionamiento del formulario -->
 	<script src="js/form-inventory.js"></script>
 
 </body>

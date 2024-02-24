@@ -20,6 +20,7 @@
 
     session_start();
 
+        // Busca al primer Usuario (admin)
         $id_usuario = 1;
         $password = $_POST['password'];
 

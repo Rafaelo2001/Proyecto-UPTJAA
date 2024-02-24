@@ -1,32 +1,28 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: ../index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: ../index.php');
+		exit;
+	}
 
-include "../php/conexion.php";
-$user = new CodeaDB();
+	include "../php/conexion.php";
+	$user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require '../php/permisos.php';
+	require '../php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ../sin_permiso.php', true, 303);
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ../sin_permiso.php', true, 303);
 
-	exit();
-}
+		exit();
+	}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -193,10 +189,12 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 		<h1 style="text-align: center;" class="table-title">Listado de Muestras</h1>
 
+        <!-- Cuadro de Busqueda de la Tabla -->
 		<div class="items">
 			<input type="text" id="filtro" onkeyup="filtrarTabla()" placeholder="Filtrar por Nombre, Cedula, Fecha, etc...">
         </div>
 
+        <!-- Tabla con el Listado de Pacientes -->
 		<div class="center-table">
 
 			<table style="text-align: center;" class="table" id="table">
@@ -211,6 +209,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 					<th>Acciones</th>
 				</thead>
 				<?php
+				// Busca todas las muestras almacenadas en la BDD
 				$busquedaBiopsia = $user->buscar("m_biopsia", "1");
 				$busquedaCitologia = $user->buscar("m_citologia", "1");
 
@@ -234,40 +233,42 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						$datos_paciente = $paciente['PN'] . " " . $paciente['PA'] . " (" . $cedula_formateada . ")";
 
 
-						echo ("<td>" . $m['ID_M_Remitido'] . "</td>");
+						// Muestra los datos en forma de tabla
+							echo ("<td>" . $m['ID_M_Remitido'] . "</td>");
 
-						if (isset($m["ID_M_Biopsia"])) {
-							echo ("<td>B-" . $m["ID_M_Biopsia"] . "</td>");
-						} elseif (isset($m["ID_M_Citologia"])) {
-							echo ("<td>C-" . $m["ID_M_Citologia"] . "</td>");
-						}
+							if (isset($m["ID_M_Biopsia"])) {
+								echo ("<td>B-" . $m["ID_M_Biopsia"] . "</td>");
+							} elseif (isset($m["ID_M_Citologia"])) {
+								echo ("<td>C-" . $m["ID_M_Citologia"] . "</td>");
+							}
 
-						echo ("<td>" . $datos_paciente . "</td>");
+							echo ("<td>" . $datos_paciente . "</td>");
 
-						$tipo_m;
-						if (isset($m["ID_M_Biopsia"])) {
-							$tipo_m = "Biopsia";
-						} elseif (isset($m["ID_M_Citologia"])) {
-							$tipo_m = "Citología";
-						}
-						echo ("<td>$tipo_m</td>");
+							$tipo_m;
+							if (isset($m["ID_M_Biopsia"])) {
+								$tipo_m = "Biopsia";
+							} elseif (isset($m["ID_M_Citologia"])) {
+								$tipo_m = "Citología";
+							}
+							echo ("<td>$tipo_m</td>");
 
-						if (strlen($material['Descripcion_material']) > 30) {
-							$Des_corta = substr($material['Descripcion_material'], 0, 30);
-							$descripcion = $Des_corta . "...";
-							echo ("<td>" . $descripcion . "</td>");
-						} else {
-							echo ("<td>" . $material['Descripcion_material'] . "</td>");
-						}
+							// Si la descripcion es muy larga, la reduce.
+							if (strlen($material['Descripcion_material']) > 30) {
+								$Des_corta = substr($material['Descripcion_material'], 0, 30);
+								$descripcion = $Des_corta . "...";
+								echo ("<td>" . $descripcion . "</td>");
+							} else {
+								echo ("<td>" . $material['Descripcion_material'] . "</td>");
+							}
 
-						$fecha = date("d-m-Y", strtotime($material['F_Entrada']));
-						echo ("<td>" . $fecha . "</td>");
+							$fecha = date("d-m-Y", strtotime($material['F_Entrada']));
+							echo ("<td>" . $fecha . "</td>");
 
-						if ($material['Examinado']) {
-							echo ("<td>Si</td>");
-						} else {
-							echo ("<td>No</td>");
-						}
+							if ($material['Examinado']) {
+								echo ("<td>Si</td>");
+							} else {
+								echo ("<td>No</td>");
+							}
 
 						echo ("<td><form action='./edit_muestras.php' method='post'><input type='hidden' name='id_m' value='" . $m['ID_M_Remitido'] . "' required><input type='hidden' name='tipo_m' value='" . $tipo_m . "' required><input type='submit' value='Editar'></form></td>")
 						
@@ -284,6 +285,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</main>
 
 	<script>
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
 		let arrow = document.querySelectorAll(".arrow");
 		for (var i = 0; i < arrow.length; i++) {
 			arrow[i].addEventListener("click", (e) => {
@@ -297,8 +299,8 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 		sidebarBtn.addEventListener("click", () => {
 			sidebar.classList.toggle("close");
 		});
-
-		function filtrarTabla() {
+        // Funcion de filtrado para el campo de busqueda
+        function filtrarTabla() {
             // Obtener el valor ingresado en el campo de entrada
             var filtro = document.getElementById("filtro").value.toUpperCase();
 

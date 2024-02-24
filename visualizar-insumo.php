@@ -1,32 +1,28 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: index.php');
+		exit;
+	}
 
-include "php/conexion.php";
-$user = new CodeaDB();
+	include "php/conexion.php";
+	$user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+	require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ./sin_permiso.php', true, 303);
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ./sin_permiso.php', true, 303);
 
-	exit();
-}
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -190,10 +186,12 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			<a href="mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
 		</div>
 
+		<!-- Formulario para la visualizacion de Insumos registrados -->
 		<section class="form-register">
 			<h1>VISUALIZADOR DE INSUMOS</h1>
 			<form action="php/actu_insumo.php" method="post" class="form" id="form" autocomplete="off">
 
+				<!-- Lista con todos los insumos registrados en la BDD -->
 				<select id="insumo" name="id_insumo" required>
 					<option disabled selected></option>
 					<?php
@@ -211,18 +209,21 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 				<br>
 
+				<!-- Existencia actual del material -->
 				<label for="existencia">Existencia actual:</label>
 				<input type="text" id="existencia" readonly style="text-align: right;">
 				<label for="existencia" id="unidades_existencia"></label>
 
 
 
+				<!-- Muestra la cantida minima para asignar alerta en la pagina de home -->
 				<label for="cant_minima">Cantidad minima:</label>
 				<input type="text" id="cant_minima" readonly style="text-align: right;">
 				<label for="cant_minima" id="unidades_cant_minima"></label>
 
 
 
+				<!-- Panel para seleccion de forma de Ingresar Nuevos Insumos -->
 				<div>
 					<label>Agregar insumos por:</label>
 					<div class="radio" id="tipo_act">
@@ -235,30 +236,39 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 				</div>
 
 
+				<!-- Ingreso de Insumos de forma directa -->
 				<section id="sec_directo" style="display: none;">
 					<h3>Directo</h3>
 					<h4>Obligatorio (*).</h4>
+
+					<!-- cantidad a agregar -->
 					<label for="cant">Cantidad a añadir (*)</label>
 					<input type="number" name="cant" min="0" disabled required>
 					<label for="cant" id="unidades_cant"></label>
 				</section>
 
+				<!-- Ingreso de Insumos por medio de lotes -->
 				<section id="sec_lote" style="display: none;">
 					<h3>Por Lote</h3>
 					<h4>Obligatorio (*).</h4>
+
+					<!-- cantidad a agregar -->
 					<label for="cant">Cantidad a añadir (*)</label>
 					<input type="number" name="cant" min="0" placeholder="Ingrese la cantidad" disabled required>
 					<label for="cant" id="unidades_cant"></label>
 
 
+					<!-- ID del lote -->
 					<label for="id_lote">ID Lote (*)</label>
 					<input type="text" name="id_lote" placeholder="Ingrese el ID del lote" disabled required>
 
 					<br>
 
+					<!-- Fecha de elaboracion del lote -->
 					<label for="f_elab">Fecha de Elaboracion (*)</label>
 					<input type="date" name="f_elab" id="f_elab" required>
 
+					<!-- Validacion del campo de fecha -->
 					<script>
 						var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 - 4 * 60 * 60 *
 							1000);
@@ -273,9 +283,11 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 					<br>
 
+					<!-- Fecha de vencimiento del lote -->
 					<label for="f_exp">Fecha de Expiracion (*)</label>
 					<input type="date" name="f_exp" id="f_exp" required>
 
+					<!-- Validacion del campo de fecha -->
 					<script>
 						var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 - 4 * 60 * 60 *
 							1000);
@@ -290,6 +302,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 					<br>
 
+					<!-- Proveedor del lote -->
 					<label for="proveedor">Proveedor (*)</label>
 					<input type="text" name="proveedor" placeholder="Indique el proveedor" disabled required>
 				</section>
@@ -303,6 +316,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</main>
 
 	<script>
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
 		let arrow = document.querySelectorAll(".arrow");
 		for (var i = 0; i < arrow.length; i++) {
 			arrow[i].addEventListener("click", (e) => {
@@ -321,6 +335,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 </body>
 
 <script>
+	// Script para el cambio de tipo de ingreso de insumo
 	$("[name='tipo_act']").change(
 		function() {
 			let tipo_ingreso = $("[name='tipo_act']:checked").val();
@@ -344,6 +359,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			}
 		});
 
+	// AJAX para la visualizacion de datos de Insumo
 	let insumo = $("#insumo");
 
 	insumo.change(function() {

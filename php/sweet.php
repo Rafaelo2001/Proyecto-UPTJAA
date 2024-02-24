@@ -1,9 +1,12 @@
 <?php
+
+    // Declaracion de la clase SweetForInsert para el manejo de alertas estilizadas usando la libreria SweetAlert2
     class SweetForInsert {
 
-        // SweetAlert (Same Folder)
-        // Esta funcion toma como argumento el titulo de la pagina y devuelve un header de la pagina para usar sweetAlert2
-
+        // Esta funcion toma como argumento el titulo de la pagina y devuelve un header de la pagina para usar SweetAlert2
+        // Toma como primer argumento el titulo de la pagina y como segundo un string con la 
+        //      cantidad de '../' correspontientes a la cantidad de carpeta por las que tiene que 
+        //      moverse el archivo llamador de la funcion para llegar a la carpeta php
         public function sweetHead($pagTitle = "Higea", $carpetasPorSalir = "../") {
             $header =
                 "<html>
@@ -48,6 +51,8 @@
             return $header;
         }
 
+        // Esta funcion retorna el script para un mensaje positivo
+        // Toma como argumentos la ubicacion del retorno de la pagina, el contenido del mensaje e informacion adicional
         public function sweetOK($retorno, $mensaje = "Datos insertados correctamente", $detalle = "") {
             $html = ($detalle != "") ? 'html: "'.str_replace('"',"'",$detalle).'",' : "";
             $alert =
@@ -71,6 +76,8 @@
             return $alert;
         }
 
+        // Esta funcion retorna el script para un mensaje de advertencia
+        // Toma como argumentos la ubicacion del retorno de la pagina, el contenido del mensaje e informacion adicional
         public function sweetWar($retorno, $mensaje = "Datos ya insertados", $detalle = "") {
             $html = ($detalle != "") ? 'html: "'.str_replace('"',"'",$detalle).'",' : "";
             $alert =
@@ -94,6 +101,8 @@
             return $alert;
         }
 
+        // Esta funcion retorna el script para un mensaje de error
+        // Toma como argumentos la ubicacion del retorno de la pagina, el contenido del mensaje e informacion adicional
         public function sweetError($retorno, $mensaje = "Error al guardar datos", $detalle = "") {
             $html = ($detalle != "") ? 'html: "'.str_replace('"',"'",$detalle).'",' : "";
             $alert =

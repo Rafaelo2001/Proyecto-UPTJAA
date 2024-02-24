@@ -1,59 +1,59 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+    session_start();
+    header('Cache-Control: no-cache, no-store, must-revalidate');
+    header('Pragma: no-cache');
+    header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-    header('Location: ../index.php');
-    exit;
-}
+    if (!isset($_SESSION['username'])) {
+        header('Location: ../index.php');
+        exit;
+    }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST' || $_POST['id_m'] == "" || $_POST['tipo_m'] == "") {
-    header('Location: ./detalles_muestras.php', true, 303);
-    exit;
-}
+    // Comprueba si se ingresó a esta pagina por un metodo POST o si la variable 'id_m' o 'tipo_m' no esta vacia
+    // Si alguna de esas condiciones no se cumplen, redirige fuera de la pagina
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST' || $_POST['id_m'] == "" || $_POST['tipo_m'] == "") {
+        header('Location: ./detalles_muestras.php', true, 303);
+        exit;
+    }
 
-require "../php/conexion.php";
-$user = new CodeaDB();
+    require "../php/conexion.php";
+    $user = new CodeaDB();
 
-$datosMuestra = $user->buscarSINGLE("m_remitido", "ID_M_Remitido='" . $_POST['id_m'] . "'");
+    // Solicita datos de la muestra a la BDD
+        $datosMuestra = $user->buscarSINGLE("m_remitido", "ID_M_Remitido='" . $_POST['id_m'] . "'");
 
-if ($_POST['tipo_m'] == "Biopsia") {
-    $datosBiop = $user->buscarSINGLE("m_biopsia", "ID_M_Remitido=" . $_POST['id_m']);
-} elseif ($_POST['tipo_m'] == "Citología") {
-    $datosCito = $user->buscarSINGLE("m_citologia", "ID_M_Remitido=" . $_POST['id_m']);
-}
+        if ($_POST['tipo_m'] == "Biopsia") {
+            $datosBiop = $user->buscarSINGLE("m_biopsia", "ID_M_Remitido=" . $_POST['id_m']);
+        } elseif ($_POST['tipo_m'] == "Citología") {
+            $datosCito = $user->buscarSINGLE("m_citologia", "ID_M_Remitido=" . $_POST['id_m']);
+        }
 
-$examen_si = "";
-$examen_no = "";
+    // Comprueba si la muestra ya esta examinada o no
+        $examen_si = "";
+        $examen_no = "";
 
-if ($datosMuestra["Examinado"]) {
-    $examen_si = "checked";
-    $examen_no = "";
-} else {
-    $examen_si = "";
-    $examen_no = "checked";
-}
+        if ($datosMuestra["Examinado"]) {
+            $examen_si = "checked";
+            $examen_no = "";
+        } else {
+            $examen_si = "";
+            $examen_no = "checked";
+        }
 
-$fecha = new DateTime($datosMuestra["F_Entrada"]);
+    // Convierte la fecha proveniente de la BDD a una utilizable por el campo date()
+        $fecha = new DateTime($datosMuestra["F_Entrada"]);
 
-// Incluye el archivo de permisos
-require '../php/permisos.php';
+    require '../php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+    $rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+    $paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-    header('Location: ../sin_permiso.php', true, 303);
+    if (!in_array($paginaActual, $permisos[$rol])) {
+        header('Location: ../sin_permiso.php', true, 303);
 
-    exit();
-}
-
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -220,6 +220,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
             <a href="../mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
         </div>
 
+        <!-- Formulario para la edicion de datos de la muestra -->
         <section class="form-register">
             <h1>Edición de Muestra de <?php echo ($_POST['tipo_m']) ?></h1>
             <h4>Obligatorio (*).</h4>
@@ -227,6 +228,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
             <form action="./insert_edit_muestras.php" method="post" class="form" id="form" autocomplete="off">
 
+                <!-- Campos a editar -->
                 <label for="des_m">Descripcion Material Remitido (*)</label>
                 <textarea type="text" name="des_m" id="des_m" cols="40" rows="3" placeholder="Escriba una descripcion del material" required><?php echo ($datosMuestra['Descripcion_material']) ?></textarea>
 
@@ -257,6 +259,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                     <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
                 </div>
 
+                <!-- Validacion de la fecha -->
                 <script>
                     var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 - 4 * 60 * 60 *
                         1000);
@@ -272,6 +275,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                 </script>
 
 
+                <!-- Determina que campo renderizar dependiendo del tipo de la muestra -->
                 <?php if ($_POST['tipo_m'] == "Biopsia") : ?>
 
                     <label for="sitio">Sitio de Lesión (*)</label>
@@ -291,6 +295,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                         </span>
                     </div>
 
+                    <!-- Validacion de la fecha -->
                     <script>
                         var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 - 4 * 60 * 60 *
                             1000);
@@ -316,6 +321,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                         <input type="text" name="otro" id="otro" placeholder="Especifique" value="<?php echo ($datosCito['Otros']) ? $datosCito['Otros'] : "" ?>" disabled>
                     </div>
 
+                    <!-- Validacion de checkboxs -->
                     <script>
                         document.getElementById('form').addEventListener('submit', function(event) {
                             var checkboxes = document.querySelectorAll('#frotis input[type="checkbox"]');
@@ -342,7 +348,8 @@ if (!in_array($paginaActual, $permisos[$rol])) {
     </main>
 
     <script>
-        let arrow = document.querySelectorAll(".arrow");
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
+		let arrow = document.querySelectorAll(".arrow");
         for (var i = 0; i < arrow.length; i++) {
             arrow[i].addEventListener("click", (e) => {
                 let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
@@ -358,13 +365,15 @@ if (!in_array($paginaActual, $permisos[$rol])) {
     </script>
 
 </body>
-<script>
-    $(":input").change(function() {
-        $("#enviar").prop("disabled", false);
-    })
-    $(":input").keypress(function() {
-        $("#enviar").prop("disabled", false);
-    })
-</script>
+
+    <!-- Habilita o desabilita el boton de envio de formulario segun haya algun cambio en los datos del paciente  o no -->
+    <script>
+        $(":input").change(function() {
+            $("#enviar").prop("disabled", false);
+        })
+        $(":input").keypress(function() {
+            $("#enviar").prop("disabled", false);
+        })
+    </script>
 
 </html>

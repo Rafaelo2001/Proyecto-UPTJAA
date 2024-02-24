@@ -7,10 +7,12 @@
     header('Pragma: no-cache');
     header('Expires: 0');
 
+    // Verifica el codigo insertado mas la combinacion extra
     if($_SESSION['token']['si_plus'] !== $_SESSION['token']['value']."si"){
-        unset($_SESSION['token']['value']);
-        unset($_SESSION['si_plus']);
-        unset($_SESSION['token']);
+        // Destruye los token por seguridad
+            unset($_SESSION['token']['value']);
+            unset($_SESSION['si_plus']);
+            unset($_SESSION['token']);
 
         header('Location: ../index.php', true, 303);
         exit;
@@ -56,8 +58,8 @@
         <h4>Obligatorio (*).</h4>
         <form action="./guardar_nueva_contra_maestra.php" method="post" class="form" id="form" style="height: 280px;">
 
+            <!-- Formulario para nueva contraseña maestra -->
             <div class="grid">
-                <!--group: password-->
                 <div class="form-group" id="group_password">
                     <div class="form-group-input">
                         <label for="password">Contraseña (*)</label>
@@ -75,6 +77,7 @@
                     </p>
                 </div>
 
+                <!-- Validacion de contraseña -->
                 <script>
                 document.getElementById('form').addEventListener('submit', function(event) {
                     var password = document.getElementById('password').value;
@@ -121,16 +124,10 @@
 
             </div>
 
-
-            <!--<div class="form-mess" id="form-mess">
-				<p><i class="fi fi-rr-triangle-warning"></i> <b>Error:</b> ¡Revise los campos!</p>
-			</div>-->
-
             <div class="button-container" style="align-self: flex-end; height: 250px;">
                 <div class="form__group form__group-btn-submit">
                     <input class="button-submit" type="submit" id="registrar" value="Guardar">
                 </div>
-                <!--<p class="form-mess-good" id="form-mess-good">¡Formulario enviado exitosamente!</p>-->
             </div>
         </form>
     </div>

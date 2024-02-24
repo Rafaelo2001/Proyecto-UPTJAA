@@ -1,32 +1,32 @@
 <?php
-include "php/conexion.php";
-$user = new CodeaDB();
+	include "php/conexion.php";
+	$user = new CodeaDB();
 
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: index.php');
+		exit;
+	}
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+	// Incluye el archivo de permisos
+	require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	// Obtiene el rol del usuario de la variable de sesión
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	// Obtiene el nombre de la página actual
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ./sin_permiso.php', true, 303);
+	// Verifica si el usuario tiene permiso para acceder a la página actual
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ./sin_permiso.php', true, 303);
 
-	exit();
-}
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -151,6 +151,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
 					</div>
 
+					<!-- Validacion de Fechas -->
 					<script>
 						var minima = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 - 4 * 60 *
 							60 * 1000);
@@ -296,6 +297,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						</p>
 					</div>
 
+					<!-- Validacion de Contraseña -->
 					<script>
 						document.getElementById('form').addEventListener('submit', function(event) {
 							var password = document.getElementById('password').value;
@@ -418,17 +420,11 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						</div>
 					</div>
 				</div>
-				<!--
-						<div class="form-mess" id="form-mess">
-							<p><i class="fi fi-rr-triangle-warning"></i><b>Error:</b> ¡Revise los campos!</p>
-						</div>
-						-->
 
 				<div class="button-container">
 					<div class="form__group form__group-btn-submit">
 						<input class="button-submit" type="submit" name="registrar" id="registrar" value="Registrar">
 					</div>
-					<!--<p class="form-mess-good" id="form-mess-good">¡Formulario enviado!</p>-->
 				</div>
 			</form>
 		</section>
@@ -447,6 +443,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</script>
 
 	<script>
+		// AJAX para la seleccion de Estados, Ciudades, Municipios y Parroquias
 		$("#lista_estados").change(function() {
 			$.ajax({
 				data: "id_estado=" + $("#lista_estados").val(),

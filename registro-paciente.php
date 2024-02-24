@@ -12,16 +12,12 @@ if (!isset($_SESSION['username'])) {
 include "php/conexion.php";
 $user = new CodeaDB();
 
-// Incluye el archivo de permisos
 require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
 $rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
 $paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
 if (!in_array($paginaActual, $permisos[$rol])) {
 	header('Location: ./sin_permiso.php', true, 303);
 
@@ -44,11 +40,13 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	<link rel="icon" type="image/png" href="images/favicon.png">
 	<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
 	
+	<!-- Incluye las librerias de JQuery de JS y la de Select2 para mejorar los inputs select -->
 	<script src="js/jquery-3.7.1.js"></script>
 	<script src="js/select2.min.js"></script>
 </head>
 
 <body class="login-register">
+	<!-- Barra de navegacion con todos los enlaces del sistema -->
 	<div class="sidebar close">
 		<a href="home.php">
 			<div class="logo-details">
@@ -191,6 +189,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			<a href="mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
 		</div>
 
+		<!-- Formulario para el registro del paciente -->
 		<section class="form-register">
 			<h1>REGISTRO DE PACIENTE</h1>
 			<h4>Obligatorio (*).</h4>
@@ -292,6 +291,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						<p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
 					</div>
 
+					<!-- Restriccion del campo date -->
 					<script>
 						var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 - 4 * 60 * 60 *
 							1000);
@@ -340,6 +340,13 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 				<h2>INFORMACIÓN DE DIRECCIÓN:</h2>
 				<div class="grid">
+
+					<!-- Grupo de listas con los Estados, Municipios, Ciudades y Parroquias -->
+					<!--
+						Al seleccionar un Estado, carga en el siguiente select todos 
+						los Municipios correspondientes, y asi sucesivamente con las Cuidades y Parroquias
+					-->
+
 					<!--group: state-->
 					<div class="form-group" id="group_state">
 						<div class="form-group-input">
@@ -454,6 +461,10 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 				</div>
 
 				<h2>INFORMACIÓN DE MÉDICO:</h2>
+
+				<!-- Seleccion de Medico -->
+				<!-- Se selecciona un medico ya existente, o en caso de no haberlo, se presiona el checkbox y se registra uno nuevo -->
+
 				<div class="grid">
 					<!--group: state-->
 					<div class="form-group" id="group_state">
@@ -514,10 +525,11 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</main>
 
 	<script>
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
 		let arrow = document.querySelectorAll(".arrow");
 		for (var i = 0; i < arrow.length; i++) {
 			arrow[i].addEventListener("click", (e) => {
-				let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
+				let arrowParent = e.target.parentElement.parentElement;
 				arrowParent.classList.toggle("showMenu");
 			});
 		}
@@ -529,6 +541,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 		});
 	</script>
 
+	<!-- Codigo JS necesario para el funcionamiento del formulario -->
 	<script src="js/form-paciente.js"></script>
 </body>
 

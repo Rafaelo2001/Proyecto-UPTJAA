@@ -77,7 +77,5 @@ session_start(); // Inicia la sesión
             catch (Exception $e){
                 die($alert->sweetError("../registro-examen.php","Error al guardar datos",$e->getMessage()));
             }
-
-            
+      
             die ($alert->sweetOK("../registro-examen.php", "Los datos del examen se han insertado correctamente")); 
-?>

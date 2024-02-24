@@ -1,32 +1,28 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: index.php');
+		exit;
+	}
 
-include "php/conexion.php";
-$user = new CodeaDB();
+	include "php/conexion.php";
+	$user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+	require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ./sin_permiso.php', true, 303);
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ./sin_permiso.php', true, 303);
 
-	exit();
-}
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -190,10 +186,12 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			<a href="mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
 		</div>
 
+		<!-- Formulario para Visualizacion de Informes registrados -->
 		<section class="form-register">
 			<h1>VISUALIZADOR DE INFORMES</h1>
 			<form action="" method="post" class="form" id="form" autocomplete="off">
 
+				<!-- Muestra una lista con todos los informes registrados en la BDD -->
 				<select id="informes" required>
 					<option></option>
 					<?php
@@ -226,10 +224,12 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 				<br><br>
 
+				<!-- Boton para generar un PDF con los datos registrados en la BDD -->
 				<input class="button-submit" type="submit" name="imprimir" id="imprimir" value="Imprimir">
 
 				<br>
 
+				<!-- Previsualizador de Datos guardados del Informe seleccionado -->
 				<section id="seccion_biopsia">
 					<label for="tipo">Tipo de informe:</label>
 					<input type="text" readonly id="tipo" name="tipo">
@@ -335,6 +335,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</main>
 
 	<script>
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
 		let arrow = document.querySelectorAll(".arrow");
 		for (var i = 0; i < arrow.length; i++) {
 			arrow[i].addEventListener("click", (e) => {
@@ -352,6 +353,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 </body>
 
-<script src="js/visualizar-informe.js"></script>
+	<!-- Codigo JS necesario para el funcionamiento del formulario -->
+	<script src="js/visualizar-informe.js"></script>
 
 </html>

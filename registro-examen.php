@@ -1,32 +1,28 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: index.php');
+		exit;
+	}
 
-include "php/conexion.php";
-$user = new CodeaDB();
+	include "php/conexion.php";
+	$user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require 'php/permisos.php';
+	require 'php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ./sin_permiso.php', true, 303);
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ./sin_permiso.php', true, 303);
 
-	exit();
-}
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -190,11 +186,13 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			<a href="mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
 		</div>
 
+		<!-- Formulario para el registro de Examen -->
 		<section class="form-register">
 			<h1>REGISTRO DE EXAMEN</h1>
 			<h4>Obligatorio (*)</h4>
 			<form action="php/insert-examen.php" method="post" class="form" id="form" autocomplete="off">
 
+				<!-- Muestra una lista con todos los pacientes registrados en la BDD -->
 				<label for="paciente">Paciente (*)</label>
 				<select id="paciente" name="paciente" style="min-width: 200px;" required>
 					<option></option>
@@ -213,10 +211,6 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 								$nombre_completo = $paciente['PN'] . " " . $paciente['SN'] . " " . $paciente['TN'] . " " . $paciente['PA'] . " " . $paciente['SA'];
 
-								// list($tipo_identidad, $ci_numerica) = explode('-', $cedula);
-								// $ci_numerica_formateada = number_format($ci_numerica, 0, ',', '.');
-								// $cedula_formateada = $tipo_identidad . '-' . $ci_numerica_formateada;
-
 								$cedula_a_mostrar = " - C.I.: $cedula";
 
 								echo $nombre_completo, $cedula_a_mostrar;
@@ -230,9 +224,11 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 				<br>
 
+				<!-- Fecha de Examen -->
 				<label for="fecha">Fecha del Examen (*)</label>
 				<input type="date" placeholder="dd/mm/aaaa" name="fecha" id="fecha" required>
 
+				<!-- Script de Validacion de Fecha -->
 				<script>
 					var hoy = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 - 4 * 60 * 60 *
 						1000);
@@ -248,6 +244,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 				<br>
 
 				<div>
+					<!-- Tipo de Examen -->
 					<label>Tipo de examen (*)</label>
 					<div class="radio" id="tipo_examen">
 						<input type="radio" name="tipo_examen" id="tipo1" value="biopsia" required>
@@ -260,23 +257,27 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 				<br>
 
-				<p id="texto" class="texto">Seleccione Paciente y Tipo de Examen</p>
-				<section id="biopsia" style="display: none;">
-					<label for="m_remitido_b">Material a Examinar (*)</label>
-					<select name="m_remitido" id="m_remitido_b" disabled required>
-						<option value="">Seleccione Paciente</option>
-					</select>
-				</section>
+				<!-- Lista con las muestras a examinar -->
+				<!-- Si no esta el tipo de examen seleccionado, aparece un texto indicando que seleccione el tipo de examen y el paciente -->
+					<p id="texto" class="texto">Seleccione Paciente y Tipo de Examen</p>
 
-				<section id="citologia" style="display: none;">
-					<label for="m_remitido_c">Material a Examinar (*)</label>
-					<select name="m_remitido" id="m_remitido_c" disabled required>
-						<option value="">Seleccione Paciente</option>
-					</select>
-				</section>
+					<section id="biopsia" style="display: none;">
+						<label for="m_remitido_b">Material a Examinar (*)</label>
+						<select name="m_remitido" id="m_remitido_b" disabled required>
+							<option value="">Seleccione Paciente</option>
+						</select>
+					</section>
+
+					<section id="citologia" style="display: none;">
+						<label for="m_remitido_c">Material a Examinar (*)</label>
+						<select name="m_remitido" id="m_remitido_c" disabled required>
+							<option value="">Seleccione Paciente</option>
+						</select>
+					</section>
 
 				<br>
 
+				<!-- Observaciones -->
 				<label for="obs">Observaciones: </label>
 				<input type="text" id="obs" name="obs">
 
@@ -298,6 +299,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</main>
 
 	<script>
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
 		let arrow = document.querySelectorAll(".arrow");
 		for (var i = 0; i < arrow.length; i++) {
 			arrow[i].addEventListener("click", (e) => {
@@ -315,6 +317,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 </body>
 
-<script src="js/form-examen.js"></script>
+	<!-- Codigo JS necesario para el funcionamiento del formulario -->
+	<script src="js/form-examen.js"></script>
 
 </html>

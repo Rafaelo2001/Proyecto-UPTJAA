@@ -1,32 +1,28 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+    session_start();
+    header('Cache-Control: no-cache, no-store, must-revalidate');
+    header('Pragma: no-cache');
+    header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-    header('Location: ../index.php');
-    exit;
-}
+    if (!isset($_SESSION['username'])) {
+        header('Location: ../index.php');
+        exit;
+    }
 
-include "../php/conexion.php";
-$user = new CodeaDB();
+    include "../php/conexion.php";
+    $user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require '../php/permisos.php';
+    require '../php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+    $rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+    $paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-    header('Location: ../sin_permiso.php', true, 303);
+    if (!in_array($paginaActual, $permisos[$rol])) {
+        header('Location: ../sin_permiso.php', true, 303);
 
-    exit();
-}
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -193,10 +189,12 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
         <h1 style="text-align: center;" class="table-title">Listado de Facturas</h1>
 
+        <!-- Cuadro de Busqueda de la Tabla -->
         <div class="items">
             <input type="text" id="filtro" onkeyup="filtrarTabla()" placeholder="Filtrar por Nombre, Cedula, Fecha, etc...">
         </div>
 
+        <!-- Tabla con el Listado de Facturas -->
         <div class="center-table">
             <table style="text-align: center;" class="table" id="table">
                 <thead>
@@ -209,6 +207,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                 </thead>
                 <tbody>
                     <?php
+                    // Busca en la BDD todas las facturas y las formatea para visualizarlas en la tabla
                     $listaFacturas = $user->buscar("factura", "1");
 
                     foreach ($listaFacturas as $factura) :
@@ -240,6 +239,8 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                         echo ("<td>$cedula</td>");
                         echo ("<td>$descripcion</td>");
                         echo ("<td>$emision</td>");
+                        
+                        // Boton para mandar a imprimir la factura correspondiene
                         echo ("<td><form action='./imprimir_factura.php' method='post'><button class='button-imprimir' name='id' value='$id'>Imprimir</button></form></td>");
 
                         echo ("</tr>");
@@ -252,7 +253,8 @@ if (!in_array($paginaActual, $permisos[$rol])) {
     </main>
 
     <script>
-        let arrow = document.querySelectorAll(".arrow");
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
+		let arrow = document.querySelectorAll(".arrow");
         for (var i = 0; i < arrow.length; i++) {
             arrow[i].addEventListener("click", (e) => {
                 let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
@@ -267,6 +269,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
         });
 
 
+        // Funcion de filtrado para el campo de busqueda
         function filtrarTabla() {
             // Obtener el valor ingresado en el campo de entrada
             var filtro = document.getElementById("filtro").value.toUpperCase();

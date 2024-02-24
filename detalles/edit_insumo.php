@@ -1,40 +1,37 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+    session_start();
+    header('Cache-Control: no-cache, no-store, must-revalidate');
+    header('Pragma: no-cache');
+    header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-    header('Location: ../index.php');
-    exit;
-}
+    if (!isset($_SESSION['username'])) {
+        header('Location: ../index.php');
+        exit;
+    }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST' || $_POST['id'] == "") {
-    header('Location: ./detalles_insumo.php', true, 303);
-    exit;
-}
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST' || $_POST['id'] == "") {
+        header('Location: ./detalles_insumo.php', true, 303);
+        exit;
+    }
 
-require "../php/conexion.php";
-$user = new CodeaDB();
+    require "../php/conexion.php";
+    $user = new CodeaDB();
 
-$insumo = $user->buscarSINGLE("insumo", "ID_Insumo='" . $_POST['id'] . "'");
+    // Selecciona los datos del insumo a editar de la BDD
+    $insumo = $user->buscarSINGLE("insumo", "ID_Insumo='" . $_POST['id'] . "'");
 
-// Incluye el archivo de permisos
-require '../php/permisos.php';
+    require '../php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+    $rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+    $paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-    header('Location: ../sin_permiso.php', true, 303);
-                    
+    if (!in_array($paginaActual, $permisos[$rol])) {
+        header('Location: ../sin_permiso.php', true, 303);
+                        
 
-    exit();
-}
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -200,6 +197,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
             <a href="../mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
         </div>
 
+        <!-- Formulario para la edicion de datos del Insumo -->
         <section class="form-register">
             <h1>Edición de Insumo: <?php $insumo['Material'] ?></h1>
             <h4>Obligatorio (*).</h4>
@@ -280,6 +278,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
         <br>
 
+        <!-- Tabla con el Listado de Lotes correspondientes al insumo actual -->
         <section>
             <h2 style="text-align: center;" class="table-title">Lotes de <?php echo ($insumo['Material']); ?></h2>
 
@@ -305,13 +304,14 @@ if (!in_array($paginaActual, $permisos[$rol])) {
                         $vencimiento = $datosLote['F_Exp'];
                         $proveedor   = $datosLote['Proveedor'];
 
-                        echo ("<form action='./insert_edit_lote.php' method='post'>");
-                        echo ("<td><input name='codigo'      type='text' value='$codigo'</td>");
-                        echo ("<td><input name='elaborado'   type='date' value='$elaborado'</td>");
-                        echo ("<td><input name='entrada'     type='date' value='$entrada'</td>");
-                        echo ("<td><input name='vencimiento' type='date' value='$vencimiento'</td>");
-                        echo ("<td><input name='proveedor'   type='text' value='$proveedor'</td>");
-                        echo ("<td><input type='hidden' name='id' value='" . $_POST['id'] . "'><input type='hidden' name='id_lote' value='" . $datosLote['ID_Lote'] . "' required><input type='submit' value='Editar Lote'></form></td>")
+						// Muestra los datos en forma de tabla y en campos inputs para su edicion
+                            echo ("<form action='./insert_edit_lote.php' method='post'>");
+                            echo ("<td><input name='codigo'      type='text' value='$codigo'</td>");
+                            echo ("<td><input name='elaborado'   type='date' value='$elaborado'</td>");
+                            echo ("<td><input name='entrada'     type='date' value='$entrada'</td>");
+                            echo ("<td><input name='vencimiento' type='date' value='$vencimiento'</td>");
+                            echo ("<td><input name='proveedor'   type='text' value='$proveedor'</td>");
+                            echo ("<td><input type='hidden' name='id' value='" . $_POST['id'] . "'><input type='hidden' name='id_lote' value='" . $datosLote['ID_Lote'] . "' required><input type='submit' value='Editar Lote'></form></td>")
                         ?>
                         </tr>
                     <?php endforeach; ?>
@@ -321,7 +321,8 @@ if (!in_array($paginaActual, $permisos[$rol])) {
     </main>
 
     <script>
-        let arrow = document.querySelectorAll(".arrow");
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
+		let arrow = document.querySelectorAll(".arrow");
         for (var i = 0; i < arrow.length; i++) {
             arrow[i].addEventListener("click", (e) => {
                 let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
@@ -337,13 +338,15 @@ if (!in_array($paginaActual, $permisos[$rol])) {
     </script>
 
 </body>
-<script>
-    $(":input").change(function() {
-        $("#enviar").prop("disabled", false);
-    })
-    $(":input").keypress(function() {
-        $("#enviar").prop("disabled", false);
-    })
-</script>
+
+    <!-- Habilita o desabilita el boton de envio de formulario segun haya algun cambio en el formulario  o no -->
+    <script>
+        $(":input").change(function() {
+            $("#enviar").prop("disabled", false);
+        })
+        $(":input").keypress(function() {
+            $("#enviar").prop("disabled", false);
+        })
+    </script>
 
 </html>

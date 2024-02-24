@@ -1,5 +1,7 @@
 <?php
 
+    // Registro del Informe Citologico en la BDD
+
     require "conexion.php";
     require "sweet.php";
 
@@ -8,11 +10,10 @@
 
     echo($alert->sweetHead("Registro de Informe Citología"));
 
-    // Conectando con la base de datos Higea
     $conex = $user->conexion;
 
-// Declarando las variables a utilizar, conectandolas con los datos recibidos de registro-informe
-/* 
+    // Declarando las variables a utilizar, conectandolas con los datos recibidos de registro-informe
+    /* 
         Orden de llenado
             
             Tabla 'informe'
@@ -33,23 +34,23 @@
                 10. ID_Examen   *
     */
 
-// informe OK
-$CIP             =  $_POST['paciente_id'];
-$id_medico       =  $_POST['medico_id'];
-$fecha           =  date("Y-m-d");
-$des_m_remitido  =  $_POST['info_c'];
-$diagnostico     =  $_POST['diag_c'];
-$obs             =  $_POST['obs_c'];
+    // informe OK
+    $CIP             =  $_POST['paciente_id'];
+    $id_medico       =  $_POST['medico_id'];
+    $fecha           =  date("Y-m-d");
+    $des_m_remitido  =  $_POST['info_c'];
+    $diagnostico     =  $_POST['diag_c'];
+    $obs             =  $_POST['obs_c'];
 
-// inf_citologia
-$calidad    =  $_POST['calidad_c'];
-$cat_gnral  =  $_POST['categ_c'];
-$hallazgos  =  $_POST['hallazgos_c'];
-$conducta   =  $_POST['conducta_c'];
-$id_examen  =  $_POST['examen_id_c'];
+    // inf_citologia
+    $calidad    =  $_POST['calidad_c'];
+    $cat_gnral  =  $_POST['categ_c'];
+    $hallazgos  =  $_POST['hallazgos_c'];
+    $conducta   =  $_POST['conducta_c'];
+    $id_examen  =  $_POST['examen_id_c'];
 
 
-// ENVIANDO DATOS
+    // ENVIANDO DATOS
 
         try {
             // Enviando 'informe'
@@ -75,9 +76,6 @@ $id_examen  =  $_POST['examen_id_c'];
             die($alert->sweetError("../registro-informes.php","Error al guardar datos",$e->getMessage()));
         }
 
-
         // Mostramos un mensaje de éxito utilizando una ventana emergente de alerta de JavaScript.
         // Después de que el usuario haga clic en el botón "Aceptar", lo redirigimos a otra página.
         die ($alert->sweetOK("../registro-informes.php", "Se ha guardado el informe de citología correctamente"));
-
-?>

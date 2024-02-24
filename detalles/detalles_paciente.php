@@ -1,31 +1,27 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+	session_start();
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-	header('Location: ../index.php');
-	exit;
-}
+	if (!isset($_SESSION['username'])) {
+		header('Location: ../index.php');
+		exit;
+	}
 
-include "../php/conexion.php";
-$user = new CodeaDB();
+	include "../php/conexion.php";
+	$user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require '../php/permisos.php';
+	require '../php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+	$rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+	$paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-	header('Location: ../sin_permiso.php', true, 303);
-	exit();
-}
+	if (!in_array($paginaActual, $permisos[$rol])) {
+		header('Location: ../sin_permiso.php', true, 303);
+		exit();
+	}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -192,10 +188,12 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 
 		<h1 style="text-align: center;" class="table-title">Listado de Pacientes</h1>
 
+        <!-- Cuadro de Busqueda de la Tabla -->
 		<div class="items">
 			<input type="text" id="filtro" onkeyup="filtrarTabla()" placeholder="Filtrar por Nombre, Cedula, Fecha, etc...">
         </div>
 
+        <!-- Tabla con el Listado de Pacientes -->
 		<div class="center-table">
 			<table style="text-align: center;" class="table" id="table">
 				<thead>
@@ -208,6 +206,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 					<th>Acciones</th>
 				</thead>
 				<?php
+				// Busca todos los pacientes almacenados en la BDD
 				$listaPacientes = $user->buscar("paciente", "1");
 				foreach ($listaPacientes as $cedula_paciente) :
 
@@ -222,32 +221,29 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 					<tr>
 						<?php
 
-						$nombre_completo = $paciente['PN'] . " " . $paciente['SN'] . " " . $paciente['TN'] . " " . $paciente['PA'] . " " . $paciente['SA'];
+						// Combina los nombres del paciente en una sola variable
+							$nombre_completo = $paciente['PN'] . " " . $paciente['SN'] . " " . $paciente['TN'] . " " . $paciente['PA'] . " " . $paciente['SA'];
 
-						list($tipo_identidad, $ci_numerica) = explode('-', $cedula);
-						$ci_numerica_formateada = number_format($ci_numerica, 0, ',', '.');
-						$cedula_formateada = $tipo_identidad . '-' . $ci_numerica_formateada;
+						// Busca las variables a mostrar en la tabla
+							$genero = ($paciente['Sexo'] == "M") ? "Masculino" : "Femenino";
 
-						$cedula_a_mostrar = " - C.I.: $cedula_formateada";
+							$telefono = $user->buscar("telefono", $ci_sql);
+							$tlfn = $telefono[0]['Nro_Telf'];
 
-						$genero = ($paciente['Sexo'] == "M") ? "Masculino" : "Femenino";
+							$correo = $user->buscar("correo", $ci_sql);
+							$email = $correo[0]['Correo'];
 
-						$telefono = $user->buscar("telefono", $ci_sql);
-						$tlfn = $telefono[0]['Nro_Telf'];
+							$f_nac = $paciente['F_nac'];
+							$f_nac_formateada = date('d-m-Y', strtotime($f_nac));
 
-						$correo = $user->buscar("correo", $ci_sql);
-						$email = $correo[0]['Correo'];
-
-						$f_nac = $paciente['F_nac'];
-						$f_nac_formateada = date('d-m-Y', strtotime($f_nac));
-
-						echo ("<td>" . $cedula . "</td>");
-						echo ("<td>" . $nombre_completo . "</td>");
-						echo ("<td>" . $f_nac_formateada . "</td>");
-						echo ("<td>" . $genero . "</td>");
-						echo ("<td>" . $tlfn . "</td>");
-						echo ("<td>" . $email . "</td>");
-						echo ("<td><form action='./edit_paciente.php' method='post'><input type='hidden' name='ci' value='$cedula' required><input type='submit' value='Editar'></form></td>")
+						// Muestra los datos en forma de tabla
+							echo ("<td>" . $cedula . "</td>");
+							echo ("<td>" . $nombre_completo . "</td>");
+							echo ("<td>" . $f_nac_formateada . "</td>");
+							echo ("<td>" . $genero . "</td>");
+							echo ("<td>" . $tlfn . "</td>");
+							echo ("<td>" . $email . "</td>");
+							echo ("<td><form action='./edit_paciente.php' method='post'><input type='hidden' name='ci' value='$cedula' required><input type='submit' value='Editar'></form></td>")
 
 						?>
 					</tr>
@@ -263,6 +259,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	</main>
 
 	<script>
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
 		let arrow = document.querySelectorAll(".arrow");
 		for (var i = 0; i < arrow.length; i++) {
 			arrow[i].addEventListener("click", (e) => {
@@ -277,8 +274,8 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 			sidebar.classList.toggle("close");
 		});
 
-
-		function filtrarTabla() {
+        // Funcion de filtrado para el campo de busqueda
+        function filtrarTabla() {
             // Obtener el valor ingresado en el campo de entrada
             var filtro = document.getElementById("filtro").value.toUpperCase();
 

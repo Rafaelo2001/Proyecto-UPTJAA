@@ -1,70 +1,68 @@
 <?php
-session_start();
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
+    session_start();
+    header('Cache-Control: no-cache, no-store, must-revalidate');
+    header('Pragma: no-cache');
+    header('Expires: 0');
 
-if (!isset($_SESSION['username'])) {
-    header('Location: ../index.php');
-    exit;
-}
+    if (!isset($_SESSION['username'])) {
+        header('Location: ../index.php');
+        exit;
+    }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['id'])) {
-    header('Location: ./gestion_usuarios.php', true, 303);
-    exit;
-}
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['id'])) {
+        header('Location: ./gestion_usuarios.php', true, 303);
+        exit;
+    }
 
-require "../php/conexion.php";
-$user = new CodeaDB();
+    require "../php/conexion.php";
+    $user = new CodeaDB();
 
-// Incluye el archivo de permisos
-require '../php/permisos.php';
+    require '../php/permisos.php';
 
-// Obtiene el rol del usuario de la variable de sesión
-$rol = $_SESSION['Rol'];
+    $rol = $_SESSION['Rol'];
 
-// Obtiene el nombre de la página actual
-$paginaActual = basename($_SERVER['PHP_SELF']);
+    $paginaActual = basename($_SERVER['PHP_SELF']);
 
-// Verifica si el usuario tiene permiso para acceder a la página actual
-if (!in_array($paginaActual, $permisos[$rol])) {
-    header('Location: ../sin_permiso.php', true, 303);
+    if (!in_array($paginaActual, $permisos[$rol])) {
+        header('Location: ../sin_permiso.php', true, 303);
 
-    exit();
-}
+        exit();
+    }
 
-$id = $_POST['id'];
-$dataUsuario = $user->conexion->query("SELECT `Nombre`,`Rol`,`CIE` FROM `usuario` WHERE `ID_Usuario` = $id;") or die($this->conexion->error);
-$data = $dataUsuario->fetch_all(MYSQLI_ASSOC);
-$datosUsuario = $data[0];
+    // Busca los datos del usuario
+        $id = $_POST['id'];
+        $dataUsuario = $user->conexion->query("SELECT `Nombre`,`Rol`,`CIE` FROM `usuario` WHERE `ID_Usuario` = $id;") or die($this->conexion->error);
+        $data = $dataUsuario->fetch_all(MYSQLI_ASSOC);
+        $datosUsuario = $data[0];
 
-$cedula = $datosUsuario['CIE'];
-$datosPersona   = $user->buscarSINGLE("persona", "CI='$cedula'");
-$datosTelefono  = $user->buscarONE("telefono", "CI='$cedula'", "Nro_Telf");
-$datosCorreo    = $user->buscarONE("correo",  "CI='$cedula'", "Correo");
+        $cedula = $datosUsuario['CIE'];
+        $datosPersona   = $user->buscarSINGLE("persona", "CI='$cedula'");
+        $datosTelefono  = $user->buscarONE("telefono", "CI='$cedula'", "Nro_Telf");
+        $datosCorreo    = $user->buscarONE("correo",  "CI='$cedula'", "Correo");
 
-$its_a_boy = "";
-$its_a_girl = "";
+    // Determina si el usuario es hombre o mujer
+        $its_a_boy = "";
+        $its_a_girl = "";
 
-if ($datosPersona["Sexo"] == "M") {
-    $its_a_boy = "checked";
-    $its_a_girl = "";
-} elseif ($datosPersona["Sexo"] == "F") {
-    $its_a_boy = "";
-    $its_a_girl = "checked";
-}
+        if ($datosPersona["Sexo"] == "M") {
+            $its_a_boy = "checked";
+            $its_a_girl = "";
+        } elseif ($datosPersona["Sexo"] == "F") {
+            $its_a_boy = "";
+            $its_a_girl = "checked";
+        }
 
+    // Determina si el usuario es Administrador o Analista
+        $rol_admin = "";
+        $rol_analis = "";
 
-$rol_admin = "";
-$rol_analis = "";
-
-if ($datosUsuario["Rol"] == "admin") {
-    $rol_admin = "checked";
-    $rol_analis = "";
-} elseif ($datosUsuario["Rol"] == "analista") {
-    $rol_admin = "";
-    $rol_analis = "checked";
-}
+        if ($datosUsuario["Rol"] == "admin") {
+            $rol_admin = "checked";
+            $rol_analis = "";
+        } elseif ($datosUsuario["Rol"] == "analista") {
+            $rol_admin = "";
+            $rol_analis = "checked";
+        }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -284,6 +282,7 @@ if ($datosUsuario["Rol"] == "admin") {
             <a href="../mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
         </div>
 
+        <!-- Formulario para la edicion de datos del Usuario -->
         <section class="form-register">
             <h1>Edición de Usuario:
                 <?php echo $datosPersona["CI"] ?>
@@ -365,6 +364,7 @@ if ($datosUsuario["Rol"] == "admin") {
                         <p class="form-input-error">Rellene este campo correctamente. Ej: 31/01/2023</p>
                     </div>
 
+                    <!-- Validacion de Fechas -->
                     <script>
                         var minima = new Date(new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 - 4 * 60 *
                             60 * 1000);
@@ -456,6 +456,7 @@ if ($datosUsuario["Rol"] == "admin") {
             <h2>Otras Acciones</h2>
 
 
+            <!-- Envio de datos para edicion de usuario -->
             <div class="acciones">
                 <div class="button-container">
                     <div class="form__group form__group-btn-submit">
@@ -465,6 +466,7 @@ if ($datosUsuario["Rol"] == "admin") {
                 </div>
             </div>
 
+            <!-- Eliminar usuario -->
             <div class="button-container">
                 <div class="form__group form__group-btn-submit">
                     <button class="buttom" id="borrar" value="<?php echo ($id); ?>">Eliminar Usuario</button>
@@ -474,7 +476,8 @@ if ($datosUsuario["Rol"] == "admin") {
     </main>
 
     <script>
-        let arrow = document.querySelectorAll(".arrow");
+		// Comprueba si el boton de la barra de navegacion fue precionado y muestra por completo el menu lateral
+		let arrow = document.querySelectorAll(".arrow");
         for (var i = 0; i < arrow.length; i++) {
             arrow[i].addEventListener("click", (e) => {
                 let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
@@ -491,6 +494,7 @@ if ($datosUsuario["Rol"] == "admin") {
 
 </body>
 <script>
+    // Habilita o desabilita el boton de envio de formulario segun haya algun cambio en los datos del usuario  o no
     $(":input").change(function() {
         $("#enviar").prop("disabled", false);
     })
@@ -498,6 +502,7 @@ if ($datosUsuario["Rol"] == "admin") {
         $("#enviar").prop("disabled", false);
     })
 
+    // Alert para eliminar usuario
     $("#borrar").click(function() {
         Swal.fire({
                 title: '¿Éstas seguro?',
