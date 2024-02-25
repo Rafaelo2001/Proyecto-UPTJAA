@@ -185,7 +185,7 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 	<main class="home-section">
 		<div class="home-content">
 			<i class="fi fi-sr-menu-burger bx-menu"></i>
-			<a href="mantenimiento/php/Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
+			<a href="./Gestion-BDD.php"><i class="fi fi-sr-settings bx-menu"></i></a>
 		</div>
 		<section class="form-register">
 

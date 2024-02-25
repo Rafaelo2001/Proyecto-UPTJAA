@@ -2751,6 +2751,7 @@ ALTER TABLE `telefono`
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`ID_Usuario`,`CIE`),
   ADD UNIQUE KEY `ID_Usuario` (`ID_Usuario`),
+  ADD UNIQUE KEY `Nombre_Usuario` (`Nombre`),
   ADD KEY `fk_Usuario_Empleado1` (`CIE`);
 
 --
