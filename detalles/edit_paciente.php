@@ -326,6 +326,19 @@
                         </span>
                     </div>
 
+                    <script>
+						// Validación del telefono
+						document.getElementById('form').addEventListener('submit', function (e) {
+						var phoneInput = document.getElementById('nro_telf');
+
+						if (!/^\d{11}$/.test(phoneInput.value)) {
+							// Si la entrada no es válida, previene el envío del formulario
+							e.preventDefault();
+							alert('Por favor, ingrese un número de teléfono válido.');
+						}
+						});
+					</script>
+
                     <!--group: e-mail-->
                     <div class="form-group" id="group_email_patient">
                         <div class="form-group-input">
