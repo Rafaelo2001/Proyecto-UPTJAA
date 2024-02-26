@@ -88,7 +88,7 @@
         $fecha = date("d/m/Y", strtotime($_POST["fecha"]));
 
         $datosPaciente = $user->buscar("persona", "CI='" . $_POST["cip"] . "'");
-        $nombrePaciente = strtoupper($datosPaciente[0]["PN"] . ' ' . $datosPaciente[0]["PA"]);
+        $nombrePaciente = $datosPaciente[0]["PN"] . ' ' . $datosPaciente[0]["PA"];
         $edadPaciente = $datosPaciente[0]["Edad"] . mb_convert_encoding(" años", "ISO-8859-1");
         $sexoPaciente = $datosPaciente[0]["Sexo"];
 
@@ -108,7 +108,7 @@
         $nombreLargo = $c->GetStringWidth("Nombre:   ");
         $c->Cell($nombreLargo, 10, "Nombre:   ", 0, 0);
         $c->SetTextColor(13, 13, 13);
-        $c->Cell(80 - $nombreLargo, 10, $nombrePaciente, 0, 0);
+        $c->Cell(80 - $nombreLargo, 10, ucfirst(mb_convert_encoding($nombrePaciente, "ISO-8859-1")), 0, 0);
 
         $c->setX(140);
 
