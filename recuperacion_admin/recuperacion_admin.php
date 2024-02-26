@@ -4,7 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Recuperación de ADMIN</title>
-        <link   href='../css/styles_higea.css'    rel='stylesheet'/>
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" type="text/css" href="../css/styles.css?v=1.1">
+        <link rel="icon" type="image/png" href="../images/favicon.png">
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
         <link   href='../css/sweetalert2.min.css' rel='stylesheet'/>
         <script src='../js/sweetalert2.all.min.js'></script>
         <script src='../js/jquery-3.7.1.js'></script>
@@ -63,13 +66,36 @@
             }
         </style>
     </head>
-    <body>
-        <h1>Recuperación de Contraseña Maestra</h1>
-        <p>Si continua activará el proceso de recuperación de contraseña maestra.</p>
-        <p>Use este apartado solamente si olvido la contraseña del ADMINISTRADOR MAESTRO.</p>
-        <p>Un correo electrónico será enviado a la dirección <b><i>blancot30@gmail.com</i></b> con el tóken de validación.</p>
-        <button type="button" id="continuar">Continuar</button>
-        <button type="button" id="index">Regresar</button>
+    <body class="login-register">
+        <header>
+            <nav>
+                <a class="title">
+                    <img src="../images/Logo con contorno.png" alt="Logo de Higea" width="90" height="90">
+                    <img src="../images/Letras.png" alt="Higea" width="180px" height="45px">
+                </a>
+            </nav>
+        </header>
+
+        <div class="login-box-master">
+            <h1>RECUPERACIÓN DE CONTRASEÑA MAESTRA</h1>
+            <p>Si continua activará el proceso de recuperación de contraseña maestra.</p>
+            <p>Use este apartado solamente si olvido la contraseña del ADMINISTRADOR MAESTRO.</p>
+            <p>Un correo electrónico será enviado a la dirección <b><i>blancot30@gmail.com</i></b> con el tóken de validación.</p>
+
+            <div class="button-container">
+                <button class="buttom-master" type="button" id="continuar">Continuar</button>
+                <button class="buttom-master2" type="button" id="index">Regresar</button>
+            </div>
+        </div>
+
+        <footer>
+            <div class="div-footer">
+                <img src="../images/Logo.png" alt="Logo de Higea" width="70" height="70">
+                <img src="../images/higea_color.png" alt="Logo de Higea" width="70" height="70">
+                <span class="copyright">&copy; 2024 HIGEA - Laboratorio Dr. Miguel Blanco. Todos los derechos
+                    reservados.</span>
+            </div>
+        </footer>
     </body>
     <script>
         // Boton de Regreso

@@ -221,6 +221,19 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 						</span>
 					</div>
 
+					<script>
+						// Validación de documento
+						document.getElementById('form').addEventListener('submit', function (e) {
+						var input = document.getElementById('ci');
+
+						if (!/^\d{6,10}$/.test(input.value)) {
+							// Si la entrada no es válida, previene el envío del formulario
+							e.preventDefault();
+							alert('Por favor, ingrese un número de cédula válido.');
+						}
+						});
+					</script>
+
 					<!--group: name1-->
 					<div class="form-group" id="group_name_patient1">
 						<div class="form-group-input">
@@ -324,6 +337,19 @@ if (!in_array($paginaActual, $permisos[$rol])) {
 							<p>El número telefónico debe tener 11 dígitos</p>
 						</span>
 					</div>
+
+					<script>
+						// Validación del telefono
+						document.getElementById('form').addEventListener('submit', function (e) {
+						var phoneInput = document.getElementById('tlfn');
+
+						if (!/^\d{11}$/.test(phoneInput.value)) {
+							// Si la entrada no es válida, previene el envío del formulario
+							e.preventDefault();
+							alert('Por favor, ingrese un número de teléfono válido.');
+						}
+						});
+					</script>
 
 					<!--group: e-mail-->
 					<div class="form-group" id="group_email_patient">
