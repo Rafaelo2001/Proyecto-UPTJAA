@@ -832,13 +832,12 @@ button:hover {
 }
 
 body::-webkit-scrollbar {
-	width: 15px;
+	width: 7px;
 }
 
 body::-webkit-scrollbar-thumb {
 	background: rgb(9, 175, 203);
 	background: linear-gradient(180deg, rgba(9, 175, 203, 1) 0%, rgba(0, 122, 151, 1) 100%);
-	border-radius: 50px;
 }
 
 body::-webkit-scrollbar-thumb:hover {

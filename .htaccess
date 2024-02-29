@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_URI} !\.(css|jpg|js|png)$
+RewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ index.php?url=$1 [L,QSA]
+Options All -Indexes
+ErrorDocument 404 /proyecto-uptjaa/404.html
+ErrorDocument 403 /proyecto-uptjaa/403.html
+#Require all denied
