@@ -37,6 +37,61 @@
     <link rel='stylesheet'
         href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+		.password-wrapper {
+            position: relative;
+            display: inline-block; /* Asegúrate de que el contenedor sea en línea para que no ocupe todo el ancho */
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px; /* Ajusta este valor para mover el botón a la derecha */
+            top: 7px; /* Centra el botón verticalmente */
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .toggle-password i {
+            font-size: 22px;
+            color: #003971;
+        }
+
+		/* Para Google Chrome */
+		input[type="password"]::-webkit-inner-spin-button,
+		input[type="password"]::-webkit-outer-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		input[type="password"]::-webkit-input-password-eye {
+			display: none;
+		}
+
+		/* Para Mozilla Firefox */
+		input[type="password"]::-ms-reveal,
+		input[type="password"]::-ms-clear {
+			display: none;
+		}
+
+        .login-box-pass input[type="password"],
+        .login-box-pass input[type="text"]:not([type="password"]) {
+            border: none;
+            border-bottom: 3px solid rgba(254, 101, 0, 1);
+            background-color: #F2F2F2;
+            outline: none;
+            height: 40px;
+            color: #0D0D0D;
+            font-size: 16px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px 2px rgba(0, 21, 49, 0.2);
+        }
+
+        .toggle-password:hover {
+            background: none;
+        }
+	</style>
 </head>
 
 <body class="login-register">
@@ -48,7 +103,7 @@
             </a>
 
             <ul class="items">
-				<button class="buttom"><a href="../index.php" class="buttom-item"><i class="fi fi-sr-exit"></i>Regresar a Inicio de Sección</a></button>
+				<button class="buttom"><a href="../index.php" class="buttom-item"><i class="fi fi-sr-exit"></i>Regresar a Inicio de Sesión</a></button>
 			</ul>
         </nav>
     </header>
@@ -63,8 +118,12 @@
                 <div class="form-group" id="group_password">
                     <div class="form-group-input">
                         <label for="password">Contraseña (*)</label>
-                        <input type="password" name="password" id="password" placeholder="Ingrese una contraseña"
-                            autocomplete="off" required>
+                        <div class="password-wrapper">
+                            <input type="password" name="password" id="password" placeholder="Ingrese contraseña" autocomplete="off" required>
+                            <button type="button" class="toggle-password" aria-label="Toggle Password Visibility">
+                                <i class="fi fi-sr-eye" aria-hidden="true"></i>
+                            </button>
+                        </div>
                         <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                     </div>
                     <p class="form-input-error" style="position: absolute;">
@@ -95,8 +154,12 @@
                 <div class="form-group" id="group_confirmation_pass">
                     <div class="form-group-input">
                         <label for="confirmation_pass">Confirme la contraseña (*)</label>
-                        <input type="password" name="confirmation_pass" id="confirmation_pass"
-                            placeholder="confirme la contraseña" autocomplete="off" required>
+                        <div class="password-wrapper">
+                            <input type="password" name="confirmation_pass" id="confirmation_pass" placeholder="confirme contraseña" autocomplete="off" required>
+                            <button type="button" class="toggle-password" aria-label="Toggle Password Visibility">
+                                <i class="fi fi-sr-eye" aria-hidden="true"></i>
+                            </button>
+                        </div>
                         <i class="formulario_validacion_estado fi fi-rr-cross"></i>
                     </div>
                     <p class="form-input-error">Las contraseñas no coinciden</p>
@@ -119,6 +182,27 @@
                         alert('Las contraseñas no coinciden.');
                         event.preventDefault();
                     }
+                });
+
+                // Añade un controlador de eventos a los botones de mostrar/ocultar contraseña
+                document.querySelectorAll(".toggle-password").forEach(function(togglePassword) {
+                    togglePassword.addEventListener("click", function() {
+                        var passwordInput = this.previousElementSibling;
+                        var type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+                        passwordInput.setAttribute("type", type);
+                        
+                        // Obtiene el icono
+                        var eyeIcon = this.querySelector("i");
+                        
+                        // Cambia el icono del ojo
+                        if (eyeIcon.classList.contains("fi-sr-eye")) {
+                            eyeIcon.classList.remove("fi-sr-eye");
+                            eyeIcon.classList.add("fi-sr-eye-crossed");
+                        } else {
+                            eyeIcon.classList.remove("fi-sr-eye-crossed");
+                            eyeIcon.classList.add("fi-sr-eye");
+                        }
+                    });
                 });
                 </script>
 

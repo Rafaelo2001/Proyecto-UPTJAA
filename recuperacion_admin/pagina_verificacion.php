@@ -31,7 +31,7 @@
                 </a>
 
                 <ul class="items">
-                    <button class="buttom"><a href="../index.php" class="buttom-item"><i class="fi fi-sr-exit"></i>Regresar a Inicio de Sección</a></button>
+                    <button class="buttom"><a href="../index.php" class="buttom-item"><i class="fi fi-sr-exit"></i>Regresar a Inicio de Sesión</a></button>
                 </ul>
             </nav>
         </header>
