@@ -207,7 +207,7 @@
 					}
 					
 					if($existencia < $minimoRojo){
-						$lista_reponer .= "<li style='background: #DA3838;'><h3>$material (URGENTE)</h3></li>";
+						$lista_reponer .= "<li style='background: #DA3838; color: white;'><h3>$material (URGENTE)</h3></li>";
 					}
 					elseif($existencia < $minimoAmarillo){
 						$lista_reponer .= "<li style='background: yellow;'><h3>$material</h3></li>";
