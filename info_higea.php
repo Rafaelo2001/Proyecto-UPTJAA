@@ -199,17 +199,13 @@
 				<div class="hero-content">
 					<p>
 						HIGEA es un innovador sistema desarrollado para el Laboratorio Dr. Miguel Blanco. Diseñado para
-						optimizar
-						la gestión de insumos y muestras, este sistema integral mejora la toma de decisiones y el
-						control del laboratorio,
-						garantizando la seguridad y eficiencia de los servicios.
+						optimizar la gestión de insumos y muestras, este sistema integral mejora la toma de decisiones y el
+						control del laboratorio, garantizando la seguridad y eficiencia de los servicios.
 					</p>
 					<p>
 						El sistema HIGEA, inspirado en la diosa de la curación y la sanidad de la mitología griega,
-						refleja el compromiso
-						del Laboratorio Dr. Miguel Blanco con la salud y el bienestar. Su logo, que combina elementos de
-						Higiea con un
-						microscopio, simboliza la dedicación del laboratorio al análisis patológico.
+						refleja el compromiso del Laboratorio Dr. Miguel Blanco con la salud y el bienestar. Su logo, que combina elementos de
+						Higiea con un microscopio, simboliza la dedicación del laboratorio al análisis patológico.
 					</p>
 				</div>
 				<div class="hero-image">
