@@ -201,7 +201,7 @@
 
 					<div class="card_image">
 
-						<img src="images/fer.png" alt="card image">
+						<img src="images/fernando.png" alt="card image">
 
 					</div>
 
